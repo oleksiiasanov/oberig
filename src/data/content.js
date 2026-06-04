@@ -4,11 +4,11 @@ export const SIGNAL_URL =
 export const ORDER_URL = "https://forms.gle/xFcMaTWR1G5pR4qW6";
 
 export const proofChips = [
-  "400-9800 МГц",
-  "SDR",
   "Live video",
   "Сканер",
   "Водоспад",
+  "RSSI/SNR",
+  "OTA",
 ];
 
 export const marketProblems = [

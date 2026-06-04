@@ -7,7 +7,7 @@ export function Hero() {
     <section className="hero section" id="top">
       <div className="hero-copy">
         <motion.p className="eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-          FPV відеодетектор на основі SDR
+          ~9 секунд швидкість сканування всього діапазону
         </motion.p>
         <motion.p
           className="hero-title"
@@ -15,21 +15,14 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 16 }}
         >
-          Покриває відеочастоти від 400 до 9800 МГц
-        </motion.p>
-        <motion.p
-          className="hero-lead"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.12, type: "spring", stiffness: 90, damping: 16 }}
-        >
-          Щоб завчасно помітити наближення FPV-дрона, попередити групу й мати більше часу на реакцію.
+          FPV відеодетектор на основі SDR
+          <span className="hero-title-sub">400–9800 МГц</span>
         </motion.p>
         <motion.div
           className="proof-chips"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, type: "spring", stiffness: 90, damping: 16 }}
+          transition={{ delay: 0.14, type: "spring", stiffness: 90, damping: 16 }}
           aria-label="Підтверджені можливості"
         >
           {proofChips.map((chip) => (
@@ -39,7 +32,7 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.24, type: "spring", stiffness: 90, damping: 16 }}
+          transition={{ delay: 0.2, type: "spring", stiffness: 90, damping: 16 }}
         >
           <CTAButtons />
         </motion.div>

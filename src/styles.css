@@ -234,6 +234,10 @@ p {
   line-height: 1.1;
 }
 
+.hero-title-sub {
+  display: block;
+}
+
 .proof-chips {
   display: flex;
   flex-wrap: wrap;
@@ -330,10 +334,11 @@ p {
   height: auto;
   max-height: min(62svh, 640px);
   margin: 0 auto;
-  border-radius: 8px;
   object-fit: contain;
   object-position: center bottom;
-  box-shadow: 0 34px 86px rgba(0, 0, 0, 0.28);
+  filter: none;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 54%, #000 54%, rgba(0, 0, 0, 0.72) 70%, transparent 90%);
+  mask-image: radial-gradient(ellipse at 50% 54%, #000 54%, rgba(0, 0, 0, 0.72) 70%, transparent 90%);
 }
 
 .section-header {
