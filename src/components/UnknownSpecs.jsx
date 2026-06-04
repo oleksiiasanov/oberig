@@ -7,8 +7,8 @@ export function UnknownSpecs() {
     <AnimatedSection id="specs">
       <SectionHeader
         kicker="Чесні межі"
-        title="Ми не вигадуємо частоти, дальність чи автономність."
-        text="Ці параметри мають бути підтверджені паспортом або специфікацією Oberig. До цього вони лишаються відкритими плейсхолдерами."
+        title="Ми не вигадуємо дальність, автономність чи ціну."
+        text="Покриття відеочастот 400-9800 МГц винесене як USP. Інші параметри мають бути підтверджені паспортом або специфікацією Oberig."
       />
       <div className="unknown-panel">
         <div className="waterfall-preview" aria-hidden="true">

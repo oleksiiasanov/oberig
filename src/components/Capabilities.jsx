@@ -7,8 +7,8 @@ export function Capabilities() {
     <AnimatedSection id="capabilities" className="section-quiet">
       <SectionHeader
         kicker="Можливості"
-        title="Щільний технічний набір без вигаданих цифр."
-        text="Тут лише підтверджені функції. Маркетингові числа залишаються плейсхолдерами, поки не з’явиться паспорт або специфікація."
+        title="SDR-основа й широке покриття відеочастот."
+        text="Oberig фокусується на FPV-відеосигналі в діапазоні 400-9800 МГц. Непідтверджені параметри на кшталт дальності чи автономності не вигадуємо."
       />
       <div className="capability-grid">
         {capabilities.map((group) => (

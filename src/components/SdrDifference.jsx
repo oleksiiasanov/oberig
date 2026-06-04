@@ -7,8 +7,8 @@ export function SdrDifference() {
     <AnimatedSection id="sdr" className="section-quiet">
       <SectionHeader
         kicker="Чому SDR"
-        title="Не просто “є сигнал”. Раніше побачити активність і зрозуміти, що наближається."
-        text="SDR-підхід поєднує live video, сканер, спектральну картину й показники якості сигналу, щоб попередження було практичним, а не абстрактним."
+        title="SDR дає ширше покриття відеочастот і більше контексту про загрозу."
+        text="Oberig покриває відеочастоти 400-9800 МГц і поєднує live video, сканер, спектральну картину та показники якості сигналу."
       />
       <div className="split-compare">
         <article>
@@ -20,7 +20,7 @@ export function SdrDifference() {
         <article className="highlight">
           <ScanLine aria-hidden="true" />
           <h3>Oberig на SDR</h3>
-          <p>Допомагає шукати активні передачі й оцінювати сигнал, щоб раніше помітити потенційну FPV-загрозу.</p>
+          <p>Покриває 400-9800 МГц, допомагає шукати активні передачі й оцінювати сигнал, щоб раніше помітити потенційну FPV-загрозу.</p>
         </article>
       </div>
     </AnimatedSection>
