@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Вседіапазонний детектор FPV та БПЛА з покриттям 1050-6040 МГц без сліпих зон для роботи в актуальній РЕО."
+    />
+    <title>Вседіапазонний детектор FPV та БПЛА</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Навігація">
+      <a class="brand" href="#top" aria-label="На початок сторінки">
+        <span class="brand-mark"></span>
+        <span>Oberig RF</span>
+      </a>
+      <nav class="nav-links" aria-label="Секції сторінки">
+        <a href="#coverage">Покриття</a>
+        <a href="#comparison">Порівняння</a>
+        <a href="#specs">ТТХ</a>
+        <a href="#contact">Контакт</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section-band">
+        <div class="hero-copy">
+          <p class="eyebrow">1050-6040 МГц / актуальна РЕО / VTX</p>
+          <h1>
+            <span>Вседіапазонний</span>
+            <span>детектор FPV</span>
+            <span>та БПЛА</span>
+          </h1>
+          <p class="hero-lead">
+            Покриття 1050-6040 МГц без сліпих зон для роботи в актуальній РЕО.
+          </p>
+          <ul class="hero-points" aria-label="Ключові тези">
+            <li>1.2 / 1.3 / 2.4 / 3.3 / 3.5 / 4.9 / 5.2 / 5.8 ГГц</li>
+            <li>FPV, квадро та частина крил залежно від відеоканалу</li>
+            <li>Робота поруч із РЕБ, калібрування під місцевість</li>
+            <li>Інтеграція в систему захисту позиції</li>
+          </ul>
+          <div class="cta-row" aria-label="Дії">
+            <a class="button primary" href="#contact">Отримати консультацію</a>
+            <a class="button secondary" href="#contact">Замовити / Отримати КП</a>
+          </div>
+        </div>
+
+        <div class="hero-panel" aria-label="Візуал продукту і спектра">
+          <img
+            class="hero-image"
+            src="assets/hero-detector.png"
+            alt="Рендер захищеного детектора поруч із технічним спектральним інтерфейсом"
+          />
+          <div class="spectrum-card compact">
+            <div class="spectrum-head">
+              <span>Суцільне покриття</span>
+              <strong>1050-6040 МГц</strong>
+            </div>
+            <div class="spectrum-axis" aria-hidden="true">
+              <span>1050</span>
+              <span>2400</span>
+              <span>3500</span>
+              <span>4900</span>
+              <span>6040</span>
+            </div>
+            <div class="spectrum-line hero-line" aria-label="Активна смуга покриття 1050-6040 МГц">
+              <span class="coverage full"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="current">
+        <div class="section-heading">
+          <p class="eyebrow">Ефір не стоїть на місці</p>
+          <h2>Що реально літає зараз</h2>
+          <p>
+            FPV/VTX мігрують між діапазонами. Детектор, який бачить лише частину
+            спектра, залишає частотні діри там, де борт уже може працювати.
+          </p>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Частота</th>
+                <th>Задача / де зустрічається</th>
+                <th>Ризик для вузькодіапазонного детектора</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.2 / 1.3 ГГц</td>
+                <td>Аналогові відеоканали, нестандартні VTX-конфігурації</td>
+                <td>Пропуск нижнього діапазону, якщо пристрій сфокусований на 2.4/5.8</td>
+              </tr>
+              <tr>
+                <td>2.4 ГГц</td>
+                <td>Відеолінки та борти з випромінюванням у підтримуваному спектрі</td>
+                <td>Сліпа зона для 5.8-only рішень</td>
+              </tr>
+              <tr>
+                <td>3.3 / 3.5 ГГц</td>
+                <td>Перебудовані або менш типові відеоканали</td>
+                <td>Часто випадає з типових 1.2/2.4/5.8 схем</td>
+              </tr>
+              <tr>
+                <td>4.9 / 5.2 / 5.8 ГГц</td>
+                <td>Поширені верхні ділянки для VTX та частини квадро</td>
+                <td>Ризик залишається, якщо покриття має розриви між каналами</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section section-band" id="coverage">
+        <div class="section-heading">
+          <p class="eyebrow">Менше сліпих зон</p>
+          <h2>Закриває весь актуальний спектр FPV</h2>
+          <p>
+            Безперервне покриття 1050-6040 МГц зменшує шанс пропустити
+            нестандартний або перебудований відеоканал у межах підтримуваного спектра.
+          </p>
+        </div>
+
+        <div class="spectrum-card large">
+          <div class="spectrum-axis major" aria-hidden="true">
+            <span>1050 MHz</span>
+            <span>1200</span>
+            <span>2400</span>
+            <span>3500</span>
+            <span>4900</span>
+            <span>6040 MHz</span>
+          </div>
+
+          <div class="coverage-grid" role="img" aria-label="Порівняння покриття частот від 1050 до 6040 МГц">
+            <div class="coverage-row ours">
+              <span class="row-label">Наш детектор</span>
+              <div class="track">
+                <span class="segment full"></span>
+              </div>
+            </div>
+
+            <div class="coverage-row">
+              <span class="row-label">Типовий 1.2/2.4/5.8</span>
+              <div class="track">
+                <span class="segment" style="--start: 3%; --end: 8%"></span>
+                <span class="segment" style="--start: 28%; --end: 31%"></span>
+                <span class="segment" style="--start: 95%; --end: 100%"></span>
+              </div>
+            </div>
+
+            <div class="coverage-row">
+              <span class="row-label">Типовий 2.4/5.8</span>
+              <div class="track">
+                <span class="segment" style="--start: 28%; --end: 31%"></span>
+                <span class="segment" style="--start: 95%; --end: 100%"></span>
+              </div>
+            </div>
+
+            <div class="coverage-row">
+              <span class="row-label">5.8-only</span>
+              <div class="track">
+                <span class="segment" style="--start: 95%; --end: 100%"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="detects">
+        <div class="section-heading">
+          <p class="eyebrow">Без універсальних обіцянок</p>
+          <h2>Що виявляє</h2>
+        </div>
+
+        <div class="card-grid four">
+          <article class="info-card">
+            <h3>FPV analog</h3>
+            <p>У відповідних діапазонах, якщо відеовипромінювання потрапляє в 1050-6040 МГц.</p>
+          </article>
+          <article class="info-card">
+            <h3>DJI / квадро</h3>
+            <p>За наявності відеовипромінювання у підтримуваному спектрі та відповідній конфігурації борту.</p>
+          </article>
+          <article class="info-card">
+            <h3>Нестандартні VTX</h3>
+            <p>Відеоканали в межах 1050-6040 МГц, включно з менш типовими ділянками.</p>
+          </article>
+          <article class="info-card">
+            <h3>Крила / кастом</h3>
+            <p>Частина платформ залежно від відеолінку, потужності передавача та антенної конфігурації.</p>
+          </article>
+        </div>
+
+        <p class="note">
+          Детекція залежить від висоти, потужності передавача, антен, рельєфу,
+          зашумленості ефіру та конкретної конфігурації борту.
+        </p>
+      </section>
+
+      <section class="section section-band" id="comparison">
+        <div class="section-heading">
+          <p class="eyebrow">Порівняння покриття</p>
+          <h2>Частотні діри видно в таблиці</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table comparison-table">
+            <thead>
+              <tr>
+                <th>Параметр</th>
+                <th>Наш детектор</th>
+                <th>Типовий 1.2/2.4/5.8</th>
+                <th>Типовий 2.4/5.8</th>
+                <th>5.8-only</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1050-6040 МГц</td>
+                <td><span class="status yes">Суцільно</span></td>
+                <td><span class="status partial">Фрагменти</span></td>
+                <td><span class="status partial">Фрагменти</span></td>
+                <td><span class="status no">Ні</span></td>
+              </tr>
+              <tr>
+                <td>1.2 ГГц</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status no">Ні</span></td>
+                <td><span class="status no">Ні</span></td>
+              </tr>
+              <tr>
+                <td>2.4 ГГц</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status no">Ні</span></td>
+              </tr>
+              <tr>
+                <td>3.3-3.5 ГГц</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status no">Зазвичай ні</span></td>
+                <td><span class="status no">Зазвичай ні</span></td>
+                <td><span class="status no">Ні</span></td>
+              </tr>
+              <tr>
+                <td>4.9-6.0 ГГц</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status partial">Частково</span></td>
+                <td><span class="status partial">Частково</span></td>
+                <td><span class="status partial">Тільки 5.8</span></td>
+              </tr>
+              <tr>
+                <td>Робота з нестандартними VTX</td>
+                <td><span class="status yes">У межах спектра</span></td>
+                <td><span class="status partial">Обмежено</span></td>
+                <td><span class="status partial">Обмежено</span></td>
+                <td><span class="status no">Вузько</span></td>
+              </tr>
+              <tr>
+                <td>Калібрування під місцевість</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+              <tr>
+                <td>Фільтрація шумів</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+              <tr>
+                <td>Робота поруч із РЕБ</td>
+                <td><span class="status yes">Передбачено</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+              <tr>
+                <td>Інтеграція в оповіщення / РЕБ</td>
+                <td><span class="status yes">Передбачено</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+              <tr>
+                <td>Blackout mode</td>
+                <td><span class="status yes">Так</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+              <tr>
+                <td>Пеленгація</td>
+                <td><span class="status yes">Зі спрямованою антеною</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+                <td><span class="status partial">Залежить від моделі</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="reo">
+        <div class="section-heading">
+          <p class="eyebrow">Складна РЕО</p>
+          <h2>Не сирена на весь ефір</h2>
+          <p>
+            Пристрій налаштовується під конкретну позицію, рівень шуму та сусідні
+            джерела випромінювання, щоб зменшувати хибні спрацювання.
+          </p>
+        </div>
+
+        <div class="feature-list">
+          <span>Фільтрація шумів</span>
+          <span>Адаптація порогів</span>
+          <span>Калібрування під позицію</span>
+          <span>Мінімізація хибних спрацювань</span>
+          <span>Відключення окремих діапазонів</span>
+          <span>Робота поруч із WiFi / Bluetooth / РЕБ</span>
+        </div>
+      </section>
+
+      <section class="section section-band" id="modes">
+        <div class="section-heading">
+          <p class="eyebrow">Режими роботи</p>
+          <h2>Під позицію, машину, СП або КСП</h2>
+        </div>
+
+        <div class="card-grid three">
+          <article class="info-card">
+            <h3>Черговий режим</h3>
+            <p>Носіння на позиції, у машині або на СП з постійним контролем ефіру.</p>
+          </article>
+          <article class="info-card">
+            <h3>FPV only</h3>
+            <p>Фокус на FPV-сигналах у підтримуваному спектрі без зайвого шуму в інтерфейсі.</p>
+          </article>
+          <article class="info-card">
+            <h3>Пеленгація</h3>
+            <p>Визначення напрямку зі спрямованою антеною, якщо така конфігурація використовується.</p>
+          </article>
+          <article class="info-card">
+            <h3>Blackout</h3>
+            <p>Робота без світлової демаскації для чергування в темний час.</p>
+          </article>
+          <article class="info-card">
+            <h3>Інтеграція з РЕБ</h3>
+            <p>Тригер або сигнал для зовнішньої системи, якщо інтеграційний контур підтверджений.</p>
+          </article>
+          <article class="info-card">
+            <h3>Моніторинг спектра</h3>
+            <p>Android / PC / USB: [підтвердити підтримувані режими підключення].</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="integration">
+        <div class="section-heading">
+          <p class="eyebrow">Елемент системи</p>
+          <h2>Інтеграція в захист позиції</h2>
+          <p>
+            Детектор працює як сенсор у контурі оповіщення, а не як окрема пищалка.
+          </p>
+        </div>
+
+        <div class="flow" aria-label="Схема інтеграції">
+          <span>Дрон / VTX</span>
+          <span>Детектор</span>
+          <span>Оповіщення</span>
+          <span>РЕБ / укриття / КП</span>
+        </div>
+
+        <div class="use-cases" aria-label="Підходить для">
+          <span>позицій</span>
+          <span>СП</span>
+          <span>КСП</span>
+          <span>екіпажів техніки</span>
+          <span>мобільних груп</span>
+          <span>розрахунків РЕБ</span>
+          <span>розвідки</span>
+        </div>
+      </section>
+
+      <section class="section section-band" id="tests">
+        <div class="section-heading">
+          <p class="eyebrow">Польова перевірка</p>
+          <h2>Місце для доказів, не для вигаданих цифр</h2>
+        </div>
+
+        <div class="proof-grid">
+          <article>
+            <strong>[додати відео]</strong>
+            <span>Відео з тестами в реальному ефірі.</span>
+          </article>
+          <article>
+            <strong>[додати кількість тестових вильотів]</strong>
+            <span>Підтверджена кількість перевірок.</span>
+          </article>
+          <article>
+            <strong>[додати перевірені VTX/відеолінки]</strong>
+            <span>Список конфігурацій, які можна публікувати.</span>
+          </article>
+          <article>
+            <strong>[додати підрозділи/відгуки]</strong>
+            <span>Фідбек підрозділів без розкриття зайвих деталей.</span>
+          </article>
+          <article>
+            <strong>[додати фото/відео з поля]</strong>
+            <span>Матеріали після погодження.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="specs">
+        <div class="section-heading">
+          <p class="eyebrow">Технічні характеристики</p>
+          <h2>ТТХ ближче до рішення</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table class="data-table specs-table">
+            <tbody>
+              <tr>
+                <th>Діапазон роботи</th>
+                <td>1050-6040 МГц</td>
+              </tr>
+              <tr>
+                <th>Підтримувані діапазони</th>
+                <td>1.2 / 1.3 / 2.4 / 3.3 / 3.5 / 4.9 / 5.2 / 5.8 ГГц</td>
+              </tr>
+              <tr>
+                <th>Способи оповіщення</th>
+                <td>[додати підтверджені способи оповіщення]</td>
+              </tr>
+              <tr>
+                <th>Акумулятор</th>
+                <td>[додати тип / ємність після підтвердження]</td>
+              </tr>
+              <tr>
+                <th>Автономність</th>
+                <td>[додати підтверджену автономність]</td>
+              </tr>
+              <tr>
+                <th>Роз'єми</th>
+                <td>[додати підтверджені роз'єми]</td>
+              </tr>
+              <tr>
+                <th>Антени</th>
+                <td>[додати комплектацію антен]</td>
+              </tr>
+              <tr>
+                <th>Захист корпусу</th>
+                <td>[додати підтверджений рівень захисту]</td>
+              </tr>
+              <tr>
+                <th>Вага</th>
+                <td>[додати підтверджену вагу]</td>
+              </tr>
+              <tr>
+                <th>Комплектація</th>
+                <td>[додати підтверджену комплектацію]</td>
+              </tr>
+              <tr>
+                <th>Опції</th>
+                <td>[додати доступні опції]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section section-band" id="faq">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>Коротко по суті</h2>
+        </div>
+
+        <div class="faq-grid">
+          <details>
+            <summary>Які частоти покриває пристрій?</summary>
+            <p>Робочий діапазон: 1050-6040 МГц. Акцент: 1.2 / 1.3 / 2.4 / 3.3 / 3.5 / 4.9 / 5.2 / 5.8 ГГц.</p>
+          </details>
+          <details>
+            <summary>Чим він відрізняється від 2.4/5.8 детекторів?</summary>
+            <p>Він закриває ширший спектр і зменшує сліпі зони між типовими діапазонами.</p>
+          </details>
+          <details>
+            <summary>Чи бачить нестандартні VTX?</summary>
+            <p>У межах 1050-6040 МГц, якщо відеовипромінювання достатнє для детекції в конкретній РЕО.</p>
+          </details>
+          <details>
+            <summary>Чи працює поруч із РЕБ?</summary>
+            <p>Так, сторінка передбачає налаштування порогів, фільтрацію шумів і калібрування під позицію.</p>
+          </details>
+          <details>
+            <summary>Чи можна вимкнути окремі діапазони?</summary>
+            <p>Так, передбачено можливість відключення діапазонів, які заважають роботі в конкретному ефірі.</p>
+          </details>
+          <details>
+            <summary>Чи є режим без світла?</summary>
+            <p>Так, передбачено Blackout mode для роботи без світлової демаскації.</p>
+          </details>
+          <details>
+            <summary>Від чого залежить дальність детекції?</summary>
+            <p>Від висоти, потужності передавача, антен, рельєфу, зашумленості ефіру та конфігурації борту.</p>
+          </details>
+          <details>
+            <summary>Чи можна підключити до зовнішньої антени?</summary>
+            <p>[додати підтверджені варіанти зовнішніх антен і роз'ємів]</p>
+          </details>
+          <details>
+            <summary>Чи підходить для машини / позиції / КСП?</summary>
+            <p>Так, сторінка позиціонує пристрій для позицій, СП, КСП, екіпажів техніки та мобільних груп.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="final-cta" id="contact">
+        <div>
+          <p class="eyebrow">Конфігурація під задачу</p>
+          <h2>Закрийте частотні діри на позиції</h2>
+          <p>
+            Отримайте консультацію по конфігурації під вашу задачу, діапазони та РЕО.
+          </p>
+          <p class="contact-meta" id="contact-details">
+            Канал зв'язку: [додати контакт для консультацій / КП]
+          </p>
+        </div>
+        <div class="cta-row">
+          <a class="button primary" href="#contact-details">Отримати консультацію</a>
+          <a class="button secondary" href="#contact-details">Замовити / Отримати КП</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
