@@ -1,12 +1,12 @@
-# Change: Add bilingual market landing
+# Change: Add multilingual market landing
 
 ## Why
-The landing page needs to reflect the updated Oberig SDR market positioning and support Ukrainian and English audiences.
+The landing page needs to reflect the updated Oberig SDR market positioning and support Ukrainian, English and French audiences.
 
 ## What Changes
 - Replace current landing content with the new section order and claims.
-- Add Ukrainian and English content variants.
-- Add a header language switcher with flag indicators.
+- Add Ukrainian, English and French content variants.
+- Add a header language dropdown with flag indicators.
 - Default Ukrainian for Ukrainian IP geolocation and English for other locations, with manual selection persisted.
 
 ## Impact

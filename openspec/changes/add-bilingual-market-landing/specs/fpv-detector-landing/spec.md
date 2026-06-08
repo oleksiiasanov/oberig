@@ -1,10 +1,10 @@
 ## ADDED Requirements
 
-### Requirement: Bilingual Landing Experience
-The landing page SHALL support Ukrainian and English content variants for all public-facing landing sections.
+### Requirement: Multilingual Landing Experience
+The landing page SHALL support Ukrainian, English and French content variants for all public-facing landing sections.
 
 #### Scenario: Manual language switch
-- **WHEN** a visitor clicks the language switcher in the header
+- **WHEN** a visitor selects a language from the header language dropdown
 - **THEN** the page updates visible content to the selected language
 - **AND** persists the selected language for future visits.
 

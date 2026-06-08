@@ -41,6 +41,10 @@ const required = [
   "https://www.tiktok.com/@oberig.sdr",
   "https://www.instagram.com/oberig_sdr/",
   "Language",
+  "fr-FR",
+  "Commander",
+  "language-menu",
+  "menu-backdrop",
 ];
 
 function collectFiles(path) {

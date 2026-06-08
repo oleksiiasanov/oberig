@@ -1,27 +1,48 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Brand } from "./Brand.jsx";
-import { LANGUAGES } from "../data/content.js";
+import { LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "../data/content.js";
 import { SocialIcon } from "./SocialIcon.jsx";
 
-function LanguageSwitcher({ language, onLanguageChange, onSelect }) {
+function LanguageSwitcher({ language, onLanguageChange }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const currentLanguage = LANGUAGES[language] || LANGUAGES.en;
+
   return (
-    <div className="language-switcher" aria-label="Language">
-      {Object.entries(LANGUAGES).map(([code, config]) => (
-        <button
-          type="button"
-          className={language === code ? "is-active" : ""}
-          aria-pressed={language === code}
-          onClick={() => {
-            onLanguageChange(code);
-            onSelect?.();
-          }}
-          key={code}
-        >
-          <span aria-hidden="true">{config.flag}</span>
-          <span>{config.label}</span>
-        </button>
-      ))}
+    <div className={`language-switcher ${isOpen ? "is-open" : ""}`} aria-label="Language">
+      <button
+        type="button"
+        className="language-current"
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        onClick={() => setIsOpen((value) => !value)}
+      >
+        <span aria-hidden="true">{currentLanguage.flag}</span>
+        <span>{currentLanguage.label}</span>
+        <ChevronDown aria-hidden="true" />
+      </button>
+      <div className="language-menu" role="menu">
+        {SELECTABLE_LANGUAGE_CODES.map((code) => {
+          const config = LANGUAGES[code];
+
+          return (
+          <button
+            type="button"
+            className={`language-option ${language === code ? "is-active" : ""}`}
+            aria-pressed={language === code}
+            role="menuitemradio"
+            onClick={() => {
+              onLanguageChange(code);
+              setIsOpen(false);
+            }}
+            key={code}
+          >
+            <span aria-hidden="true">{config.flag}</span>
+            <span>{config.label}</span>
+          </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -34,17 +55,13 @@ export function Header({ content, language, onLanguageChange }) {
   return (
     <header className="site-header">
       <Brand />
-      <button
-        type="button"
-        className="menu-toggle"
-        aria-expanded={isMenuOpen}
-        aria-controls="site-menu"
-        onClick={() => setIsMenuOpen((value) => !value)}
-      >
-        {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        <span>Menu</span>
-      </button>
       <div className={`header-actions ${isMenuOpen ? "is-open" : ""}`} id="site-menu">
+        <div className="drawer-head">
+          <span>Menu</span>
+          <button type="button" className="drawer-close" aria-label="Close menu" onClick={closeMenu}>
+            <X aria-hidden="true" />
+          </button>
+        </div>
         <nav className="nav" aria-label={content.meta.navLabel}>
           {content.nav.map(([href, label]) => (
             <a href={href} onClick={closeMenu} key={href}>
@@ -60,8 +77,26 @@ export function Header({ content, language, onLanguageChange }) {
             </a>
           ))}
         </div>
-        <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} onSelect={closeMenu} />
       </div>
+      <div className="header-controls">
+        <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={isMenuOpen}
+          aria-controls="site-menu"
+          onClick={() => setIsMenuOpen((value) => !value)}
+        >
+          {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          <span>Menu</span>
+        </button>
+      </div>
+      <button
+        type="button"
+        className={`menu-backdrop ${isMenuOpen ? "is-open" : ""}`}
+        aria-label="Close menu"
+        onClick={closeMenu}
+      />
     </header>
   );
 }

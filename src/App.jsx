@@ -9,7 +9,7 @@ import { MarketComparison } from "./components/MarketComparison.jsx";
 import { Trust } from "./components/Trust.jsx";
 import { FAQ } from "./components/FAQ.jsx";
 import { FinalCTA } from "./components/FinalCTA.jsx";
-import { landingContent, LANGUAGES } from "./data/content.js";
+import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
 const STORAGE_KEY = "oberig-language";
 
@@ -18,11 +18,15 @@ function getFallbackLanguage() {
   return navigator.language?.toLowerCase().startsWith("uk") ? "uk" : "en";
 }
 
+function isSupportedLanguage(language) {
+  return SELECTABLE_LANGUAGE_CODES.includes(language);
+}
+
 export default function App() {
   const [language, setLanguage] = useState(() => {
     if (typeof window === "undefined") return "en";
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored === "uk" || stored === "en" ? stored : getFallbackLanguage();
+    return isSupportedLanguage(stored) ? stored : getFallbackLanguage();
   });
 
   useEffect(() => {
@@ -50,6 +54,7 @@ export default function App() {
   const content = useMemo(() => landingContent[language] || landingContent.en, [language]);
 
   const handleLanguageChange = (nextLanguage) => {
+    if (!isSupportedLanguage(nextLanguage)) return;
     setLanguage(nextLanguage);
     localStorage.setItem(STORAGE_KEY, nextLanguage);
   };
