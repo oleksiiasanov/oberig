@@ -150,22 +150,24 @@ main {
 .header-actions {
   position: fixed;
   inset: 0 0 0 auto;
-  z-index: 80;
+  z-index: 160;
   display: flex;
-  width: min(86vw, 368px);
+  width: min(88vw, 380px);
   height: 100svh;
   flex-direction: column;
   min-width: 0;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 16px;
-  padding: 18px;
+  gap: 22px;
+  overflow-y: auto;
+  padding: 22px;
   border: 1px solid var(--line);
   border-width: 0 0 0 1px;
   border-radius: 0;
-  background: rgba(6, 12, 20, 0.96);
+  background: rgb(6, 12, 20);
   box-shadow: -24px 0 80px rgba(0, 0, 0, 0.48), inset 1px 0 0 rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(22px);
+  overscroll-behavior: contain;
   transform: translateX(104%);
   transition: transform 260ms ease;
   pointer-events: none;
@@ -179,9 +181,9 @@ main {
 .menu-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 70;
+  z-index: 120;
   border: 0;
-  background: rgba(0, 0, 0, 0.46);
+  background: rgba(0, 0, 0, 0.68);
   opacity: 0;
   transition: opacity 220ms ease;
   pointer-events: none;
@@ -198,8 +200,10 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 900;
 }
 
@@ -248,13 +252,13 @@ main {
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
   width: 100%;
-  padding: 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(8, 15, 24, 0.58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .language-switcher {
@@ -350,19 +354,27 @@ main {
 
 .nav a {
   flex: 0 0 auto;
-  min-height: 40px;
-  padding: 10px 12px;
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  padding: 18px 4px;
+  border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: clamp(1.05rem, 4.8vw, 1.22rem);
+  font-weight: 850;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 0;
   transition: color 180ms ease, background 180ms ease;
+}
+
+.nav a:last-child {
+  border-bottom: 1px solid var(--line);
 }
 
 .nav a:hover,
 .nav a:focus-visible {
   color: var(--text);
-  background: rgba(var(--accent-rgb), 0.12);
+  background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.12), rgba(var(--accent-rgb), 0));
   outline: none;
 }
 
@@ -1040,6 +1052,24 @@ p {
   .nav {
     width: auto;
     flex-direction: row;
+    gap: 4px;
+    padding: 3px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(8, 15, 24, 0.58);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .nav a {
+    min-height: 40px;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 6px;
+    font-size: 0.82rem;
+  }
+
+  .nav a:last-child {
+    border-bottom: 0;
   }
 
   .section {
