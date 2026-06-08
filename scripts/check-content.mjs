@@ -49,7 +49,7 @@ const required = [
   "og:title",
   "og:image",
   "twitter:card",
-  "https://www.oberig-sdr.com.ua/hero_main.png",
+  "https://www.oberig-sdr.com.ua/og-image.png",
 ];
 
 function collectFiles(path) {

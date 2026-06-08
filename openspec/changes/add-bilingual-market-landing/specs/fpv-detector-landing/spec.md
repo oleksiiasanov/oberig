@@ -28,7 +28,7 @@ The landing page SHALL present the product media block as a looping video of the
 - **AND** the product image is only used as a poster or fallback.
 
 ### Requirement: Link Preview Metadata
-The landing page SHALL expose social preview metadata for messengers and social platforms, including the page title, short product description, canonical URL, and hero product image.
+The landing page SHALL expose social preview metadata for messengers and social platforms, including the page title, short product description, canonical URL, and an optimized hero product preview image.
 
 #### Scenario: Messenger link preview
 - **WHEN** a visitor shares the public site URL in a messenger
