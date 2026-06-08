@@ -46,6 +46,10 @@ const required = [
   "language-menu",
   "menu-backdrop",
   "/video_1.mp4",
+  "og:title",
+  "og:image",
+  "twitter:card",
+  "https://www.oberig-sdr.com.ua/hero_main.png",
 ];
 
 function collectFiles(path) {

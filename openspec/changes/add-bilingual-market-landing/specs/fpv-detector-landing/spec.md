@@ -27,6 +27,15 @@ The landing page SHALL present the product media block as a looping video of the
 - **AND** the video loops continuously
 - **AND** the product image is only used as a poster or fallback.
 
+### Requirement: Link Preview Metadata
+The landing page SHALL expose social preview metadata for messengers and social platforms, including the page title, short product description, canonical URL, and hero product image.
+
+#### Scenario: Messenger link preview
+- **WHEN** a visitor shares the public site URL in a messenger
+- **THEN** the preview metadata identifies the page as Oberig SDR
+- **AND** includes a short description of the SDR-based FPV video detector
+- **AND** uses the hero product image as the preview image.
+
 ## MODIFIED Requirements
 
 ### Requirement: Landing Positioning
