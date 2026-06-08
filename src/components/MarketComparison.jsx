@@ -1,26 +1,29 @@
-import { comparisonRows } from "../data/content.js";
 import { AnimatedSection } from "./AnimatedSection.jsx";
 import { SectionHeader } from "./SectionHeader.jsx";
 
-export function MarketComparison() {
+export function MarketComparison({ content }) {
   return (
     <AnimatedSection id="comparison" className="section-quiet">
       <SectionHeader
-        kicker="Порівняння"
-        title="Oberig порівнюється з ринком за критеріями, а не за назвами конкурентів."
-        text="Жодних рейтингів і публічних балів. Лише категорійні болі та підтверджені можливості Oberig."
+        kicker={content.comparison.kicker}
+        title={content.comparison.title}
+        text={content.comparison.text}
       />
-      <div className="comparison-table" role="table" aria-label="Порівняння Oberig з типовим приладом на ринку">
+      <div className="comparison-table" role="table" aria-label={content.comparison.title}>
         <div className="comparison-head" role="row">
-          <span role="columnheader">Критерій</span>
-          <span role="columnheader">Типовий прилад на ринку</span>
-          <span role="columnheader">Oberig</span>
+          {content.comparison.columns.map((column) => (
+            <span role="columnheader" key={column}>
+              {column}
+            </span>
+          ))}
         </div>
-        {comparisonRows.map(([label, market, oberig]) => (
+        {content.comparison.rows.map(([label, oberig, market]) => (
           <div className="comparison-row" role="row" key={label}>
             <strong role="cell">{label}</strong>
+            <span role="cell" className="comparison-highlight">
+              {oberig}
+            </span>
             <span role="cell">{market}</span>
-            <span role="cell">{oberig}</span>
           </div>
         ))}
       </div>

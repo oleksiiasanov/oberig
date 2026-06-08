@@ -1,13 +1,21 @@
 import { CTAButtons } from "./CTAButtons.jsx";
 import { AnimatedSection } from "./AnimatedSection.jsx";
 
-export function FinalCTA() {
+export function FinalCTA({ content }) {
   return (
     <AnimatedSection id="contact" className="final-cta">
-      <p className="eyebrow">Наступний крок</p>
-      <h2>Потрібен час на реакцію до наближення дрона?</h2>
-      <p>Проконсультуємо, як Oberig допомагає завчасно помічати аналоговий відеосигнал FPV-дрона, і приймемо заявку на замовлення.</p>
-      <CTAButtons center />
+      <p className="eyebrow">{content.hero.eyebrow}</p>
+      <h2>{content.hero.title}</h2>
+      <p>{content.hero.subtitle}</p>
+      <CTAButtons content={content} center />
+      <div className="footer-links">
+        {content.socials.map(([name, label, href]) => (
+          <a href={href} target="_blank" rel="noreferrer" aria-label={name} key={name}>
+            {label}
+          </a>
+        ))}
+      </div>
+      <small>{content.footer}</small>
     </AnimatedSection>
   );
 }

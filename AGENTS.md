@@ -46,6 +46,7 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 
 ## 5. Oberig Landing Visual Guardrails
 - Build mobile-first: base CSS must work at 360-430px before tablet and desktop overrides.
+- Use the Oberig focus accent `rgb(162, 251, 10)` / `#a2fb0a` for primary highlights, buttons, glows, active states, and derived accent surfaces.
 - Keep the hero hierarchy strict: H1 is the brand or a short offer, while long Ukrainian value propositions belong in the subhead/body copy.
 - Avoid poster-scale text blocks. Hero copy should stay readable, balanced, and normally no more than two lines per text role on desktop.
 - Product visuals must support the message, not dominate it. If real device media is unavailable, use restrained placeholders with clear labels and modest scale.

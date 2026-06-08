@@ -1,31 +1,30 @@
 import { motion } from "framer-motion";
-import { proofChips } from "../data/content.js";
 import { CTAButtons } from "./CTAButtons.jsx";
 
-export function Hero() {
+export function Hero({ content }) {
   return (
     <section className="hero section" id="top">
       <div className="hero-copy">
         <motion.p className="eyebrow" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-          ~9 секунд швидкість сканування всього діапазону
+          {content.hero.eyebrow}
         </motion.p>
-        <motion.p
+        <motion.h1
           className="hero-title"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 16 }}
         >
-          FPV відеодетектор на основі SDR
-          <span className="hero-title-sub">400–9800 МГц</span>
-        </motion.p>
+          {content.hero.title}
+          <span className="hero-title-sub">{content.hero.subtitle}</span>
+        </motion.h1>
         <motion.div
           className="proof-chips"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, type: "spring", stiffness: 90, damping: 16 }}
-          aria-label="Підтверджені можливості"
+          aria-label={content.advantages.kicker}
         >
-          {proofChips.map((chip) => (
+          {content.hero.chips.map((chip) => (
             <span key={chip}>{chip}</span>
           ))}
         </motion.div>
@@ -34,7 +33,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 90, damping: 16 }}
         >
-          <CTAButtons />
+          <CTAButtons content={content} />
         </motion.div>
       </div>
       <motion.div
@@ -46,7 +45,7 @@ export function Hero() {
         <img
           className="hero-product"
           src="/hero_main.png"
-          alt="SDR-пристрій Oberig з антенами"
+          alt={content.hero.imageAlt}
           width="1024"
           height="1536"
         />

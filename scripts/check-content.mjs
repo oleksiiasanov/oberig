@@ -4,8 +4,7 @@ import { join } from "node:path";
 const root = process.cwd();
 const srcRoots = ["src", "index.html", "public"];
 
-const SIGNAL_URL =
-  "https://signal.group/#CjQKIJtYdEsLqmFX_KES9TLN8lugJYrcXZCMHkJ5namzsW9mEhDpQtJzhrOuLiakfxgBDh2Y";
+const WHATSAPP_URL = "https://wa.me/380954716680";
 const ORDER_URL = "https://forms.gle/xFcMaTWR1G5pR4qW6";
 
 const forbidden = [
@@ -30,17 +29,18 @@ const forbidden = [
 const required = [
   "Oberig",
   "SDR",
+  "500–9000 МГц",
+  "~9 секунд",
   "Водоспад",
   "RSSI/SNR",
-  "Отримати консультацію",
   "Замовити",
-  SIGNAL_URL,
+  "Зв’язатись з нами",
+  WHATSAPP_URL,
   ORDER_URL,
-  "[потребує підтвердження]",
-  "Перегляд",
-  "Сканер",
-  "Браузер",
-  "Налаштування",
+  "https://www.facebook.com/oberig.sdr",
+  "https://www.tiktok.com/@oberig.sdr",
+  "https://www.instagram.com/oberig_sdr/",
+  "Language",
 ];
 
 function collectFiles(path) {
@@ -92,6 +92,10 @@ if (!/min-height:\s*(4[4-9]|[5-9]\d)px/.test(css)) {
 
 if (css.includes("#000000")) {
   failures.push("Avoid pure #000000 in the visual system.");
+}
+
+if (!css.includes("--accent-rgb: 162, 251, 10")) {
+  failures.push("Design system must use Oberig focus accent rgb(162, 251, 10).");
 }
 
 if (failures.length) {

@@ -1,24 +1,15 @@
-import { capabilities } from "../data/content.js";
 import { AnimatedSection } from "./AnimatedSection.jsx";
 import { SectionHeader } from "./SectionHeader.jsx";
 
-export function Capabilities() {
+export function Capabilities({ content }) {
   return (
-    <AnimatedSection id="capabilities" className="section-quiet">
-      <SectionHeader
-        kicker="Можливості"
-        title="SDR-основа й широке покриття відеочастот."
-        text="Oberig фокусується на FPV-відеосигналі в діапазоні 400-9800 МГц. Непідтверджені параметри на кшталт дальності чи автономності не вигадуємо."
-      />
-      <div className="capability-grid">
-        {capabilities.map((group) => (
-          <article className="capability-card" key={group.title}>
-            <h3>{group.title}</h3>
-            <ul>
-              {group.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+    <AnimatedSection id="use-cases">
+      <SectionHeader kicker={content.useCases.kicker} title={content.useCases.title} />
+      <div className="use-case-grid">
+        {content.useCases.cards.map(([title, text]) => (
+          <article className="use-case-card" key={title}>
+            <h3>{title}</h3>
+            <p>{text}</p>
           </article>
         ))}
       </div>
