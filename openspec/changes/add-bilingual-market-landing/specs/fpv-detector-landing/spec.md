@@ -18,6 +18,15 @@ The landing page SHALL support Ukrainian, English and French content variants fo
 - **AND** IP geolocation does not resolve to Ukraine
 - **THEN** the page defaults to English.
 
+### Requirement: Product Media Video
+The landing page SHALL present the product media block as a looping video of the Oberig SDR device rather than duplicating the hero product image.
+
+#### Scenario: Product video playback
+- **WHEN** the landing page loads
+- **THEN** the product media video is preloaded and attempts muted autoplay before the visitor scrolls to the media block
+- **AND** the video loops continuously
+- **AND** the product image is only used as a poster or fallback.
+
 ## MODIFIED Requirements
 
 ### Requirement: Landing Positioning

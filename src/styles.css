@@ -688,14 +688,57 @@ p {
 }
 
 .media-frame {
+  position: relative;
   overflow: hidden;
-  padding: 14px;
+  padding: 12px;
+  isolation: isolate;
 }
 
-.media-frame img {
-  width: min(100%, 520px);
-  margin: 0 auto;
+.media-frame::before {
+  position: absolute;
+  inset: -30% 10% auto;
+  z-index: -1;
+  height: 52%;
+  content: "";
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16), transparent 68%);
+  filter: blur(34px);
+  opacity: 0.78;
+}
+
+.media-frame > span {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  z-index: 2;
+}
+
+.media-video-shell {
+  position: relative;
+  overflow: hidden;
   border-radius: 8px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+}
+
+.media-video-shell::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -70px 90px rgba(3, 8, 14, 0.24);
+  pointer-events: none;
+}
+
+.spotlight-video {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  max-height: 620px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  background: var(--bg);
 }
 
 .feature-card,

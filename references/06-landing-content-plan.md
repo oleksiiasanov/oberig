@@ -55,7 +55,8 @@ Oberig SDR — не звичайний відеоприймач, а FPV/BPLA vid
   - `Посилений захист екрану`
 
 ### 3. Product media insert
-- Center media block for future rotating detector video.
+- Center media block with `public/video_1.mp4`.
+- Video should autoplay muted on page load, loop continuously, and use the product image only as a poster/fallback.
 - Text: `Сучасний український оберіг`
 
 ### 4. Designed for current needs
@@ -90,5 +91,4 @@ Message: engineering/product team, volunteer context, goal of helping defenders 
 ## Deferred sections
 - Reviews carousel.
 - Patent description + photo.
-- Real rotating detector video.
 - Photo collage with detector from multiple sides and screen with video.

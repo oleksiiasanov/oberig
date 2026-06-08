@@ -45,6 +45,7 @@ const required = [
   "Commander",
   "language-menu",
   "menu-backdrop",
+  "/video_1.mp4",
 ];
 
 function collectFiles(path) {

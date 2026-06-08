@@ -30,6 +30,8 @@ export const landingContent = {
       primaryAction: "Замовити",
       secondaryAction: "Зв’язатись з нами",
       ctaLabel: "Основні дії",
+      menuLabel: "Меню",
+      closeMenuLabel: "Закрити меню",
     },
     nav: [
       ["#advantages", "Переваги"],
@@ -60,8 +62,9 @@ export const landingContent = {
     },
     spotlight: {
       title: "Сучасний український оберіг",
-      text: "Медіа-блок під відео з обертанням детектора. Поки відео не додано, використовуємо актуальне фото продукту.",
-      badge: "Product view",
+      text: "Відео показує реальний форм-фактор Oberig SDR: компактний корпус, антени та польову ергономіку без зайвих декоративних макетів.",
+      badge: "Вигляд продукту",
+      videoLabel: "Відео з оглядом Oberig SDR",
     },
     design: {
       kicker: "Польова логіка",
@@ -134,6 +137,8 @@ export const landingContent = {
       primaryAction: "Order",
       secondaryAction: "Contact us",
       ctaLabel: "Primary actions",
+      menuLabel: "Menu",
+      closeMenuLabel: "Close menu",
     },
     nav: [
       ["#advantages", "Advantages"],
@@ -164,8 +169,9 @@ export const landingContent = {
     },
     spotlight: {
       title: "A modern Ukrainian oberig",
-      text: "Media block prepared for a rotating detector video. Until the video asset is added, the current product image is used.",
+      text: "The video shows the real Oberig SDR form factor: compact body, antennas and field ergonomics without decorative mockups.",
       badge: "Product view",
+      videoLabel: "Oberig SDR product view video",
     },
     design: {
       kicker: "Field logic",
@@ -238,6 +244,8 @@ export const landingContent = {
       primaryAction: "Commander",
       secondaryAction: "Nous contacter",
       ctaLabel: "Actions principales",
+      menuLabel: "Menu",
+      closeMenuLabel: "Fermer le menu",
     },
     nav: [
       ["#advantages", "Avantages"],
@@ -268,8 +276,9 @@ export const landingContent = {
     },
     spotlight: {
       title: "Un oberig ukrainien moderne",
-      text: "Bloc média prévu pour une vidéo de rotation du détecteur. En attendant l’ajout de la vidéo, l’image produit actuelle est utilisée.",
+      text: "La vidéo montre le vrai format d’Oberig SDR : boîtier compact, antennes et ergonomie terrain sans maquettes décoratives.",
       badge: "Vue produit",
+      videoLabel: "Vidéo de présentation produit Oberig SDR",
     },
     design: {
       kicker: "Logique terrain",
