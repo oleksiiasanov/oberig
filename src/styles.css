@@ -968,9 +968,10 @@ p {
 }
 
 .comparison-values span {
+  position: relative;
   display: flex;
   align-items: flex-start;
-  padding: 12px;
+  padding: 12px 12px 12px 32px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
@@ -978,6 +979,25 @@ p {
   font-size: 0.92rem;
   font-weight: 760;
   line-height: 1.35;
+}
+
+.comparison-values span::before {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.34);
+  content: attr(data-label);
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 
 .comparison-values .comparison-highlight {
@@ -1120,6 +1140,10 @@ p {
     border: 0;
     background: transparent;
     font-size: 1rem;
+  }
+
+  .comparison-values span::before {
+    content: none;
   }
 
   .comparison-values .comparison-highlight {

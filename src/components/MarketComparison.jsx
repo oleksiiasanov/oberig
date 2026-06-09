@@ -2,6 +2,8 @@ import { AnimatedSection } from "./AnimatedSection.jsx";
 import { SectionHeader } from "./SectionHeader.jsx";
 
 export function MarketComparison({ content }) {
+  const [, oberigColumn, marketColumn] = content.comparison.columns;
+
   return (
     <AnimatedSection id="comparison" className="section-quiet">
       <SectionHeader
@@ -21,10 +23,12 @@ export function MarketComparison({ content }) {
           <div className="comparison-row" role="row" key={label}>
             <strong role="cell">{label}</strong>
             <div className="comparison-values">
-              <span role="cell" className="comparison-highlight">
+              <span role="cell" className="comparison-highlight" data-label={oberigColumn}>
                 {oberig}
               </span>
-              <span role="cell">{market}</span>
+              <span role="cell" data-label={marketColumn}>
+                {market}
+              </span>
             </div>
           </div>
         ))}
