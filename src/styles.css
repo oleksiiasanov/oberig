@@ -977,12 +977,12 @@ p {
   min-height: 92px;
   align-items: center;
   justify-content: flex-start;
-  padding: 14px 12px 14px 36px;
+  padding: 14px 16px;
   border: 1px solid var(--comparison-card-line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
   color: var(--muted);
-  font-size: clamp(0.78rem, 3.65vw, 0.92rem);
+  font-size: clamp(0.8rem, 3.7vw, 0.92rem);
   font-weight: 760;
   line-height: 1.24;
   overflow-wrap: anywhere;
@@ -999,7 +999,7 @@ p {
   justify-content: center;
   min-height: 44px;
   padding: 5px 0;
-  color: var(--comparison-card-line);
+  color: currentColor;
   content: attr(data-label);
   font-size: 0.5rem;
   font-weight: 680;
