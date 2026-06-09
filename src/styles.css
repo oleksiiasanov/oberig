@@ -970,19 +970,23 @@ p {
 .comparison-values span {
   --comparison-card-line: rgba(255, 255, 255, 0.12);
   --comparison-card-mask: rgb(18, 27, 36);
-  --comparison-label-gap: 58px;
+  --comparison-label-gap: 52px;
   position: relative;
   display: flex;
-  min-height: 84px;
+  min-width: 0;
+  min-height: 92px;
   align-items: center;
-  padding: 14px 12px 14px 54px;
+  justify-content: flex-start;
+  padding: 14px 12px 14px 36px;
   border: 1px solid var(--comparison-card-line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: clamp(0.78rem, 3.65vw, 0.92rem);
   font-weight: 760;
-  line-height: 1.35;
+  line-height: 1.24;
+  overflow-wrap: anywhere;
+  text-align: left;
 }
 
 .comparison-values span::before {
@@ -997,9 +1001,9 @@ p {
   padding: 5px 0;
   color: var(--comparison-card-line);
   content: attr(data-label);
-  font-size: 0.54rem;
+  font-size: 0.5rem;
   font-weight: 680;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   line-height: 1;
   text-transform: uppercase;
   writing-mode: vertical-rl;
