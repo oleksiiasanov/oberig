@@ -84,6 +84,7 @@ export const landingContent = {
       title: "Порівняння з детекторами на ринку",
       text:
         "Детектори дронів стали обов'язковим приладом для кожного військового, адже вони оберігають від небезпеки з неба. Oberig SDR забезпечує високу точність і дозволяє виявити загрозу раніше за типові ринкові аналоги.",
+      otherLabel: "Інші",
       columns: ["Характеристика", "Детектор Oberig SDR", "Типовий прилад"],
       rows: [
         ["Архітектура", "SDR-платформа", "Відеоприймач"],
@@ -191,6 +192,7 @@ export const landingContent = {
       title: "Comparison with market drone detectors",
       text:
         "Drone detectors have become essential equipment for military personnel because they protect against threats from the sky. Oberig SDR provides high accuracy and helps detect threats earlier than typical market alternatives.",
+      otherLabel: "Others",
       columns: ["Characteristic", "Oberig SDR detector", "Typical device"],
       rows: [
         ["Architecture", "SDR platform", "Video receiver"],
@@ -298,6 +300,7 @@ export const landingContent = {
       title: "Comparaison avec les détecteurs de drones du marché",
       text:
         "Les détecteurs de drones sont devenus un équipement essentiel pour les militaires, car ils protègent contre les menaces venant du ciel. Oberig SDR offre une haute précision et aide à détecter la menace plus tôt que les alternatives typiques du marché.",
+      otherLabel: "Autres",
       columns: ["Caractéristique", "Détecteur Oberig SDR", "Appareil typique"],
       rows: [
         ["Architecture", "Plateforme SDR", "Récepteur vidéo"],

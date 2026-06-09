@@ -991,9 +991,9 @@ p {
   justify-content: center;
   color: rgba(255, 255, 255, 0.34);
   content: attr(data-label);
-  font-size: 0.58rem;
+  font-size: 0.62rem;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   line-height: 1;
   text-transform: uppercase;
   writing-mode: vertical-rl;
