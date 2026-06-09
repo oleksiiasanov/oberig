@@ -970,8 +970,9 @@ p {
 .comparison-values span {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  padding: 12px 12px 12px 32px;
+  min-height: 84px;
+  align-items: center;
+  padding: 14px 12px 14px 54px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
@@ -983,21 +984,23 @@ p {
 
 .comparison-values span::before {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
+  top: 50%;
+  left: -1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.34);
+  min-height: 44px;
+  padding: 5px 0;
+  background: rgb(15, 25, 34);
+  color: rgba(255, 255, 255, 0.42);
   content: attr(data-label);
-  font-size: 0.62rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
+  font-size: 0.54rem;
+  font-weight: 680;
+  letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
   writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .comparison-values .comparison-highlight {
