@@ -43,6 +43,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html.menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   min-width: 320px;
   margin: 0;
@@ -55,6 +60,16 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   line-height: 1.55;
+}
+
+body.menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.menu-open main,
+html.menu-open .menu-backdrop {
+  touch-action: none;
 }
 
 body::before {
@@ -158,15 +173,17 @@ main {
   inset: 0;
   z-index: 160;
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
+  height: 100svh;
   height: 100dvh;
   flex-direction: column;
   min-width: 0;
   align-items: stretch;
   justify-content: flex-start;
   gap: 22px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: max(22px, env(safe-area-inset-top)) 22px max(22px, env(safe-area-inset-bottom));
   border: 1px solid var(--line);
   border-width: 0;
@@ -175,6 +192,9 @@ main {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(22px);
   overscroll-behavior: contain;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
   transition: transform 260ms ease;
   pointer-events: none;
