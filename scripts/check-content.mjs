@@ -47,9 +47,7 @@ const required = [
   "menu-backdrop",
   "/video_1.mp4",
   "og:title",
-  "og:image",
   "twitter:card",
-  "https://www.oberig-sdr.com.ua/og-image.png",
 ];
 
 function collectFiles(path) {
@@ -82,6 +80,7 @@ for (const term of required) {
 }
 
 const css = readFileSync(join(root, "src/styles.css"), "utf8");
+const html = readFileSync(join(root, "index.html"), "utf8");
 
 if (css.includes("@media (max-width")) {
   failures.push("CSS must be mobile-first and avoid max-width media queries.");
@@ -103,8 +102,16 @@ if (css.includes("#000000")) {
   failures.push("Avoid pure #000000 in the visual system.");
 }
 
-if (!css.includes("--accent-rgb: 162, 251, 10")) {
-  failures.push("Design system must use Oberig focus accent rgb(162, 251, 10).");
+if (!css.includes("--accent-rgb: 195, 141, 24")) {
+  failures.push("Design system must use bronze as the default focus accent rgb(195, 141, 24).");
+}
+
+if (!css.includes(':root[data-theme="green"]') || !css.includes("--accent-rgb: 162, 251, 10")) {
+  failures.push("Design system must keep the green B palette available behind the theme switch.");
+}
+
+if (html.includes('property="og:image"') || html.includes('name="twitter:image"')) {
+  failures.push("Messenger previews should not include image metadata while image previews are disabled.");
 }
 
 if (failures.length) {

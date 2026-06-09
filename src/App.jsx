@@ -12,6 +12,9 @@ import { FinalCTA } from "./components/FinalCTA.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
 const STORAGE_KEY = "oberig-language";
+const THEME_STORAGE_KEY = "oberig-theme";
+const DEFAULT_THEME = "bronze";
+const THEME_VARIANTS = ["bronze", "green"];
 
 function getFallbackLanguage() {
   if (typeof navigator === "undefined") return "en";
@@ -22,11 +25,20 @@ function isSupportedLanguage(language) {
   return SELECTABLE_LANGUAGE_CODES.includes(language);
 }
 
+function isSupportedTheme(theme) {
+  return THEME_VARIANTS.includes(theme);
+}
+
 export default function App() {
   const [language, setLanguage] = useState(() => {
     if (typeof window === "undefined") return "en";
     const stored = localStorage.getItem(STORAGE_KEY);
     return isSupportedLanguage(stored) ? stored : getFallbackLanguage();
+  });
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_THEME;
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    return isSupportedTheme(stored) ? stored : DEFAULT_THEME;
   });
 
   useEffect(() => {
@@ -51,12 +63,24 @@ export default function App() {
     document.documentElement.lang = LANGUAGES[language].locale;
   }, [language]);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
   const content = useMemo(() => landingContent[language] || landingContent.en, [language]);
 
   const handleLanguageChange = (nextLanguage) => {
     if (!isSupportedLanguage(nextLanguage)) return;
     setLanguage(nextLanguage);
     localStorage.setItem(STORAGE_KEY, nextLanguage);
+  };
+
+  const handleThemeToggle = () => {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === "bronze" ? "green" : "bronze";
+      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+      return nextTheme;
+    });
   };
 
   return (
@@ -66,7 +90,7 @@ export default function App() {
         <Hero content={content} />
         <MarketProblem content={content} />
         <SdrDifference content={content} />
-        <Modes content={content} />
+        <Modes content={content} onThemeToggle={handleThemeToggle} />
         <MarketComparison content={content} />
         <Capabilities content={content} />
         <FAQ content={content} />

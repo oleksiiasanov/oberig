@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Brand } from "./Brand.jsx";
 import { LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "../data/content.js";
@@ -51,6 +51,18 @@ export function Header({ content, language, onLanguageChange }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return undefined;
+
+    document.documentElement.classList.toggle("is-menu-open", isMenuOpen);
+    document.body.classList.toggle("is-menu-open", isMenuOpen);
+
+    return () => {
+      document.documentElement.classList.remove("is-menu-open");
+      document.body.classList.remove("is-menu-open");
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className="site-header">
