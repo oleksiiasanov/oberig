@@ -968,12 +968,15 @@ p {
 }
 
 .comparison-values span {
+  --comparison-card-line: rgba(255, 255, 255, 0.12);
+  --comparison-label-gap: 58px;
   position: relative;
   display: flex;
   min-height: 84px;
   align-items: center;
   padding: 14px 12px 14px 54px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--comparison-card-line);
+  border-left-color: transparent;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
   color: var(--muted);
@@ -986,13 +989,13 @@ p {
   position: absolute;
   top: 50%;
   left: -1px;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
   padding: 5px 0;
-  background: rgb(15, 25, 34);
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--comparison-card-line);
   content: attr(data-label);
   font-size: 0.54rem;
   font-weight: 680;
@@ -1003,8 +1006,26 @@ p {
   transform: translate(-50%, -50%) rotate(180deg);
 }
 
+.comparison-values span::after {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: -1px;
+  width: 1px;
+  content: "";
+  background: linear-gradient(
+    to bottom,
+    var(--comparison-card-line) 0 calc(50% - var(--comparison-label-gap) / 2),
+    transparent calc(50% - var(--comparison-label-gap) / 2) calc(50% + var(--comparison-label-gap) / 2),
+    var(--comparison-card-line) calc(50% + var(--comparison-label-gap) / 2) 100%
+  );
+  pointer-events: none;
+}
+
 .comparison-values .comparison-highlight {
+  --comparison-card-line: rgba(var(--accent-rgb), 0.36);
   border-color: rgba(var(--accent-rgb), 0.3);
+  border-left-color: transparent;
   background: rgba(var(--accent-rgb), 0.08);
   color: var(--yellow-soft);
   font-weight: 850;
@@ -1146,6 +1167,10 @@ p {
   }
 
   .comparison-values span::before {
+    content: none;
+  }
+
+  .comparison-values span::after {
     content: none;
   }
 
