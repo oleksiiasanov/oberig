@@ -969,6 +969,7 @@ p {
 
 .comparison-values span {
   --comparison-card-line: rgba(255, 255, 255, 0.12);
+  --comparison-card-mask: rgb(18, 27, 36);
   --comparison-label-gap: 58px;
   position: relative;
   display: flex;
@@ -976,7 +977,6 @@ p {
   align-items: center;
   padding: 14px 12px 14px 54px;
   border: 1px solid var(--comparison-card-line);
-  border-left-color: transparent;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
   color: var(--muted);
@@ -1008,24 +1008,20 @@ p {
 
 .comparison-values span::after {
   position: absolute;
-  top: 7px;
-  bottom: 7px;
+  top: 50%;
   left: -1px;
   width: 1px;
+  height: var(--comparison-label-gap);
   content: "";
-  background: linear-gradient(
-    to bottom,
-    var(--comparison-card-line) 0 calc(50% - var(--comparison-label-gap) / 2),
-    transparent calc(50% - var(--comparison-label-gap) / 2) calc(50% + var(--comparison-label-gap) / 2),
-    var(--comparison-card-line) calc(50% + var(--comparison-label-gap) / 2) 100%
-  );
+  background: var(--comparison-card-mask);
   pointer-events: none;
+  transform: translateY(-50%);
 }
 
 .comparison-values .comparison-highlight {
   --comparison-card-line: rgba(var(--accent-rgb), 0.36);
+  --comparison-card-mask: rgb(34, 31, 24);
   border-color: rgba(var(--accent-rgb), 0.3);
-  border-left-color: transparent;
   background: rgba(var(--accent-rgb), 0.08);
   color: var(--yellow-soft);
   font-weight: 850;
