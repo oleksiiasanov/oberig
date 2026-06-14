@@ -37,11 +37,11 @@ The landing page SHALL expose text-only social preview metadata for messengers a
 - **AND** does not include image preview metadata.
 
 ### Requirement: Accent Theme Variants
-The landing page SHALL use the bronze accent palette based on `#c38d18` as the default visual theme and keep the green accent palette as a hidden B variant for internal comparison.
+The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep the bronze accent palette as a hidden B variant for internal comparison.
 
 #### Scenario: Hidden theme switch
 - **WHEN** a reviewer quickly clicks the first design feature card ten times
-- **THEN** the page toggles between the default bronze theme and the green B theme
+- **THEN** the page toggles between the default green theme and the bronze B theme
 - **AND** persists the selected theme for later visits.
 
 ### Requirement: Responsive Comparison Layout

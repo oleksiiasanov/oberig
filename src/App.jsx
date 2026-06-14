@@ -12,7 +12,7 @@ import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/con
 
 const STORAGE_KEY = "dvision-language";
 const THEME_STORAGE_KEY = "dvision-theme";
-const DEFAULT_THEME = "bronze";
+const DEFAULT_THEME = "green";
 const THEME_VARIANTS = ["bronze", "green"];
 
 function getFallbackLanguage() {
@@ -76,7 +76,7 @@ export default function App() {
 
   const handleThemeToggle = () => {
     setTheme((currentTheme) => {
-      const nextTheme = currentTheme === "bronze" ? "green" : "bronze";
+      const nextTheme = currentTheme === "green" ? "bronze" : "green";
       localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
       return nextTheme;
     });

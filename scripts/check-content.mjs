@@ -101,12 +101,12 @@ if (css.includes("#000000")) {
   failures.push("Avoid pure #000000 in the visual system.");
 }
 
-if (!css.includes("--accent-rgb: 195, 141, 24")) {
-  failures.push("Design system must use bronze as the default focus accent rgb(195, 141, 24).");
+if (!css.includes("--accent-rgb: 162, 251, 10")) {
+  failures.push("Design system must use green as the default focus accent rgb(162, 251, 10).");
 }
 
-if (!css.includes(':root[data-theme="green"]') || !css.includes("--accent-rgb: 162, 251, 10")) {
-  failures.push("Design system must keep the green B palette available behind the theme switch.");
+if (!css.includes(':root[data-theme="bronze"]') || !css.includes("--accent-rgb: 195, 141, 24")) {
+  failures.push("Design system must keep the bronze B palette available behind the theme switch.");
 }
 
 if (html.includes('property="og:image"') || html.includes('name="twitter:image"')) {

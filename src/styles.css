@@ -6,10 +6,10 @@
   --surface-strong: rgba(22, 32, 44, 0.92);
   --surface-soft: rgba(255, 255, 255, 0.035);
   --line: rgba(255, 255, 255, 0.1);
-  --accent-rgb: 195, 141, 24;
+  --accent-rgb: 162, 251, 10;
   --accent: rgb(var(--accent-rgb));
-  --accent-soft: #f2c15a;
-  --accent-muted: #7b5310;
+  --accent-soft: #d7ff7a;
+  --accent-muted: #6fae05;
   --accent-surface: rgba(var(--accent-rgb), 0.1);
   --accent-line: rgba(var(--accent-rgb), 0.34);
   --line-strong: var(--accent-line);
@@ -29,10 +29,10 @@
   --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
-:root[data-theme="green"] {
-  --accent-rgb: 162, 251, 10;
-  --accent-soft: #d7ff7a;
-  --accent-muted: #6fae05;
+:root[data-theme="bronze"] {
+  --accent-rgb: 195, 141, 24;
+  --accent-soft: #f2c15a;
+  --accent-muted: #7b5310;
 }
 
 * {
@@ -275,15 +275,19 @@ main {
   filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.08));
 }
 
+.brand-logo-bronze {
+  display: none;
+}
+
+:root[data-theme="bronze"] .brand-logo-bronze {
+  display: block;
+}
+
+:root[data-theme="bronze"] .brand-logo-green {
+  display: none;
+}
+
 .brand-logo-green {
-  display: none;
-}
-
-:root[data-theme="green"] .brand-logo-bronze {
-  display: none;
-}
-
-:root[data-theme="green"] .brand-logo-green {
   display: block;
 }
 
