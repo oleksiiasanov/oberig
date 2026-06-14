@@ -27,7 +27,7 @@ const forbidden = [
 ];
 
 const required = [
-  "Oberig",
+  "D.VISION",
   "SDR",
   "500–9000 МГц",
   "~9 секунд",
@@ -45,7 +45,6 @@ const required = [
   "Commander",
   "language-menu",
   "menu-backdrop",
-  "/video_1.mp4",
   "og:title",
   "twitter:card",
 ];

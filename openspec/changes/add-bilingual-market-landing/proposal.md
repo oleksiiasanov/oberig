@@ -1,7 +1,7 @@
 # Change: Add multilingual market landing
 
 ## Why
-The landing page needs to reflect the updated Oberig SDR market positioning and support Ukrainian, English and French audiences.
+The landing page needs to reflect the updated D.VISION market positioning and support Ukrainian, English and French audiences.
 
 ## What Changes
 - Replace current landing content with the new section order and claims.

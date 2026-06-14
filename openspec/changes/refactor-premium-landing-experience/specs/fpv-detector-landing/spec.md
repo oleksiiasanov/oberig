@@ -1,8 +1,8 @@
 ## ADDED Requirements
 ### Requirement: Authentic Product Content Source
-The landing page content SHALL be derived from Oberig's authoritative reference space and SHALL NOT replicate competitor-derived page structure, old landing claims, or prior assumptions.
+The landing page content SHALL be derived from D.VISION's authoritative reference space and SHALL NOT replicate competitor-derived page structure, old landing claims, or prior assumptions.
 
-#### Scenario: Content is re-grounded in Oberig data
+#### Scenario: Content is re-grounded in D.VISION data
 - **WHEN** the landing content is authored or reconciled
 - **THEN** ranges, signal classes, work modes, and technical characteristics reflect the `references/` space
 - **AND** where the reference space differs from any prior landing value, the reference space prevails
@@ -14,19 +14,19 @@ The landing page content SHALL be derived from Oberig's authoritative reference 
 - **AND** the new landing uses only confirmed reference-space claims or explicit placeholders
 
 ### Requirement: Consultation CTA Destination
-The landing page consultation call-to-action SHALL link to the Oberig Signal group invite.
+The landing page consultation call-to-action SHALL link to the D.VISION Signal group invite.
 
 #### Scenario: User requests a consultation
 - **WHEN** the user activates a "get consultation" call-to-action
-- **THEN** it opens the Oberig Signal group invite link
+- **THEN** it opens the D.VISION Signal group invite link
 - **AND** the link target is consistent across the hero and final CTA
 
 ### Requirement: Order CTA Destination
-The landing page order call-to-action SHALL link to the Oberig Google Form order intake.
+The landing page order call-to-action SHALL link to the D.VISION Google Form order intake.
 
 #### Scenario: User starts an order
 - **WHEN** the user activates an "order" call-to-action
-- **THEN** it opens the Oberig Google Form order link
+- **THEN** it opens the D.VISION Google Form order link
 - **AND** the link target is consistent across the hero and final CTA
 - **AND** order CTAs are visually and semantically distinct from consultation CTAs
 - **AND** order CTAs do not imply unconfirmed price, delivery, warranty, or availability details
@@ -41,7 +41,7 @@ The landing page SHALL follow the detailed landing content plan in the reference
 - **AND** any section that cannot be grounded remains a placeholder rather than invented copy
 
 ### Requirement: Authentic Product Imagery
-The landing page SHALL use the real photograph of the Oberig detector as the primary product media.
+The landing page SHALL use the real photograph of the D.VISION detector as the primary product media.
 
 #### Scenario: User views product media
 - **WHEN** the hero or product-media area is displayed
@@ -68,7 +68,7 @@ The landing page SHALL include restrained premium motion and tactile interactive
 - **AND** animations do not obscure critical technical copy or product claims
 
 ### Requirement: Brand Assets And Design Tokens
-The landing page SHALL use the supplied Oberig logo and favicon as brand inputs for the visual identity system.
+The landing page SHALL use the supplied D.VISION logo and favicon as brand inputs for the visual identity system.
 
 #### Scenario: Brand system is defined
 - **WHEN** visual tokens are created for the premium rebuild
@@ -98,31 +98,31 @@ The landing page SHALL be written in Ukrainian for a military and technical audi
 - **AND** the copy does not explain basic FPV concepts, use civilian dramatization, or reuse unsupported old frequency claims
 
 ### Requirement: Hero Spectrum Positioning
-The landing page SHALL present Oberig as a Ukrainian SDR-based detector/analyzer for analog video signals, not as the old all-band 1050-6040 MHz landing claim.
+The landing page SHALL present D.VISION as a Ukrainian SDR-based detector/analyzer for analog video signals, not as the old all-band 1050-6040 MHz landing claim.
 
 #### Scenario: User views the hero section
 - **WHEN** the first viewport is loaded
-- **THEN** the page positions Oberig around SDR architecture, live decoded video, scanner workflow, waterfall spectrum analysis, and RSSI/SNR where confirmed by the reference space
-- **AND** the hero CTA for consultation opens the Oberig Signal group invite
-- **AND** the hero includes a distinct order CTA that opens the Oberig Google Form order link
+- **THEN** the page positions D.VISION around SDR architecture, live decoded video, scanner workflow, waterfall spectrum analysis, and RSSI/SNR where confirmed by the reference space
+- **AND** the hero CTA for consultation opens the D.VISION Signal group invite
+- **AND** the hero includes a distinct order CTA that opens the D.VISION Google Form order link
 - **AND** unconfirmed frequency ranges, distances, autonomy, battery, screen, and price are omitted or shown only as explicit placeholders
 - **AND** the hero does not display the old "1050-6040 МГц" claim unless it is later confirmed in `references/`
 
 ### Requirement: Current Frequency Reality Section
-The landing page SHALL describe the market problem using grounded category insights rather than presenting unsupported Oberig frequency coverage.
+The landing page SHALL describe the market problem using grounded category insights rather than presenting unsupported D.VISION frequency coverage.
 
 #### Scenario: User reviews market context
 - **WHEN** the market-problem section is displayed
 - **THEN** it explains category pain points such as unstable video, mismatched declared ranges, weak autonomy, or inconsistent production only at the level supported by the competitor-analysis reference
 - **AND** it does not publish named competitor rankings or scores
-- **AND** it does not turn category pain points into Oberig product claims unless confirmed by the technical reference
+- **AND** it does not turn category pain points into D.VISION product claims unless confirmed by the technical reference
 
 ### Requirement: Frequency Coverage Comparison Visual
 The landing page SHALL avoid claimed product frequency-coverage visuals until the relevant ranges are confirmed in the reference space.
 
 #### Scenario: User compares coverage or spectrum behavior
 - **WHEN** a frequency, spectrum, or coverage visual is displayed
-- **THEN** any actual Oberig frequency ranges remain explicit placeholders unless confirmed in `references/`
+- **THEN** any actual D.VISION frequency ranges remain explicit placeholders unless confirmed in `references/`
 - **AND** the visual may illustrate SDR/waterfall analysis behavior and configurable scanning without claiming unconfirmed coverage
 - **AND** competitor coverage is described generically and only as category context, not as named-device claims
 
@@ -136,13 +136,13 @@ The landing page SHALL describe confirmed signal-handling capabilities with care
 - **AND** the page does not claim the product sees all drones or all signal types
 
 ### Requirement: Detector Comparison Table
-The landing page SHALL compare Oberig against the market by criteria grounded in the reference space, not by the old frequency-column table.
+The landing page SHALL compare D.VISION against the market by criteria grounded in the reference space, not by the old frequency-column table.
 
 #### Scenario: User scans comparison content
 - **WHEN** the comparison section is displayed
 - **THEN** it compares criteria such as SDR vs repackaged video receiver, live video, waterfall analysis, RSSI/SNR, configurable scanning, OTA, USB-C functions, and Ukrainian engineering where confirmed
 - **AND** market weaknesses are generalized from the competitor-analysis reference
-- **AND** unconfirmed Oberig figures such as ranges, autonomy, battery, screen size, and price remain placeholders
+- **AND** unconfirmed D.VISION figures such as ranges, autonomy, battery, screen size, and price remain placeholders
 
 ### Requirement: Complex RF Environment Operation
 The landing page SHALL describe confirmed SDR analysis and configuration capabilities without inventing EW-adjacent behavior.
@@ -153,7 +153,7 @@ The landing page SHALL describe confirmed SDR analysis and configuration capabil
 - **AND** claims about terrain calibration, false-positive reduction, band disabling, operation near EW, alert integration, or direction finding are omitted unless confirmed in the reference space
 
 ### Requirement: Work Modes
-The landing page SHALL present the confirmed Oberig application modes and device workflows from the reference space.
+The landing page SHALL present the confirmed D.VISION application modes and device workflows from the reference space.
 
 #### Scenario: User reviews work modes
 - **WHEN** the work-modes section is displayed
@@ -162,7 +162,7 @@ The landing page SHALL present the confirmed Oberig application modes and device
 - **AND** old modes such as standby, FPV only, direction finding, blackout, EW integration, or spectrum monitoring are not presented unless confirmed later
 
 ### Requirement: Position Defense Integration
-The landing page SHALL present Oberig as a technical SDR tool for analysis and consultation without tactical workflow instructions.
+The landing page SHALL present D.VISION as a technical SDR tool for analysis and consultation without tactical workflow instructions.
 
 #### Scenario: User reviews product fit
 - **WHEN** an integration or use-context section is displayed
@@ -193,8 +193,8 @@ The landing page SHALL include a technical FAQ and final CTAs grounded in the ne
 #### Scenario: User reaches the final page sections
 - **WHEN** the FAQ and final CTA are displayed
 - **THEN** the FAQ covers SDR vs video receiver, live video, scanner, waterfall analysis, RSSI/SNR, antennas, OTA, USB-C workflows, missing confirmed figures, and claim boundaries where appropriate
-- **AND** the final CTA includes consultation through the Oberig Signal group
-- **AND** the final CTA includes ordering through the Oberig Google Form
+- **AND** the final CTA includes consultation through the D.VISION Signal group
+- **AND** the final CTA includes ordering through the D.VISION Google Form
 - **AND** old CTA copy about commercial proposals or closing specific frequency gaps is not required unless re-approved
 
 ### Requirement: Visual Style And Responsiveness

@@ -1,15 +1,15 @@
 # Change: Refactor Premium Landing Experience
 
 ## Why
-The current landing page visual direction no longer matches the desired quality bar, and its content structure is essentially inherited from competitor pages rather than built from Oberig's own product data. The next iteration needs a phased reset toward a premium, modern, conversion-oriented experience inspired by Busy, Stripe, Linear, and Apple-level landing craft, while re-grounding all content in Oberig's authoritative internal product instruction and preserving the existing safety/claims boundaries.
+The current landing page visual direction no longer matches the desired quality bar, and its content structure is essentially inherited from competitor pages rather than built from D.VISION's own product data. The next iteration needs a phased reset toward a premium, modern, conversion-oriented experience inspired by Busy, Stripe, Linear, and Apple-level landing craft, while re-grounding all content in D.VISION's authoritative internal product instruction and preserving the existing safety/claims boundaries.
 
 ## What Changes
 - Replace the current visual design system instead of iterating on its existing military/olive treatment.
-- Re-derive all landing content from the `references/` space (Oberig's SDR user guide captured in `references/02-technical-documentation.md`) instead of the current competitor-shaped structure and assumptions.
+- Re-derive all landing content from the `references/` space (D.VISION's SDR user guide captured in `references/02-technical-documentation.md`) instead of the current competitor-shaped structure and assumptions.
 - Treat all pre-reference-space landing content, frequency claims, spectrum claims, comparison structure, and CTA assumptions as invalid unless they are confirmed in `references/`.
 - Use the detailed landing content plan to define section order, messaging hierarchy, allowed claims, placeholders, forbidden claims, and content evals.
-- Route the "get consultation" call(s)-to-action to the Oberig Signal group invite link.
-- Route order call(s)-to-action to the Oberig Google Form order link.
+- Route the "get consultation" call(s)-to-action to the D.VISION Signal group invite link.
+- Route order call(s)-to-action to the D.VISION Google Form order link.
 - Use the supplied transparent logo and favicon as brand inputs for the typography, palette, favicon, and design-token system.
 - Use the real product photo of the detector as the primary product media, replacing the previously generated detector image.
 - Add repository-level Cursor and Claude Code instructions to guide future AI-assisted visual work.
@@ -34,7 +34,7 @@ Process steps (approval gate, design reset, tooling decision, concept direction,
   - Competitor analysis: independent FPV-detector testing report (captured in `references/03-competitor-analysis.md`)
   - Signal group invite (consultation CTA): `https://signal.group/#CjQKIJtYdEsLqmFX_KES9TLN8lugJYrcXZCMHkJ5namzsW9mEhDpQtJzhrOuLiakfxgBDh2Y`
   - Google Form order link: `https://forms.gle/xFcMaTWR1G5pR4qW6`
-  - Transparent Oberig logo and favicon assets, used as brand-system inputs
+  - Transparent D.VISION logo and favicon assets, used as brand-system inputs
   - Real product photo of the detector (to be supplied as a high-quality asset)
   - Busy visual reference (`references/01-visual-reference.md`) and optional v0/Lovable-generated concepts
   - Content blueprint mapping inputs → blocks/copy/CTA: `references/04-content-blueprint.md`

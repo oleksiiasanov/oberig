@@ -1,8 +1,8 @@
 ## Context
-The current site is a static HTML/CSS landing page. Its content structure is essentially inherited from competitor pages, and its visual treatment uses a military/olive skin the user wants removed. This change resets both: content is re-grounded in Oberig's own authoritative product instruction, and the visual direction restarts toward a premium, modern standard. The preferred visual reference is Busy (`https://busy.app/`): product-first hero composition, high-contrast interface depth, large media/device moments, long-form storytelling, and polished transitions — used as reference, not a template.
+The current site is a static HTML/CSS landing page. Its content structure is essentially inherited from competitor pages, and its visual treatment uses a military/olive skin the user wants removed. This change resets both: content is re-grounded in D.VISION's own authoritative product instruction, and the visual direction restarts toward a premium, modern standard. The preferred visual reference is Busy (`https://busy.app/`): product-first hero composition, high-contrast interface depth, large media/device moments, long-form storytelling, and polished transitions — used as reference, not a template.
 
 ## Goals / Non-Goals
-- Goals: reset the landing's visual direction; re-derive all content from Oberig's internal instruction; keep mobile-first behavior; preserve claim/safety boundaries; introduce a repeatable premium design standard; make future AI-assisted edits more consistent.
+- Goals: reset the landing's visual direction; re-derive all content from D.VISION's internal instruction; keep mobile-first behavior; preserve claim/safety boundaries; introduce a repeatable premium design standard; make future AI-assisted edits more consistent.
 - Goals: decide whether the current static stack can support the desired quality or whether a component-driven stack is warranted.
 - Goals: allow v0/Lovable exploration without making generated output the unquestioned source of truth.
 - Goals: establish explicit agentic quality gates so future AI agents can verify grounded content, mobile-first behavior, CTA routing, accessibility, and performance consistently.
@@ -14,7 +14,7 @@ The current site is a static HTML/CSS landing page. Its content structure is ess
 This plan mirrors the section order in `tasks.md` (Approval → Content → Agent Instructions → Design Reset → Tooling → Implementation → Verification).
 
 1. **Approval**: approve the phased proposal and confirm direction (reference space is the only source of truth; component-driven preference; v0/Lovable as inspiration only).
-2. **Content Re-grounding**: treat all old landing content as non-authoritative, read the reference space, and re-derive all sections from Oberig's own data. Reconcile every range, mode, signal class, and characteristic against `references/`; where prior content differs, the reference space wins. Use `references/06-landing-content-plan.md` as the section-by-section contract for messaging, allowed claims, placeholders, forbidden claims, and CTA logic.
+2. **Content Re-grounding**: treat all old landing content as non-authoritative, read the reference space, and re-derive all sections from D.VISION's own data. Reconcile every range, mode, signal class, and characteristic against `references/`; where prior content differs, the reference space wins. Use `references/06-landing-content-plan.md` as the section-by-section contract for messaging, allowed claims, placeholders, forbidden claims, and CTA logic.
 3. **Agent Instructions**: add the provided Cursor and Claude Code design standards to the root `AGENTS.md` outside the managed OpenSpec block.
 4. **Design Reset & Brand System**: remove the existing olive/amber military skin while retaining safety constraints; ingest the supplied transparent logo and favicon, derive type direction and palette cues, and define design tokens before rebuilding visual sections.
 5. **Tooling & Concept Direction**: plan for a component-driven frontend stack (e.g. Vite/React/Tailwind), with final setup confirmed during implementation; use Busy as the main visual reference and optionally generate inspiration through v0/Lovable, translating only suitable patterns into repo-native implementation.
@@ -22,11 +22,11 @@ This plan mirrors the section order in `tasks.md` (Approval → Content → Agen
 7. **Agentic QA And Archive**: run focused validation/evals (see Agentic Quality Gates), update OpenSpec task statuses, and archive the change after implementation is accepted.
 
 ## Decisions
-- Decision: Content is sourced from Oberig's authoritative internal instruction; the current competitor-derived structure is not treated as ground truth.
+- Decision: Content is sourced from D.VISION's authoritative internal instruction; the current competitor-derived structure is not treated as ground truth.
 - Decision: All old frequency, spectrum, detector-class, technical-characteristic, and CTA claims are invalid unless confirmed in `references/`.
 - Decision: The landing content plan defines the implementation order: Hero, Market Problem, Why SDR Matters, Work Modes, Capabilities, Spectrum/Unknown Specs, Market Comparison, Ukrainian Engineering, FAQ, Final CTA.
-- Decision: Consultation CTAs link to the Oberig Signal group invite.
-- Decision: Order CTAs link to the Oberig Google Form order intake.
+- Decision: Consultation CTAs link to the D.VISION Signal group invite.
+- Decision: Order CTAs link to the D.VISION Google Form order intake.
 - Decision: The supplied transparent logo and favicon inform the design system; the logo guides display-type proportions and brand presence, while the favicon informs compact mark usage and palette extraction.
 - Decision: The real detector photo replaces the generated detector image as primary product media; image enhancement, if needed, is produced outside this agent and supplied as an asset.
 - Decision: Treat Busy as a visual reference, not a template to copy (reference only; not a durable spec requirement).
@@ -49,7 +49,7 @@ This plan mirrors the section order in `tasks.md` (Approval → Content → Agen
 
 ## Alternatives Considered
 - Continue polishing the current static design: rejected because the user explicitly wants the current design removed.
-- Keep the competitor-shaped content: rejected because the content must reflect Oberig's own product data.
+- Keep the competitor-shaped content: rejected because the content must reflect D.VISION's own product data.
 - Directly import generated v0/Lovable code: risky because it may not preserve existing Ukrainian copy, OpenSpec constraints, accessibility, or repository conventions.
 - Keep all work in a single HTML file: acceptable only if the static stack remains, but less aligned with the requested modular standard.
 

@@ -2,17 +2,17 @@
 
 Статус: **оновлено під новий контент і мультимовний сайт.**
 
-Цей документ є робочим контент-контрактом для Oberig SDR landing. Публічний сайт має підтримувати
+Цей документ є робочим контент-контрактом для D.VISION landing. Публічний сайт має підтримувати
 три мови: українську, англійську та французьку. Якщо IP користувача з України — дефолт українська;
 для інших IP — англійська. Французька доступна через ручний вибір мови, який зберігається.
 
 ## Product truth
 
 ### One-liner
-**Oberig SDR — wide-band drone detector based on SDR, covering 500–9000 MHz.**
+**D.VISION — wide-band drone detector based on SDR, covering 500–9000 MHz.**
 
 ### Core positioning
-Oberig SDR — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
+D.VISION — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
 Головні claims:
 - діапазон сканування: **500–9000 МГц**;
 - повне сканування діапазону: **~9 секунд**;
@@ -36,7 +36,7 @@ Oberig SDR — не звичайний відеоприймач, а FPV/BPLA vid
 
 ### 1. Hero
 - Eyebrow: `Час сканування: ~9 секунд`
-- H1: `Oberig SDR`
+- H1: `D.VISION`
 - Support: `Детектор дронів широкого діапазону 500–9000 МГц`
 - Chips: `FPV`, `Крила`, `Аналогові НРК`
 - Media: real product image / future collage.
@@ -47,31 +47,26 @@ Oberig SDR — не звичайний відеоприймач, а FPV/BPLA vid
 - Title: `Максимальна детекція доступна на ринку`
 - Body: patented SDR-platform technology receives radio signal and transforms it into video.
 - Big tiles:
-  - `Дальність сканування: до 10 км`
-  - `Діапазон сканування: 500–9000 МГц`
-  - `Сканування повного кола: ~9 секунд`
-  - `Кольорове відео`
-  - `Компактність девайсу`
-  - `Посилений захист екрану`
+  - `Компактність: 13 × 8 см без антен`
+  - `Відображення: Кольорове відео`
+  - `Захист дисплея: Додатковий PETG протектор`
 
 ### 3. Product media insert
-- Center media block with `public/video_1.mp4`.
-- Video should autoplay muted on page load, loop continuously, and use the product image only as a poster/fallback.
-- Text: `Сучасний український оберіг`
+- Removed from the public landing page because the previous product-view video block is outdated.
 
 ### 4. Designed for current needs
-Cards:
+List rows:
 - Автономність роботи
 - Формат віддаленого спостереження
 - Захист девайсу
-- Ергономіка
+- Розміри девайсу
 - Широкі можливості застосування
 - Адаптація під умови роботи
 - Доступність
 
 ### 5. Comparison
-Compare Oberig SDR against a typical market device.
-Oberig column must be visually highlighted.
+Compare D.VISION against a typical market device.
+D.VISION column must be visually highlighted.
 
 ### 6. Use cases
 Cards:
@@ -85,7 +80,7 @@ Cards:
 Use the provided FAQ copy around SDR, Waterfall, RSSI/SNR, detection limits, affordability, and interface languages.
 
 ### 8. Team
-Title: `Команда Oberig SDR`
+Title: `Команда D.VISION`
 Message: engineering/product team, volunteer context, goal of helping defenders and civilians return home unharmed.
 
 ## Deferred sections

@@ -19,7 +19,7 @@ The landing page SHALL support Ukrainian, English and French content variants fo
 - **THEN** the page defaults to English.
 
 ### Requirement: Product Media Video
-The landing page SHALL present the product media block as a looping video of the Oberig SDR device rather than duplicating the hero product image.
+The landing page SHALL present the product media block as a looping video of the D.VISION device rather than duplicating the hero product image.
 
 #### Scenario: Product video playback
 - **WHEN** the landing page loads
@@ -32,7 +32,7 @@ The landing page SHALL expose text-only social preview metadata for messengers a
 
 #### Scenario: Messenger link preview
 - **WHEN** a visitor shares the public site URL in a messenger
-- **THEN** the preview metadata identifies the page as Oberig SDR
+- **THEN** the preview metadata identifies the page as D.VISION
 - **AND** includes a short description of the SDR-based FPV video detector
 - **AND** does not include image preview metadata.
 
@@ -50,14 +50,14 @@ The landing page SHALL present the market comparison in a mobile-readable patter
 #### Scenario: Mobile comparison rows
 - **WHEN** a visitor views the comparison section on a mobile viewport
 - **THEN** each characteristic label spans the full row width
-- **AND** the Oberig and typical-device values appear as two adjacent comparison blocks below the label.
+- **AND** the D.VISION and typical-device values appear as two adjacent comparison blocks below the label.
 
 ## MODIFIED Requirements
 
 ### Requirement: Landing Positioning
-The landing page SHALL position Oberig SDR as a wide-band FPV video detector based on SDR, with a primary claim of 500-9000 MHz coverage and approximately 9-second full-range scanning.
+The landing page SHALL position D.VISION as a wide-band FPV video detector based on SDR, with a primary claim of 500-9000 MHz coverage and approximately 9-second full-range scanning.
 
 #### Scenario: Hero positioning
 - **WHEN** a visitor opens the page
-- **THEN** the hero presents Oberig SDR as a drone detector for 500-9000 MHz
+- **THEN** the hero presents D.VISION as a drone detector for 500-9000 MHz
 - **AND** highlights approximately 9-second full-range scanning.

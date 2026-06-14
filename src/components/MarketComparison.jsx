@@ -17,12 +17,12 @@ export function MarketComparison({ content }) {
             </span>
           ))}
         </div>
-        {content.comparison.rows.map(([label, oberig, market]) => (
+        {content.comparison.rows.map(([label, product, market]) => (
           <div className="comparison-row" role="row" key={label}>
             <strong role="cell">{label}</strong>
             <div className="comparison-values">
-              <span role="cell" className="comparison-highlight" data-label="Oberig">
-                {oberig}
+              <span role="cell" className="comparison-highlight" data-label="D.VISION">
+                {product}
               </span>
               <span role="cell" data-label={content.comparison.otherLabel}>
                 {market}

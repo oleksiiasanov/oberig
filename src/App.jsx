@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
 import { MarketProblem } from "./components/MarketProblem.jsx";
-import { SdrDifference } from "./components/SdrDifference.jsx";
 import { Modes } from "./components/Modes.jsx";
 import { Capabilities } from "./components/Capabilities.jsx";
 import { MarketComparison } from "./components/MarketComparison.jsx";
@@ -11,8 +10,8 @@ import { FAQ } from "./components/FAQ.jsx";
 import { FinalCTA } from "./components/FinalCTA.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
-const STORAGE_KEY = "oberig-language";
-const THEME_STORAGE_KEY = "oberig-theme";
+const STORAGE_KEY = "dvision-language";
+const THEME_STORAGE_KEY = "dvision-theme";
 const DEFAULT_THEME = "bronze";
 const THEME_VARIANTS = ["bronze", "green"];
 
@@ -89,7 +88,6 @@ export default function App() {
       <main>
         <Hero content={content} />
         <MarketProblem content={content} />
-        <SdrDifference content={content} />
         <Modes content={content} onThemeToggle={handleThemeToggle} />
         <MarketComparison content={content} />
         <Capabilities content={content} />

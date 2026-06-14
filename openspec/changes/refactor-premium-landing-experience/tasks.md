@@ -6,7 +6,7 @@
 
 ## 2. Content Re-grounding
 - [x] 2.1 Capture authoritative product data in the `references/` space (SDR user guide provided as text → `references/02-technical-documentation.md`).
-- [x] 2.2 Map current sections to Oberig's own data; remove competitor-shaped structure and assumptions.
+- [x] 2.2 Map current sections to D.VISION's own data; remove competitor-shaped structure and assumptions.
 - [x] 2.3 Reconcile ranges, signal classes, work modes, and technical characteristics against the instruction; correct or placeholder anything not confirmed by it.
 - [x] 2.4 Add both valid CTA destinations to the content model: Signal for consultation and Google Form for order intake.
 - [x] 2.5 Create the detailed landing content plan with section goals, allowed claims, placeholders, forbidden claims, CTA logic, claims map, and content eval checklist.
@@ -29,8 +29,8 @@
 ## 6. Premium Landing Implementation
 - [x] 6.1 Rebuild the hero with product-first visual hierarchy inspired by Busy without copying it.
 - [x] 6.2 Use the real detector photo as primary product media; until a high-quality asset is supplied, use a clean placeholder rather than the old generated image.
-- [x] 6.3 Wire the consultation CTA(s) to the Oberig Signal group invite link.
-- [x] 6.4 Wire the order CTA(s) to the Oberig Google Form link.
+- [x] 6.3 Wire the consultation CTA(s) to the D.VISION Signal group invite link.
+- [x] 6.4 Wire the order CTA(s) to the D.VISION Google Form link.
 - [x] 6.5 Rebuild feature and comparison content using asymmetric/bento layouts instead of generic three-column blocks.
 - [x] 6.6 Add refined motion, hover states, active states, and reduced-motion handling.
 - [x] 6.7 Ensure the landing remains mobile-first and avoids incoherent overlap on phone, tablet, and desktop layouts.
