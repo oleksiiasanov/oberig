@@ -37,14 +37,13 @@ const required = [
   "Зв’язатись з нами",
   WHATSAPP_URL,
   ORDER_URL,
-  "https://www.facebook.com/oberig.sdr",
-  "https://www.tiktok.com/@oberig.sdr",
-  "https://www.instagram.com/oberig_sdr/",
+  "https://www.tiktok.com/@dvision_sdr",
+  "https://www.instagram.com/dvision_sdr",
   "Language",
-  "fr-FR",
-  "Commander",
   "language-menu",
   "menu-backdrop",
+  "/logo-default.png",
+  "/logo-exp.png",
   "og:title",
   "twitter:card",
 ];
@@ -105,8 +104,8 @@ if (!css.includes("--accent-rgb: 162, 251, 10")) {
   failures.push("Design system must use green as the default focus accent rgb(162, 251, 10).");
 }
 
-if (!css.includes(':root[data-theme="bronze"]') || !css.includes("--accent-rgb: 195, 141, 24")) {
-  failures.push("Design system must keep the bronze B palette available behind the theme switch.");
+if (css.includes('data-theme="bronze"') || css.includes("--accent-rgb: 195, 141, 24")) {
+  failures.push("Bronze/gold theme should be removed from the visual system.");
 }
 
 if (html.includes('property="og:image"') || html.includes('name="twitter:image"')) {

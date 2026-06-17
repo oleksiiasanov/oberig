@@ -11,9 +11,9 @@ import { FinalCTA } from "./components/FinalCTA.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
 const STORAGE_KEY = "dvision-language";
-const THEME_STORAGE_KEY = "dvision-theme";
-const DEFAULT_THEME = "green";
-const THEME_VARIANTS = ["bronze", "green"];
+const LOGO_STORAGE_KEY = "dvision-logo-variant";
+const DEFAULT_LOGO_VARIANT = "sdr";
+const LOGO_VARIANTS = ["base", "sdr"];
 
 function getFallbackLanguage() {
   if (typeof navigator === "undefined") return "en";
@@ -24,8 +24,8 @@ function isSupportedLanguage(language) {
   return SELECTABLE_LANGUAGE_CODES.includes(language);
 }
 
-function isSupportedTheme(theme) {
-  return THEME_VARIANTS.includes(theme);
+function isSupportedLogoVariant(variant) {
+  return LOGO_VARIANTS.includes(variant);
 }
 
 export default function App() {
@@ -34,10 +34,10 @@ export default function App() {
     const stored = localStorage.getItem(STORAGE_KEY);
     return isSupportedLanguage(stored) ? stored : getFallbackLanguage();
   });
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return DEFAULT_THEME;
-    const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    return isSupportedTheme(stored) ? stored : DEFAULT_THEME;
+  const [logoVariant, setLogoVariant] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_LOGO_VARIANT;
+    const stored = localStorage.getItem(LOGO_STORAGE_KEY);
+    return isSupportedLogoVariant(stored) ? stored : DEFAULT_LOGO_VARIANT;
   });
 
   useEffect(() => {
@@ -62,10 +62,6 @@ export default function App() {
     document.documentElement.lang = LANGUAGES[language].locale;
   }, [language]);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
-
   const content = useMemo(() => landingContent[language] || landingContent.en, [language]);
 
   const handleLanguageChange = (nextLanguage) => {
@@ -74,21 +70,21 @@ export default function App() {
     localStorage.setItem(STORAGE_KEY, nextLanguage);
   };
 
-  const handleThemeToggle = () => {
-    setTheme((currentTheme) => {
-      const nextTheme = currentTheme === "green" ? "bronze" : "green";
-      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-      return nextTheme;
+  const handleLogoToggle = () => {
+    setLogoVariant((currentVariant) => {
+      const nextVariant = currentVariant === "sdr" ? "base" : "sdr";
+      localStorage.setItem(LOGO_STORAGE_KEY, nextVariant);
+      return nextVariant;
     });
   };
 
   return (
     <>
-      <Header content={content} language={language} onLanguageChange={handleLanguageChange} />
+      <Header content={content} language={language} logoVariant={logoVariant} onLanguageChange={handleLanguageChange} />
       <main>
         <Hero content={content} />
         <MarketProblem content={content} />
-        <Modes content={content} onThemeToggle={handleThemeToggle} />
+        <Modes content={content} onLogoToggle={handleLogoToggle} />
         <MarketComparison content={content} />
         <Capabilities content={content} />
         <FAQ content={content} />

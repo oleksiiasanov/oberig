@@ -47,7 +47,7 @@ function LanguageSwitcher({ language, onLanguageChange }) {
   );
 }
 
-export function Header({ content, language, onLanguageChange }) {
+export function Header({ content, language, logoVariant, onLanguageChange }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollYRef = useRef(0);
 
@@ -106,7 +106,7 @@ export function Header({ content, language, onLanguageChange }) {
 
   return (
     <header className="site-header">
-      <Brand />
+      <Brand variant={logoVariant} />
       <div className={`header-actions ${isMenuOpen ? "is-open" : ""}`} id="site-menu">
         <div className="drawer-head">
           <span>{content.meta.menuLabel}</span>

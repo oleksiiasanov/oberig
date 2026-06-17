@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Multilingual Landing Experience
-The landing page SHALL support Ukrainian, English and French content variants for all public-facing landing sections.
+The landing page SHALL support Ukrainian and English content variants for all public-facing landing sections.
 
 #### Scenario: Manual language switch
 - **WHEN** a visitor selects a language from the header language dropdown
@@ -36,13 +36,13 @@ The landing page SHALL expose text-only social preview metadata for messengers a
 - **AND** includes a short description of the SDR-based FPV video detector
 - **AND** does not include image preview metadata.
 
-### Requirement: Accent Theme Variants
-The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep the bronze accent palette as a hidden B variant for internal comparison.
+### Requirement: Hidden Logo Variant
+The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep two D.VISION logo variants available for internal comparison.
 
-#### Scenario: Hidden theme switch
+#### Scenario: Hidden logo switch
 - **WHEN** a reviewer quickly clicks the first design feature card ten times
-- **THEN** the page toggles between the default green theme and the bronze B theme
-- **AND** persists the selected theme for later visits.
+- **THEN** the page toggles between the plain D.VISION logo and the D.VISION SDR logo
+- **AND** persists the selected logo variant for later visits.
 
 ### Requirement: Responsive Comparison Layout
 The landing page SHALL present the market comparison in a mobile-readable pattern that does not collapse all table cells into a single hard-to-scan vertical list.

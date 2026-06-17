@@ -3,23 +3,23 @@ import { AnimatedSection } from "./AnimatedSection.jsx";
 import { CTAButtons } from "./CTAButtons.jsx";
 import { SectionHeader } from "./SectionHeader.jsx";
 
-const THEME_CLICK_COUNT = 10;
-const THEME_CLICK_WINDOW_MS = 3500;
+const LOGO_CLICK_COUNT = 10;
+const LOGO_CLICK_WINDOW_MS = 3500;
 
-export function Modes({ content, onThemeToggle }) {
-  const themeClickTimesRef = useRef([]);
+export function Modes({ content, onLogoToggle }) {
+  const logoClickTimesRef = useRef([]);
 
   const handleFeatureClick = (index) => {
-    if (index !== 0 || !onThemeToggle) return;
+    if (index !== 0 || !onLogoToggle) return;
 
     const now = Date.now();
-    themeClickTimesRef.current = [...themeClickTimesRef.current, now].filter(
-      (time) => now - time <= THEME_CLICK_WINDOW_MS,
+    logoClickTimesRef.current = [...logoClickTimesRef.current, now].filter(
+      (time) => now - time <= LOGO_CLICK_WINDOW_MS,
     );
 
-    if (themeClickTimesRef.current.length >= THEME_CLICK_COUNT) {
-      themeClickTimesRef.current = [];
-      onThemeToggle();
+    if (logoClickTimesRef.current.length >= LOGO_CLICK_COUNT) {
+      logoClickTimesRef.current = [];
+      onLogoToggle();
     }
   };
 

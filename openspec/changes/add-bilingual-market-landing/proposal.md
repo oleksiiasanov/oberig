@@ -1,11 +1,11 @@
 # Change: Add multilingual market landing
 
 ## Why
-The landing page needs to reflect the updated D.VISION market positioning and support Ukrainian, English and French audiences.
+The landing page needs to reflect the updated D.VISION market positioning and support Ukrainian and English audiences.
 
 ## What Changes
 - Replace current landing content with the new section order and claims.
-- Add Ukrainian, English and French content variants.
+- Add Ukrainian and English content variants.
 - Add a header language dropdown with flag indicators.
 - Default Ukrainian for Ukrainian IP geolocation and English for other locations, with manual selection persisted.
 

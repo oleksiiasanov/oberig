@@ -29,12 +29,6 @@
   --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
-:root[data-theme="bronze"] {
-  --accent-rgb: 195, 141, 24;
-  --accent-soft: #f2c15a;
-  --accent-muted: #7b5310;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -275,20 +269,32 @@ main {
   filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.08));
 }
 
-.brand-logo-bronze {
-  display: none;
+.brand-wordmark {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: clamp(1.25rem, 6vw, 2.15rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
 }
 
-:root[data-theme="bronze"] .brand-logo-bronze {
-  display: block;
+.brand-wordmark::first-letter {
+  color: var(--accent-soft);
 }
 
-:root[data-theme="bronze"] .brand-logo-green {
-  display: none;
-}
-
-.brand-logo-green {
-  display: block;
+.brand-wordmark strong {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.62em;
+  letter-spacing: 0.03em;
 }
 
 .nav {
@@ -784,9 +790,12 @@ p {
   background: var(--bg);
 }
 
-.feature-card,
-.use-case-card {
+.feature-card {
   min-height: 190px;
+}
+
+.use-case-card {
+  min-height: auto;
 }
 
 .feature-grid {

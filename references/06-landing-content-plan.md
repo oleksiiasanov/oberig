@@ -3,8 +3,8 @@
 Статус: **оновлено під новий контент і мультимовний сайт.**
 
 Цей документ є робочим контент-контрактом для D.VISION landing. Публічний сайт має підтримувати
-три мови: українську, англійську та французьку. Якщо IP користувача з України — дефолт українська;
-для інших IP — англійська. Французька доступна через ручний вибір мови, який зберігається.
+дві мови: українську та англійську. Якщо IP користувача з України — дефолт українська; для інших IP —
+англійська.
 
 ## Product truth
 
@@ -23,14 +23,13 @@ D.VISION — не звичайний відеоприймач, а FPV/BPLA video
 - order CTA: Google Form.
 
 ### CTA system
-- Primary: **Замовити** / **Order** / **Commander** → `https://forms.gle/xFcMaTWR1G5pR4qW6`
-- Secondary: **Зв’язатись з нами** / **Contact us** / **Nous contacter** → `https://wa.me/380954716680`
+- Primary: **Замовити** / **Order** → `https://forms.gle/xFcMaTWR1G5pR4qW6`
+- Secondary: **Зв’язатись з нами** / **Contact us** → `https://wa.me/380954716680`
 - Signal CTA більше не використовується.
 
 ### Social links
-- Facebook: `https://www.facebook.com/oberig.sdr`
-- TikTok: `https://www.tiktok.com/@oberig.sdr`
-- Instagram: `https://www.instagram.com/oberig_sdr/`
+- TikTok: `https://www.tiktok.com/@dvision_sdr`
+- Instagram: `https://www.instagram.com/dvision_sdr`
 
 ## Section order
 
@@ -58,7 +57,7 @@ D.VISION — не звичайний відеоприймач, а FPV/BPLA video
 List rows:
 - Автономність роботи
 - Формат віддаленого спостереження
-- Захист девайсу
+- Захист дисплея
 - Розміри девайсу
 - Широкі можливості застосування
 - Адаптація під умови роботи
