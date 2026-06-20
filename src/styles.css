@@ -110,6 +110,9 @@ main {
 }
 
 .site-header {
+  --header-font-size: 0.82rem;
+  --header-logo-height: calc(var(--header-font-size) * 1.4);
+
   position: sticky;
   top: 0;
   z-index: 50;
@@ -145,7 +148,7 @@ main {
   color: var(--text);
   background: rgba(8, 15, 24, 0.72);
   font: inherit;
-  font-size: 0.82rem;
+  font-size: var(--header-font-size);
   font-weight: 850;
   cursor: pointer;
 }
@@ -263,8 +266,10 @@ main {
 }
 
 .brand-logo {
-  width: clamp(150px, 44vw, 300px);
-  height: auto;
+  width: auto;
+  max-width: clamp(150px, 44vw, 300px);
+  height: var(--header-logo-height);
+  object-fit: contain;
   opacity: 0.98;
   filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.08));
 }
@@ -336,7 +341,7 @@ main {
   color: var(--muted);
   background: rgba(8, 15, 24, 0.58);
   font: inherit;
-  font-size: 0.78rem;
+  font-size: calc(var(--header-font-size) * 0.95);
   font-weight: 800;
   text-decoration: none;
   cursor: pointer;
@@ -1344,7 +1349,7 @@ p {
     padding: 10px 12px;
     border: 0;
     border-radius: 6px;
-    font-size: 0.82rem;
+    font-size: var(--header-font-size);
   }
 
   .nav a:last-child {
