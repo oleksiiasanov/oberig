@@ -44,8 +44,15 @@ const required = [
   "menu-backdrop",
   "/logo-default.png",
   "/logo-exp.png",
+  "/og-image.png",
+  "/favicon.ico/favicon.ico",
+  "/favicon.ico/favicon-32x32.png",
+  "/favicon.ico/apple-icon-180x180.png",
+  "/favicon.ico/manifest.json",
   "og:title",
+  "og:image",
   "twitter:card",
+  "twitter:image",
 ];
 
 function collectFiles(path) {
@@ -108,8 +115,8 @@ if (css.includes('data-theme="bronze"') || css.includes("--accent-rgb: 195, 141,
   failures.push("Bronze/gold theme should be removed from the visual system.");
 }
 
-if (html.includes('property="og:image"') || html.includes('name="twitter:image"')) {
-  failures.push("Messenger previews should not include image metadata while image previews are disabled.");
+if (!html.includes('name="twitter:card" content="summary_large_image"')) {
+  failures.push("Twitter previews should use summary_large_image when OG image is enabled.");
 }
 
 if (failures.length) {
