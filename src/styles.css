@@ -120,10 +120,10 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  width: min(var(--max), calc(100% - 24px));
+  width: 100%;
   min-height: 76px;
-  margin: 0 auto;
-  padding: 14px 0;
+  margin: 0;
+  padding: 14px max(12px, calc((100vw - var(--max)) / 2));
   backdrop-filter: blur(18px);
 }
 
@@ -890,7 +890,7 @@ p {
   gap: 12px;
   min-height: auto;
   align-items: start;
-  padding: 18px;
+  padding: 18px 18px 16px;
 }
 
 .feature-card small {
@@ -936,6 +936,7 @@ p {
   height: 100%;
   overflow: hidden;
   border-radius: 8px;
+  background: transparent;
 }
 
 .device-loop-video {
@@ -947,6 +948,7 @@ p {
   filter: drop-shadow(0 34px 64px rgba(0, 0, 0, 0.38));
   transform: scale(1.24);
   transform-origin: center;
+  background: transparent;
 }
 
 .characteristics-layout > .cta-row {
@@ -1417,10 +1419,6 @@ p {
 }
 
 @media (min-width: 1040px) {
-  .site-header {
-    width: min(var(--max), calc(100% - 64px));
-  }
-
   .menu-toggle {
     display: none;
   }

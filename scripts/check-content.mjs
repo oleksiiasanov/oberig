@@ -27,6 +27,7 @@ const forbidden = [
 ];
 
 const required = [
+  "D.Vision SDR - FPV-відеодетектор на основі SDR-платформи",
   "D.VISION SDR",
   "SDR",
   "500–9000 МГц",

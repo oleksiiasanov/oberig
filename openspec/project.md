@@ -57,6 +57,6 @@ D.VISION SDR is a product landing page for a wide-band FPV/drone video detector 
 
 ## External Dependencies
 - `ipapi.co` is used client-side for optional country detection when no language preference exists.
-- Proms is used for order intake.
+- Prom is used for order intake.
 - WhatsApp is used for the contact CTA.
 - TikTok and Instagram are the current public social destinations.

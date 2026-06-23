@@ -94,7 +94,7 @@ The landing page SHALL use the supplied D.VISION SDR logo assets and support a h
 
 #### Scenario: Hidden logo switch
 - **WHEN** a reviewer quickly clicks the first characteristics card ten times
-- **THEN** the page toggles between the plain D.VISION SDR logo and the D.VISION SDR logo
+- **THEN** the page toggles between the plain D.VISION wordmark and the D.VISION SDR wordmark
 - **AND** persists the selected logo variant for future visits.
 
 ### Requirement: Hero Positioning
