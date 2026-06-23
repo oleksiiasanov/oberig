@@ -4,3 +4,5 @@ mobile.png
 .DS_Store
 node_modules/
 dist/
+# Heavy source video lives outside public/ so Vite never ships it to dist/
+raw-assets/

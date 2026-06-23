@@ -1,11 +1,11 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
 const srcRoots = ["src", "index.html", "public"];
 
 const WHATSAPP_URL = "https://wa.me/380954716680";
-const ORDER_URL = "https://forms.gle/xFcMaTWR1G5pR4qW6";
+const ORDER_URL = "https://prom.ua/p3099333953-dron-detektor-dvision.html";
 
 const forbidden = [
   "1050",
@@ -27,7 +27,7 @@ const forbidden = [
 ];
 
 const required = [
-  "D.VISION",
+  "D.VISION SDR",
   "SDR",
   "500–9000 МГц",
   "~9 секунд",
@@ -44,6 +44,9 @@ const required = [
   "menu-backdrop",
   "/logo-default.png",
   "/logo-exp.png",
+  "/device-loop-3d-alpha.webm",
+  "/device-loop-3d.mp4",
+  "/device-loop-3d-poster.png",
   "/og-image.png",
   "https://www.dvision.com.ua/",
   "https://www.dvision.com.ua/og-image.png",
@@ -86,8 +89,27 @@ for (const term of required) {
   if (!haystack.includes(term)) failures.push(`Required public/content term missing: ${term}`);
 }
 
+for (const path of [
+  "public/device-loop-3d.mp4",
+  "public/device-loop-3d-alpha.webm",
+  "public/device-loop-3d-poster.png",
+  "public/robots.txt",
+  "public/sitemap.xml",
+  "public/.well-known/security.txt",
+]) {
+  if (!existsSync(join(root, path))) failures.push(`Required public asset missing: ${path}`);
+}
+
+// public/ is copied verbatim into dist/ by Vite, so heavy/unused source media must not live there.
+for (const heavy of ["public/Device_loop1_3d.mov", "public/video_1.mp4"]) {
+  if (existsSync(join(root, heavy))) {
+    failures.push(`Heavy/unused media in public/ ships to dist/: ${heavy}. Keep sources in raw-assets/ and use the optimized device-loop-3d.{mp4,webm}.`);
+  }
+}
+
 const css = readFileSync(join(root, "src/styles.css"), "utf8");
 const html = readFileSync(join(root, "index.html"), "utf8");
+const vercelConfig = readFileSync(join(root, "vercel.json"), "utf8");
 
 if (css.includes("@media (max-width")) {
   failures.push("CSS must be mobile-first and avoid max-width media queries.");
@@ -119,6 +141,16 @@ if (css.includes('data-theme="bronze"') || css.includes("--accent-rgb: 195, 141,
 
 if (!html.includes('name="twitter:card" content="summary_large_image"')) {
   failures.push("Twitter previews should use summary_large_image when OG image is enabled.");
+}
+
+for (const header of [
+  "Content-Security-Policy",
+  "Permissions-Policy",
+  "Referrer-Policy",
+  "X-Content-Type-Options",
+  "X-Frame-Options",
+]) {
+  if (!vercelConfig.includes(header)) failures.push(`Vercel security header missing: ${header}`);
 }
 
 if (failures.length) {

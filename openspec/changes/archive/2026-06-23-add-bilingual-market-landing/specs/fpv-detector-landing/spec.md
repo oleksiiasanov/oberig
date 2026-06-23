@@ -19,7 +19,7 @@ The landing page SHALL support Ukrainian and English content variants for all pu
 - **THEN** the page defaults to English.
 
 ### Requirement: Product Media Video
-The landing page SHALL present the product media block as a looping video of the D.VISION device rather than duplicating the hero product image.
+The landing page SHALL present the product media block as a looping video of the D.VISION SDR device rather than duplicating the hero product image.
 
 #### Scenario: Product video playback
 - **WHEN** the landing page loads
@@ -32,16 +32,16 @@ The landing page SHALL expose rich social preview metadata for messengers and so
 
 #### Scenario: Messenger link preview
 - **WHEN** a visitor shares the public site URL in a messenger
-- **THEN** the preview metadata identifies the page as D.VISION
+- **THEN** the preview metadata identifies the page as D.VISION SDR
 - **AND** includes a short description of the SDR-based FPV video detector
-- **AND** includes image preview metadata that resolves on the production D.VISION domain.
+- **AND** includes image preview metadata that resolves on the production D.VISION SDR domain.
 
 ### Requirement: Hidden Logo Variant
-The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep two D.VISION logo variants available for internal comparison.
+The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep two D.VISION SDR logo variants available for internal comparison.
 
 #### Scenario: Hidden logo switch
 - **WHEN** a reviewer quickly clicks the first design feature card ten times
-- **THEN** the page toggles between the plain D.VISION logo and the D.VISION SDR logo
+- **THEN** the page toggles between the plain D.VISION SDR logo and the D.VISION SDR logo
 - **AND** persists the selected logo variant for later visits.
 
 ### Requirement: Responsive Comparison Layout
@@ -50,14 +50,14 @@ The landing page SHALL present the market comparison in a mobile-readable patter
 #### Scenario: Mobile comparison rows
 - **WHEN** a visitor views the comparison section on a mobile viewport
 - **THEN** each characteristic label spans the full row width
-- **AND** the D.VISION and typical-device values appear as two adjacent comparison blocks below the label.
+- **AND** the D.VISION SDR and typical-device values appear as two adjacent comparison blocks below the label.
 
 ## MODIFIED Requirements
 
 ### Requirement: Landing Positioning
-The landing page SHALL position D.VISION as a wide-band FPV video detector based on SDR, with a primary claim of 500-9000 MHz coverage and approximately 9-second full-range scanning.
+The landing page SHALL position D.VISION SDR as a wide-band FPV video detector based on SDR, with a primary claim of 500-9000 MHz coverage and approximately 9-second full-range scanning.
 
 #### Scenario: Hero positioning
 - **WHEN** a visitor opens the page
-- **THEN** the hero presents D.VISION as a drone detector for 500-9000 MHz
+- **THEN** the hero presents D.VISION SDR as a drone detector for 500-9000 MHz
 - **AND** highlights approximately 9-second full-range scanning.

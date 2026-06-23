@@ -2,17 +2,17 @@
 
 Статус: **оновлено під новий контент і мультимовний сайт.**
 
-Цей документ є робочим контент-контрактом для D.VISION landing. Публічний сайт має підтримувати
+Цей документ є робочим контент-контрактом для D.VISION SDR landing. Публічний сайт має підтримувати
 дві мови: українську та англійську. Якщо IP користувача з України — дефолт українська; для інших IP —
 англійська.
 
 ## Product truth
 
 ### One-liner
-**D.VISION — wide-band drone detector based on SDR, covering 500–9000 MHz.**
+**D.VISION SDR — wide-band drone detector based on SDR, covering 500–9000 MHz.**
 
 ### Core positioning
-D.VISION — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
+D.VISION SDR — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
 Головні claims:
 - діапазон сканування: **500–9000 МГц**;
 - повне сканування діапазону: **~9 секунд**;
@@ -20,10 +20,10 @@ D.VISION — не звичайний відеоприймач, а FPV/BPLA video
 - ціна: **від 22 000 грн**;
 - поставка: **до 5 тижнів**;
 - WhatsApp CTA: `+380954716680`;
-- order CTA: Google Form.
+- order CTA: Prom.
 
 ### CTA system
-- Primary: **Замовити** / **Order** → `https://forms.gle/xFcMaTWR1G5pR4qW6`
+- Primary: **Замовити** / **Order** → `https://prom.ua/p3099333953-dron-detektor-dvision.html`
 - Secondary: **Зв’язатись з нами** / **Contact us** → `https://wa.me/380954716680`
 - Signal CTA більше не використовується.
 
@@ -35,7 +35,7 @@ D.VISION — не звичайний відеоприймач, а FPV/BPLA video
 
 ### 1. Hero
 - Eyebrow: `Час сканування: ~9 секунд`
-- H1: `D.VISION`
+- H1: `D.VISION SDR`
 - Support: `Детектор дронів широкого діапазону 500–9000 МГц`
 - Chips: `FPV`, `Крила`, `Аналогові НРК`
 - Media: real product image / future collage.
@@ -64,8 +64,8 @@ List rows:
 - Доступність
 
 ### 5. Comparison
-Compare D.VISION against a typical market device.
-D.VISION column must be visually highlighted.
+Compare D.VISION SDR against a typical market device.
+D.VISION SDR column must be visually highlighted.
 
 ### 6. Use cases
 Cards:
@@ -79,7 +79,7 @@ Cards:
 Use the provided FAQ copy around SDR, Waterfall, RSSI/SNR, detection limits, affordability, and interface languages.
 
 ### 8. Team
-Title: `Команда D.VISION`
+Title: `Команда D.VISION SDR`
 Message: engineering/product team, volunteer context, goal of helping defenders and civilians return home unharmed.
 
 ## Deferred sections

@@ -1,0 +1,4 @@
+Contact: https://wa.me/380954716680
+Canonical: https://www.dvision.com.ua/.well-known/security.txt
+Preferred-Languages: uk, en
+Expires: 2027-06-23T23:59:59+03:00

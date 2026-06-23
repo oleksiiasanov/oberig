@@ -647,6 +647,39 @@ p {
   margin-bottom: 28px;
 }
 
+.characteristics-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.characteristics-layout {
+  display: grid;
+  grid-template-areas:
+    "features"
+    "visual"
+    "cta";
+  gap: 32px;
+  align-items: start;
+  justify-content: center;
+}
+
+.characteristics-content {
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+  width: 100%;
+}
+
+.characteristics-header {
+  max-width: 100%;
+}
+
+.characteristics-header h2 {
+  max-width: 880px;
+  font-size: clamp(2rem, 9.8vw, 3.5rem);
+  line-height: 1;
+}
+
 .section-header p:last-child {
   max-width: 720px;
   margin: 16px 0 0;
@@ -662,6 +695,7 @@ p {
 .use-case-grid {
   display: grid;
   gap: 12px;
+  align-items: stretch;
 }
 
 .bento-card,
@@ -801,19 +835,62 @@ p {
 
 .use-case-card {
   min-height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 48px 32px 12px;
+  border-radius: 16px;
+}
+
+.use-case-icon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+}
+
+.use-case-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.use-case-card h3 {
+  margin: 0;
+}
+
+.use-case-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.use-case-photo {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.use-case-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .feature-grid {
+  grid-area: features;
+  width: 100%;
   gap: 8px;
 }
 
 .feature-card {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr);
-  gap: 8px 14px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   min-height: auto;
   align-items: start;
-  padding: 16px;
+  padding: 18px;
 }
 
 .feature-card small {
@@ -840,6 +917,41 @@ p {
 .feature-card li::before {
   color: var(--blue-soft);
   content: "+ ";
+}
+
+.device-loop {
+  position: relative;
+  grid-area: visual;
+  width: min(92vw, 460px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+  /* overflow stays visible so the ambient glow (::before) is never hard-clipped */
+  background: transparent;
+}
+
+.device-loop-clip {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.device-loop-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 34px 64px rgba(0, 0, 0, 0.38));
+  transform: scale(1.24);
+  transform-origin: center;
+}
+
+.characteristics-layout > .cta-row {
+  grid-area: cta;
+  width: 100%;
 }
 
 .card-index,
@@ -1260,6 +1372,11 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .use-case-photo {
+    grid-column: span 2;
+    min-height: 260px;
+  }
+
   .media-spotlight {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
   }
@@ -1285,7 +1402,7 @@ p {
   }
 
   .feature-card {
-    grid-template-columns: 48px minmax(180px, 0.42fr) minmax(0, 1fr);
+    grid-template-columns: minmax(170px, 0.34fr) minmax(0, 1fr);
     gap: 16px;
     align-items: center;
   }
@@ -1406,16 +1523,67 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .characteristics-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+    grid-template-areas:
+      "features visual"
+      "cta visual";
+    gap: 24px 28px;
+    align-items: start;
+  }
+
+  .characteristics-section {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+
+  .characteristics-header {
+    margin-bottom: 30px;
+  }
+
+  .characteristics-header h2 {
+    max-width: 100%;
+    font-size: clamp(2rem, 9.8vw, 3.5rem);
+  }
+
+  .device-loop {
+    width: clamp(430px, 39vw, 580px);
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+    align-self: stretch;
+    justify-self: center;
+    margin-top: 0;
+    /* shift the model left without changing its size (visual only, no clipping) */
+    transform: translateX(-12%);
+  }
+
+  .device-loop-video {
+    /* Keep the video box at the cards' height so the object's size/position
+       stays identical; the taller container just reveals the lower part. */
+    height: var(--feature-stack-height);
+    transform: translateY(7%) scale(1.5);
+  }
+
   .use-case-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
   }
 
-  .use-case-card {
-    grid-column: span 2;
+  /* top row: 3 cards each take 1 column */
+  .use-case-card:nth-child(-n + 3) {
+    grid-column: span 1;
   }
 
+  /* bottom row: 2 cards each take 1 column */
   .use-case-card:nth-child(n + 4) {
-    grid-column: span 3;
+    grid-column: span 1;
+  }
+
+  /* photo fills the last cell of the bottom row */
+  .use-case-photo {
+    grid-column: span 1;
+    min-height: 280px;
   }
 }
 
