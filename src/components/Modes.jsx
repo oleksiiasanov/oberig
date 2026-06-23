@@ -74,8 +74,8 @@ export function Modes({ content, onLogoToggle }) {
               playsInline
               preload="metadata"
             >
-              <source src="/device-loop-3d-alpha.webm" type="video/webm" />
-              <source src="/device-loop-3d.mp4" type="video/mp4" />
+              <source src="/device-loop-3d-alpha.webm" type="video/webm" media="(min-width: 760px)" />
+              <source src="/device-loop-3d-mobile-bg.mp4" type="video/mp4" />
             </video>
           </div>
         </div>

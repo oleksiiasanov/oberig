@@ -10,7 +10,7 @@ The landing is already implemented and deployed from `main`. This archive is a r
 - Decision: Public-facing brand text is `D.VISION SDR`; the production domain remains `https://www.dvision.com.ua/`.
 - Decision: Order CTAs route to `https://prom.ua/p3099333953-dron-detektor-dvision.html`.
 - Decision: Contact CTAs remain on WhatsApp at `https://wa.me/380954716680`.
-- Decision: The rotating 3D device visual uses `device-loop-3d-alpha.webm` first, with `device-loop-3d.mp4` as fallback and `device-loop-3d-poster.png` as transparent poster.
+- Decision: The rotating 3D device visual uses `device-loop-3d-alpha.webm` on wider screens, with `device-loop-3d-mobile-bg.mp4` as the mobile-safe fallback and `device-loop-3d-poster.png` as transparent poster.
 - Decision: The high-resolution source MOV stays ignored and is not shipped as a production asset.
 - Decision: Visual screenshot checks remain opt-in or risk-driven; routine validation uses content checks and production build.
 

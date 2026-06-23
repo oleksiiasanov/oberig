@@ -124,6 +124,8 @@ main {
   min-height: 76px;
   margin: 0;
   padding: 14px max(12px, calc((100vw - var(--max)) / 2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(7, 16, 26, 0.78);
   backdrop-filter: blur(18px);
 }
 
@@ -890,7 +892,7 @@ p {
   gap: 12px;
   min-height: auto;
   align-items: start;
-  padding: 18px 18px 16px;
+  padding: 18px 18px 16px !important;
 }
 
 .feature-card small {
@@ -936,7 +938,10 @@ p {
   height: 100%;
   overflow: hidden;
   border-radius: 8px;
-  background: transparent;
+  background:
+    radial-gradient(circle at 50% 56%, rgba(var(--accent-rgb), 0.1), transparent 58%),
+    linear-gradient(180deg, rgba(8, 15, 25, 0.84), rgba(7, 16, 26, 0.98) 62%),
+    var(--bg);
 }
 
 .device-loop-video {
@@ -1300,6 +1305,10 @@ p {
 @media (min-width: 760px) {
   .site-header {
     gap: 16px;
+  }
+
+  .device-loop-clip {
+    background: transparent;
   }
 
   .comparison-head,

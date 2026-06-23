@@ -46,7 +46,7 @@ const required = [
   "/logo-default.png",
   "/logo-exp.png",
   "/device-loop-3d-alpha.webm",
-  "/device-loop-3d.mp4",
+  "/device-loop-3d-mobile-bg.mp4",
   "/device-loop-3d-poster.png",
   "/og-image.png",
   "https://www.dvision.com.ua/",
@@ -91,8 +91,8 @@ for (const term of required) {
 }
 
 for (const path of [
-  "public/device-loop-3d.mp4",
   "public/device-loop-3d-alpha.webm",
+  "public/device-loop-3d-mobile-bg.mp4",
   "public/device-loop-3d-poster.png",
   "public/robots.txt",
   "public/sitemap.xml",
