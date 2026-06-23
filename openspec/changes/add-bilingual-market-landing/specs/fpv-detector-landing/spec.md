@@ -28,13 +28,13 @@ The landing page SHALL present the product media block as a looping video of the
 - **AND** the product image is only used as a poster or fallback.
 
 ### Requirement: Link Preview Metadata
-The landing page SHALL expose text-only social preview metadata for messengers and social platforms, including the page title, short product description, and canonical URL.
+The landing page SHALL expose rich social preview metadata for messengers and social platforms, including the page title, short product description, canonical URL, and branded preview image.
 
 #### Scenario: Messenger link preview
 - **WHEN** a visitor shares the public site URL in a messenger
 - **THEN** the preview metadata identifies the page as D.VISION
 - **AND** includes a short description of the SDR-based FPV video detector
-- **AND** does not include image preview metadata.
+- **AND** includes image preview metadata that resolves on the production D.VISION domain.
 
 ### Requirement: Hidden Logo Variant
 The landing page SHALL use the neon green accent palette based on `#a2fb0a` as the default visual theme and keep two D.VISION logo variants available for internal comparison.
