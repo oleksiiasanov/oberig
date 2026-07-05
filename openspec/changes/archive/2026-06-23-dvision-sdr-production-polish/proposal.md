@@ -5,7 +5,7 @@ The D.VISION SDR landing received a set of production-facing updates after the m
 
 ## What Changes
 - Standardize public brand text, metadata, alt labels, docs, and specs around `D.VISION SDR`.
-- Route all order CTAs to the Prom product page instead of the earlier Google Form destination.
+- Route all order CTAs to the Google Form instead of the Prom product page.
 - Add production trust metadata: `robots.txt`, `sitemap.xml`, `security.txt`, favicon manifest naming, and Vercel security headers.
 - Replace the outdated product media block with optimized transparent 3D device loop assets and a transparent poster fallback.
 - Align the desktop 3D visual height with the characteristics list and preserve mobile-first behavior.

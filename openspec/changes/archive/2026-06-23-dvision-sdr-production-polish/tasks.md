@@ -6,7 +6,7 @@
 
 ## 2. Implementation Summary
 - [x] 2.1 Standardize public text and metadata on `D.VISION SDR`.
-- [x] 2.2 Route order CTAs to the Prom product page.
+- [x] 2.2 Route order CTAs to the Google Form.
 - [x] 2.3 Add transparent 3D video loop assets and poster fallback.
 - [x] 2.4 Align the characteristics visual height with the list height.
 - [x] 2.5 Keep Ukrainian/English language support and remove French support.

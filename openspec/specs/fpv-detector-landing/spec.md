@@ -195,7 +195,7 @@ The landing page SHALL route conversion actions to the approved order and contac
 
 #### Scenario: Visitor starts an order
 - **WHEN** a visitor activates an order CTA
-- **THEN** it opens `https://prom.ua/p3099333953-dron-detektor-dvision.html`.
+- **THEN** it opens `https://forms.gle/xFcMaTWR1G5pR4qW6`.
 
 #### Scenario: Visitor contacts D.VISION SDR
 - **WHEN** a visitor activates a contact CTA

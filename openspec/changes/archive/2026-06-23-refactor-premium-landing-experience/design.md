@@ -18,7 +18,7 @@ This plan mirrors the section order in `tasks.md` (Approval → Content → Agen
 3. **Agent Instructions**: add the provided Cursor and Claude Code design standards to the root `AGENTS.md` outside the managed OpenSpec block.
 4. **Design Reset & Brand System**: remove the existing olive/amber military skin while retaining safety constraints; ingest the supplied transparent logo and favicon, derive type direction and palette cues, and define design tokens before rebuilding visual sections.
 5. **Tooling & Concept Direction**: plan for a component-driven frontend stack (e.g. Vite/React/Tailwind), with final setup confirmed during implementation; use Busy as the main visual reference and optionally generate inspiration through v0/Lovable, translating only suitable patterns into repo-native implementation.
-6. **Implementation**: rebuild the page as modular sections with mobile-first layout, bento/asymmetric content areas, refined motion, polished interactive states, the real product photo as primary media, the WhatsApp link wired to contact CTAs, and the Prom wired to order CTAs.
+6. **Implementation**: rebuild the page as modular sections with mobile-first layout, bento/asymmetric content areas, refined motion, polished interactive states, the real product photo as primary media, the WhatsApp link wired to contact CTAs, and Google Form wired to order CTAs.
 7. **Agentic QA And Archive**: run focused validation/evals (see Agentic Quality Gates), update OpenSpec task statuses, and archive the change after implementation is accepted.
 
 ## Decisions
@@ -26,7 +26,7 @@ This plan mirrors the section order in `tasks.md` (Approval → Content → Agen
 - Decision: All old frequency, spectrum, detector-class, technical-characteristic, and CTA claims are invalid unless confirmed in `references/`.
 - Decision: The landing content plan defines the implementation order: Hero, Advantages, Characteristics, Market Comparison, Usage Scenarios, FAQ, About, and minimal Footer.
 - Decision: Contact CTAs link to the approved D.VISION SDR WhatsApp URL.
-- Decision: Order CTAs link to the D.VISION SDR Prom order intake.
+- Decision: Order CTAs link to the D.VISION SDR Google Form order intake.
 - Decision: The supplied transparent logo and favicon inform the design system; the logo guides display-type proportions and brand presence, while the favicon informs compact mark usage and palette extraction.
 - Decision: The real detector photo replaces the generated detector image as primary product media; image enhancement, if needed, is produced outside this agent and supplied as an asset.
 - Decision: Treat Busy as a visual reference, not a template to copy (reference only; not a durable spec requirement).
@@ -41,7 +41,7 @@ This plan mirrors the section order in `tasks.md` (Approval → Content → Agen
 - OpenSpec gate: validate the active change with `openspec validate refactor-premium-landing-experience --strict --no-interactive`.
 - Content grounding gate: scan implemented copy for old invalid claims, unsupported frequency values, named competitor claims, and unconfirmed marketing numbers.
 - Content-plan gate: verify every implemented section maps to `references/06-landing-content-plan.md` and every factual claim maps to the claims map.
-- CTA gate: verify contact actions point to WhatsApp and order actions point to the Prom.
+- CTA gate: verify contact actions point to WhatsApp and order actions point to Google Form.
 - Mobile-first gate: verify the base layout is mobile-first, avoids horizontal overflow, uses usable tap targets, and keeps tables/cards readable on narrow screens.
 - Accessibility gate: verify semantic headings, alt text, keyboard-visible focus states, and `prefers-reduced-motion` handling.
 - Performance gate: verify assets and animations do not create avoidable load or runtime weight.

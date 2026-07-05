@@ -1,4 +1,4 @@
-export const ORDER_URL = "https://prom.ua/p3099333953-dron-detektor-dvision.html";
+export const ORDER_URL = "https://forms.gle/xFcMaTWR1G5pR4qW6";
 export const WHATSAPP_URL = "https://wa.me/380954716680";
 
 export const SOCIAL_LINKS = [

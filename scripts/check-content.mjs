@@ -5,7 +5,7 @@ const root = process.cwd();
 const srcRoots = ["src", "index.html", "public"];
 
 const WHATSAPP_URL = "https://wa.me/380954716680";
-const ORDER_URL = "https://prom.ua/p3099333953-dron-detektor-dvision.html";
+const ORDER_URL = "https://forms.gle/xFcMaTWR1G5pR4qW6";
 
 const forbidden = [
   "1050",

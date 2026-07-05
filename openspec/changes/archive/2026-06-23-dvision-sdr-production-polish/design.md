@@ -2,13 +2,13 @@
 The landing is already implemented and deployed from `main`. This archive is a retrospective production release record, not an active proposal awaiting implementation. The baseline spec has already been updated to describe the current shipped behavior.
 
 ## Goals / Non-Goals
-- Goals: document the final D.VISION SDR naming, Prom order routing, production metadata, optimized 3D media, and quality gates.
+- Goals: document the final D.VISION SDR naming, Google Form order routing, production metadata, optimized 3D media, and quality gates.
 - Goals: preserve the rationale behind the transparent WebM/PNG media assets and the height-sync behavior for the characteristics section.
 - Non-Goals: reopen a new redesign phase, introduce new claims, or change production behavior beyond documentation clean-up.
 
 ## Decisions
 - Decision: Public-facing brand text is `D.VISION SDR`; the production domain remains `https://www.dvision.com.ua/`.
-- Decision: Order CTAs route to `https://prom.ua/p3099333953-dron-detektor-dvision.html`.
+- Decision: Order CTAs route to `https://forms.gle/xFcMaTWR1G5pR4qW6`.
 - Decision: Contact CTAs remain on WhatsApp at `https://wa.me/380954716680`.
 - Decision: The rotating 3D device visual uses `device-loop-3d-alpha.webm` on wider screens, with `device-loop-3d-mobile-bg.mp4` as the mobile-safe fallback and `device-loop-3d-poster.png` as transparent poster.
 - Decision: The high-resolution source MOV stays ignored and is not shipped as a production asset.

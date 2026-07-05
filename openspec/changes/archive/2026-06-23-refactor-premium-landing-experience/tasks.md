@@ -8,7 +8,7 @@
 - [x] 2.1 Capture authoritative product data in the `references/` space (SDR user guide provided as text → `references/02-technical-documentation.md`).
 - [x] 2.2 Map current sections to D.VISION SDR's own data; remove competitor-shaped structure and assumptions.
 - [x] 2.3 Reconcile ranges, signal classes, work modes, and technical characteristics against the instruction; correct or placeholder anything not confirmed by it.
-- [x] 2.4 Add both valid CTA destinations to the content model: WhatsApp for contact and Prom for order intake.
+- [x] 2.4 Add both valid CTA destinations to the content model: WhatsApp for contact and Google Form for order intake.
 - [x] 2.5 Create the detailed landing content plan with section goals, allowed claims, placeholders, forbidden claims, CTA logic, claims map, and content eval checklist.
 
 ## 3. Agent Instructions
@@ -30,7 +30,7 @@
 - [x] 6.1 Rebuild the hero with product-first visual hierarchy inspired by Busy without copying it.
 - [x] 6.2 Use the real detector photo as primary product media; until a high-quality asset is supplied, use a clean placeholder rather than the old generated image.
 - [x] 6.3 Wire the contact CTA(s) to the approved D.VISION SDR WhatsApp link.
-- [x] 6.4 Wire the order CTA(s) to the D.VISION SDR Prom link.
+- [x] 6.4 Wire the order CTA(s) to the D.VISION SDR Google Form link.
 - [x] 6.5 Rebuild feature and comparison content using asymmetric/bento layouts instead of generic three-column blocks.
 - [x] 6.6 Add refined motion, hover states, active states, and reduced-motion handling.
 - [x] 6.7 Ensure the landing remains mobile-first and avoids incoherent overlap on phone, tablet, and desktop layouts.
@@ -41,7 +41,7 @@
 - [x] 7.2 Run content grounding checks for old invalid claims, unsupported frequencies, named competitors, unconfirmed marketing numbers, and mismatch with `references/06-landing-content-plan.md`.
 - [x] 7.3 Run mobile-first checks for narrow widths, tap targets, readable tables/cards, and no horizontal overflow.
 - [x] 7.4 Verify the contact CTA opens the correct WhatsApp link.
-- [x] 7.5 Verify the order CTA opens the correct Prom link.
+- [x] 7.5 Verify the order CTA opens the correct Google Form link.
 - [x] 7.6 Run accessibility and reduced-motion checks.
 - [x] 7.7 Run targeted visual checks only when layout risk justifies them or when requested.
 - [x] 7.8 Update task statuses after implementation.

@@ -9,7 +9,7 @@ The current landing page visual direction no longer matches the desired quality 
 - Treat all pre-reference-space landing content, frequency claims, spectrum claims, comparison structure, and CTA assumptions as invalid unless they are confirmed in `references/`.
 - Use the detailed landing content plan to define section order, messaging hierarchy, allowed claims, placeholders, forbidden claims, and content evals.
 - Route the contact call(s)-to-action to the approved D.VISION SDR WhatsApp link.
-- Route order call(s)-to-action to the D.VISION SDR Prom order link.
+- Route order call(s)-to-action to the D.VISION SDR Google Form link.
 - Use the supplied transparent logo and favicon as brand inputs for the typography, palette, favicon, and design-token system.
 - Use the real product photo of the detector as the primary product media, replacing the previously generated detector image.
 - Add repository-level Cursor and Claude Code instructions to guide future AI-assisted visual work.
@@ -23,7 +23,7 @@ Process steps (approval gate, design reset, tooling decision, concept direction,
 - Unconfirmed frequency ranges, detection distance, autonomy, battery, screen size, price, and similar marketing figures remain explicit placeholders until supplied in the reference space.
 - Migrate toward a component-driven frontend stack for the premium rebuild unless implementation discovery reveals a strong reason to stay static.
 - Use v0/Lovable, if at all, as concept exploration or draft inspiration rather than an unquestioned code source.
-- Keep contact and order as separate valid actions: WhatsApp for contact, Prom for order intake.
+- Keep contact and order as separate valid actions: WhatsApp for contact, Google Form for order intake.
 
 ## Impact
 - Affected specs: `fpv-detector-landing`, `project-agent-guidelines`
@@ -33,7 +33,7 @@ Process steps (approval gate, design reset, tooling decision, concept direction,
   - SDR user guide (authoritative product content; provided as text and captured in `references/02-technical-documentation.md`; original Notion: `https://www.notion.so/SDR-374874c8aa8d80d9a786f2adfeb50383`)
   - Competitor analysis: independent FPV-detector testing report (captured in `references/03-competitor-analysis.md`)
   - WhatsApp contact CTA: `https://wa.me/380954716680`
-  - Prom order link: `https://prom.ua/p3099333953-dron-detektor-dvision.html`
+  - Google Form link: `https://forms.gle/xFcMaTWR1G5pR4qW6`
   - Transparent D.VISION SDR logo and favicon assets, used as brand-system inputs
   - Real product photo of the detector (to be supplied as a high-quality asset)
   - Busy visual reference (`references/01-visual-reference.md`) and optional v0/Lovable-generated concepts

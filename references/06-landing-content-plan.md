@@ -20,10 +20,10 @@ D.VISION SDR — не звичайний відеоприймач, а FPV/BPLA v
 - ціна: **від 22 000 грн**;
 - поставка: **до 5 тижнів**;
 - WhatsApp CTA: `+380954716680`;
-- order CTA: Prom.
+- order CTA: Google Form.
 
 ### CTA system
-- Primary: **Замовити** / **Order** → `https://prom.ua/p3099333953-dron-detektor-dvision.html`
+- Primary: **Замовити** / **Order** → `https://forms.gle/xFcMaTWR1G5pR4qW6`
 - Secondary: **Зв’язатись з нами** / **Contact us** → `https://wa.me/380954716680`
 - Signal CTA більше не використовується.
 

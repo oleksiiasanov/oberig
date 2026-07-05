@@ -22,11 +22,11 @@ The landing page contact call-to-action SHALL link to the approved D.VISION SDR 
 - **AND** the link target is consistent across the landing
 
 ### Requirement: Order CTA Destination
-The landing page order call-to-action SHALL link to the D.VISION SDR Prom order intake.
+The landing page order call-to-action SHALL link to the D.VISION SDR Google Form order intake.
 
 #### Scenario: User starts an order
 - **WHEN** the user activates an "order" call-to-action
-- **THEN** it opens the D.VISION SDR Prom order link
+- **THEN** it opens the D.VISION SDR Google Form link
 - **AND** the link target is consistent across the hero and final CTA
 - **AND** order CTAs are visually and semantically distinct from consultation CTAs
 - **AND** order CTAs do not imply unconfirmed price, delivery, warranty, or availability details
@@ -104,7 +104,7 @@ The landing page SHALL present D.VISION SDR as a Ukrainian SDR-based detector/an
 - **WHEN** the first viewport is loaded
 - **THEN** the page positions D.VISION SDR around SDR architecture, live decoded video, scanner workflow, waterfall spectrum analysis, and RSSI/SNR where confirmed by the reference space
 - **AND** the hero contact CTA opens the approved D.VISION SDR WhatsApp URL
-- **AND** the hero includes a distinct order CTA that opens the D.VISION SDR Prom order link
+- **AND** the hero includes a distinct order CTA that opens the D.VISION SDR Google Form link
 - **AND** unconfirmed frequency ranges, distances, autonomy, battery, screen, and price are omitted or shown only as explicit placeholders
 - **AND** the hero does not display the old "1050-6040 МГц" claim unless it is later confirmed in `references/`
 
@@ -194,7 +194,7 @@ The landing page SHALL include a technical FAQ and final CTAs grounded in the ne
 - **WHEN** the FAQ and final CTA are displayed
 - **THEN** the FAQ covers SDR vs video receiver, live video, scanner, waterfall analysis, RSSI/SNR, antennas, OTA, USB-C workflows, missing confirmed figures, and claim boundaries where appropriate
 - **AND** contact CTAs use the approved D.VISION SDR WhatsApp URL
-- **AND** the final CTA includes ordering through the D.VISION SDR Prom
+- **AND** the final CTA includes ordering through the D.VISION SDR Google Form
 - **AND** old CTA copy about commercial proposals or closing specific frequency gaps is not required unless re-approved
 
 ### Requirement: Visual Style And Responsiveness

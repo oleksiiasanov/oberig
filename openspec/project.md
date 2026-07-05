@@ -43,7 +43,7 @@ D.VISION SDR is a product landing page for a wide-band FPV/drone video detector 
 - Supported public languages are Ukrainian and English.
 - Current social links are TikTok and Instagram only.
 - Approved CTA destinations:
-  - Order: `https://prom.ua/p3099333953-dron-detektor-dvision.html`
+  - Order: `https://forms.gle/xFcMaTWR1G5pR4qW6`
   - Contact: `https://wa.me/380954716680`
 
 ## Important Constraints
@@ -57,6 +57,6 @@ D.VISION SDR is a product landing page for a wide-band FPV/drone video detector 
 
 ## External Dependencies
 - `ipapi.co` is used client-side for optional country detection when no language preference exists.
-- Prom is used for order intake.
+- Google Form is used for order intake.
 - WhatsApp is used for the contact CTA.
 - TikTok and Instagram are the current public social destinations.

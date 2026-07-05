@@ -6,10 +6,10 @@
 
 - **Консультація:** Signal-група  
   `https://signal.group/#CjQKIJtYdEsLqmFX_KES9TLN8lugJYrcXZCMHkJ5namzsW9mEhDpQtJzhrOuLiakfxgBDh2Y`
-- **Замовлення:** Prom  
-  `https://prom.ua/p3099333953-dron-detektor-dvision.html`
+- **Замовлення:** Google Form  
+  `https://forms.gle/xFcMaTWR1G5pR4qW6`
 
-Правило: консультаційні CTA ведуть у Signal, CTA замовлення ведуть у Prom. Ці дії різні
+Правило: консультаційні CTA ведуть у Signal, CTA замовлення ведуть у Google Form. Ці дії різні
 й мають бути візуально/семантично розрізнені.
 
 ## Logo input
