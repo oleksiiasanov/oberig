@@ -27,10 +27,10 @@ const forbidden = [
 ];
 
 const required = [
-  "D.Vision SDR - FPV-відеодетектор на основі SDR-платформи",
-  "D.VISION SDR",
+  "D·Vision SDR - FPV-відеодетектор на основі SDR-платформи",
+  "D·Vision SDR",
   "SDR",
-  "500–9000 МГц",
+  "500–8000 МГц",
   "~9 секунд",
   "Водоспад",
   "RSSI/SNR",

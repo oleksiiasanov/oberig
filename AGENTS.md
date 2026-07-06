@@ -29,7 +29,7 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 ## 2. Cursor & Claude Tool-Use Guidelines
 - **Autonomous Setup:** If a feature requires an external library for premium visuals, such as Framer Motion, lucide icons, Radix primitives, Tailwind, or a component-driven stack, consider it during implementation and respect project terminal permissions before installing dependencies.
 - **Component-Driven:** Split the landing page into modular, atomic sections or components such as `Hero`, `BentoFeatures`, `Modes`, `CTA`, and `FAQ`. Do not dump the full landing into one unstructured file when a component stack is available.
-- **Copywriting:** Never use Lorem Ipsum. Generate realistic, conversion-optimized Ukrainian copy tailored to D.VISION and grounded in `references/`.
+- **Copywriting:** Never use Lorem Ipsum. Generate realistic, conversion-optimized Ukrainian copy tailored to D·Vision and grounded in `references/`.
 - **No Refactoring Regressions:** Preserve existing business logic, project configuration, and types unless explicitly asked to change them.
 
 ## 3. Interaction & Animation Spec
@@ -44,9 +44,9 @@ Keep this managed block so 'openspec update' can refresh the instructions.
 - Treat `references/06-landing-content-plan.md` as the landing content contract.
 - Ask whether to push now or later before any `git push`.
 
-## 5. D.VISION Landing Visual Guardrails
+## 5. D·Vision Landing Visual Guardrails
 - Build mobile-first: base CSS must work at 360-430px before tablet and desktop overrides.
-- Use the D.VISION focus accent `rgb(162, 251, 10)` / `#a2fb0a` for primary highlights, buttons, glows, active states, and derived accent surfaces.
+- Use the D·Vision focus accent `rgb(162, 251, 10)` / `#a2fb0a` for primary highlights, buttons, glows, active states, and derived accent surfaces.
 - Keep the hero hierarchy strict: H1 is the brand or a short offer, while long Ukrainian value propositions belong in the subhead/body copy.
 - Avoid poster-scale text blocks. Hero copy should stay readable, balanced, and normally no more than two lines per text role on desktop.
 - Product visuals must support the message, not dominate it. If real device media is unavailable, use restrained placeholders with clear labels and modest scale.

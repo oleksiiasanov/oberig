@@ -1,7 +1,7 @@
 # Project Context
 
 ## Purpose
-D.VISION SDR is a product landing page for a wide-band FPV/drone video detector based on SDR. The site must communicate the product clearly to Ukrainian and international audiences, provide order/contact paths, and stay grounded in approved product/reference material.
+D·Vision SDR is a product landing page for a wide-band FPV/drone video detector based on SDR. The site must communicate the product clearly to Ukrainian and international audiences, provide order/contact paths, and stay grounded in approved product/reference material.
 
 ## Tech Stack
 - Vite
@@ -38,8 +38,8 @@ D.VISION SDR is a product landing page for a wide-band FPV/drone video detector 
 - Keep commits focused and describe the product-facing change.
 
 ## Domain Context
-- The landing positions D.VISION SDR as an SDR-based FPV/drone video detector.
-- Current public positioning highlights 500-9000 MHz coverage and approximately 9-second full-range scanning.
+- The landing positions D·Vision SDR as an SDR-based FPV/drone video detector.
+- Current public positioning highlights 500-8000 MHz coverage and approximately 9-second full-range scanning.
 - Supported public languages are Ukrainian and English.
 - Current social links are TikTok and Instagram only.
 - Approved CTA destinations:

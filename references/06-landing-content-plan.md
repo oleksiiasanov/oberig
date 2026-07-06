@@ -2,19 +2,19 @@
 
 Статус: **оновлено під новий контент і мультимовний сайт.**
 
-Цей документ є робочим контент-контрактом для D.VISION SDR landing. Публічний сайт має підтримувати
+Цей документ є робочим контент-контрактом для D·Vision SDR landing. Публічний сайт має підтримувати
 дві мови: українську та англійську. Якщо IP користувача з України — дефолт українська; для інших IP —
 англійська.
 
 ## Product truth
 
 ### One-liner
-**D.VISION SDR — wide-band drone detector based on SDR, covering 500–9000 MHz.**
+**D·Vision SDR — wide-band drone detector based on SDR, covering 500–8000 MHz.**
 
 ### Core positioning
-D.VISION SDR — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
+D·Vision SDR — не звичайний відеоприймач, а FPV/BPLA video detector на основі SDR-платформи.
 Головні claims:
-- діапазон сканування: **500–9000 МГц**;
+- діапазон сканування: **500–8000 МГц**;
 - повне сканування діапазону: **~9 секунд**;
 - дальність сканування: **до 10 км**;
 - ціна: **від 22 000 грн**;
@@ -35,8 +35,8 @@ D.VISION SDR — не звичайний відеоприймач, а FPV/BPLA v
 
 ### 1. Hero
 - Eyebrow: `Час сканування: ~9 секунд`
-- H1: `D.VISION SDR`
-- Support: `Детектор дронів широкого діапазону 500–9000 МГц`
+- H1: `D·Vision SDR`
+- Support: `Детектор дронів широкого діапазону 500–8000 МГц`
 - Chips: `FPV`, `Крила`, `Аналогові НРК`
 - Media: real product image / future collage.
 - CTA: order + WhatsApp.
@@ -64,8 +64,8 @@ List rows:
 - Доступність
 
 ### 5. Comparison
-Compare D.VISION SDR against a typical market device.
-D.VISION SDR column must be visually highlighted.
+Compare D·Vision SDR against a typical market device.
+D·Vision SDR column must be visually highlighted.
 
 ### 6. Use cases
 Cards:
@@ -79,7 +79,7 @@ Cards:
 Use the provided FAQ copy around SDR, Waterfall, RSSI/SNR, detection limits, affordability, and interface languages.
 
 ### 8. Team
-Title: `Команда D.VISION SDR`
+Title: `Команда D·Vision SDR`
 Message: engineering/product team, volunteer context, goal of helping defenders and civilians return home unharmed.
 
 ## Deferred sections

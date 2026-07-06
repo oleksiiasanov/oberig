@@ -35,7 +35,7 @@ export function Capabilities({ content }) {
         <div className="use-case-photo">
           <img
             src="/usecases/usecase-car.jpg"
-            alt="D.VISION SDR встановлений у автомобілі"
+            alt="D·Vision SDR встановлений у автомобілі"
           />
         </div>
       </div>

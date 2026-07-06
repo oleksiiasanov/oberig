@@ -9,14 +9,14 @@ export function Brand({ compact = false, variant = "sdr" }) {
   }, [logoSrc]);
 
   return (
-    <a className={`brand ${compact ? "brand-compact" : ""}`} href="#top" aria-label="D.VISION SDR">
+    <a className={`brand ${compact ? "brand-compact" : ""}`} href="#top" aria-label="D·Vision SDR">
       {logoFailed ? (
         <span className="brand-wordmark">
-          D.VISION SDR
+          D·Vision SDR
           {variant === "sdr" ? <strong>SDR</strong> : null}
         </span>
       ) : (
-        <img className="brand-logo" src={logoSrc} alt="D.VISION SDR" onError={() => setLogoFailed(true)} />
+        <img className="brand-logo" src={logoSrc} alt="D·Vision SDR" onError={() => setLogoFailed(true)} />
       )}
     </a>
   );
