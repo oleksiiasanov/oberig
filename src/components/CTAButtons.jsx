@@ -1,4 +1,4 @@
-import { ArrowUpRight, MessageCircle, ClipboardList } from "lucide-react";
+import { ArrowUpRight, BookOpen, MessageCircle, ClipboardList } from "lucide-react";
 
 export function CTAButtons({ content, center = false }) {
   return (
@@ -11,6 +11,10 @@ export function CTAButtons({ content, center = false }) {
       <a className="btn btn-secondary" href={content.whatsappUrl} target="_blank" rel="noreferrer">
         <MessageCircle aria-hidden="true" />
         <span>{content.meta.secondaryAction}</span>
+      </a>
+      <a className="btn btn-tertiary" href="/manual">
+        <BookOpen aria-hidden="true" />
+        <span>{content.meta.manualAction}</span>
       </a>
     </div>
   );

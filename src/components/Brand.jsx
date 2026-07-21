@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function Brand({ compact = false, variant = "sdr" }) {
+export function Brand({ compact = false, href = "/", onNavigate, variant = "sdr" }) {
   const [logoFailed, setLogoFailed] = useState(false);
   const logoSrc = variant === "base" ? "/logo-default.png" : "/logo-exp.png";
 
@@ -9,7 +9,16 @@ export function Brand({ compact = false, variant = "sdr" }) {
   }, [logoSrc]);
 
   return (
-    <a className={`brand ${compact ? "brand-compact" : ""}`} href="#top" aria-label="D·Vision SDR">
+    <a
+      className={`brand ${compact ? "brand-compact" : ""}`}
+      href={href}
+      aria-label="D·Vision SDR"
+      onClick={(event) => {
+        if (!onNavigate) return;
+        event.preventDefault();
+        onNavigate(href);
+      }}
+    >
       {logoFailed ? (
         <span className="brand-wordmark">
           D·Vision SDR

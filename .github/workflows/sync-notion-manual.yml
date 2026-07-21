@@ -1,0 +1,46 @@
+name: Sync Notion manual
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync manual from Notion
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_MANUAL_URL: ${{ vars.NOTION_MANUAL_URL }}
+          NOTION_PAGE_ID: ${{ vars.NOTION_PAGE_ID }}
+          NOTION_SYNC_STRICT: "1"
+        run: npm run sync:manual
+
+      - name: Commit generated manual
+        run: |
+          if git diff --quiet -- src/data/manual.generated.json; then
+            echo "Manual is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/manual.generated.json
+          git commit -m "chore: sync Notion manual"
+          git push

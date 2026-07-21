@@ -47,22 +47,20 @@ function LanguageSwitcher({ language, onLanguageChange }) {
   );
 }
 
-export function Header({ content, language, logoVariant, onLanguageChange }) {
+export function Header({ content, language, logoVariant, onLanguageChange, onNavigate }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollYRef = useRef(0);
 
   const closeMenu = () => setIsMenuOpen(false);
   const handleNavClick = (event, href) => {
-    if (!href.startsWith("#")) {
+    if (href.startsWith("http")) {
       closeMenu();
       return;
     }
 
     event.preventDefault();
     closeMenu();
-    window.setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 0);
+    onNavigate(href);
   };
 
   useEffect(() => {
@@ -106,7 +104,7 @@ export function Header({ content, language, logoVariant, onLanguageChange }) {
 
   return (
     <header className="site-header">
-      <Brand variant={logoVariant} />
+      <Brand href="/" variant={logoVariant} onNavigate={onNavigate} />
       <div className={`header-actions ${isMenuOpen ? "is-open" : ""}`} id="site-menu">
         <div className="drawer-head">
           <span>{content.meta.menuLabel}</span>
@@ -135,6 +133,7 @@ export function Header({ content, language, logoVariant, onLanguageChange }) {
         <button
           type="button"
           className="menu-toggle"
+          aria-label={content.meta.menuLabel}
           aria-expanded={isMenuOpen}
           aria-controls="site-menu"
           onClick={() => setIsMenuOpen((value) => !value)}

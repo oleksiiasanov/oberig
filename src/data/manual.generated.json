@@ -1,0 +1,1680 @@
+{
+  "source": "notion-public",
+  "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
+  "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
+  "title": "Посібник користувача SDR",
+  "syncedAt": "2026-07-21T12:58:52.677Z",
+  "lastEditedAt": "2026-07-21T12:21:13.255Z",
+  "blocks": [
+    {
+      "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
+      "richText": [
+        {
+          "text": "Портативний пасивний приймач аналогових відеосигналів. Цей посібник пояснює, як підготувати пристрій до роботи, приймати та аналізувати відеосигнали, зберігати результати й оновлювати прошивку."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a3874c8-aa8d-8016-bd16-ea1009381424",
+      "richText": [
+        {
+          "text": "⚠️ Пристрій працює виключно на прийом і нічого не випромінює в ефір."
+        }
+      ],
+      "children": [],
+      "type": "quote"
+    },
+    {
+      "id": "3a3874c8-aa8d-8060-9a80-c782905559c0",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a3874c8-aa8d-80df-ba6d-ccda1514121b",
+      "richText": [
+        {
+          "text": "1. Технічні характеристики"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "3a3874c8-aa8d-808b-a217-fb7bd078e27d",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a3874c8-aa8d-80fd-b3b9-da15625ff913",
+      "richText": [
+        {
+          "text": "2. Початок роботи"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "3a3874c8-aa8d-8005-b17c-eb2df9cddf27",
+      "richText": [
+        {
+          "text": "Комплект поставки"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a3874c8-aa8d-80c1-81a1-d1eb03621db9",
+      "richText": [
+        {
+          "text": "Пристрій SDR — 1 шт."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a3874c8-aa8d-8017-9004-e5c9173b28f2",
+      "richText": [
+        {
+          "text": "Всеспрямована антена SMA — 2 шт."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a3874c8-aa8d-801d-bf77-d9a178df52aa",
+      "richText": [
+        {
+          "text": "Кабель USB-C до комплекту не входить.",
+          "italic": true
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a3874c8-aa8d-80de-a079-fb820f422c39",
+      "richText": [
+        {
+          "text": "Підключення антен"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a3874c8-aa8d-8064-a79d-cc26a181b2e0",
+      "richText": [
+        {
+          "text": "Пристрій має два антенні входи SMA:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a3874c8-aa8d-8092-b6c8-d2888d16fdfc",
+      "richText": [
+        {
+          "text": "Вхід 1",
+          "bold": true
+        },
+        {
+          "text": " — нижній діапазон частот."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a3874c8-aa8d-80e9-b044-f386fafc291c",
+      "richText": [
+        {
+          "text": "Вхід 2",
+          "bold": true
+        },
+        {
+          "text": " — верхній діапазон частот."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a3874c8-aa8d-8094-bec2-e7869f345d9f",
+      "richText": [
+        {
+          "text": "Пристрій автоматично перемикається між входами на пороговій частоті, заданій у налаштуваннях ("
+        },
+        {
+          "text": "Налаштування → Сканер → Перемикач антени 2",
+          "bold": true
+        },
+        {
+          "text": "). Заводське значення — "
+        },
+        {
+          "text": "3000 МГц",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a3874c8-aa8d-8000-b190-e2a53e27e074",
+      "richText": [
+        {
+          "text": "Закрутіть обидві антени від руки до упору. Не докладайте надмірних зусиль до роз'ємів SMA."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80d6-b6d8-c2b320cd8a32",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A25e57050-85c3-4132-bb02-dba2c2099a8c%3Aantenna_labels_styled.png?table=block&id=3a4874c8-aa8d-80d6-b6d8-c2b320cd8a32&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a3874c8-aa8d-804e-94b8-c5b8c09716eb",
+      "richText": [
+        {
+          "text": "Встановлення SD-карти"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a3874c8-aa8d-80d8-a3e8-d67fee0454ee",
+      "richText": [
+        {
+          "text": "Вставте microSD-карту до клацання. Карта потрібна для збереження фото і відео — "
+        },
+        {
+          "text": "без карти зйомка не працює",
+          "bold": true
+        },
+        {
+          "text": ". Якщо карта нова або з іншої техніки, відформатуйте її: "
+        },
+        {
+          "text": "Налаштування → Утиліти → Форматувати SD-карту",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-807b-833b-e65ad928d93c",
+      "richText": [
+        {
+          "text": "Перше ввімкнення та зарядка"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-80aa-bcf0-c7ebcb4ba981",
+      "richText": [
+        {
+          "text": "Зарядіть пристрій через порт USB-C. Використовуйте зарядний адаптер із підтримкою струму від 2А."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8082-b1ff-f1e11c53e0e5",
+      "richText": [
+        {
+          "text": "Під час зарядки поруч із роз'ємом світиться світлодіод, а у верхньому правому куті екрана з'являється іконка блискавки та іконка батареї з поточним рівнем заряду (виділено на скріншоті нижче):"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-800a-ab0e-fc6e8ad04039",
+      "richText": [
+        {
+          "text": "Повна зарядка займає в середньому 4–6 годин залежно від початкового рівня заряду та навантаження. Пристроєм можна користуватися під час зарядки."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8007-82ad-fc2ef5592390",
+      "richText": [
+        {
+          "text": "Утримуйте кнопку "
+        },
+        {
+          "text": "ЖИВЛЕННЯ",
+          "bold": true
+        },
+        {
+          "text": " ~2 секунди для ввімкнення."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8023-958f-e3db74b72433",
+      "richText": [
+        {
+          "text": "За потреби змініть мову інтерфейсу: "
+        },
+        {
+          "text": "Menu → Settings → Device → Language",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "374874c8-aa8d-8095-a83a-efa5a080dade",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-80ff-a429-c8369b1e2dc7",
+      "richText": [
+        {
+          "text": "3. Керування та навігація"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "3a4874c8-aa8d-8030-9aae-f060443ac4ba",
+      "richText": [
+        {
+          "text": "Таблиця кнопок"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-8019-bf1e-f7d24d4d6e71",
+      "richText": [
+        {
+          "text": "Швидке меню"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-806a-8bed-f4fbabd506c4",
+      "richText": [
+        {
+          "text": "Натисніть "
+        },
+        {
+          "text": "МЕНЮ",
+          "bold": true
+        },
+        {
+          "text": " у будь-який момент, щоб відкрити бічну панель:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a7-802a-e43dc39b7ef5",
+      "richText": [
+        {
+          "text": "Сканування",
+          "bold": true
+        },
+        {
+          "text": " — автоматичний пошук каналів (Розділ 5)."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80de-b00b-e72694a6aa1d",
+      "richText": [
+        {
+          "text": "Перегляд",
+          "bold": true
+        },
+        {
+          "text": " — прийом відео наживо (Розділ 4)."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ff-960a-fc5bf97937c1",
+      "richText": [
+        {
+          "text": "Інструменти",
+          "bold": true
+        },
+        {
+          "text": " — додаткові інструменти аналізу ефіру: Водоспад, Діапазони, WiFi-відео, RC-керування (Розділи 6–7)."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80eb-9505-dcb500902fb6",
+      "richText": [
+        {
+          "text": "Браузер",
+          "bold": true
+        },
+        {
+          "text": " — перегляд збережених фото та відео."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80c1-b9ea-dd0f50490cfb",
+      "richText": [
+        {
+          "text": "Налаштування",
+          "bold": true
+        },
+        {
+          "text": " — конфігурація пристрою (Розділ 8)."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-801a-82a6-e568613fd40a",
+      "richText": [
+        {
+          "text": "Довідка",
+          "bold": true
+        },
+        {
+          "text": " — спрощена версія цього посібника безпосередньо на екрані пристрою."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80b0-b8fd-ec268d8f804c",
+      "richText": [
+        {
+          "text": "Підменю «Інструменти»"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8086-9b4a-f365f57ee4e5",
+      "richText": [
+        {
+          "text": "Водоспад",
+          "bold": true
+        },
+        {
+          "text": " — візуальний аналіз спектра (детально в Розділі 6)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80bd-8608-d3cf5100ebef",
+      "richText": [
+        {
+          "text": "Діапазони",
+          "bold": true
+        },
+        {
+          "text": " — тестова функція виявлення засобів РЕБ (радіоелектронної боротьби / глушіння сигналу)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80b9-a75d-e378750890e6",
+      "richText": [
+        {
+          "text": "WiFi-відео",
+          "bold": true
+        },
+        {
+          "text": " — тестова функція виявлення цифрових дронів та інших Wi-Fi пристроїв у ефірі."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80f0-b87e-f6be39bb9591",
+      "richText": [
+        {
+          "text": "RC-керування",
+          "bold": true
+        },
+        {
+          "text": " — тестова функція виявлення сигналів керування дроном (RC-каналу)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8016-9004-f9eb456d6523",
+      "richText": [
+        {
+          "text": "⚠️ "
+        },
+        {
+          "text": "Діапазони",
+          "bold": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "WiFi-відео",
+          "bold": true
+        },
+        {
+          "text": " та "
+        },
+        {
+          "text": "RC-керування",
+          "bold": true
+        },
+        {
+          "text": " — тестові (beta) функції. Детальний опис інтерфейсу та інтерпретації результатів — див. Розділ 7."
+        }
+      ],
+      "children": [],
+      "type": "quote"
+    },
+    {
+      "id": "374874c8-aa8d-8052-8db8-c8f147b24310",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-8034-b291-ea91470cf079",
+      "richText": [
+        {
+          "text": "4. Налаштування"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "3a4874c8-aa8d-8064-8dd0-fa2e8d72c5e2",
+      "richText": [
+        {
+          "text": "Меню → Налаштування.",
+          "bold": true
+        },
+        {
+          "text": " Параметри розділені на вкладки."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8067-afea-f96058c288f6",
+      "richText": [
+        {
+          "text": "ℹ️ Після збереження змін на будь-якій вкладці внизу екрана з'являється службове повідомлення "
+        },
+        {
+          "text": "«Settings saved»",
+          "bold": true
+        },
+        {
+          "text": ". Для вкладки "
+        },
+        {
+          "text": "USB",
+          "bold": true
+        },
+        {
+          "text": " зміни додатково потребують перезавантаження пристрою."
+        }
+      ],
+      "children": [],
+      "type": "quote"
+    },
+    {
+      "id": "3a4874c8-aa8d-800e-ae53-d4f3e50db70b",
+      "richText": [
+        {
+          "text": "Вкладка «Сканер»"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-8052-9e3f-c98da376fd74",
+      "richText": [
+        {
+          "text": "Початкова частота",
+          "bold": true
+        },
+        {
+          "text": " — нижня межа сканування, МГц."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80da-9101-f009188180cc",
+      "richText": [
+        {
+          "text": "Кінцева частота",
+          "bold": true
+        },
+        {
+          "text": " — верхня межа сканування, МГц."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8041-8197-c77d8d53de81",
+      "richText": [
+        {
+          "text": "Перемикач антени 2",
+          "bold": true
+        },
+        {
+          "text": " — порогова частота (МГц), вище якої пристрій перемикається на другий антенний вхід. Заводське значення: 3000 МГц."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8011-a747-cbf5099b27fa",
+      "richText": [
+        {
+          "text": "Авто скріншоти",
+          "bold": true
+        },
+        {
+          "text": " — автоматичний скріншот при виявленні нового активного сигналу."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80b4-9012-f4837ee3d67e",
+      "richText": [
+        {
+          "text": "Автозапуск нового каналу",
+          "bold": true
+        },
+        {
+          "text": " — коли сканер знаходить новий сигнал, пристрій автоматично відкриває його в режимі "
+        },
+        {
+          "text": "Перегляд",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-808c-ad43-f318099c9842",
+      "richText": [
+        {
+          "text": "Стовпці гістограми",
+          "bold": true
+        },
+        {
+          "text": " — відображення графіків RSSI/SNR у вигляді стовпців замість лінії (лише зовнішній вигляд)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8055-96f6-ded3f6103128",
+      "richText": [
+        {
+          "text": "Профіль WiFi",
+          "bold": true
+        },
+        {
+          "text": " — "
+        },
+        {
+          "text": "Загальний",
+          "italic": true
+        },
+        {
+          "text": " / "
+        },
+        {
+          "text": "Дрон",
+          "italic": true
+        },
+        {
+          "text": " / "
+        },
+        {
+          "text": "Прихована камера",
+          "italic": true
+        },
+        {
+          "text": ". Обирає тип цілі для інструмента "
+        },
+        {
+          "text": "WiFi-відео",
+          "bold": true
+        },
+        {
+          "text": " (Розділ 7). ⚠️ "
+        },
+        {
+          "text": "Експериментальний параметр",
+          "bold": true
+        },
+        {
+          "text": " — поведінка для різних профілів ще уточнюється."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a5-9875-cc09120b739e",
+      "richText": [
+        {
+          "text": "Вкладка «Пристрій»"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a3-9346-c24cd09f9e28",
+      "richText": [
+        {
+          "text": "Звук увімкнено",
+          "bold": true
+        },
+        {
+          "text": " — системні звуки та сповіщення."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8081-976b-e9e089285e82",
+      "richText": [
+        {
+          "text": "Гучність звуку",
+          "bold": true
+        },
+        {
+          "text": " — гучність системних звуків (0–10)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8005-a08e-db8a2db67e99",
+      "richText": [
+        {
+          "text": "Тайм-аут екрану (с)",
+          "bold": true
+        },
+        {
+          "text": " — час у "
+        },
+        {
+          "text": "секундах",
+          "bold": true
+        },
+        {
+          "text": " до затемнення екрана. Значення 0 — екран не вимикається."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8099-b4ea-d8339107ec4d",
+      "richText": [
+        {
+          "text": "Активна яскравість",
+          "bold": true
+        },
+        {
+          "text": " — яскравість під час використання (0–1000)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8047-9baf-cd296d09cd4d",
+      "richText": [
+        {
+          "text": "Неактивна яскравість",
+          "bold": true
+        },
+        {
+          "text": " — яскравість у режимі очікування (0–1000)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80f8-86db-dd4d15ffc371",
+      "richText": [
+        {
+          "text": "Запис відео",
+          "bold": true
+        },
+        {
+          "text": " — якщо позначено, кнопка "
+        },
+        {
+          "text": "ЖИВЛЕННЯ",
+          "bold": true
+        },
+        {
+          "text": " запускає/зупиняє запис відео; якщо ні — робить фото."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80f1-a915-ebc2675f453b",
+      "richText": [
+        {
+          "text": "Мова",
+          "bold": true
+        },
+        {
+          "text": " — Eng. / Укр."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80d9-95fb-ed7b159239bb",
+      "richText": [
+        {
+          "text": "Вкладка «USB»"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-807d-9a6e-ce8d4d16a4aa",
+      "richText": [
+        {
+          "text": "Примітка на екрані: "
+        },
+        {
+          "text": "«Зміни потребують перезавантаження системи».",
+          "bold": true
+        }
+      ],
+      "children": [],
+      "type": "quote"
+    },
+    {
+      "id": "3a4874c8-aa8d-8066-9fd3-ec2bcf4bcc89",
+      "richText": [
+        {
+          "text": "USB Увімкнено",
+          "bold": true
+        },
+        {
+          "text": " — головний вимикач усіх USB-функцій."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80fe-9c61-d1a3da11f0c9",
+      "richText": [
+        {
+          "text": "USB Камера",
+          "bold": true
+        },
+        {
+          "text": " — пристрій визначається як стандартна веб-камера (UVC)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80c2-a781-ded5caf44947",
+      "richText": [
+        {
+          "text": "USB Мережа",
+          "bold": true
+        },
+        {
+          "text": " — спільний інтернет з ПК або Android-смартфона (CDC-NCM); потрібно для OTA-оновлень."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8099-8866-f1a11692be9a",
+      "richText": [
+        {
+          "text": "USB Серійний порт",
+          "bold": true
+        },
+        {
+          "text": " — системна консоль налагодження через USB."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80b5-a4dd-cb20f4a3b7d4",
+      "richText": [
+        {
+          "text": "Вкладка «Час та дата»"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-808b-a210-d26445af80b0",
+      "richText": [
+        {
+          "text": "Приклад вигляду: "
+        },
+        {
+          "text": "«Поточний RTC: 1970-01-02 00:19:43 (T5)»",
+          "bold": true
+        },
+        {
+          "text": " — поточний час внутрішнього годинника (дата 1970 рік означає, що годинник ще не налаштований). Нижче — поля для ручного встановлення: "
+        },
+        {
+          "text": "Рік, Місяць, День, Година, Хвилина, Секунда",
+          "bold": true
+        },
+        {
+          "text": ". Дата й час використовуються у назвах збережених файлів."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8074-a206-e787254a37eb",
+      "richText": [
+        {
+          "text": "Вкладка «Утиліти»"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3a4874c8-aa8d-806e-b4a5-f989590c8001",
+      "richText": [
+        {
+          "text": "Версія прошивки",
+          "bold": true
+        },
+        {
+          "text": " — поточна встановлена версія (наприклад, 0.3.2). Лише для перегляду."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8083-8dfe-e1da21261e89",
+      "richText": [
+        {
+          "text": "OTA Оновлення (Мережа)",
+          "bold": true
+        },
+        {
+          "text": " — бездротове оновлення прошивки (див. Розділ 5)."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-809d-a814-fb34a8872a0f",
+      "richText": [
+        {
+          "text": "Форматувати SD (FAT32)",
+          "bold": true
+        },
+        {
+          "text": " — очищення карти та форматування у FAT32. ⚠️ "
+        },
+        {
+          "text": "Видаляє всі дані з карти.",
+          "bold": true
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80e1-a7b1-d1d3d9cf27ba",
+      "richText": [
+        {
+          "text": "Скинути налаштування",
+          "bold": true
+        },
+        {
+          "text": " — повернення всіх параметрів до заводських значень."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "374874c8-aa8d-8072-907d-ccdeefcc9655",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "374874c8-aa8d-80ac-a1b1-c567d5670b4f",
+      "richText": [
+        {
+          "text": "5. Оновлення прошивки (OTA)"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "374874c8-aa8d-8086-98e4-f58a0b6e34af",
+      "richText": [
+        {
+          "text": "Оновлення через мережу (OTA) дозволяють оновлювати програмне забезпечення пристрою через інтернет. Для цього пристрій має бути підключений до хоста з доступом до інтернету (Android-телефон або Windows ПК) через USB."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80fc-82ef-f5ecb9105461",
+      "richText": [
+        {
+          "text": "1. Підключення пристрою до ПК"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ef-8ffa-cd3932ae068a",
+      "richText": [
+        {
+          "text": "Підключіть пристрій до комп'ютера через USB."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8050-a131-e8cca6ee6e00",
+      "richText": [
+        {
+          "text": "Дочекайтеся, поки Windows визначить новий мережевий адаптер."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ff-ba5e-cf00f748e25b",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-800d-a628-c3c0136583f4",
+      "richText": [
+        {
+          "text": "2. Надання доступу до інтернету через Windows"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8027-942f-f199d3008032",
+      "richText": [
+        {
+          "text": "Натисніть "
+        },
+        {
+          "text": "Win + R",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-807e-8d83-ced5c16ae968",
+      "richText": [
+        {
+          "text": "Введіть:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-809e-a546-fc753d68dbd8",
+      "richText": [
+        {
+          "text": "ncpa.cpl"
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-8031-9b0c-ef8e6458bfde",
+      "richText": [
+        {
+          "text": "Відкриється вікно "
+        },
+        {
+          "text": "Мережеві підключення",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a8-91fd-d7fda7f05c04",
+      "richText": [
+        {
+          "text": "Знайдіть підключення, через яке ПК має доступ до Інтернету (Wi-Fi або Ethernet)."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a0-87d8-ee3eb1d5c5d0",
+      "richText": [
+        {
+          "text": "Клікніть по ньому правою кнопкою миші → "
+        },
+        {
+          "text": "Властивості",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8017-b294-eece750c8225",
+      "richText": [
+        {
+          "text": "Перейдіть на вкладку "
+        },
+        {
+          "text": "Спільний доступ",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8033-a355-c283a12e0f74",
+      "richText": [
+        {
+          "text": "Поставте галочку:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-802a-9535-d8e8dda94134",
+      "richText": [
+        {
+          "text": "У списку нижче виберіть адаптер пристрою:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ff-8665-d6a4ffc659b4",
+      "richText": [
+        {
+          "text": "Натисніть "
+        },
+        {
+          "text": "OK",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8071-bd4b-fe7449db8702",
+      "richText": [
+        {
+          "text": "Після цього пристрій має отримати IP-адресу від Windows."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a6-85a1-d34b4f9e6f6c",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-80a1-af3d-dde1fc465ea6",
+      "richText": [
+        {
+          "text": "3. Перевірка доступу до мережі"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-808c-adc5-ece5404ea3fd",
+      "richText": [
+        {
+          "text": "На екрані пристрою:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80de-a7d5-f658508b7c6c",
+      "richText": [
+        {
+          "text": "Відкрийте меню "
+        },
+        {
+          "text": "Налаштування",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ef-aca5-ca11a80b9a41",
+      "richText": [
+        {
+          "text": "Перейдіть до "
+        },
+        {
+          "text": "OTA Оновлення (Мережа)",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8085-85fd-fb7dcb7794d7",
+      "richText": [
+        {
+          "text": "Якщо все налаштовано правильно, на екрані буде показано:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8016-896e-e1c552f6be7b",
+      "richText": [
+        {
+          "text": "USB Connection: Connected\nNetwork (IP): 192.168.xxx.xxx"
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-8034-8d71-c648cf41899e",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-808b-b1d9-c7ab615f5867",
+      "richText": [
+        {
+          "text": "4. Перевірка нової прошивки"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8004-88aa-cb64eddaee5c",
+      "richText": [
+        {
+          "text": "У меню OTA виберіть:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8013-9b42-cb14ad716a79",
+      "richText": [
+        {
+          "text": "Check Update"
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-80af-932d-eb4a239eac50",
+      "richText": [
+        {
+          "text": "Пристрій перевірить наявність нової версії."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80f9-9bbd-e1a5c1dd4dd4",
+      "richText": [
+        {
+          "text": "Якщо оновлення знайдено, побачите щось на кшталт:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a0-8264-eee9736b0a39",
+      "richText": [
+        {
+          "text": "Install: Newer 0.3.2 stable"
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-801f-b610-db4f86e86d81",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-80f2-ad72-ebff56956704",
+      "richText": [
+        {
+          "text": "5. Встановлення прошивки"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8078-b4b4-e19397e1d522",
+      "richText": [
+        {
+          "text": "Натисніть:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8033-9e87-e781a528ac90",
+      "richText": [
+        {
+          "text": "Install"
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-8075-a117-d74611ab2f24",
+      "richText": [
+        {
+          "text": "Дочекайтеся завершення всіх етапів:"
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a2-9cff-de850b0d4eb7",
+      "richText": [
+        {
+          "text": "На екрані буде показуватися прогрес у відсотках."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8066-8e56-d3b56035e9ab",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-80f6-8a5b-ccc39535f3c7",
+      "richText": [
+        {
+          "text": "6. Завершення оновлення"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80a8-a3d6-f72e872d7b22",
+      "richText": [
+        {
+          "text": "Після успішного завершення з'явиться повідомлення:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8039-a46c-e6931abcfe14",
+      "richText": [
+        {
+          "text": "Update Successful!\nRebooting in 3s..."
+        }
+      ],
+      "children": [],
+      "language": "Plain Text",
+      "type": "code"
+    },
+    {
+      "id": "3a4874c8-aa8d-8056-a9f2-cd0e7116f97f",
+      "richText": [
+        {
+          "text": "Пристрій автоматично перезавантажиться."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80d6-b3c4-d8f40975a719",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3a4874c8-aa8d-803c-babc-f2b207598d23",
+      "richText": [
+        {
+          "text": "7. Перевірка версії"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80e6-90d0-f021a3ed3330",
+      "richText": [
+        {
+          "text": "Після перезавантаження:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8097-afa9-cfbd4ab507ca",
+      "richText": [
+        {
+          "text": "Відкрийте "
+        },
+        {
+          "text": "Налаштування → Утиліти",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-808f-b5e5-e2be39f81c02",
+      "richText": [
+        {
+          "text": "Переконайтеся, що відображається нова версія прошивки."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-8070-afa0-c294db8af17a",
+      "richText": [
+        {
+          "text": "Оновлення завершено."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "374874c8-aa8d-80da-b1c3-fa3274e19593",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "374874c8-aa8d-80e2-9935-dca5efdcd5af",
+      "richText": [
+        {
+          "text": "6. Підключення до USB та ПК"
+        }
+      ],
+      "children": [],
+      "type": "heading_2"
+    },
+    {
+      "id": "374874c8-aa8d-804e-9b12-fa199ca66586",
+      "richText": [
+        {
+          "text": "Ваш пристрій є потужним інструментом при підключенні до комп'ютера через порт USB-C."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "374874c8-aa8d-803a-9e0f-e1ee50d74da6",
+      "richText": [
+        {
+          "text": "Режим веб-камери (UVC):",
+          "bold": true
+        },
+        {
+          "text": " Пристрій відображається як «SDR Camera» на вашому ПК. Ви можете використовувати його в Zoom, OBS або VLC."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3a4874c8-aa8d-801c-8035-c0bbe6098048",
+      "richText": [
+        {
+          "text": "Цей файл дозволяє повноцінно керувати пристроєм віддалено. "
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8013-a2f2-fd1f4a2e8096",
+      "richText": [
+        {
+          "text": "controll.html"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-80ae-925b-c3f394a5ac9a",
+      "richText": [
+        {
+          "text": "Відкрийте його, дозвольте браузеру використовувати девайси камери та керування"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3a4874c8-aa8d-8034-8688-e766eb045563",
+      "richText": [
+        {
+          "text": "\n• "
+        },
+        {
+          "text": "Дистанційне керування:",
+          "bold": true
+        },
+        {
+          "text": " У налаштуваннях камери на ПК (або за допомогою слайдера «Pan») ви можете дистанційно змінювати радіочастоту пристрою.\n• "
+        },
+        {
+          "text": "Спільний інтернет:",
+          "bold": true
+        },
+        {
+          "text": " При підключенні до ПК або Android-телефона пристрій може використовувати інтернет-з'єднання хоста для роботи функції "
+        },
+        {
+          "text": "OTA Оновлення",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    }
+  ]
+}
