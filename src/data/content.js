@@ -44,7 +44,7 @@ export const landingContent = {
       kicker: "Посібник",
       title: "Посібник користувача SDR",
       lead:
-        "Актуальна інструкція синхронізується з Notion і відображається тут як нативна сторінка сайту: швидко, читабельно й без переходу в зовнішній редактор.",
+        "Актуальна інструкція з підготовки, роботи з відеосигналами, збереження результатів та оновлення пристрою.",
       backLabel: "На головну",
       syncLabel: "Синхронізовано з Notion",
       updatedLabel: "Оновлено",
@@ -164,7 +164,7 @@ export const landingContent = {
       kicker: "User manual",
       title: "SDR user manual",
       lead:
-        "The current instruction is synchronized from Notion and rendered here as a native site page: fast, readable, and available without opening an external editor.",
+        "The current guide for setup, video-signal operation, saving results, and updating the device.",
       backLabel: "Back to home",
       syncLabel: "Synced from Notion",
       updatedLabel: "Updated",

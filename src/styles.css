@@ -1374,6 +1374,7 @@ p {
   display: grid;
   gap: 12px;
   align-content: start;
+  width: min(100%, 420px);
   padding: 18px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1434,8 +1435,14 @@ p {
   padding-top: 20px;
 }
 
+.manual-sync-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+}
+
 .manual-reader {
-  width: min(100%, 860px);
+  width: min(100%, 960px);
   margin: 0 auto;
   padding: 22px;
   border: 1px solid var(--line);
@@ -1485,6 +1492,7 @@ p {
 .manual-reader blockquote,
 .manual-reader summary,
 .manual-reader figcaption {
+  max-width: 78ch;
   color: #c2ced7;
   font-size: 1rem;
   line-height: 1.66;
@@ -1813,12 +1821,18 @@ p {
   }
 
   .manual-hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-    gap: 32px;
+    max-width: 920px;
   }
 
   .manual-reader {
     padding: 42px 48px;
+  }
+}
+
+@media (min-width: 1040px) {
+  .manual-reader {
+    width: min(100%, 1080px);
+    padding: 48px 56px;
   }
 }
 

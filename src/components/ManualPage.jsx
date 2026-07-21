@@ -160,6 +160,29 @@ function formatDate(value, language) {
   }).format(new Date(value));
 }
 
+function ManualSyncCard({ manual, updatedAt }) {
+  return (
+    <aside className="manual-sync-card" aria-label={manual.syncLabel}>
+      <BookOpen aria-hidden="true" />
+      <strong>{manual.syncLabel}</strong>
+      {updatedAt ? (
+        <span>
+          <Clock3 aria-hidden="true" />
+          {manual.updatedLabel}: {updatedAt}
+        </span>
+      ) : null}
+      <span>
+        <RefreshCw aria-hidden="true" />
+        {manual.sourceLabel}: {manualData.source === "notion-api" ? "Notion API" : "Notion"}
+      </span>
+      <a href={manualData.sourceUrl} target="_blank" rel="noreferrer">
+        {manual.openSourceLabel}
+        <ExternalLink aria-hidden="true" />
+      </a>
+    </aside>
+  );
+}
+
 export function ManualPage({ content, language, onNavigate }) {
   const manual = content.manual;
   const updatedAt = formatDate(manualData.lastEditedAt || manualData.syncedAt, language);
@@ -192,24 +215,6 @@ export function ManualPage({ content, language, onNavigate }) {
             <h1>{manualData.title || manual.title}</h1>
             <p>{manual.lead}</p>
           </div>
-          <aside className="manual-sync-card" aria-label={manual.syncLabel}>
-            <BookOpen aria-hidden="true" />
-            <strong>{manual.syncLabel}</strong>
-            {updatedAt ? (
-              <span>
-                <Clock3 aria-hidden="true" />
-                {manual.updatedLabel}: {updatedAt}
-              </span>
-            ) : null}
-            <span>
-              <RefreshCw aria-hidden="true" />
-              {manual.sourceLabel}: {manualData.source === "notion-api" ? "Notion API" : "Notion"}
-            </span>
-            <a href={manualData.sourceUrl} target="_blank" rel="noreferrer">
-              {manual.openSourceLabel}
-              <ExternalLink aria-hidden="true" />
-            </a>
-          </aside>
         </motion.div>
       </section>
 
@@ -225,6 +230,10 @@ export function ManualPage({ content, language, onNavigate }) {
             </aside>
           )}
         </article>
+      </section>
+
+      <section className="section manual-sync-section">
+        <ManualSyncCard manual={manual} updatedAt={updatedAt} />
       </section>
     </main>
   );
