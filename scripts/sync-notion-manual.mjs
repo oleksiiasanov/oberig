@@ -142,7 +142,7 @@ function convertPublicBlock(block, blocks) {
   if (!block) return null;
 
   const title = oldRichText(block.properties?.title);
-  const children = (block.content || []).map((id) => convertPublicBlock(unwrapPublicBlock(blocks[id]), blocks)).filter(Boolean);
+  const children = (block.content || []).map((id) => convertPublicBlock(blocks[id], blocks)).filter(Boolean);
   const common = { id: block.id, richText: title, children };
 
   if (!plainRichText(title) && !children.length && block.type !== "divider" && block.type !== "image") return null;

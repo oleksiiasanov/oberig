@@ -3,7 +3,7 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача SDR",
-  "syncedAt": "2026-07-21T12:58:52.677Z",
+  "syncedAt": "2026-07-21T13:23:30.589Z",
   "lastEditedAt": "2026-07-21T12:21:13.255Z",
   "blocks": [
     {
@@ -250,7 +250,16 @@
           "text": "Під час зарядки поруч із роз'ємом світиться світлодіод, а у верхньому правому куті екрана з'являється іконка блискавки та іконка батареї з поточним рівнем заряду (виділено на скріншоті нижче):"
         }
       ],
-      "children": [],
+      "children": [
+        {
+          "id": "3a4874c8-aa8d-8055-ab79-e71b84b70778",
+          "type": "image",
+          "src": "https://righteous-inch-4a5.notion.site/image/attachment%3Af18ee37d-a91f-4656-9a34-5083704ebe7a%3Abattery_icons_screenshot.png?table=block&id=3a4874c8-aa8d-8055-ab79-e71b84b70778&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+          "caption": [],
+          "richText": [],
+          "children": []
+        }
+      ],
       "type": "numbered_list_item"
     },
     {
@@ -1219,7 +1228,19 @@
           "text": "Поставте галочку:"
         }
       ],
-      "children": [],
+      "children": [
+        {
+          "id": "3a4874c8-aa8d-80bd-b677-ecdaa11ed34b",
+          "richText": [
+            {
+              "text": "«Дозволити іншим користувачам мережі використовувати підключення до Інтернету цього комп'ютера»",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "paragraph"
+        }
+      ],
       "type": "numbered_list_item"
     },
     {
@@ -1229,7 +1250,36 @@
           "text": "У списку нижче виберіть адаптер пристрою:"
         }
       ],
-      "children": [],
+      "children": [
+        {
+          "id": "3a4874c8-aa8d-80f5-bd60-d8979b306ae4",
+          "richText": [
+            {
+              "text": "Ethernet 1 (приклад)",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "3a4874c8-aa8d-8031-8c4b-eb8b8c74029d",
+          "richText": [
+            {
+              "text": "або "
+            },
+            {
+              "text": "SDR Device SDR Network",
+              "bold": true
+            },
+            {
+              "text": " (назва може відрізнятися)."
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
       "type": "numbered_list_item"
     },
     {
@@ -1452,7 +1502,48 @@
           "text": "Дочекайтеся завершення всіх етапів:"
         }
       ],
-      "children": [],
+      "children": [
+        {
+          "id": "3a4874c8-aa8d-8017-8f8f-d7481f54c8a7",
+          "richText": [
+            {
+              "text": "завантаження;"
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "3a4874c8-aa8d-80f9-a831-f92975c3f892",
+          "richText": [
+            {
+              "text": "стирання пам'яті;"
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "3a4874c8-aa8d-80ff-b60b-d314dd2f9ed1",
+          "richText": [
+            {
+              "text": "запису прошивки;"
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "3a4874c8-aa8d-8073-9070-d5dca9d38814",
+          "richText": [
+            {
+              "text": "перевірки."
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
       "type": "numbered_list_item"
     },
     {

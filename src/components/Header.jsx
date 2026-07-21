@@ -114,7 +114,12 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
         </div>
         <nav className="nav" aria-label={content.meta.navLabel}>
           {content.nav.map(([href, label]) => (
-            <a href={href} onClick={(event) => handleNavClick(event, href)} key={href}>
+            <a
+              className={href === "/manual" ? "nav-manual-link" : undefined}
+              href={href}
+              onClick={(event) => handleNavClick(event, href)}
+              key={href}
+            >
               {label}
             </a>
           ))}

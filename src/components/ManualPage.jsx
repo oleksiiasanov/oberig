@@ -6,6 +6,10 @@ function richTextKey(run, index) {
   return `${run.text}-${run.href || ""}-${index}`;
 }
 
+function plainText(value = []) {
+  return value.map((run) => run.text).join("").trim();
+}
+
 function RichText({ value = [] }) {
   if (!value.length) return null;
 
@@ -183,10 +187,32 @@ function ManualSyncCard({ manual, updatedAt }) {
   );
 }
 
+function ManualToc({ items, label }) {
+  if (!items.length) return null;
+
+  return (
+    <nav className="manual-toc" aria-label={label}>
+      <span>{label}</span>
+      <ol>
+        {items.map((item) => (
+          <li key={item.id}>
+            <a href={`#${item.id}`}>{item.title}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 export function ManualPage({ content, language, onNavigate }) {
   const manual = content.manual;
   const updatedAt = formatDate(manualData.lastEditedAt || manualData.syncedAt, language);
   const hasBlocks = Array.isArray(manualData.blocks) && manualData.blocks.length > 0;
+  const tocItems = (manualData.blocks || [])
+    .filter((block) => block.type === "heading_2")
+    .map((block) => ({ id: block.id, title: plainText(block.richText) }))
+    .filter((item) => item.title)
+    .slice(0, 8);
 
   return (
     <main className="manual-page">
@@ -215,6 +241,7 @@ export function ManualPage({ content, language, onNavigate }) {
             <h1>{manualData.title || manual.title}</h1>
             <p>{manual.lead}</p>
           </div>
+          <ManualToc items={tocItems} label={manual.contentsLabel} />
         </motion.div>
       </section>
 

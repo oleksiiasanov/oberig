@@ -447,6 +447,10 @@ main {
   outline: none;
 }
 
+.nav .nav-manual-link {
+  color: var(--yellow-soft);
+}
+
 .section {
   width: min(var(--max), calc(100% - 24px));
   margin: 0 auto;
@@ -1370,6 +1374,56 @@ p {
   font-size: 1rem;
 }
 
+.manual-toc {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(8, 15, 24, 0.58);
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+.manual-toc > span {
+  color: var(--yellow-soft);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manual-toc ol {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.manual-toc a {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.manual-toc a:hover,
+.manual-toc a:focus-visible {
+  color: var(--text);
+  border-color: rgba(var(--accent-rgb), 0.32);
+  background: rgba(var(--accent-rgb), 0.09);
+  outline: none;
+  transform: translateX(2px);
+}
+
 .manual-sync-card {
   display: grid;
   gap: 12px;
@@ -1442,7 +1496,7 @@ p {
 }
 
 .manual-reader {
-  width: min(100%, 960px);
+  width: min(100%, var(--max));
   margin: 0 auto;
   padding: 22px;
   border: 1px solid var(--line);
@@ -1463,8 +1517,9 @@ p {
 .manual-reader h2,
 .manual-reader h3,
 .manual-reader h4 {
+  width: min(100%, 920px);
   max-width: 100%;
-  margin: 40px 0 12px;
+  margin: 40px auto 12px;
   color: var(--text);
   font-family: var(--font-display);
   font-weight: 850;
@@ -1476,6 +1531,7 @@ p {
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   font-size: clamp(1.7rem, 7vw, 2.5rem);
+  scroll-margin-top: 96px;
 }
 
 .manual-reader h3 {
@@ -1492,14 +1548,17 @@ p {
 .manual-reader blockquote,
 .manual-reader summary,
 .manual-reader figcaption {
+  width: min(100%, 920px);
   max-width: 78ch;
+  margin-right: auto;
+  margin-left: auto;
   color: #c2ced7;
   font-size: 1rem;
   line-height: 1.66;
 }
 
 .manual-reader p {
-  margin: 12px 0;
+  margin: 12px auto;
 }
 
 .manual-reader a {
@@ -1518,7 +1577,10 @@ p {
 
 .manual-reader pre {
   overflow: auto;
+  width: min(100%, 920px);
   margin: 18px 0;
+  margin-right: auto;
+  margin-left: auto;
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1533,8 +1595,9 @@ p {
 
 .manual-list {
   display: grid;
+  width: min(100%, 920px);
   gap: 8px;
-  margin: 14px 0;
+  margin: 14px auto;
   padding-left: 22px;
 }
 
@@ -1555,7 +1618,8 @@ p {
 .manual-toggle,
 .manual-child-page,
 .manual-empty {
-  margin: 18px 0;
+  width: min(100%, 920px);
+  margin: 18px auto;
   border: 1px solid rgba(var(--accent-rgb), 0.22);
   border-radius: 8px;
   background: rgba(var(--accent-rgb), 0.07);
@@ -1620,17 +1684,20 @@ p {
 
 .manual-reader hr {
   height: 1px;
-  margin: 28px 0;
+  width: min(100%, 920px);
+  margin: 28px auto;
   border: 0;
   background: rgba(255, 255, 255, 0.09);
 }
 
 .manual-reader figure {
-  margin: 24px 0;
+  width: min(100%, 720px);
+  margin: 24px auto;
 }
 
 .manual-reader figure img {
   width: 100%;
+  height: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
@@ -1821,7 +1888,8 @@ p {
   }
 
   .manual-hero-grid {
-    max-width: 920px;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    gap: 32px;
   }
 
   .manual-reader {
@@ -1831,7 +1899,7 @@ p {
 
 @media (min-width: 1040px) {
   .manual-reader {
-    width: min(100%, 1080px);
+    width: min(100%, var(--max));
     padding: 48px 56px;
   }
 }
