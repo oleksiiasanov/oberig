@@ -104,6 +104,35 @@ function ManualBlock({ block }) {
           ) : null}
         </figure>
       ) : null;
+    case "table":
+      return block.rows?.length ? (
+        <div className="manual-table-wrap">
+          <table className="manual-table">
+            {block.hasColumnHeader ? (
+              <thead>
+                <tr>
+                  {block.rows[0].cells.map((cell, index) => (
+                    <th key={`${block.rows[0].id}-${index}`}>
+                      <RichText value={cell} />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+            ) : null}
+            <tbody>
+              {(block.hasColumnHeader ? block.rows.slice(1) : block.rows).map((row) => (
+                <tr key={row.id}>
+                  {row.cells.map((cell, index) => (
+                    <td key={`${row.id}-${index}`}>
+                      <RichText value={cell} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : null;
     case "toggle":
       return (
         <details className="manual-toggle">
@@ -237,7 +266,6 @@ export function ManualPage({ content, language, onNavigate }) {
           transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 18 }}
         >
           <div>
-            <p className="eyebrow">{manual.kicker}</p>
             <h1>{manualData.title || manual.title}</h1>
             <p>{manual.lead}</p>
           </div>

@@ -138,6 +138,19 @@ function publicFileUrl(block) {
   return fileSource;
 }
 
+function publicTableRows(block, blocks) {
+  const columnOrder = block.format?.table_block_column_order || [];
+
+  return (block.content || [])
+    .map((id) => blocks[id])
+    .filter((row) => row?.type === "table_row")
+    .map((row) => ({
+      id: row.id,
+      cells: columnOrder.map((columnId) => oldRichText(row.properties?.[columnId] || [])),
+    }))
+    .filter((row) => row.cells.some((cell) => plainRichText(cell)));
+}
+
 function convertPublicBlock(block, blocks) {
   if (!block) return null;
 
@@ -145,7 +158,7 @@ function convertPublicBlock(block, blocks) {
   const children = (block.content || []).map((id) => convertPublicBlock(blocks[id], blocks)).filter(Boolean);
   const common = { id: block.id, richText: title, children };
 
-  if (!plainRichText(title) && !children.length && block.type !== "divider" && block.type !== "image") return null;
+  if (!plainRichText(title) && !children.length && !["divider", "image", "table"].includes(block.type)) return null;
 
   switch (block.type) {
     case "page":
@@ -177,6 +190,17 @@ function convertPublicBlock(block, blocks) {
         richText: [],
         children: [],
       };
+    case "table":
+      return {
+        id: block.id,
+        type: "table",
+        hasColumnHeader: Boolean(block.format?.table_block_column_header),
+        rows: publicTableRows(block, blocks),
+        richText: [],
+        children: [],
+      };
+    case "table_row":
+      return null;
     case "toggle":
       return { ...common, type: "toggle" };
     default:
@@ -265,6 +289,27 @@ async function convertApiBlock(block) {
         type: "image",
         src: value.file?.url || value.external?.url || "",
         caption: apiRichText(value.caption || []),
+        richText: [],
+        children: [],
+      };
+    case "table": {
+      const rows = children
+        .filter((child) => child.type === "table_row")
+        .map((child) => ({ id: child.id, cells: child.cells || [] }));
+      return {
+        id: block.id,
+        type: "table",
+        hasColumnHeader: Boolean(value.has_column_header),
+        rows,
+        richText: [],
+        children: [],
+      };
+    }
+    case "table_row":
+      return {
+        id: block.id,
+        type: "table_row",
+        cells: (value.cells || []).map(apiRichText),
         richText: [],
         children: [],
       };
