@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
 import { MarketProblem } from "./components/MarketProblem.jsx";
+import { SocialReels } from "./components/SocialReels.jsx";
 import { Modes } from "./components/Modes.jsx";
 import { Capabilities } from "./components/Capabilities.jsx";
 import { MarketComparison } from "./components/MarketComparison.jsx";
@@ -135,6 +136,7 @@ export default function App() {
         <main>
           <Hero content={content} />
           <MarketProblem content={content} />
+          <SocialReels content={content} />
           <Modes content={content} onLogoToggle={handleLogoToggle} />
           <MarketComparison content={content} />
           <Capabilities content={content} />
