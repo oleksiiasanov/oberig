@@ -34,6 +34,7 @@ const required = [
   "~9 секунд",
   "Водоспад",
   "RSSI/SNR",
+  "Відео-огляд D·Vision SDR",
   "Замовити",
   "Зв’язатись з нами",
   WHATSAPP_URL,

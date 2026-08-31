@@ -1,0 +1,11 @@
+## 1. Implementation
+- [x] 1.1 Add the YouTube Data API sync script that resolves the channel, filters Short-length videos, and writes `src/data/reels.generated.json`.
+- [x] 1.2 Add `npm run sync:shorts` and a daily GitHub Actions workflow for the sync.
+- [x] 1.3 Add the `SocialReels` slider component with newest-first cards and a modal that embeds the YouTube privacy player (with a local-video fallback for placeholder data).
+- [x] 1.4 Render the section in `src/App.jsx` immediately below the technical-advantages section.
+- [x] 1.5 Add Ukrainian and English section copy in `src/data/content.js`.
+- [x] 1.6 Style the slider, cards, and modal in the existing D·Vision visual system (mobile-first).
+- [x] 1.7 Add `frame-src https://www.youtube-nocookie.com` to the Vercel CSP.
+- [x] 1.8 Extend `scripts/check-content.mjs` with the new required section copy.
+- [x] 1.9 Run `openspec validate add-youtube-shorts-section --strict --no-interactive`.
+- [x] 1.10 Run `npm run check:content` and `npm run build`.
