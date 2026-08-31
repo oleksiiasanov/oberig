@@ -184,10 +184,11 @@ The landing page SHALL use a minimal footer with current D·Vision SDR social li
 
 #### Scenario: Footer is displayed
 - **WHEN** the footer appears
-- **THEN** it contains TikTok and Instagram links only
+- **THEN** it contains TikTok, Instagram, Facebook, and YouTube links only
 - **AND** TikTok points to `https://www.tiktok.com/@dvision_sdr`
 - **AND** Instagram points to `https://www.instagram.com/dvision_sdr`
-- **AND** Facebook is not displayed
+- **AND** Facebook points to `https://www.facebook.com/dvision.sdr`
+- **AND** YouTube points to `https://youtube.com/@d.visionsdr`
 - **AND** the footer includes the `D·Vision SDR ™` trademark.
 
 ### Requirement: CTA Destinations

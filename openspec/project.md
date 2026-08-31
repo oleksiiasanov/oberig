@@ -41,7 +41,7 @@ D·Vision SDR is a product landing page for a wide-band FPV/drone video detector
 - The landing positions D·Vision SDR as an SDR-based FPV/drone video detector.
 - Current public positioning highlights 500-8000 MHz coverage and approximately 9-second full-range scanning.
 - Supported public languages are Ukrainian and English.
-- Current social links are TikTok and Instagram only.
+- Current social links are TikTok, Instagram, Facebook, and YouTube only.
 - Approved CTA destinations:
   - Order: `https://forms.gle/xFcMaTWR1G5pR4qW6`
   - Contact: `https://wa.me/380954716680`
@@ -59,4 +59,4 @@ D·Vision SDR is a product landing page for a wide-band FPV/drone video detector
 - `ipapi.co` is used client-side for optional country detection when no language preference exists.
 - Google Form is used for order intake.
 - WhatsApp is used for the contact CTA.
-- TikTok and Instagram are the current public social destinations.
+- TikTok, Instagram, Facebook, and YouTube are the current public social destinations.

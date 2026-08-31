@@ -4,6 +4,8 @@ export const WHATSAPP_URL = "https://wa.me/380954716680";
 export const SOCIAL_LINKS = [
   ["TikTok", "TT", "https://www.tiktok.com/@dvision_sdr"],
   ["Instagram", "IG", "https://www.instagram.com/dvision_sdr"],
+  ["Facebook", "FB", "https://www.facebook.com/dvision.sdr"],
+  ["YouTube", "YT", "https://youtube.com/@d.visionsdr"],
 ];
 
 export const LANGUAGES = {

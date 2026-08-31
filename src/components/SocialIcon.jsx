@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 
 function TikTokIcon() {
   return (
@@ -13,6 +13,8 @@ function TikTokIcon() {
 
 const ICONS = {
   Instagram,
+  Facebook,
+  YouTube: Youtube,
   TikTok: TikTokIcon,
 };
 

@@ -40,6 +40,8 @@ const required = [
   ORDER_URL,
   "https://www.tiktok.com/@dvision_sdr",
   "https://www.instagram.com/dvision_sdr",
+  "https://www.facebook.com/dvision.sdr",
+  "https://youtube.com/@d.visionsdr",
   "Language",
   "language-menu",
   "menu-backdrop",
