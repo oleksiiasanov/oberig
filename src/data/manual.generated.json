@@ -3,8 +3,8 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача SDR",
-  "syncedAt": "2026-09-09T07:21:37.361Z",
-  "lastEditedAt": "2026-08-19T12:42:32.757Z",
+  "syncedAt": "2026-09-10T07:17:01.130Z",
+  "lastEditedAt": "2026-09-09T16:47:06.817Z",
   "blocks": [
     {
       "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
@@ -460,7 +460,7 @@
       "id": "3a4874c8-aa8d-80ff-a429-c8369b1e2dc7",
       "richText": [
         {
-          "text": "3. Керування та навігація"
+          "text": "Керування та навігація"
         }
       ],
       "children": [],
@@ -614,345 +614,530 @@
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-8019-bf1e-f7d24d4d6e71",
-      "richText": [
-        {
-          "text": "Швидке меню"
-        }
-      ],
-      "children": [],
-      "type": "heading_3"
-    },
-    {
-      "id": "3a4874c8-aa8d-806a-8bed-f4fbabd506c4",
-      "richText": [
-        {
-          "text": "Натисніть "
-        },
-        {
-          "text": "МЕНЮ",
-          "bold": true
-        },
-        {
-          "text": " у будь-який момент, щоб відкрити бічну панель:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80a7-802a-e43dc39b7ef5",
-      "richText": [
-        {
-          "text": "Сканування",
-          "bold": true
-        },
-        {
-          "text": " — автоматичний пошук каналів (Розділ 5)."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80de-b00b-e72694a6aa1d",
-      "richText": [
-        {
-          "text": "Перегляд",
-          "bold": true
-        },
-        {
-          "text": " — прийом відео наживо (Розділ 4)."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ff-960a-fc5bf97937c1",
-      "richText": [
-        {
-          "text": "Інструменти",
-          "bold": true
-        },
-        {
-          "text": " — додаткові інструменти аналізу ефіру: Водоспад, Діапазони, WiFi-відео, RC-керування (Розділи 6–7)."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80eb-9505-dcb500902fb6",
-      "richText": [
-        {
-          "text": "Браузер",
-          "bold": true
-        },
-        {
-          "text": " — перегляд збережених фото та відео."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80c1-b9ea-dd0f50490cfb",
-      "richText": [
-        {
-          "text": "Налаштування",
-          "bold": true
-        },
-        {
-          "text": " — конфігурація пристрою (Розділ 8)."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-801a-82a6-e568613fd40a",
-      "richText": [
-        {
-          "text": "Довідка",
-          "bold": true
-        },
-        {
-          "text": " — спрощена версія цього посібника безпосередньо на екрані пристрою."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80b0-b8fd-ec268d8f804c",
-      "richText": [
-        {
-          "text": "Підменю «Інструменти»"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8086-9b4a-f365f57ee4e5",
-      "richText": [
-        {
-          "text": "Водоспад",
-          "bold": true
-        },
-        {
-          "text": " — візуальний аналіз спектра (детально в Розділі 6)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80bd-8608-d3cf5100ebef",
-      "richText": [
-        {
-          "text": "Діапазони",
-          "bold": true
-        },
-        {
-          "text": " — тестова функція виявлення засобів РЕБ (радіоелектронної боротьби / глушіння сигналу)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80b9-a75d-e378750890e6",
-      "richText": [
-        {
-          "text": "WiFi-відео",
-          "bold": true
-        },
-        {
-          "text": " — тестова функція виявлення цифрових дронів та інших Wi-Fi пристроїв у ефірі."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80f0-b87e-f6be39bb9591",
-      "richText": [
-        {
-          "text": "RC-керування",
-          "bold": true
-        },
-        {
-          "text": " — тестова функція виявлення сигналів керування дроном (RC-каналу)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8016-9004-f9eb456d6523",
-      "richText": [
-        {
-          "text": "⚠️ "
-        },
-        {
-          "text": "Діапазони",
-          "bold": true
-        },
-        {
-          "text": ", "
-        },
-        {
-          "text": "WiFi-відео",
-          "bold": true
-        },
-        {
-          "text": " та "
-        },
-        {
-          "text": "RC-керування",
-          "bold": true
-        },
-        {
-          "text": " — тестові (beta) функції. Детальний опис інтерфейсу та інтерпретації результатів — див. Розділ 7."
-        }
-      ],
-      "children": [],
-      "type": "quote"
-    },
-    {
       "id": "374874c8-aa8d-8052-8db8-c8f147b24310",
       "type": "divider",
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-8034-b291-ea91470cf079",
+      "id": "3d6874c8-aa8d-804c-85c0-f6f39777d474",
       "richText": [
         {
-          "text": "4. Налаштування"
+          "text": "Меню та налаштування"
         }
       ],
       "children": [],
       "type": "heading_2"
     },
     {
-      "id": "3a4874c8-aa8d-8064-8dd0-fa2e8d72c5e2",
+      "id": "3d6874c8-aa8d-8026-b72a-e7a8b6a0bb2d",
       "richText": [
         {
-          "text": "Меню → Налаштування.",
-          "bold": true
-        },
-        {
-          "text": " Параметри розділені на вкладки."
+          "text": "Головне меню D.vision SDR забезпечує доступ до основних режимів роботи пристрою:"
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-8067-afea-f96058c288f6",
+      "id": "3d6874c8-aa8d-800a-8704-f980767ff10c",
       "richText": [
         {
-          "text": "ℹ️ Після збереження змін на будь-якій вкладці внизу екрана з'являється службове повідомлення "
-        },
-        {
-          "text": "«Settings saved»",
+          "text": "Сканування",
           "bold": true
         },
         {
-          "text": ". Для вкладки "
-        },
-        {
-          "text": "USB",
-          "bold": true
-        },
-        {
-          "text": " зміни додатково потребують перезавантаження пристрою."
+          "text": " — пошук та виявлення сигналів."
         }
       ],
       "children": [],
-      "type": "quote"
+      "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-800e-ae53-d4f3e50db70b",
+      "id": "3d6874c8-aa8d-8068-b0d0-ccda8086ce98",
       "richText": [
         {
-          "text": "Вкладка «Сканер»"
+          "text": "Перегляд",
+          "bold": true
+        },
+        {
+          "text": " — перегляд виявлених сигналів."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-805d-bdd8-d79d59698d2d",
+      "richText": [
+        {
+          "text": "Інструменти",
+          "bold": true
+        },
+        {
+          "text": " — додаткові функції пристрою."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-809e-af73-fdf7139e2014",
+      "richText": [
+        {
+          "text": "Браузер",
+          "bold": true
+        },
+        {
+          "text": " — робота зі збереженими даними."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80ae-967c-ef2ba8e835be",
+      "richText": [
+        {
+          "text": "Налаштування",
+          "bold": true
+        },
+        {
+          "text": " — конфігурація параметрів пристрою."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80a6-9b97-c829d31e32a4",
+      "richText": [
+        {
+          "text": "Довідка",
+          "bold": true
+        },
+        {
+          "text": " — довідкова інформація."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80d0-9462-ecdb77565c0e",
+      "richText": [
+        {
+          "text": "Налаштування"
         }
       ],
       "children": [],
       "type": "heading_3"
     },
     {
-      "id": "3a4874c8-aa8d-8052-9e3f-c98da376fd74",
+      "id": "3d6874c8-aa8d-805d-a8b4-e7e5482c36c2",
       "richText": [
         {
-          "text": "Початкова частота",
+          "text": "Розділ "
+        },
+        {
+          "text": "Налаштування",
           "bold": true
         },
         {
-          "text": " — нижня межа сканування, МГц."
+          "text": " складається з п'яти основних категорій."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-8027-a9f2-c473b8dc4624",
+      "richText": [
+        {
+          "text": "1. Пристрій і система"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3d6874c8-aa8d-8054-9368-feece872c52c",
+      "richText": [
+        {
+          "text": "Містить основні системні параметри D.vision SDR:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-801b-8c21-d49f1023ed44",
+      "richText": [
+        {
+          "text": "Мова",
+          "bold": true
+        },
+        {
+          "text": " — вибір мови інтерфейсу: українська або англійська."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-80da-9101-f009188180cc",
+      "id": "3d6874c8-aa8d-80aa-83d7-f97808940b04",
       "richText": [
         {
-          "text": "Кінцева частота",
+          "text": "Яскравість",
           "bold": true
         },
         {
-          "text": " — верхня межа сканування, МГц."
+          "text": " — регулювання яскравості дисплея під час роботи."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-8041-8197-c77d8d53de81",
+      "id": "3d6874c8-aa8d-807e-b3d5-ebcf355fd6f6",
       "richText": [
         {
-          "text": "Перемикач антени 2",
+          "text": "Яскравість у сні",
           "bold": true
         },
         {
-          "text": " — порогова частота (МГц), вище якої пристрій перемикається на другий антенний вхід. Заводське значення: 3000 МГц."
+          "text": " — рівень яскравості дисплея в режимі очікування."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-8011-a747-cbf5099b27fa",
+      "id": "3d6874c8-aa8d-806d-8d2c-dd75047c6018",
       "richText": [
         {
-          "text": "Авто скріншоти",
+          "text": "Затемнити через",
           "bold": true
         },
         {
-          "text": " — автоматичний скріншот при виявленні нового активного сигналу."
+          "text": " — час бездіяльності, після якого яскравість дисплея автоматично зменшується."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-80b4-9012-f4837ee3d67e",
+      "id": "3d6874c8-aa8d-80e6-9489-debe07915e0a",
       "richText": [
         {
-          "text": "Автозапуск нового каналу",
+          "text": "Звук",
           "bold": true
         },
         {
-          "text": " — коли сканер знаходить новий сигнал, пристрій автоматично відкриває його в режимі "
+          "text": " — увімкнення або вимкнення звукових сповіщень."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8072-8bd2-ce97678c60eb",
+      "richText": [
+        {
+          "text": "Гучність",
+          "bold": true
         },
         {
-          "text": "Перегляд",
+          "text": " — регулювання рівня гучності."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-808a-8adc-c00efd5c4d08",
+      "richText": [
+        {
+          "text": "Для застосування змінених параметрів натисніть "
+        },
+        {
+          "text": "Зберегти",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-806f-9fd3-e13b37cc024f",
+      "richText": [
+        {
+          "text": "Скинути зміни",
+          "bold": true
+        },
+        {
+          "text": " — скасовує внесені, але ще не збережені зміни."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80ab-9bd1-cbf2c3a76218",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3d6874c8-aa8d-805a-9f97-e658768ca000",
+      "richText": [
+        {
+          "text": "2. Сканування і виявлення"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3d6874c8-aa8d-8011-979c-eeb004acb6d9",
+      "richText": [
+        {
+          "text": "Використовується для налаштування діапазону сканування та типів сигналів, які необхідно виявляти."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80c0-90fe-f51e2aabdcd2",
+      "richText": [
+        {
+          "text": "Діапазон сканування"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80dd-bb34-dfb0706cc985",
+      "richText": [
+        {
+          "text": "Сканувати від",
+          "bold": true
+        },
+        {
+          "text": " — нижня межа сканування."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-807f-acf7-c56d47f24e8c",
+      "richText": [
+        {
+          "text": "Сканувати до",
+          "bold": true
+        },
+        {
+          "text": " — верхня межа сканування."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80ef-9985-cd2f614845fe",
+      "richText": [
+        {
+          "text": "Доступний діапазон сканування D.vision SDR — "
+        },
+        {
+          "text": "500–8700 МГц",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80af-8795-c76005ca0549",
+      "richText": [
+        {
+          "text": "Зменшення діапазону дозволяє обмежити сканування лише необхідною частиною спектра."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-809d-aad7-d8350089962a",
+      "richText": [
+        {
+          "text": "Що шукати"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80eb-a60b-c90dd84a03dd",
+      "richText": [
+        {
+          "text": "Кожен тип детекції можна незалежно увімкнути або вимкнути:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80f3-8432-d3ce9972c5ca",
+      "richText": [
+        {
+          "text": "Аналогове відео",
+          "bold": true
+        },
+        {
+          "text": " — пошук аналогових відеосигналів."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8075-a18a-f3f066541575",
+      "richText": [
+        {
+          "text": "Дрони DJI",
+          "bold": true
+        },
+        {
+          "text": " — пошук сигналів дронів DJI."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8016-8ec3-f176fb17cf5f",
+      "richText": [
+        {
+          "text": "Wi-Fi камери",
+          "bold": true
+        },
+        {
+          "text": " — пошук сигналів Wi-Fi камер."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8004-be2d-d344f426b337",
+      "richText": [
+        {
+          "text": "Walksnail FPV",
+          "bold": true
+        },
+        {
+          "text": " — пошук сигналів систем Walksnail FPV."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8037-b579-ffc4a55879b2",
+      "richText": [
+        {
+          "text": "Відображення"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-8022-a6a4-e88b3b616411",
+      "richText": [
+        {
+          "text": "Показувати рівень",
+          "bold": true
+        },
+        {
+          "text": " — відображає рівень прийнятого сигналу для виявленого джерела."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80cd-b342-e333160a53a8",
+      "richText": [
+        {
+          "text": "Додаткова індикація стрілками показує зміну рівня сигналу та допомагає визначити тенденцію: "
+        },
+        {
+          "text": "наближення до джерела сигналу або віддалення від нього",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80e6-aed2-fdab0c829186",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3d6874c8-aa8d-807d-ba04-c7b718bd77d2",
+      "richText": [
+        {
+          "text": "3. Запис і сценарій"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "3d6874c8-aa8d-8073-968d-e60838955034",
+      "richText": [
+        {
+          "text": "Визначає поведінку D.vision SDR під час виявлення сигналу та роботу функцій запису."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-8002-ad1d-ca965cc3fe7f",
+      "richText": [
+        {
+          "text": "Кнопка ЖИВЛЕННЯ",
+          "bold": true
+        },
+        {
+          "text": " — визначає дію короткого натискання кнопки: "
+        },
+        {
+          "text": "Фото",
+          "bold": true
+        },
+        {
+          "text": " або "
+        },
+        {
+          "text": "Відео",
           "bold": true
         },
         {
@@ -963,354 +1148,385 @@
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-808c-ad43-f318099c9842",
+      "id": "3d6874c8-aa8d-803f-8642-c98ede2e3cc9",
       "richText": [
         {
-          "text": "Стовпці гістограми",
+          "text": "Зберігати знахідки",
           "bold": true
         },
         {
-          "text": " — відображення графіків RSSI/SNR у вигляді стовпців замість лінії (лише зовнішній вигляд)."
+          "text": " — автоматично зберігає інформацію про виявлення на microSD-карту. Для кожної знахідки зберігаються:"
+        }
+      ],
+      "children": [
+        {
+          "id": "3d6874c8-aa8d-808e-812c-e54010bbd128",
+          "richText": [
+            {
+              "text": "скріншот;"
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "3d6874c8-aa8d-8063-b9ed-cc1060fb9e29",
+          "richText": [
+            {
+              "text": "лог детекції у форматі "
+            },
+            {
+              "text": "CSV",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-8035-83f2-f665d4476f26",
+      "richText": [
+        {
+          "text": "Відкривати перегляд",
+          "bold": true
+        },
+        {
+          "text": " — після виявлення сигналу автоматично відкриває екран його перегляду."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-8055-96f6-ded3f6103128",
+      "id": "3d6874c8-aa8d-8028-9030-de6a4fa4986e",
       "richText": [
         {
-          "text": "Профіль WiFi",
+          "text": "Показувати знахідку",
           "bold": true
         },
         {
-          "text": " — "
-        },
-        {
-          "text": "Загальний",
-          "italic": true
-        },
-        {
-          "text": " / "
-        },
-        {
-          "text": "Дрон",
-          "italic": true
-        },
-        {
-          "text": " / "
-        },
-        {
-          "text": "Прихована камера",
-          "italic": true
-        },
-        {
-          "text": ". Обирає тип цілі для інструмента "
-        },
-        {
-          "text": "WiFi-відео",
-          "bold": true
-        },
-        {
-          "text": " (Розділ 7). ⚠️ "
-        },
-        {
-          "text": "Експериментальний параметр",
-          "bold": true
-        },
-        {
-          "text": " — поведінка для різних профілів ще уточнюється."
+          "text": " — визначає час відображення знайденого сигналу."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-80a5-9875-cc09120b739e",
+      "id": "3d6874c8-aa8d-80c4-8043-f8138cc89c56",
       "richText": [
         {
-          "text": "Вкладка «Пристрій»"
+          "text": "Лишатися у перегляді",
+          "bold": true
+        },
+        {
+          "text": " — визначає, чи залишиться пристрій у режимі перегляду після виявлення або повернеться до сканування."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80bf-9792-c1d6e4df9459",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3d6874c8-aa8d-805c-8f88-f02cb68e05fd",
+      "richText": [
+        {
+          "text": "4. USB-підключення"
         }
       ],
       "children": [],
       "type": "heading_3"
     },
     {
-      "id": "3a4874c8-aa8d-80a3-9346-c24cd09f9e28",
+      "id": "3d6874c8-aa8d-80b8-be97-ff7f31fe5248",
       "richText": [
         {
-          "text": "Звук увімкнено",
-          "bold": true
-        },
-        {
-          "text": " — системні звуки та сповіщення."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8081-976b-e9e089285e82",
-      "richText": [
-        {
-          "text": "Гучність звуку",
-          "bold": true
-        },
-        {
-          "text": " — гучність системних звуків (0–10)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8005-a08e-db8a2db67e99",
-      "richText": [
-        {
-          "text": "Тайм-аут екрану (с)",
-          "bold": true
-        },
-        {
-          "text": " — час у "
-        },
-        {
-          "text": "секундах",
-          "bold": true
-        },
-        {
-          "text": " до затемнення екрана. Значення 0 — екран не вимикається."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8099-b4ea-d8339107ec4d",
-      "richText": [
-        {
-          "text": "Активна яскравість",
-          "bold": true
-        },
-        {
-          "text": " — яскравість під час використання (0–1000)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8047-9baf-cd296d09cd4d",
-      "richText": [
-        {
-          "text": "Неактивна яскравість",
-          "bold": true
-        },
-        {
-          "text": " — яскравість у режимі очікування (0–1000)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80f8-86db-dd4d15ffc371",
-      "richText": [
-        {
-          "text": "Запис відео",
-          "bold": true
-        },
-        {
-          "text": " — якщо позначено, кнопка "
-        },
-        {
-          "text": "ЖИВЛЕННЯ",
-          "bold": true
-        },
-        {
-          "text": " запускає/зупиняє запис відео; якщо ні — робить фото."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80f1-a915-ebc2675f453b",
-      "richText": [
-        {
-          "text": "Мова",
-          "bold": true
-        },
-        {
-          "text": " — Eng. / Укр."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80d9-95fb-ed7b159239bb",
-      "richText": [
-        {
-          "text": "Вкладка «USB»"
-        }
-      ],
-      "children": [],
-      "type": "heading_3"
-    },
-    {
-      "id": "3a4874c8-aa8d-807d-9a6e-ce8d4d16a4aa",
-      "richText": [
-        {
-          "text": "Примітка на екрані: "
-        },
-        {
-          "text": "«Зміни потребують перезавантаження системи».",
-          "bold": true
-        }
-      ],
-      "children": [],
-      "type": "quote"
-    },
-    {
-      "id": "3a4874c8-aa8d-8066-9fd3-ec2bcf4bcc89",
-      "richText": [
-        {
-          "text": "USB Увімкнено",
-          "bold": true
-        },
-        {
-          "text": " — головний вимикач усіх USB-функцій."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80fe-9c61-d1a3da11f0c9",
-      "richText": [
-        {
-          "text": "USB Камера",
-          "bold": true
-        },
-        {
-          "text": " — пристрій визначається як стандартна веб-камера (UVC)."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80c2-a781-ded5caf44947",
-      "richText": [
-        {
-          "text": "USB Мережа",
-          "bold": true
-        },
-        {
-          "text": " — спільний інтернет з ПК або Android-смартфона (CDC-NCM); потрібно для OTA-оновлень."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8099-8866-f1a11692be9a",
-      "richText": [
-        {
-          "text": "USB Серійний порт",
-          "bold": true
-        },
-        {
-          "text": " — системна консоль налагодження через USB."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80b5-a4dd-cb20f4a3b7d4",
-      "richText": [
-        {
-          "text": "Вкладка «Час та дата»"
-        }
-      ],
-      "children": [],
-      "type": "heading_3"
-    },
-    {
-      "id": "3a4874c8-aa8d-808b-a210-d26445af80b0",
-      "richText": [
-        {
-          "text": "Приклад вигляду: "
-        },
-        {
-          "text": "«Поточний RTC: 1970-01-02 00:19:43 (T5)»",
-          "bold": true
-        },
-        {
-          "text": " — поточний час внутрішнього годинника (дата 1970 рік означає, що годинник ще не налаштований). Нижче — поля для ручного встановлення: "
-        },
-        {
-          "text": "Рік, Місяць, День, Година, Хвилина, Секунда",
-          "bold": true
-        },
-        {
-          "text": ". Дата й час використовуються у назвах збережених файлів."
+          "text": "Містить параметри USB та веб-доступу."
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-8074-a206-e787254a37eb",
+      "id": "3d6874c8-aa8d-809d-a51b-eb49cb336f20",
       "richText": [
         {
-          "text": "Вкладка «Утиліти»"
+          "text": "USB-пристрій"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-802f-a315-e481566a22a8",
+      "richText": [
+        {
+          "text": "USB",
+          "bold": true
+        },
+        {
+          "text": " — вмикає роботу USB-підключення."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80de-99e1-dabf750c746d",
+      "richText": [
+        {
+          "text": "Веб-камера",
+          "bold": true
+        },
+        {
+          "text": " — вмикає режим веб-камери."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-809d-8772-ced8c42adac6",
+      "richText": [
+        {
+          "text": "Мережа",
+          "bold": true
+        },
+        {
+          "text": " — вмикає мережеве з'єднання через USB."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80a1-a6de-d7b515982554",
+      "richText": [
+        {
+          "text": "Консоль",
+          "bold": true
+        },
+        {
+          "text": " — сервісна функція. Для звичайної роботи користувача не потрібна."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-802e-b65c-c1aa970eea60",
+      "richText": [
+        {
+          "text": "Після першого ввімкнення параметрів "
+        },
+        {
+          "text": "USB",
+          "bold": true
+        },
+        {
+          "text": ", "
+        },
+        {
+          "text": "Веб-камера",
+          "bold": true
+        },
+        {
+          "text": " та "
+        },
+        {
+          "text": "Мережа",
+          "bold": true
+        },
+        {
+          "text": " необхідно "
+        },
+        {
+          "text": "перезапустити D.vision SDR",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-803a-8014-d9c139a29964",
+      "richText": [
+        {
+          "text": "Порт USB-хост"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-8060-a260-c45cc773a52f",
+      "richText": [
+        {
+          "text": "Порт USB-хост",
+          "bold": true
+        },
+        {
+          "text": " — сервісна функція. Для звичайної роботи користувача не потрібна."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-80af-9286-c94bc642f14c",
+      "richText": [
+        {
+          "text": "Веб-доступ"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-807e-a93d-d98ab64b2400",
+      "richText": [
+        {
+          "text": "Веб-перегляд",
+          "bold": true
+        },
+        {
+          "text": " — дозволяє переглядати екран D.vision SDR через веб-інтерфейс."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80e6-ba6c-cc2b2939dbbe",
+      "richText": [
+        {
+          "text": "Веб-керування",
+          "bold": true
+        },
+        {
+          "text": " — дозволяє дистанційно керувати пристроєм через веб-інтерфейс."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80c2-b8f4-d536142157d3",
+      "richText": [
+        {
+          "text": "Видавати адреси",
+          "bold": true
+        },
+        {
+          "text": " — необхідно використовувати при підключенні до iPad та інших пристроїв, які не призначають мережеву адресу USB-з'єднанню автоматично."
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-80ad-a0f8-fca10eafc05e",
+      "richText": [
+        {
+          "text": "Для повної процедури підключення див. розділ "
+        },
+        {
+          "text": "«Віддалене керування через USB»",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-803b-9470-ea9ebaa9c7a2",
+      "type": "divider",
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "3d6874c8-aa8d-804c-a51a-f0a7afe8ffe4",
+      "richText": [
+        {
+          "text": "5. Утиліти"
         }
       ],
       "children": [],
       "type": "heading_3"
     },
     {
-      "id": "3a4874c8-aa8d-806e-b4a5-f989590c8001",
+      "id": "3d6874c8-aa8d-8041-8e85-d655dae1a2af",
       "richText": [
         {
-          "text": "Версія прошивки",
+          "text": "Містить функції обслуговування та керування програмним забезпеченням пристрою."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "3d6874c8-aa8d-8001-a96c-c5cdb8d8e4ee",
+      "richText": [
+        {
+          "text": "Прошивка",
           "bold": true
         },
         {
-          "text": " — поточна встановлена версія (наприклад, 0.3.2). Лише для перегляду."
+          "text": " — відображає поточну версію програмного забезпечення D.vision SDR."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-8083-8dfe-e1da21261e89",
+      "id": "3d6874c8-aa8d-80fb-aa55-d9e0f4cb501e",
       "richText": [
         {
-          "text": "OTA Оновлення (Мережа)",
+          "text": "Оновити через мережу",
           "bold": true
         },
         {
-          "text": " — бездротове оновлення прошивки (див. Розділ 5)."
+          "text": " — запускає оновлення програмного забезпечення через мережеве підключення. Детальну процедуру див. у розділі "
+        },
+        {
+          "text": "«Оновлення програмного забезпечення»",
+          "bold": true
+        },
+        {
+          "text": "."
         }
       ],
       "children": [],
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-809d-a814-fb34a8872a0f",
+      "id": "3d6874c8-aa8d-8041-b333-ecae43b12683",
       "richText": [
         {
-          "text": "Форматувати SD (FAT32)",
+          "text": "Форматувати SD",
           "bold": true
         },
         {
-          "text": " — очищення карти та форматування у FAT32. ⚠️ "
+          "text": " — форматує встановлену microSD-карту. "
         },
         {
-          "text": "Видаляє всі дані з карти.",
+          "text": "Усі дані на карті буде видалено.",
           "bold": true
         }
       ],
@@ -1318,14 +1534,14 @@
       "type": "bulleted_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-80e1-a7b1-d1d3d9cf27ba",
+      "id": "3d6874c8-aa8d-8070-a695-d39ffac121fc",
       "richText": [
         {
           "text": "Скинути налаштування",
           "bold": true
         },
         {
-          "text": " — повернення всіх параметрів до заводських значень."
+          "text": " — повертає налаштування пристрою до початкового стану."
         }
       ],
       "children": [],
@@ -1732,7 +1948,7 @@
       "id": "3a4874c8-aa8d-80a0-8264-eee9736b0a39",
       "richText": [
         {
-          "text": "Install: Newer 0.3.2 stable"
+          "text": "Install: Newer 0.3.10 stable"
         }
       ],
       "children": [],
@@ -1964,85 +2180,290 @@
       "type": "heading_2"
     },
     {
-      "id": "374874c8-aa8d-804e-9b12-fa199ca66586",
+      "id": "704b57e2-bd1d-4928-8b05-77df1a0b4c3a",
       "richText": [
         {
-          "text": "Ваш пристрій є потужним інструментом при підключенні до комп'ютера через порт USB-C."
+          "text": "Віддалене керування через USB"
         }
       ],
       "children": [],
-      "type": "paragraph"
+      "type": "heading_3"
     },
     {
-      "id": "374874c8-aa8d-803a-9e0f-e1ee50d74da6",
+      "id": "828fd7fe-85a0-426e-9ee9-f2a50962b66d",
       "richText": [
         {
-          "text": "Режим веб-камери (UVC):",
-          "bold": true
+          "text": "Підключіть "
         },
         {
-          "text": " Пристрій відображається як «SDR Camera» на вашому ПК. Ви можете використовувати його в Zoom, OBS або VLC."
+          "text": "D.vision",
+          "href": "http://Dvision.com.ua"
+        },
+        {
+          "text": " SDR до комп’ютера через USB-C."
         }
       ],
       "children": [],
-      "type": "bulleted_list_item"
+      "type": "numbered_list_item"
     },
     {
-      "id": "3a4874c8-aa8d-801c-8035-c0bbe6098048",
+      "id": "2e079bb8-1ad0-43a0-8198-dd37ab84abca",
       "richText": [
         {
-          "text": "Цей файл дозволяє повноцінно керувати пристроєм віддалено. "
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8013-a2f2-fd1f4a2e8096",
-      "richText": [
-        {
-          "text": "controll.html"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ae-925b-c3f394a5ac9a",
-      "richText": [
-        {
-          "text": "Відкрийте його, дозвольте браузеру використовувати девайси камери та керування"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8034-8688-e766eb045563",
-      "richText": [
-        {
-          "text": "\n• "
+          "text": "На пристрої відкрийте "
         },
         {
-          "text": "Дистанційне керування:",
-          "bold": true
-        },
-        {
-          "text": " У налаштуваннях камери на ПК (або за допомогою слайдера «Pan») ви можете дистанційно змінювати радіочастоту пристрою.\n• "
-        },
-        {
-          "text": "Спільний інтернет:",
-          "bold": true
-        },
-        {
-          "text": " При підключенні до ПК або Android-телефона пристрій може використовувати інтернет-з'єднання хоста для роботи функції "
-        },
-        {
-          "text": "OTA Оновлення",
+          "text": "MENU → Налаштування → USB підключення",
           "bold": true
         },
         {
           "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "62c14161-32c4-4e06-a076-08ec1dc2a083",
+      "richText": [
+        {
+          "text": "У секції "
+        },
+        {
+          "text": "USB-пристрій",
+          "bold": true
+        },
+        {
+          "text": " увімкніть(якщо вимкнуто):"
+        }
+      ],
+      "children": [
+        {
+          "id": "32d9a13c-fba7-4edc-b2e7-1cd9b1602fcf",
+          "richText": [
+            {
+              "text": "USB",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "6786f243-2614-47e1-b378-d0e9315831af",
+          "richText": [
+            {
+              "text": "Веб-камера",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "112a3f99-fdea-496d-92c9-be422ba7fcb7",
+          "richText": [
+            {
+              "text": "Мережа",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "bf2ba3a2-5263-473e-ab7e-74f8d97959a2",
+      "richText": [
+        {
+          "text": "Після першого ввімкнення цих параметрів "
+        },
+        {
+          "text": "перезапустіть пристрій",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "6baf7c53-1c1a-4752-8b09-551813fee25e",
+      "richText": [
+        {
+          "text": "Після перезапуску знову відкрийте "
+        },
+        {
+          "text": "MENU → Налаштування → USB підключення",
+          "bold": true
+        },
+        {
+          "text": "."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "87268fef-8840-4fbf-a6f8-ec441bcbd0d0",
+      "richText": [
+        {
+          "text": "У секції "
+        },
+        {
+          "text": "Веб-доступ",
+          "bold": true
+        },
+        {
+          "text": " увімкніть:"
+        }
+      ],
+      "children": [
+        {
+          "id": "14bc14bb-07a4-4485-a7f6-9f351f5e0c4e",
+          "richText": [
+            {
+              "text": "Веб-перегляд",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "0157ae1c-77ea-408a-b4f3-636363adda9b",
+          "richText": [
+            {
+              "text": "Веб-керування",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "9112073e-5569-4e22-a177-4ef973689472",
+      "richText": [
+        {
+          "text": "На екрані пристрою з’явиться локальна HTTPS-адреса з індивідуальним ключем доступу у форматі "
+        },
+        {
+          "text": "https://192.168.xxx.xxx/?k=XXXXXXXXXX",
+          "code": true
+        },
+        {
+          "text": ". Також відображається QR-код для швидкого відкриття адреси з мобільного телефону чи планшету."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "4f4e37d0-10d7-4ebc-b722-b3cf581c578b",
+      "richText": [
+        {
+          "text": "На комп’ютері відкрийте "
+        },
+        {
+          "text": "повну актуальну адресу",
+          "bold": true
+        },
+        {
+          "text": " у браузері."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "f62f7dd6-aac6-4c58-9ce4-8fc690bd7f07",
+      "richText": [
+        {
+          "text": "Під час першого підключення браузер може показати попередження про недовірений локальний HTTPS-сертифікат. У такому випадку виберіть "
+        },
+        {
+          "text": "«Розширені»",
+          "bold": true
+        },
+        {
+          "text": " та перейдіть на локальну адресу пристрою."
+        }
+      ],
+      "children": [],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "fbc4e8cc-fabf-4337-930d-b625d1822e5d",
+      "richText": [
+        {
+          "text": "Після підключення відкриється "
+        },
+        {
+          "text": "SDR Control Center",
+          "bold": true
+        },
+        {
+          "text": ", у якому доступні:"
+        }
+      ],
+      "children": [
+        {
+          "id": "3d626b32-86f1-4c07-b566-19fe4e037fce",
+          "richText": [
+            {
+              "text": "трансляція екрана пристрою;"
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        },
+        {
+          "id": "da1c7ba1-4c27-4d38-b557-8191deaebeef",
+          "richText": [
+            {
+              "text": "дистанційне керування кнопками "
+            },
+            {
+              "text": "↑ / ↓ / ← / →",
+              "bold": true
+            }
+          ],
+          "children": [],
+          "type": "bulleted_list_item"
+        }
+      ],
+      "type": "numbered_list_item"
+    },
+    {
+      "id": "3d6874c8-aa8d-804e-bf0a-e2b12d7d8afc",
+      "richText": [
+        {
+          "text": "Важливо для Android:",
+          "bold": true
+        },
+        {
+          "text": " для коректної роботи на Android-смартфонах і планшетах потрібна "
+        },
+        {
+          "text": "Android 14 або новіша версія",
+          "bold": true
+        },
+        {
+          "text": ". Під час підключення до D.vision SDR необхідно "
+        },
+        {
+          "text": "вимкнути Wi-Fi",
+          "bold": true
+        },
+        {
+          "text": " на смартфоні або планшеті."
         }
       ],
       "children": [],
