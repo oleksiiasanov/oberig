@@ -64,17 +64,21 @@ function CatalogDropdown({ href, label, items, onNavigate, closeMenu }) {
         if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false);
       }}
     >
-      <a
-        className="nav-dropdown-trigger"
-        href={href}
-        onClick={(event) => navigateTo(event, href)}
-        onFocus={() => setIsOpen(true)}
-        aria-expanded={isOpen}
-        aria-haspopup="menu"
-      >
-        <span>{label}</span>
-        <ChevronDown aria-hidden="true" />
-      </a>
+      <div className="nav-dropdown-row">
+        <a className="nav-dropdown-trigger" href={href} onClick={(event) => navigateTo(event, href)}>
+          {label}
+        </a>
+        <button
+          type="button"
+          className="nav-dropdown-toggle"
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
+          aria-label={label}
+          onClick={() => setIsOpen((value) => !value)}
+        >
+          <ChevronDown aria-hidden="true" />
+        </button>
+      </div>
       <div className="nav-dropdown-panel" role="menu">
         <div className="nav-dropdown-panel-inner">
           {items.map((item) => (

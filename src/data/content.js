@@ -64,7 +64,7 @@ export const landingContent = {
               rows: [
                 ["Діапазон сканування", "500–8700 МГц"],
                 ["Сканування повного кола", "~9 секунд"],
-                ["Дальність сканування", "до 10 км (500–6000 МГц) /\nдо 5 км (6000–7000 МГц) /\nдо 3,5 км (7000–8700 МГц)"],
+                ["Дальність сканування", "до 10 км (500–6000 МГц)\nдо 5 км (6000–7000 МГц)\nдо 3,5 км (7000–8700 МГц)"],
               ],
             },
             {
@@ -399,7 +399,7 @@ export const landingContent = {
               rows: [
                 ["Scanning range", "500-8700 MHz"],
                 ["Full-circle scan", "~9 seconds"],
-                ["Detection range", "up to 10 km (500-6000 MHz) /\nup to 5 km (6000-7000 MHz) /\nup to 3.5 km (7000-8700 MHz)"],
+                ["Detection range", "up to 10 km (500-6000 MHz)\nup to 5 km (6000-7000 MHz)\nup to 3.5 km (7000-8700 MHz)"],
               ],
             },
             {
