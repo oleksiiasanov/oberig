@@ -2014,13 +2014,14 @@ p {
 .order-spec-row {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .order-spec-row dt {
+  flex: 0 0 auto;
+  max-width: 40%;
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
@@ -2029,8 +2030,9 @@ p {
 }
 
 .order-spec-row dd {
+  flex: 1 1 auto;
+  min-width: 0;
   margin: 0;
-  max-width: 62%;
   color: var(--text);
   font-size: 0.95rem;
   font-weight: 400;
