@@ -1,4 +1,4 @@
-import { ArrowLeft, BookOpen, Clock3, ExternalLink, RefreshCw } from "lucide-react";
+import { BookOpen, Clock3, ExternalLink, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import manualData from "../data/manual.generated.json";
 
@@ -143,12 +143,7 @@ function ManualBlock({ block }) {
         </details>
       );
     case "child_page":
-      return (
-        <div className="manual-child-page">
-          <BookOpen aria-hidden="true" />
-          <RichText value={block.richText} />
-        </div>
-      );
+      return null;
     default:
       return (
         <p>
@@ -233,7 +228,7 @@ function ManualToc({ items, label }) {
   );
 }
 
-export function ManualPage({ content, language, onNavigate }) {
+export function ManualPage({ content, language }) {
   const manual = content.manual;
   const updatedAt = formatDate(manualData.lastEditedAt || manualData.syncedAt, language);
   const hasBlocks = Array.isArray(manualData.blocks) && manualData.blocks.length > 0;
@@ -246,31 +241,16 @@ export function ManualPage({ content, language, onNavigate }) {
   return (
     <main className="manual-page">
       <section className="section manual-hero">
-        <motion.a
-          className="manual-back"
-          href="/"
-          onClick={(event) => {
-            event.preventDefault();
-            onNavigate("/");
-          }}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <ArrowLeft aria-hidden="true" />
-          <span>{manual.backLabel}</span>
-        </motion.a>
         <motion.div
           className="manual-hero-grid"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 18 }}
         >
-          <div>
-            <h1>{manualData.title || manual.title}</h1>
-            <p>{manual.lead}</p>
-          </div>
-          <ManualToc items={tocItems} label={manual.contentsLabel} />
+          <h1>{manual.title || manualData.title}</h1>
+          <p>{manual.lead}</p>
         </motion.div>
+        <ManualToc items={tocItems} label={manual.contentsLabel} />
       </section>
 
       <section className="section manual-reader-section">

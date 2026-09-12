@@ -1,9 +1,9 @@
-import { ArrowUpRight, BookOpen, MessageCircle, ClipboardList } from "lucide-react";
+import { ArrowUpRight, MessageCircle, ClipboardList } from "lucide-react";
 
 export function CTAButtons({ content, center = false }) {
   return (
     <div className={`cta-row ${center ? "cta-center" : ""}`} aria-label={content.meta.ctaLabel}>
-      <a className="btn btn-primary" href={content.orderUrl} target="_blank" rel="noreferrer">
+      <a className="btn btn-primary" href="/order">
         <ClipboardList aria-hidden="true" />
         <span>{content.meta.primaryAction}</span>
         <ArrowUpRight aria-hidden="true" />
@@ -11,10 +11,6 @@ export function CTAButtons({ content, center = false }) {
       <a className="btn btn-secondary" href={content.whatsappUrl} target="_blank" rel="noreferrer">
         <MessageCircle aria-hidden="true" />
         <span>{content.meta.secondaryAction}</span>
-      </a>
-      <a className="btn btn-tertiary" href="/manual">
-        <BookOpen aria-hidden="true" />
-        <span>{content.meta.manualAction}</span>
       </a>
     </div>
   );

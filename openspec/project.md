@@ -39,7 +39,7 @@ D·Vision SDR is a product landing page for a wide-band FPV/drone video detector
 
 ## Domain Context
 - The landing positions D·Vision SDR as an SDR-based FPV/drone video detector.
-- Current public positioning highlights 500-8000 MHz coverage and approximately 9-second full-range scanning.
+- Current public positioning highlights 500-8700 MHz coverage and approximately 9-second full-range scanning.
 - Supported public languages are Ukrainian and English.
 - Current social links are TikTok, Instagram, Facebook, and YouTube only.
 - Approved CTA destinations:

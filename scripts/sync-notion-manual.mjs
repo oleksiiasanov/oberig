@@ -33,6 +33,13 @@ function cleanText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function normalizeRun(run) {
+  const isBareProductNameLink = /^D\.vision$/i.test(run.text);
+  const text = run.text.replace(/D\.vision/gi, "D·Vision");
+  const href = isBareProductNameLink ? undefined : run.href;
+  return { ...run, text, href };
+}
+
 function oldRichText(value) {
   if (!Array.isArray(value)) return [];
 
@@ -49,21 +56,23 @@ function oldRichText(value) {
         if (annotation[0] === "c") run.code = true;
       }
 
-      return run;
+      return normalizeRun(run);
     })
     .filter((run) => run.text);
 }
 
 function apiRichText(value = []) {
   return value
-    .map((part) => ({
-      text: part.plain_text || "",
-      href: part.href || undefined,
-      bold: part.annotations?.bold || undefined,
-      italic: part.annotations?.italic || undefined,
-      strike: part.annotations?.strikethrough || undefined,
-      code: part.annotations?.code || undefined,
-    }))
+    .map((part) =>
+      normalizeRun({
+        text: part.plain_text || "",
+        href: part.href || undefined,
+        bold: part.annotations?.bold || undefined,
+        italic: part.annotations?.italic || undefined,
+        strike: part.annotations?.strikethrough || undefined,
+        code: part.annotations?.code || undefined,
+      }),
+    )
     .filter((run) => run.text);
 }
 

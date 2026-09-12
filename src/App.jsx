@@ -9,6 +9,8 @@ import { Trust } from "./components/Trust.jsx";
 import { FAQ } from "./components/FAQ.jsx";
 import { FinalCTA } from "./components/FinalCTA.jsx";
 import { ManualPage } from "./components/ManualPage.jsx";
+import { OrderPage } from "./components/OrderPage.jsx";
+import { ServicePage } from "./components/ServicePage.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
 const STORAGE_KEY = "dvision-language";
@@ -31,7 +33,11 @@ function isSupportedLogoVariant(variant) {
 
 function getPageFromLocation() {
   if (typeof window === "undefined") return "landing";
-  return window.location.pathname.replace(/\/$/, "") === "/manual" ? "manual" : "landing";
+  const path = window.location.pathname.replace(/\/$/, "");
+  if (path === "/manual") return "manual";
+  if (path === "/order") return "order";
+  if (path === "/service") return "service";
+  return "landing";
 }
 
 export default function App() {
@@ -78,14 +84,57 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (page !== "order" || typeof window === "undefined" || !window.location.hash) return;
+
+    const hash = window.location.hash;
+    const timer = window.setTimeout(() => {
+      document.querySelector(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+
+    return () => window.clearTimeout(timer);
+  }, [page]);
+
+  useEffect(() => {
     const baseTitle = "D·Vision SDR - FPV-відеодетектор на основі SDR-платформи";
-    document.title = page === "manual" ? `${content.manual.navLabel} | D·Vision SDR` : baseTitle;
-  }, [content.manual.navLabel, page]);
+    const pageLabel =
+      page === "manual"
+        ? content.manual.navLabel
+        : page === "order"
+          ? content.order.navLabel
+          : page === "service"
+            ? content.service.navLabel
+            : null;
+    document.title = pageLabel ? `${pageLabel} | D·Vision SDR` : baseTitle;
+  }, [content.manual.navLabel, content.order.navLabel, content.service.navLabel, page]);
 
   const handleNavigate = (href) => {
     if (href === "/manual") {
       window.history.pushState({}, "", "/manual");
       setPage("manual");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href === "/order") {
+      window.history.pushState({}, "", "/order");
+      setPage("order");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href.startsWith("/order#")) {
+      const hash = href.slice("/order".length);
+      window.history.pushState({}, "", href);
+      setPage("order");
+      window.setTimeout(() => {
+        document.querySelector(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
+      return;
+    }
+
+    if (href === "/service") {
+      window.history.pushState({}, "", "/service");
+      setPage("service");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -130,7 +179,11 @@ export default function App() {
         onNavigate={handleNavigate}
       />
       {page === "manual" ? (
-        <ManualPage content={content} language={language} onNavigate={handleNavigate} />
+        <ManualPage content={content} language={language} />
+      ) : page === "order" ? (
+        <OrderPage content={content} />
+      ) : page === "service" ? (
+        <ServicePage content={content} />
       ) : (
         <main>
           <Hero content={content} />

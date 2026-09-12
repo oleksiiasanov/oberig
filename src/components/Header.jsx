@@ -17,7 +17,6 @@ function LanguageSwitcher({ language, onLanguageChange }) {
         aria-haspopup="menu"
         onClick={() => setIsOpen((value) => !value)}
       >
-        <span aria-hidden="true">{currentLanguage.flag}</span>
         <span>{currentLanguage.label}</span>
         <ChevronDown aria-hidden="true" />
       </button>
@@ -37,11 +36,58 @@ function LanguageSwitcher({ language, onLanguageChange }) {
               }}
               key={code}
             >
-              <span aria-hidden="true">{config.flag}</span>
               <span>{config.label}</span>
             </button>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function CatalogDropdown({ href, label, items, onNavigate, closeMenu }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navigateTo = (event, target) => {
+    event.preventDefault();
+    closeMenu();
+    setIsOpen(false);
+    onNavigate(target);
+  };
+
+  return (
+    <div
+      className={`nav-dropdown ${isOpen ? "is-open" : ""}`}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false);
+      }}
+    >
+      <a
+        className="nav-dropdown-trigger"
+        href={href}
+        onClick={(event) => navigateTo(event, href)}
+        onFocus={() => setIsOpen(true)}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+      >
+        <span>{label}</span>
+        <ChevronDown aria-hidden="true" />
+      </a>
+      <div className="nav-dropdown-panel" role="menu">
+        <div className="nav-dropdown-panel-inner">
+          {items.map((item) => (
+            <a
+              href={`${href}#${item.id}`}
+              role="menuitem"
+              onClick={(event) => navigateTo(event, `${href}#${item.id}`)}
+              key={item.id}
+            >
+              {item.navLabel || item.name}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -113,16 +159,22 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
           </button>
         </div>
         <nav className="nav" aria-label={content.meta.navLabel}>
-          {content.nav.map(([href, label]) => (
-            <a
-              className={href === "/manual" ? "nav-manual-link" : undefined}
-              href={href}
-              onClick={(event) => handleNavClick(event, href)}
-              key={href}
-            >
-              {label}
-            </a>
-          ))}
+          {content.nav.map(([href, label]) =>
+            href === "/order" ? (
+              <CatalogDropdown
+                href={href}
+                label={label}
+                items={content.order.items}
+                onNavigate={onNavigate}
+                closeMenu={closeMenu}
+                key={href}
+              />
+            ) : (
+              <a href={href} onClick={(event) => handleNavClick(event, href)} key={href}>
+                {label}
+              </a>
+            ),
+          )}
         </nav>
         <div className="social-links header-socials" aria-label="Social links">
           {content.socials.map(([name, label, href]) => (

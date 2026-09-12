@@ -3,6 +3,14 @@
     {
       "source": "/manual",
       "destination": "/"
+    },
+    {
+      "source": "/order",
+      "destination": "/"
+    },
+    {
+      "source": "/service",
+      "destination": "/"
     }
   ],
   "headers": [
