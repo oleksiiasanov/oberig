@@ -1,4 +1,4 @@
-import { BookOpen } from "lucide-react";
+import { ArrowUp, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import manualData from "../data/manual.generated.json";
 import { FinalCTA } from "./FinalCTA.jsx";
@@ -180,6 +180,19 @@ function ManualBlocks({ blocks = [] }) {
   return rendered;
 }
 
+function BackToTop() {
+  return (
+    <button
+      type="button"
+      className="manual-back-to-top"
+      aria-label="Scroll to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
+      <ArrowUp aria-hidden="true" />
+    </button>
+  );
+}
+
 function ManualToc({ items, label }) {
   if (!items.length) return null;
 
@@ -234,6 +247,8 @@ export function ManualPage({ content }) {
           )}
         </article>
       </section>
+
+      <BackToTop />
 
       <FinalCTA content={content} />
     </main>

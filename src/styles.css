@@ -1527,13 +1527,13 @@ p {
   font-weight: 850;
   letter-spacing: 0;
   line-height: 1.08;
+  scroll-margin-top: 96px;
 }
 
 .manual-reader h2 {
   padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   font-size: clamp(1.7rem, 7vw, 2.5rem);
-  scroll-margin-top: 96px;
 }
 
 .manual-reader h3 {
@@ -2109,7 +2109,8 @@ p {
   margin-top: 10px;
 }
 
-.order-back-to-top {
+.order-back-to-top,
+.manual-back-to-top {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -2127,13 +2128,16 @@ p {
   cursor: pointer;
 }
 
-.order-back-to-top svg {
+.order-back-to-top svg,
+.manual-back-to-top svg {
   width: 20px;
   height: 20px;
 }
 
 .order-back-to-top:hover,
-.order-back-to-top:focus-visible {
+.order-back-to-top:focus-visible,
+.manual-back-to-top:hover,
+.manual-back-to-top:focus-visible {
   border-color: rgba(var(--accent-rgb), 0.36);
   color: var(--accent);
   outline: none;
