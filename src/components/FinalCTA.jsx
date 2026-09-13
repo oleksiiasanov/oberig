@@ -1,9 +1,8 @@
-import { AnimatedSection } from "./AnimatedSection.jsx";
 import { SocialIcon } from "./SocialIcon.jsx";
 
 export function FinalCTA({ content }) {
   return (
-    <AnimatedSection id="contact" className="site-footer">
+    <section id="contact" className="section site-footer">
       <small>{content.footer}</small>
       <div className="footer-links">
         {content.socials.map(([name, label, href]) => (
@@ -13,6 +12,6 @@ export function FinalCTA({ content }) {
           </a>
         ))}
       </div>
-    </AnimatedSection>
+    </section>
   );
 }

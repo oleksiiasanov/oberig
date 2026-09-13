@@ -1,4 +1,4 @@
-import { ArrowUpRight, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff } from "lucide-react";
+import { ArrowUp, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff } from "lucide-react";
 import { motion } from "framer-motion";
 import { FinalCTA } from "./FinalCTA.jsx";
 
@@ -30,7 +30,7 @@ function ItemPhoto({ item, order }) {
     <div className="order-item-photo">
       <ItemTag item={item} />
       <Icon aria-hidden="true" />
-      <span aria-hidden="true">{order.photoPendingLabel}</span>
+      <span className="order-item-photo-label" aria-hidden="true">{order.photoPendingLabel}</span>
     </div>
   );
 }
@@ -133,6 +133,9 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
         <div className="order-item-intro">
           <h3>{item.name}</h3>
           <p className="order-item-short">{item.short}</p>
+          <a className="btn btn-primary order-item-cta-mobile" href={orderUrl} target="_blank" rel="noreferrer">
+            <span>{orderLabel}</span>
+          </a>
           {firstGroup ? <CharacteristicsTable title={firstGroup.title} rows={firstGroup.rows} /> : null}
         </div>
       </div>
@@ -158,7 +161,6 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
 
       <a className="btn btn-primary order-item-cta" href={orderUrl} target="_blank" rel="noreferrer">
         <span>{orderLabel}</span>
-        <ArrowUpRight aria-hidden="true" />
       </a>
     </motion.article>
   );
@@ -182,6 +184,19 @@ function QuickNav({ items, quickNav }) {
   );
 }
 
+function BackToTop() {
+  return (
+    <button
+      type="button"
+      className="order-back-to-top"
+      aria-label="Scroll to top"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    >
+      <ArrowUp aria-hidden="true" />
+    </button>
+  );
+}
+
 export function OrderPage({ content }) {
   const { order } = content;
 
@@ -201,6 +216,8 @@ export function OrderPage({ content }) {
           ))}
         </div>
       </section>
+
+      <BackToTop />
 
       <FinalCTA content={content} />
     </main>

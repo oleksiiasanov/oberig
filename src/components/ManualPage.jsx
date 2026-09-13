@@ -1,4 +1,4 @@
-import { BookOpen, Clock3, ExternalLink, RefreshCw } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import manualData from "../data/manual.generated.json";
 import { FinalCTA } from "./FinalCTA.jsx";
@@ -180,38 +180,6 @@ function ManualBlocks({ blocks = [] }) {
   return rendered;
 }
 
-function formatDate(value, language) {
-  if (!value) return "";
-  return new Intl.DateTimeFormat(language === "uk" ? "uk-UA" : "en-US", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(value));
-}
-
-function ManualSyncCard({ manual, updatedAt }) {
-  return (
-    <aside className="manual-sync-card" aria-label={manual.syncLabel}>
-      <BookOpen aria-hidden="true" />
-      <strong>{manual.syncLabel}</strong>
-      {updatedAt ? (
-        <span>
-          <Clock3 aria-hidden="true" />
-          {manual.updatedLabel}: {updatedAt}
-        </span>
-      ) : null}
-      <span>
-        <RefreshCw aria-hidden="true" />
-        {manual.sourceLabel}: {manualData.source === "notion-api" ? "Notion API" : "Notion"}
-      </span>
-      <a href={manualData.sourceUrl} target="_blank" rel="noreferrer">
-        {manual.openSourceLabel}
-        <ExternalLink aria-hidden="true" />
-      </a>
-    </aside>
-  );
-}
-
 function ManualToc({ items, label }) {
   if (!items.length) return null;
 
@@ -229,9 +197,8 @@ function ManualToc({ items, label }) {
   );
 }
 
-export function ManualPage({ content, language }) {
+export function ManualPage({ content }) {
   const manual = content.manual;
-  const updatedAt = formatDate(manualData.lastEditedAt || manualData.syncedAt, language);
   const hasBlocks = Array.isArray(manualData.blocks) && manualData.blocks.length > 0;
   const tocItems = (manualData.blocks || [])
     .filter((block) => block.type === "heading_2")
@@ -266,10 +233,6 @@ export function ManualPage({ content, language }) {
             </aside>
           )}
         </article>
-      </section>
-
-      <section className="section manual-sync-section">
-        <ManualSyncCard manual={manual} updatedAt={updatedAt} />
       </section>
 
       <FinalCTA content={content} />
