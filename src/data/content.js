@@ -43,9 +43,16 @@ export const landingContent = {
       title: "Каталог виробів D·Vision SDR",
       photoPendingLabel: "Фото додається",
       priceLabel: "Ціна",
+      descriptionLabel: "Опис",
+      quickNav: [
+        ["Детектор", "detector"],
+        ["Виносна антена", "antenna"],
+        ["Кріплення в авто", "holder"],
+      ],
       items: [
         {
           id: "detector",
+          category: "detector",
           icon: "radar",
           photo: "/products/detector-1.jpg",
           tagStatus: "preorder",
@@ -102,17 +109,18 @@ export const landingContent = {
         },
         {
           id: "car-antenna",
+          category: "antenna",
           icon: "antenna",
           photo: "/products/external-antena-for-car.jpg",
           tagStatus: "in-stock",
           tag: "В наявності",
           name: "Виносна антена для авто",
           short:
-            "Двохантенна система на магнітному кріпленні з кабелем 2 або 10 м на вибір для винесення точки прийому сигналу за межі транспортного засобу.",
+            "Двохантенна система на магнітному кріпленні з кабелем 2, 5 або 10 м на вибір для винесення точки прийому сигналу за межі транспортного засобу.",
           description: [
             "Виносна антена розроблена спеціально під робочі частоти детектора D·Vision SDR. Вона призначена для винесення приймальних елементів на дах автомобіля, що дозволяє усунути екранування сигналу металевим кузовом і суттєво підвищує дальність та стабільність виявлення БПЛА.",
             "Конструкція містить дві внутрішні антени, оптимізовані для роботи в діапазонах детектора. Фіксація на металевих поверхнях здійснюється за допомогою потужної основи з трьох неодимових магнітів, що забезпечує надійне утримання модуля на даху авто під час руху на високій швидкості та в умовах інтенсивної вібрації.",
-            "Комплект поставляється з гнучким високочастотним кабелем довжиною 2 або 10 метрів на вибір, який має мінімальне згасання сигналу та дозволяє зручно завести підключення в салон автомобіля.",
+            "Комплект поставляється з гнучким високочастотним кабелем довжиною 2, 5 або 10 метрів на вибір, який має мінімальне згасання сигналу та дозволяє зручно завести підключення в салон автомобіля.",
           ],
           characteristics: [
             {
@@ -120,7 +128,7 @@ export const landingContent = {
               rows: [
                 ["Кількість антен", "2 внутрішні всеспрямовані"],
                 ["Тип кріплення", "Основа з 3 неодимових магнітів"],
-                ["Довжина кабелю", "2 або 10 м на вибір"],
+                ["Довжина кабелю", "2, 5 або 10 м на вибір"],
                 ["Конектори", "Стандартні ВЧ-роз'єми"],
               ],
             },
@@ -137,10 +145,12 @@ export const landingContent = {
           price: [
             ["Антена 2 м", "7 000 грн"],
             ["Антена 5 м", "13 000 грн"],
+            ["Антена 10 м", "14 200 грн"],
           ],
         },
         {
           id: "bunker-antenna",
+          category: "antenna",
           icon: "shield-half",
           photo: "/products/external-antena-for-shelter.jpg",
           tagStatus: "in-stock",
@@ -176,13 +186,13 @@ export const landingContent = {
           },
           extras: [],
           price: [
-            ["Антена 10 м", "14 200 грн"],
             ["Антена 14 м", "15 600 грн"],
             ["Антена 20 м", "16 000 грн"],
           ],
         },
         {
           id: "car-holder",
+          category: "holder",
           icon: "car-front",
           photo: "/products/car-holder-1.jpg",
           tagStatus: "in-stock",
@@ -355,7 +365,7 @@ export const landingContent = {
         "Наша мета — щоб усі наші захисники, захисниці та цивільні поверталися додому неушкодженими.",
       ],
     },
-    footer: "D·Vision SDR ™",
+    footer: "D·Vision SDR ™, 2026",
   },
   en: {
     ...shared,
@@ -378,9 +388,16 @@ export const landingContent = {
       title: "D·Vision SDR Product Catalog",
       photoPendingLabel: "Photo coming soon",
       priceLabel: "Price",
+      descriptionLabel: "Description",
+      quickNav: [
+        ["Detector", "detector"],
+        ["External Antenna", "antenna"],
+        ["Car Mount", "holder"],
+      ],
       items: [
         {
           id: "detector",
+          category: "detector",
           icon: "radar",
           photo: "/products/detector-1.jpg",
           tagStatus: "preorder",
@@ -437,16 +454,17 @@ export const landingContent = {
         },
         {
           id: "car-antenna",
+          category: "antenna",
           icon: "antenna",
           photo: "/products/external-antena-for-car.jpg",
           tagStatus: "in-stock",
           tag: "In stock",
           name: "External Antenna for Car",
-          short: "A dual-antenna magnetic-mount system with a 2 or 10 m cable for moving the receiving point outside the vehicle.",
+          short: "A dual-antenna magnetic-mount system with a 2, 5, or 10 m cable for moving the receiving point outside the vehicle.",
           description: [
             "The external antenna is designed specifically for the D·Vision SDR detector's operating frequencies. It moves the receiving elements onto the car's roof, eliminating signal shielding from the metal body and significantly improving UAV detection range and stability.",
             "The unit contains two internal antennas optimized for the detector's bands. It attaches to metal surfaces via a base with three powerful neodymium magnets, holding firmly on a car roof at high speed and under heavy vibration.",
-            "It ships with a flexible, low-loss RF cable 2 or 10 meters long, making it easy to route the connection into the cabin.",
+            "It ships with a flexible, low-loss RF cable 2, 5, or 10 meters long, making it easy to route the connection into the cabin.",
           ],
           characteristics: [
             {
@@ -454,7 +472,7 @@ export const landingContent = {
               rows: [
                 ["Antennas", "2 internal omnidirectional"],
                 ["Mount type", "Base with 3 neodymium magnets"],
-                ["Cable length", "2 or 10 m, your choice"],
+                ["Cable length", "2, 5, or 10 m, your choice"],
                 ["Connectors", "Standard RF connectors"],
               ],
             },
@@ -471,10 +489,12 @@ export const landingContent = {
           price: [
             ["2 m antenna", "UAH 7,000"],
             ["5 m antenna", "UAH 13,000"],
+            ["10 m antenna", "UAH 14,200"],
           ],
         },
         {
           id: "bunker-antenna",
+          category: "antenna",
           icon: "shield-half",
           photo: "/products/external-antena-for-shelter.jpg",
           tagStatus: "in-stock",
@@ -510,13 +530,13 @@ export const landingContent = {
           },
           extras: [],
           price: [
-            ["10 m antenna", "UAH 14,200"],
             ["14 m antenna", "UAH 15,600"],
             ["20 m antenna", "UAH 16,000"],
           ],
         },
         {
           id: "car-holder",
+          category: "holder",
           icon: "car-front",
           photo: "/products/car-holder-1.jpg",
           tagStatus: "in-stock",
@@ -683,6 +703,6 @@ export const landingContent = {
         "Our goal is for defenders, volunteers and civilians to return home unharmed.",
       ],
     },
-    footer: "D·Vision SDR ™",
+    footer: "D·Vision SDR ™, 2026",
   },
 };

@@ -1,6 +1,7 @@
 import { BookOpen, Clock3, ExternalLink, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
 import manualData from "../data/manual.generated.json";
+import { FinalCTA } from "./FinalCTA.jsx";
 
 function richTextKey(run, index) {
   return `${run.text}-${run.href || ""}-${index}`;
@@ -270,6 +271,8 @@ export function ManualPage({ content, language }) {
       <section className="section manual-sync-section">
         <ManualSyncCard manual={manual} updatedAt={updatedAt} />
       </section>
+
+      <FinalCTA content={content} />
     </main>
   );
 }

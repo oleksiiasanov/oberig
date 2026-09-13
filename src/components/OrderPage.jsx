@@ -1,5 +1,6 @@
 import { ArrowUpRight, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff } from "lucide-react";
 import { motion } from "framer-motion";
+import { FinalCTA } from "./FinalCTA.jsx";
 
 const ITEM_ICONS = {
   radar: Radar,
@@ -34,12 +35,15 @@ function ItemPhoto({ item, order }) {
   );
 }
 
-function DescriptionScroll({ paragraphs }) {
+function DescriptionScroll({ label, paragraphs }) {
   return (
-    <div className="order-description-full">
-      {paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
-      ))}
+    <div className="order-description">
+      <h4>{label}</h4>
+      <div className="order-description-full">
+        {paragraphs.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
     </div>
   );
 }
@@ -134,7 +138,7 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
       </div>
 
       <div className={`order-description-row ${secondGroup ? "" : "order-description-row-single"}`}>
-        <DescriptionScroll paragraphs={item.description} />
+        <DescriptionScroll label={order.descriptionLabel} paragraphs={item.description} />
         {secondGroup ? <CharacteristicsTable title={secondGroup.title} rows={secondGroup.rows} /> : null}
       </div>
 
@@ -160,6 +164,24 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
   );
 }
 
+function QuickNav({ items, quickNav }) {
+  const links = quickNav
+    .map(([label, category]) => [label, items.find((item) => item.category === category)?.id])
+    .filter(([, id]) => id);
+
+  if (!links.length) return null;
+
+  return (
+    <nav className="order-quicknav" aria-label="Quick product navigation">
+      {links.map(([label, id]) => (
+        <a className="order-quicknav-tab" href={`#${id}`} key={id}>
+          {label}
+        </a>
+      ))}
+    </nav>
+  );
+}
+
 export function OrderPage({ content }) {
   const { order } = content;
 
@@ -169,6 +191,7 @@ export function OrderPage({ content }) {
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 18 }}>
           <h1>{order.title}</h1>
         </motion.div>
+        <QuickNav items={order.items} quickNav={order.quickNav} />
       </section>
 
       <section className="section order-list-section">
@@ -178,6 +201,8 @@ export function OrderPage({ content }) {
           ))}
         </div>
       </section>
+
+      <FinalCTA content={content} />
     </main>
   );
 }

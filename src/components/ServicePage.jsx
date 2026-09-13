@@ -1,5 +1,6 @@
 import { CheckCircle2, XCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { FinalCTA } from "./FinalCTA.jsx";
 
 const SECTION_ICONS = {
   check: CheckCircle2,
@@ -54,6 +55,8 @@ export function ServicePage({ content }) {
           ))}
         </div>
       </section>
+
+      <FinalCTA content={content} />
     </main>
   );
 }
