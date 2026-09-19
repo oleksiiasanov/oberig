@@ -3,8 +3,8 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача D·Vision SDR",
-  "syncedAt": "2026-09-18T07:22:44.039Z",
-  "lastEditedAt": "2026-09-13T10:34:31.300Z",
+  "syncedAt": "2026-09-19T07:18:55.547Z",
+  "lastEditedAt": "2026-09-18T16:28:40.223Z",
   "blocks": [
     {
       "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
@@ -2620,25 +2620,8 @@
       "id": "3d6874c8-aa8d-804e-bf0a-e2b12d7d8afc",
       "richText": [
         {
-          "text": "Важливо для Android:",
+          "text": "Важливо для Android: для коректної роботи на Android-смартфонах і планшетах потрібна Android 14 або новіша версія. Під час підключення до D·Vision SDR необхідно вимкнути Wi-Fi та мобільну мережу на смартфоні або планшеті.",
           "bold": true
-        },
-        {
-          "text": " для коректної роботи на Android-смартфонах і планшетах потрібна "
-        },
-        {
-          "text": "Android 14 або новіша версія",
-          "bold": true
-        },
-        {
-          "text": ". Під час підключення до D·Vision SDR необхідно "
-        },
-        {
-          "text": "вимкнути Wi-Fi",
-          "bold": true
-        },
-        {
-          "text": " на смартфоні або планшеті."
         }
       ],
       "children": [],
