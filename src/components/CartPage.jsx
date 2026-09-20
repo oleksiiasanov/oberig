@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CircleCheck, X } from "lucide-react";
+import { CircleCheck, Trash2, X } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   CharacteristicsTable,
@@ -122,8 +122,6 @@ export function CartPage({ content, search, onNavigate }) {
   const [contact, setContact] = useState({ name: "", phone: DEFAULT_PHONE });
   const [status, setStatus] = useState("idle"); // idle | error | sending | done
   const [errors, setErrors] = useState({});
-  const accessoriesRef = useRef(null);
-  const submitRef = useRef(null);
   const successRef = useRef(null);
 
   useEffect(() => {
@@ -169,9 +167,8 @@ export function CartPage({ content, search, onNavigate }) {
         {order.priceLabel}: <strong>{item.price}</strong>
       </span>
     ) : null;
-  const renderLengths = (item, { isMain }) => {
+  const renderLengths = (item) => {
     if (!item.cableLengths?.length) return null;
-    const total = totalQty(item);
     return (
       <div className="cart-lengths">
         <span className="cart-lengths-title">{cart.lengthLabel}</span>
@@ -191,14 +188,11 @@ export function CartPage({ content, search, onNavigate }) {
                   value={qty}
                   onChange={(event) => setLineQty(item, length, Number(event.target.value))}
                 >
-                  {Array.from({ length: MAX_QUANTITY + 1 - (isMain && total === qty ? 1 : 0) }, (_, n) => {
-                    const value = n + (isMain && total === qty ? 1 : 0);
-                    return (
-                      <option value={value} key={value}>
-                        {value}
-                      </option>
-                    );
-                  })}
+                  {Array.from({ length: MAX_QUANTITY + 1 }, (_, value) => (
+                    <option value={value} key={value}>
+                      {value}
+                    </option>
+                  ))}
                 </select>
               </label>
             </div>
@@ -207,26 +201,44 @@ export function CartPage({ content, search, onNavigate }) {
       </div>
     );
   };
-  const scrollTo = (ref) => ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  const scrollToAfter = (index) => {
-    const next = accessories[index + 1];
-    const target = next ? document.getElementById(`cart-row-${next.id}`) : submitRef.current;
-    target?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-  const skipAccessory = (index) => {
-    const item = accessories[index];
-    setQuantities((current) => {
-      const cleared = { ...current };
-      (item.cableLengths?.length ? item.cableLengths : [undefined]).forEach((length) => {
-        cleared[lineKey(item, length)] = 0;
-      });
-      return cleared;
-    });
-    scrollToAfter(index);
+  const removeLine = (line) =>
+    setQuantities((current) => ({ ...current, [lineKey({ id: line.id }, line.cableLengthM)]: 0 }));
+  const renderRow = (item) => {
+    const qty = totalQty(item);
+    return (
+      <article className={`cart-row ${qty > 0 ? "is-added" : ""}`} id={`cart-row-${item.id}`} key={item.id}>
+        <button type="button" className="cart-row-info" onClick={() => setPreviewId(item.id)} aria-label={`${cart.details}: ${item.name}`}>
+          <ItemPhoto item={item} order={order} />
+          <span className="cart-row-text">
+            {qty > 0 ? (
+              <span className="cart-added-badge">
+                <CircleCheck aria-hidden="true" /> {cart.addedLabel}
+              </span>
+            ) : null}
+            <strong>{item.name}</strong>
+            <span className="cart-row-short">{item.short}</span>
+            {renderPrice(item)}
+          </span>
+        </button>
+        {item.cableLengths?.length ? null : (
+          <div className="cart-row-controls">
+            <QuantitySelect
+              id={`cart-qty-${item.id}`}
+              label={cart.quantityLabel}
+              value={qty}
+              min={0}
+              onChange={(value) => setLineQty(item, undefined, value)}
+            />
+          </div>
+        )}
+        {renderLengths(item)}
+      </article>
+    );
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!orderLines.length) return;
     const nextErrors = {
       name: !contact.name.trim(),
       phone: !isValidPhone(contact.phone),
@@ -288,97 +300,38 @@ export function CartPage({ content, search, onNavigate }) {
         </motion.div>
       </section>
 
-      <section className="section cart-section">
-        <article className="cart-row cart-row-main is-added">
-          <button type="button" className="cart-row-info" onClick={() => setPreviewId(mainItem.id)} aria-label={`${cart.details}: ${mainItem.name}`}>
-            <ItemPhoto item={mainItem} order={order} />
-            <span className="cart-row-text">
-              <span className="cart-added-badge">
-                <CircleCheck aria-hidden="true" /> {cart.addedLabel}
-              </span>
-              <strong>{mainItem.name}</strong>
-              <span className="cart-row-short">{mainItem.short}</span>
-              {renderPrice(mainItem)}
-            </span>
-          </button>
-          <div className="cart-row-controls">
-            {mainItem.cableLengths?.length ? null : (
-              <QuantitySelect
-                id="cart-qty-main"
-                label={cart.quantityLabel}
-                value={lineQty(mainItem)}
-                min={1}
-                onChange={(value) => setLineQty(mainItem, undefined, value)}
-              />
-            )}
-            <button type="button" className="btn btn-primary" onClick={() => scrollTo(accessoriesRef)}>
-              <span>{cart.next}</span>
-            </button>
-          </div>
-          {renderLengths(mainItem, { isMain: true })}
-        </article>
-      </section>
+      <section className="section cart-section">{renderRow(mainItem)}</section>
 
       {accessories.length ? (
-        <section className="section cart-section" ref={accessoriesRef}>
+        <section className="section cart-section">
           <h2 className="cart-subtitle">{cart.accessoriesTitle}</h2>
-          <div className="cart-list">
-            {accessories.map((item, index) => {
-              const qty = totalQty(item);
-              return (
-                <article className={`cart-row ${qty > 0 ? "is-added" : ""}`} id={`cart-row-${item.id}`} key={item.id}>
-                  <button type="button" className="cart-row-info" onClick={() => setPreviewId(item.id)} aria-label={`${cart.details}: ${item.name}`}>
-                    <ItemPhoto item={item} order={order} />
-                    <span className="cart-row-text">
-                      {qty > 0 ? (
-                        <span className="cart-added-badge">
-                          <CircleCheck aria-hidden="true" /> {cart.addedLabel}
-                        </span>
-                      ) : null}
-                      <strong>{item.name}</strong>
-                      <span className="cart-row-short">{item.short}</span>
-                      {renderPrice(item)}
-                    </span>
-                  </button>
-                  <div className="cart-row-controls">
-                    {item.cableLengths?.length ? null : (
-                      <QuantitySelect
-                        id={`cart-qty-${item.id}`}
-                        label={cart.quantityLabel}
-                        value={qty}
-                        min={0}
-                        onChange={(value) => setLineQty(item, undefined, value)}
-                      />
-                    )}
-                    <button type="button" className="btn btn-primary" disabled={qty === 0} onClick={() => scrollToAfter(index)}>
-                      <span>{cart.next}</span>
-                    </button>
-                    <button type="button" className="btn btn-secondary" onClick={() => skipAccessory(index)}>
-                      <span>{cart.skip}</span>
-                    </button>
-                  </div>
-                  {renderLengths(item, { isMain: false })}
-                </article>
-              );
-            })}
-          </div>
+          <div className="cart-list">{accessories.map(renderRow)}</div>
         </section>
       ) : null}
 
       <section className="section cart-section cart-total-section">
         <div className="cart-total">
           <h2 className="cart-subtitle">{cart.totalTitle}</h2>
-          <ul className="cart-total-lines">
-            {orderLines.map((line) => (
-              <li key={`${line.id}-${line.cableLengthM || ""}`}>
-                <span>
-                  {line.name}
-                  {line.cableLengthM ? `, ${line.cableLengthM} ${cart.lengthUnit}` : ""} × {line.quantity}
-                </span>
-                <span>{formatMoney(line.quantity * line.unitPrice)}</span>
-              </li>
-            ))}
-          </ul>
+          {orderLines.length ? (
+            <ul className="cart-total-lines">
+              {orderLines.map((line) => {
+                const label = `${line.name}${line.cableLengthM ? `, ${line.cableLengthM} ${cart.lengthUnit}` : ""}`;
+                return (
+                  <li key={`${line.id}-${line.cableLengthM || ""}`}>
+                    <span className="cart-total-name">
+                      {label} × {line.quantity}
+                    </span>
+                    <span className="cart-total-price">{formatMoney(line.quantity * line.unitPrice)}</span>
+                    <button type="button" className="cart-remove" aria-label={`${cart.remove}: ${label}`} onClick={() => removeLine(line)}>
+                      <Trash2 aria-hidden="true" />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="cart-total-empty">{cart.emptyTotal}</p>
+          )}
           <p className="cart-total-sum">
             <span>{cart.totalLabel}</span>
             <strong>{formatMoney(total)}</strong>
@@ -386,7 +339,7 @@ export function CartPage({ content, search, onNavigate }) {
         </div>
       </section>
 
-      <section className="section cart-section" ref={submitRef}>
+      <section className="section cart-section">
         <form className="cart-submit" onSubmit={handleSubmit} noValidate>
           <h2 className="cart-subtitle">
             {cart.commentTitle} <span className="cart-tag">{cart.optionalLabel}</span>
@@ -444,7 +397,7 @@ export function CartPage({ content, search, onNavigate }) {
             <span>{cart.consent}</span>
           </label>
           {status === "error" ? <p className="cart-error" role="alert">{cart.errorMessage}</p> : null}
-          <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending"}>
+          <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || !orderLines.length}>
             <span>{status === "sending" ? cart.sending : cart.submit}</span>
           </button>
         </form>

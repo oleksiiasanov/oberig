@@ -55,12 +55,65 @@ function doPost(e) {
       cell.setValue(col.value(order));
     });
 
+    try {
+      notify(order, book.getUrl());
+    } catch (mailError) {
+      console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
+    }
+
     return json({ ok: true });
   } catch (error) {
     return json({ ok: false, error: String(error) });
   } finally {
     lock.releaseLock();
   }
+}
+
+// Recipients live in Script properties (Project Settings → Script properties → NOTIFY_EMAILS, comma-separated),
+// so their addresses are not stored in the public repository.
+function notify(order, sheetUrl) {
+  const recipients = (PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAILS") || "")
+    .split(",")
+    .map((email) => email.trim())
+    .filter(Boolean);
+  if (!recipients.length) return;
+
+  const money = (n) => Number(n || 0).toLocaleString("uk-UA") + " грн";
+  const lines = order.items.map((i) => {
+    const length = i.cableLengthM ? ", " + i.cableLengthM + " м" : "";
+    return "• " + i.name + length + " × " + i.quantity;
+  });
+  const body = [
+    "Нове замовлення на dvision.com.ua",
+    "",
+    "Імʼя: " + order.name,
+    "Телефон: " + order.phone,
+    order.comment ? "Коментар: " + order.comment : "",
+    "",
+    "Замовлення:",
+    ...lines,
+    "",
+    "Разом: " + money(order.total),
+    "",
+    "Таблиця: " + sheetUrl,
+  ].join("\n");
+
+  MailApp.sendEmail({
+    to: recipients.join(","),
+    subject: "Нове замовлення D·Vision SDR — " + order.name + " (" + money(order.total) + ")",
+    body: body,
+  });
+}
+
+// Run this once from the editor (select testNotify → Run): it asks for the email permission and sends a sample
+// email, which is the quickest way to check NOTIFY_EMAILS and authorization. Not used by the website.
+function testNotify() {
+  const recipients = PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAILS");
+  console.log("NOTIFY_EMAILS = " + recipients);
+  notify(
+    { name: "ТЕСТ", phone: "+380000000000", comment: "Перевірка сповіщень", total: 1000, items: [{ name: "Тест", quantity: 1 }] },
+    SpreadsheetApp.getActiveSpreadsheet().getUrl()
+  );
 }
 
 function json(body) {

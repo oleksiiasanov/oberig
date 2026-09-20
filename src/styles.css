@@ -3091,14 +3091,48 @@ p {
 
 .cart-total-lines li {
   display: flex;
-  gap: 16px;
-  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
 }
 
-.cart-total-lines li span:last-child {
+.cart-total-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-total-price {
   flex: none;
   color: var(--text);
   white-space: nowrap;
+}
+
+.cart-remove {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+}
+
+.cart-remove:hover,
+.cart-remove:focus-visible {
+  border-color: #ff8a80;
+  color: #ff8a80;
+}
+
+.cart-remove svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cart-total-empty {
+  margin: 0;
+  color: var(--muted);
 }
 
 .cart-total-sum {
