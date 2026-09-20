@@ -105,6 +105,17 @@ function notify(order, sheetUrl) {
   });
 }
 
+// Run this once from the editor (select testNotify → Run): it asks for the email permission and sends a sample
+// email, which is the quickest way to check NOTIFY_EMAILS and authorization. Not used by the website.
+function testNotify() {
+  const recipients = PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAILS");
+  console.log("NOTIFY_EMAILS = " + recipients);
+  notify(
+    { name: "ТЕСТ", phone: "+380000000000", comment: "Перевірка сповіщень", total: 1000, items: [{ name: "Тест", quantity: 1 }] },
+    SpreadsheetApp.getActiveSpreadsheet().getUrl()
+  );
+}
+
 function json(body) {
   return ContentService.createTextOutput(JSON.stringify(body)).setMimeType(ContentService.MimeType.JSON);
 }
