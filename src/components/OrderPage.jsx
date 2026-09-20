@@ -9,12 +9,12 @@ const ITEM_ICONS = {
   "shield-half": ShieldHalf,
 };
 
-function ItemTag({ item }) {
+export function ItemTag({ item }) {
   if (!item.tag) return null;
   return <span className={`order-item-tag order-item-tag-${item.tagStatus}`}>{item.tag}</span>;
 }
 
-function ItemPhoto({ item, order }) {
+export function ItemPhoto({ item, order }) {
   if (item.photo) {
     return (
       <div className="order-item-photo has-photo">
@@ -35,7 +35,7 @@ function ItemPhoto({ item, order }) {
   );
 }
 
-function DescriptionScroll({ label, paragraphs }) {
+export function DescriptionScroll({ label, paragraphs }) {
   return (
     <div className="order-description">
       <h4>{label}</h4>
@@ -48,7 +48,7 @@ function DescriptionScroll({ label, paragraphs }) {
   );
 }
 
-function CharacteristicsTable({ title, rows }) {
+export function CharacteristicsTable({ title, rows }) {
   return (
     <div className="order-spec-table">
       <h4>{title}</h4>
@@ -64,7 +64,7 @@ function CharacteristicsTable({ title, rows }) {
   );
 }
 
-function FunctionalityGrid({ title, items }) {
+export function FunctionalityGrid({ title, items }) {
   return (
     <div className="order-functionality">
       <h4>{title}</h4>
@@ -80,7 +80,7 @@ function FunctionalityGrid({ title, items }) {
   );
 }
 
-function ExtrasList({ title, items }) {
+export function ExtrasList({ title, items }) {
   return (
     <div className="order-extra-group">
       <h4>{title}</h4>
@@ -93,7 +93,7 @@ function ExtrasList({ title, items }) {
   );
 }
 
-function PriceBlock({ label, price }) {
+export function PriceBlock({ label, price }) {
   if (Array.isArray(price)) {
     return (
       <div className="order-price order-price-tiers">
@@ -116,7 +116,12 @@ function PriceBlock({ label, price }) {
   );
 }
 
-function OrderItem({ item, order, orderUrl, orderLabel }) {
+function OrderItem({ item, order, orderLabel, onNavigate }) {
+  const cartHref = `/cart?item=${item.id}`;
+  const goToCart = (event) => {
+    event.preventDefault();
+    onNavigate(cartHref);
+  };
   const [firstGroup, secondGroup] = item.characteristics || [];
 
   return (
@@ -133,7 +138,7 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
         <div className="order-item-intro">
           <h3>{item.name}</h3>
           <p className="order-item-short">{item.short}</p>
-          <a className="btn btn-primary order-item-cta-mobile" href={orderUrl} target="_blank" rel="noreferrer">
+          <a className="btn btn-primary order-item-cta-mobile" href={cartHref} onClick={goToCart}>
             <span>{orderLabel}</span>
           </a>
           {firstGroup ? <CharacteristicsTable title={firstGroup.title} rows={firstGroup.rows} /> : null}
@@ -159,7 +164,7 @@ function OrderItem({ item, order, orderUrl, orderLabel }) {
 
       {item.price ? <PriceBlock label={order.priceLabel} price={item.price} /> : null}
 
-      <a className="btn btn-primary order-item-cta" href={orderUrl} target="_blank" rel="noreferrer">
+      <a className="btn btn-primary order-item-cta" href={cartHref} onClick={goToCart}>
         <span>{orderLabel}</span>
       </a>
     </motion.article>
@@ -197,7 +202,7 @@ function BackToTop() {
   );
 }
 
-export function OrderPage({ content }) {
+export function OrderPage({ content, onNavigate }) {
   const { order } = content;
 
   return (
@@ -212,7 +217,7 @@ export function OrderPage({ content }) {
       <section className="section order-list-section">
         <div className="order-list">
           {order.items.map((item) => (
-            <OrderItem item={item} order={order} orderUrl={content.orderUrl} orderLabel={content.meta.primaryAction} key={item.id} />
+            <OrderItem item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate} key={item.id} />
           ))}
         </div>
       </section>

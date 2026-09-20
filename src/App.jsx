@@ -9,6 +9,7 @@ import { Trust } from "./components/Trust.jsx";
 import { FAQ } from "./components/FAQ.jsx";
 import { FinalCTA } from "./components/FinalCTA.jsx";
 import { ManualPage } from "./components/ManualPage.jsx";
+import { CartPage } from "./components/CartPage.jsx";
 import { OrderPage } from "./components/OrderPage.jsx";
 import { ServicePage } from "./components/ServicePage.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
@@ -36,6 +37,7 @@ function getPageFromLocation() {
   const path = window.location.pathname.replace(/\/$/, "");
   if (path === "/manual") return "manual";
   if (path === "/order") return "order";
+  if (path === "/cart") return "cart";
   if (path === "/service") return "service";
   return "landing";
 }
@@ -52,6 +54,7 @@ export default function App() {
     return isSupportedLogoVariant(stored) ? stored : DEFAULT_LOGO_VARIANT;
   });
   const [page, setPage] = useState(getPageFromLocation);
+  const [cartSearch, setCartSearch] = useState(() => (typeof window === "undefined" ? "" : window.location.search));
   const content = useMemo(() => landingContent[language] || landingContent.en, [language]);
 
   useEffect(() => {
@@ -77,7 +80,10 @@ export default function App() {
   }, [language]);
 
   useEffect(() => {
-    const handlePopState = () => setPage(getPageFromLocation());
+    const handlePopState = () => {
+      setPage(getPageFromLocation());
+      setCartSearch(window.location.search);
+    };
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
@@ -101,11 +107,13 @@ export default function App() {
         ? content.manual.navLabel
         : page === "order"
           ? content.order.navLabel
-          : page === "service"
-            ? content.service.navLabel
-            : null;
+          : page === "cart"
+            ? content.cart.navLabel
+            : page === "service"
+              ? content.service.navLabel
+              : null;
     document.title = pageLabel ? `${pageLabel} | D·Vision SDR` : baseTitle;
-  }, [content.manual.navLabel, content.order.navLabel, content.service.navLabel, page]);
+  }, [content.manual.navLabel, content.order.navLabel, content.cart.navLabel, content.service.navLabel, page]);
 
   const handleNavigate = (href) => {
     if (href === "/manual") {
@@ -129,6 +137,14 @@ export default function App() {
       window.setTimeout(() => {
         document.querySelector(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 60);
+      return;
+    }
+
+    if (href === "/cart" || href.startsWith("/cart?")) {
+      window.history.pushState({}, "", href);
+      setCartSearch(href.slice("/cart".length));
+      setPage("cart");
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
@@ -181,7 +197,9 @@ export default function App() {
       {page === "manual" ? (
         <ManualPage content={content} language={language} />
       ) : page === "order" ? (
-        <OrderPage content={content} />
+        <OrderPage content={content} onNavigate={handleNavigate} />
+      ) : page === "cart" ? (
+        <CartPage content={content} search={cartSearch} onNavigate={handleNavigate} />
       ) : page === "service" ? (
         <ServicePage content={content} />
       ) : (
