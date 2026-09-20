@@ -3002,7 +3002,7 @@ p {
 }
 
 .cart-row-price strong {
-  color: var(--accent);
+  color: #fff;
   font-size: 1.05rem;
 }
 
@@ -3039,7 +3039,7 @@ p {
 }
 
 .cart-length-price {
-  color: var(--accent);
+  color: #fff;
   font-size: 0.95rem;
 }
 
@@ -3175,4 +3175,21 @@ p {
     min-width: 64px;
     min-height: 34px;
   }
+}
+
+/* Chosen quantity stands out in neon so it is easy to double-check */
+.cart-row.is-added .cart-qty select,
+.cart-length-row.is-added .cart-length-qty select {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cart-row-controls .cart-added-badge {
+  align-self: center;
+  white-space: nowrap;
+}
+
+.cart-lengths .cart-added-badge {
+  margin-left: 4px;
 }

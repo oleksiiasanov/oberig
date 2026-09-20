@@ -167,7 +167,7 @@ export function CartPage({ content, search, onNavigate }) {
         {order.priceLabel}: <strong>{item.price}</strong>
       </span>
     ) : null;
-  const renderLengths = (item) => {
+  const renderLengths = (item, badge) => {
     if (!item.cableLengths?.length) return null;
     return (
       <div className="cart-lengths">
@@ -198,9 +198,15 @@ export function CartPage({ content, search, onNavigate }) {
             </div>
           );
         })}
+        {badge}
       </div>
     );
   };
+  const addedBadge = (
+    <span className="cart-added-badge">
+      <CircleCheck aria-hidden="true" /> {cart.addedLabel}
+    </span>
+  );
   const removeLine = (line) =>
     setQuantities((current) => ({ ...current, [lineKey({ id: line.id }, line.cableLengthM)]: 0 }));
   const renderRow = (item) => {
@@ -210,11 +216,6 @@ export function CartPage({ content, search, onNavigate }) {
         <button type="button" className="cart-row-info" onClick={() => setPreviewId(item.id)} aria-label={`${cart.details}: ${item.name}`}>
           <ItemPhoto item={item} order={order} />
           <span className="cart-row-text">
-            {qty > 0 ? (
-              <span className="cart-added-badge">
-                <CircleCheck aria-hidden="true" /> {cart.addedLabel}
-              </span>
-            ) : null}
             <strong>{item.name}</strong>
             <span className="cart-row-short">{item.short}</span>
             {renderPrice(item)}
@@ -229,9 +230,10 @@ export function CartPage({ content, search, onNavigate }) {
               min={0}
               onChange={(value) => setLineQty(item, undefined, value)}
             />
+            {qty > 0 ? addedBadge : null}
           </div>
         )}
-        {renderLengths(item)}
+        {renderLengths(item, qty > 0 ? addedBadge : null)}
       </article>
     );
   };
