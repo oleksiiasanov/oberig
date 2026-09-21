@@ -48,6 +48,7 @@ export const landingContent = {
         ["Детектор", "detector"],
         ["Виносна антена", "antenna"],
         ["Кріплення в авто", "holder"],
+        ["Кріплення на бронежилет", "molle"],
       ],
       items: [
         {
@@ -228,6 +229,43 @@ export const landingContent = {
           },
           extras: [],
           price: "1000 грн",
+        },
+        {
+          id: "molle-mount",
+          category: "molle",
+          icon: "shield-half",
+          photo: "/products/molle-mount-1.webp",
+          tagStatus: "in-stock",
+          tag: "В наявності",
+          name: "Кріплення на бронежилет (MOLLE)",
+          short: "Тактичне кріплення на систему MOLLE для надійної фіксації детектора на спорядженні та зручного моніторингу без задіяння рук.",
+          description: [
+            "Кріплення розроблене для фіксації детектора D·Vision SDR на бронежилеті, плитоносці або іншому елементі екіпірування з системою MOLLE. Воно дозволяє повністю звільнити руки для виконання паралельних завдань, зберігаючи при цьому постійний огляд екрана та оперативний контроль ситуації на місцевості.",
+            "Конструкція адаптована під габарити приладу та забезпечує його міцне й надійне утримання під час активного руху чи переміщення складним рельєфом. Кріплення виготовлене з витривалого матеріалу PETg, що гарантує високу механічну міцність, стійкість до ударів, зносу та впливу зовнішніх чинників.",
+            "Пристрій легко інтегрується в тактичне спорядження, залишаючи зручний доступ до інтерфейсу та органів керування детектором.",
+          ],
+          characteristics: [
+            {
+              title: "Конструкція та матеріали",
+              rows: [
+                ["Тип фіксації", "Кріплення на тактичну систему MOLLE"],
+                ["Матеріал", "PETg (підвищена міцність, термостійкість та ударостійкість)"],
+                ["Габаритні розміри", "150 × 100 × 20 мм"],
+                ["Вага", "150 г"],
+              ],
+            },
+          ],
+          functionality: {
+            title: "Особливості",
+            items: [
+              "Сумісність із детектором D·Vision SDR",
+              "Надійне утримання пристрою та вільні руки для виконання бойових або поточних завдань",
+              "Зручний кут огляду екрана для безперервного моніторингу обстановки",
+              "Легкий монтаж і стійкість до механічних навантажень у польових умовах",
+            ],
+          },
+          extras: [],
+          price: "300 грн",
         },
       ],
     },
@@ -433,6 +471,7 @@ export const landingContent = {
         ["Detector", "detector"],
         ["External Antenna", "antenna"],
         ["Car Mount", "holder"],
+        ["Body Armor Mount", "molle"],
       ],
       items: [
         {
@@ -612,6 +651,43 @@ export const landingContent = {
           },
           extras: [],
           price: "UAH 1,000",
+        },
+        {
+          id: "molle-mount",
+          category: "molle",
+          icon: "shield-half",
+          photo: "/products/molle-mount-1.webp",
+          tagStatus: "in-stock",
+          tag: "In stock",
+          name: "Body Armor Mount (MOLLE)",
+          short: "A tactical MOLLE mount for securing the detector to your gear and monitoring hands-free.",
+          description: [
+            "The mount is designed to secure the D·Vision SDR detector on a body armor vest, plate carrier or any other gear with a MOLLE system. It frees your hands for parallel tasks while keeping the screen constantly in view and the situation on the ground under control.",
+            "The design is sized for the device and holds it firmly during active movement or travel over rough terrain. The mount is made of durable PETg, which ensures high mechanical strength and resistance to impact, wear and environmental factors.",
+            "It integrates easily into tactical gear, leaving convenient access to the detector's interface and controls.",
+          ],
+          characteristics: [
+            {
+              title: "Build and materials",
+              rows: [
+                ["Attachment type", "Mounts to the tactical MOLLE system"],
+                ["Material", "PETg (increased strength, heat and impact resistance)"],
+                ["Dimensions", "150 × 100 × 20 mm"],
+                ["Weight", "150 g"],
+              ],
+            },
+          ],
+          functionality: {
+            title: "Usage notes",
+            items: [
+              "Compatible with the D·Vision SDR detector",
+              "Secure hold and free hands for combat or routine tasks",
+              "Comfortable screen viewing angle for continuous monitoring",
+              "Easy mounting and resistance to mechanical loads in the field",
+            ],
+          },
+          extras: [],
+          price: "UAH 300",
         },
       ],
     },
