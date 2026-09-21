@@ -5,6 +5,8 @@
  */
 
 const SHEET_GID = 1570882665; // tab id from the sheet URL (#gid=…); 0/empty falls back to SHEET_NAME, then the first tab
+const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it after calling the customer → the row turns green
+const PROCESSED_COLOR = "#b6d7a8";
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
@@ -72,6 +74,12 @@ function doPost(e) {
       cell.setValue(col.value(order));
     });
 
+    const contactIndex = headers.indexOf(norm(CONTACT_HEADER));
+    if (contactIndex !== -1) {
+      sheet.getRange(row, contactIndex + 1).insertCheckboxes(); // unchecked
+      highlightProcessedRows(sheet, contactIndex + 1, columnCount);
+    }
+
     try {
       notify(order, book.getUrl() + "#gid=" + sheet.getSheetId());
     } catch (mailError) {
@@ -131,6 +139,36 @@ function testNotify() {
     { name: "ТЕСТ", phone: "+380000000000", comment: "Перевірка сповіщень", total: 1000, items: [{ name: "Тест", quantity: 1 }] },
     SpreadsheetApp.getActiveSpreadsheet().getUrl()
   );
+}
+
+// One conditional-format rule for the whole tab: a ticked "Контакт" box paints the entire row green.
+// It is a rule (not a trigger), so it reacts instantly and also works for rows added by hand. Safe to call repeatedly.
+function highlightProcessedRows(sheet, contactColumn, columnCount) {
+  const formula = "=$" + sheet.getRange(1, contactColumn).getA1Notation().replace(/\d+/, "") + "2=TRUE";
+  const isOurs = (rule) => {
+    const condition = rule.getBooleanCondition();
+    return condition && condition.getCriteriaType() === SpreadsheetApp.BooleanCriteria.CUSTOM_FORMULA &&
+      condition.getCriteriaValues()[0] === formula;
+  };
+  const rules = sheet.getConditionalFormatRules().filter((rule) => !isOurs(rule));
+  rules.push(
+    SpreadsheetApp.newConditionalFormatRule()
+      .whenFormulaSatisfied(formula)
+      .setBackground(PROCESSED_COLOR)
+      .setRanges([sheet.getRange(2, 1, Math.max(sheet.getMaxRows() - 1, 1), columnCount)])
+      .build()
+  );
+  sheet.setConditionalFormatRules(rules);
+}
+
+// Optional: run once from the editor to set up the green highlight (and checkboxes for existing rows) without waiting for an order.
+function setupProcessedRows() {
+  const sheet = findSheet(SpreadsheetApp.getActiveSpreadsheet());
+  const columnCount = sheet.getLastColumn();
+  const index = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm).indexOf(norm(CONTACT_HEADER));
+  if (index === -1) throw new Error('Column "' + CONTACT_HEADER + '" not found in row 1');
+  if (sheet.getLastRow() > 1) sheet.getRange(2, index + 1, sheet.getLastRow() - 1, 1).insertCheckboxes();
+  highlightProcessedRows(sheet, index + 1, columnCount);
 }
 
 function json(body) {
