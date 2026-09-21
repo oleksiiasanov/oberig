@@ -4,7 +4,8 @@
  * Columns are found by header text (row 1), so extra CRM columns (status, notes…) are left alone.
  */
 
-const SHEET_NAME = ""; // leave empty to use the first sheet, or set the tab name
+const SHEET_GID = 1570882665; // tab id from the sheet URL (#gid=…); 0/empty falls back to SHEET_NAME, then the first tab
+const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -34,6 +35,14 @@ function norm(text) {
   return String(text).replace(/[ʼ’‘`']/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
 }
 
+function findSheet(book) {
+  if (SHEET_GID) {
+    const byId = book.getSheets().find((sheet) => sheet.getSheetId() === SHEET_GID);
+    if (byId) return byId;
+  }
+  return SHEET_NAME ? book.getSheetByName(SHEET_NAME) : book.getSheets()[0];
+}
+
 function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
@@ -44,9 +53,16 @@ function doPost(e) {
 
     lock.waitLock(20000);
     const book = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = SHEET_NAME ? book.getSheetByName(SHEET_NAME) : book.getSheets()[0];
-    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
-    const row = sheet.getLastRow() + 1;
+    const sheet = findSheet(book);
+    const columnCount = sheet.getLastColumn();
+    const headers = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm);
+
+    // Newest order goes right under the header row: insert a row and copy the look of the order below it.
+    const row = 2;
+    sheet.insertRowBefore(row);
+    if (sheet.getLastRow() > row) {
+      sheet.getRange(row + 1, 1, 1, columnCount).copyTo(sheet.getRange(row, 1, 1, columnCount), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+    }
 
     COLUMNS.forEach((col) => {
       const index = col.match ? headers.findIndex(col.match) : headers.indexOf(norm(col.header));
@@ -57,7 +73,7 @@ function doPost(e) {
     });
 
     try {
-      notify(order, book.getUrl());
+      notify(order, book.getUrl() + "#gid=" + sheet.getSheetId());
     } catch (mailError) {
       console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
     }
