@@ -4,7 +4,10 @@
  * Columns are found by header text (row 1), so extra CRM columns (status, notes…) are left alone.
  */
 
-const SHEET_NAME = ""; // leave empty to use the first sheet, or set the tab name
+const SHEET_GID = 1570882665; // tab id from the sheet URL (#gid=…); 0/empty falls back to SHEET_NAME, then the first tab
+const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it after calling the customer → the row turns green
+const PROCESSED_COLOR = "#b6d7a8";
+const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -34,6 +37,14 @@ function norm(text) {
   return String(text).replace(/[ʼ’‘`']/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
 }
 
+function findSheet(book) {
+  if (SHEET_GID) {
+    const byId = book.getSheets().find((sheet) => sheet.getSheetId() === SHEET_GID);
+    if (byId) return byId;
+  }
+  return SHEET_NAME ? book.getSheetByName(SHEET_NAME) : book.getSheets()[0];
+}
+
 function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
@@ -44,9 +55,16 @@ function doPost(e) {
 
     lock.waitLock(20000);
     const book = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = SHEET_NAME ? book.getSheetByName(SHEET_NAME) : book.getSheets()[0];
-    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
-    const row = sheet.getLastRow() + 1;
+    const sheet = findSheet(book);
+    const columnCount = sheet.getLastColumn();
+    const headers = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm);
+
+    // Newest order goes right under the header row: insert a row and copy the look of the order below it.
+    const row = 2;
+    sheet.insertRowBefore(row);
+    if (sheet.getLastRow() > row) {
+      sheet.getRange(row + 1, 1, 1, columnCount).copyTo(sheet.getRange(row, 1, 1, columnCount), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+    }
 
     COLUMNS.forEach((col) => {
       const index = col.match ? headers.findIndex(col.match) : headers.indexOf(norm(col.header));
@@ -56,8 +74,14 @@ function doPost(e) {
       cell.setValue(col.value(order));
     });
 
+    const contactIndex = headers.indexOf(norm(CONTACT_HEADER));
+    if (contactIndex !== -1) {
+      sheet.getRange(row, contactIndex + 1).insertCheckboxes(); // unchecked
+      highlightProcessedRows(sheet, contactIndex + 1, columnCount);
+    }
+
     try {
-      notify(order, book.getUrl());
+      notify(order, book.getUrl() + "#gid=" + sheet.getSheetId());
     } catch (mailError) {
       console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
     }
@@ -115,6 +139,36 @@ function testNotify() {
     { name: "ТЕСТ", phone: "+380000000000", comment: "Перевірка сповіщень", total: 1000, items: [{ name: "Тест", quantity: 1 }] },
     SpreadsheetApp.getActiveSpreadsheet().getUrl()
   );
+}
+
+// One conditional-format rule for the whole tab: a ticked "Контакт" box paints the entire row green.
+// It is a rule (not a trigger), so it reacts instantly and also works for rows added by hand. Safe to call repeatedly.
+function highlightProcessedRows(sheet, contactColumn, columnCount) {
+  const formula = "=$" + sheet.getRange(1, contactColumn).getA1Notation().replace(/\d+/, "") + "2=TRUE";
+  const isOurs = (rule) => {
+    const condition = rule.getBooleanCondition();
+    return condition && condition.getCriteriaType() === SpreadsheetApp.BooleanCriteria.CUSTOM_FORMULA &&
+      condition.getCriteriaValues()[0] === formula;
+  };
+  const rules = sheet.getConditionalFormatRules().filter((rule) => !isOurs(rule));
+  rules.push(
+    SpreadsheetApp.newConditionalFormatRule()
+      .whenFormulaSatisfied(formula)
+      .setBackground(PROCESSED_COLOR)
+      .setRanges([sheet.getRange(2, 1, Math.max(sheet.getMaxRows() - 1, 1), columnCount)])
+      .build()
+  );
+  sheet.setConditionalFormatRules(rules);
+}
+
+// Optional: run once from the editor to set up the green highlight (and checkboxes for existing rows) without waiting for an order.
+function setupProcessedRows() {
+  const sheet = findSheet(SpreadsheetApp.getActiveSpreadsheet());
+  const columnCount = sheet.getLastColumn();
+  const index = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm).indexOf(norm(CONTACT_HEADER));
+  if (index === -1) throw new Error('Column "' + CONTACT_HEADER + '" not found in row 1');
+  if (sheet.getLastRow() > 1) sheet.getRange(2, index + 1, sheet.getLastRow() - 1, 1).insertCheckboxes();
+  highlightProcessedRows(sheet, index + 1, columnCount);
 }
 
 function json(body) {
