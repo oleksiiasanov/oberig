@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CircleCheck, Trash2, X } from "lucide-react";
+import { ChevronDown, CircleCheck, Trash2, X } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   CharacteristicsTable,
@@ -12,7 +12,7 @@ import {
 import { FinalCTA } from "./FinalCTA.jsx";
 import { submitOrder } from "../lib/submitOrder.js";
 
-const MAX_QUANTITY = 300;
+const MAX_QUANTITY = 99;
 
 const parsePrice = (value) => Number(String(value).replace(/\D/g, "")) || 0;
 
@@ -30,21 +30,84 @@ function isValidPhone(value) {
   return digits.length >= 8 && digits.length <= 15;
 }
 
-function QuantitySelect({ label, value, min, onChange, id }) {
+function QuantityDropdown({ id, label, value, min, onChange }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const listRef = useRef(null);
   const options = [];
   for (let n = min; n <= MAX_QUANTITY; n += 1) options.push(n);
 
+  useEffect(() => {
+    if (!open) return undefined;
+    const close = (event) => {
+      if (!rootRef.current?.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    listRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+    return () => document.removeEventListener("pointerdown", close);
+  }, [open]);
+
+  const choose = (n) => {
+    onChange(n);
+    setOpen(false);
+  };
+  const handleKey = (event) => {
+    if (event.key === "Escape") setOpen(false);
+    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+      event.preventDefault();
+      const next = Math.min(MAX_QUANTITY, Math.max(min, value + (event.key === "ArrowDown" ? 1 : -1)));
+      onChange(next);
+    }
+  };
+
   return (
-    <label className="cart-qty" htmlFor={id}>
+    <div className="qty-dropdown" ref={rootRef} onKeyDown={handleKey}>
+      <button
+        type="button"
+        id={id}
+        className="qty-dropdown-btn"
+        aria-label={`${label}: ${value}`}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span>{value}</span>
+        <ChevronDown aria-hidden="true" />
+      </button>
+      {open ? (
+        <ul className="qty-dropdown-list" role="listbox" aria-label={label} ref={listRef}>
+          {options.map((n) => (
+            <li
+              key={n}
+              role="option"
+              aria-selected={n === value}
+              className={n === value ? "is-selected" : ""}
+              onClick={() => choose(n)}
+            >
+              {n}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
+
+function AddedBadge({ label, iconOnly }) {
+  return (
+    <span className="cart-added-badge" role={iconOnly ? "img" : undefined} aria-label={iconOnly ? label : undefined}>
+      <CircleCheck aria-hidden="true" />
+      {iconOnly ? null : ` ${label}`}
+    </span>
+  );
+}
+
+function QuantitySelect({ label, value, min, onChange, id }) {
+  return (
+    <div className="cart-qty">
       <span>{label}</span>
-      <select id={id} value={value} onChange={(event) => onChange(Number(event.target.value))}>
-        {options.map((n) => (
-          <option value={n} key={n}>
-            {n}
-          </option>
-        ))}
-      </select>
-    </label>
+      <QuantityDropdown id={id} label={label} value={value} min={min} onChange={onChange} />
+    </div>
   );
 }
 
@@ -181,20 +244,17 @@ export function CartPage({ content, search, onNavigate }) {
                 {length} {cart.lengthUnit}
               </span>
               <span className="cart-length-price">{item.price?.[index]?.[1]}</span>
-              <label className="cart-length-qty" htmlFor={id}>
+              <div className="cart-length-qty">
                 <span className="sr-only">{`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}</span>
-                <select
+                <QuantityDropdown
                   id={id}
+                  label={`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}
                   value={qty}
-                  onChange={(event) => setLineQty(item, length, Number(event.target.value))}
-                >
-                  {Array.from({ length: MAX_QUANTITY + 1 }, (_, value) => (
-                    <option value={value} key={value}>
-                      {value}
-                    </option>
-                  ))}
-                </select>
-              </label>
+                  min={0}
+                  onChange={(value) => setLineQty(item, length, value)}
+                />
+                {qty > 0 ? <AddedBadge label={cart.addedLabel} iconOnly /> : <span className="cart-added-spacer" aria-hidden="true" />}
+              </div>
             </div>
           );
         })}
@@ -210,11 +270,6 @@ export function CartPage({ content, search, onNavigate }) {
         <button type="button" className="cart-row-info" onClick={() => setPreviewId(item.id)} aria-label={`${cart.details}: ${item.name}`}>
           <ItemPhoto item={item} order={order} />
           <span className="cart-row-text">
-            {qty > 0 ? (
-              <span className="cart-added-badge">
-                <CircleCheck aria-hidden="true" /> {cart.addedLabel}
-              </span>
-            ) : null}
             <strong>{item.name}</strong>
             <span className="cart-row-short">{item.short}</span>
             {renderPrice(item)}
@@ -229,6 +284,7 @@ export function CartPage({ content, search, onNavigate }) {
               min={0}
               onChange={(value) => setLineQty(item, undefined, value)}
             />
+            {qty > 0 ? <AddedBadge label={cart.addedLabel} /> : null}
           </div>
         )}
         {renderLengths(item)}
@@ -342,7 +398,7 @@ export function CartPage({ content, search, onNavigate }) {
       <section className="section cart-section">
         <form className="cart-submit" onSubmit={handleSubmit} noValidate>
           <h2 className="cart-subtitle">
-            {cart.commentTitle} <span className="cart-tag">{cart.optionalLabel}</span>
+            {cart.commentTitle} <span className="cart-optional">{cart.optionalLabel}</span>
           </h2>
           <label className="cart-comment">
             <span className="sr-only">{cart.commentTitle}</span>

@@ -259,7 +259,7 @@ export const landingContent = {
       lengthLabel: "Довжина кабелю",
       lengthUnit: "м",
       commentTitle: "Коментар",
-      optionalLabel: "опціонально",
+      optionalLabel: "(опціонально)",
       termsTitle: "Умови замовлення",
       terms: [
         "Очікування по передзамовленню: до 8 тижнів",
