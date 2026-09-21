@@ -19,6 +19,7 @@ const COLUMNS = [
   { header: "Виносна антена для бліндажа, 14м", value: (o) => qty(o, "bunker-antenna", 14) },
   { header: "Виносна антена для бліндажа, 20м", value: (o) => qty(o, "bunker-antenna", 20) },
   { header: "Автомобільний тримач", value: (o) => qty(o, "car-holder") },
+  { header: "Кріплення на бронежилет", value: (o) => qty(o, "molle-mount") },
   { header: "Разом", value: (o) => Number(o.total) || 0 },
 ];
 

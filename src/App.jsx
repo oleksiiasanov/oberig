@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
 import { MarketProblem } from "./components/MarketProblem.jsx";
@@ -99,6 +99,11 @@ export default function App() {
 
     return () => window.clearTimeout(timer);
   }, [page]);
+
+  // The order page is taller than the cart: a smooth scroll started before the page swap ends up at the bottom.
+  useLayoutEffect(() => {
+    if (page === "cart") window.scrollTo({ top: 0, behavior: "instant" });
+  }, [page, cartSearch]);
 
   useEffect(() => {
     const baseTitle = "D·Vision SDR - FPV-відеодетектор на основі SDR-платформи";
