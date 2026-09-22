@@ -106,7 +106,7 @@ export default function App() {
   }, [page, cartSearch]);
 
   useEffect(() => {
-    const baseTitle = "D·Vision SDR - FPV-відеодетектор на основі SDR-платформи";
+    const baseTitle = "D·Vision SDR. Детектор БПЛА на основі SDR-платформи";
     const pageLabel =
       page === "manual"
         ? content.manual.navLabel
