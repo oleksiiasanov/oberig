@@ -146,7 +146,7 @@ export const landingContent = {
           extras: [],
           price: [
             ["Антена 2 м", "7 000 грн"],
-            ["Антена 5 м", "13 000 грн"],
+            ["Антена 5 м", "13 200 грн"],
             ["Антена 10 м", "14 200 грн"],
           ],
         },
@@ -568,7 +568,7 @@ export const landingContent = {
           extras: [],
           price: [
             ["2 m antenna", "UAH 7,000"],
-            ["5 m antenna", "UAH 13,000"],
+            ["5 m antenna", "UAH 13,200"],
             ["10 m antenna", "UAH 14,200"],
           ],
         },
