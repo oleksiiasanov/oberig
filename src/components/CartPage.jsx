@@ -315,6 +315,19 @@ export function CartPage({ content, search, onNavigate }) {
         language: content.meta.lang,
         submittedAt: new Date().toISOString(),
       });
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "purchase", {
+          transaction_id: `order-${Date.now()}`,
+          currency: "UAH",
+          value: total,
+          items: orderLines.map((line) => ({
+            item_id: line.id,
+            item_name: line.name,
+            price: line.unitPrice,
+            quantity: line.quantity,
+          })),
+        });
+      }
       setStatus("done");
     } catch {
       setStatus("error");
