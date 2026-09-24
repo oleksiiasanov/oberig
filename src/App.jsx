@@ -120,6 +120,15 @@ export default function App() {
     document.title = pageLabel ? `${pageLabel} | D·Vision SDR` : baseTitle;
   }, [content.manual.navLabel, content.order.navLabel, content.cart.navLabel, content.service.navLabel, page]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+    window.gtag("event", "page_view", {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname + window.location.search,
+    });
+  }, [page, cartSearch]);
+
   const handleNavigate = (href) => {
     if (href === "/manual") {
       window.history.pushState({}, "", "/manual");
