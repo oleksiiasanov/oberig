@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "sync:manual": "node scripts/sync-notion-manual.mjs",
+    "sync:shorts": "node scripts/sync-youtube-shorts.mjs",
     "check:content": "node scripts/check-content.mjs",
     "check": "npm run check:content && npm run build"
   },
