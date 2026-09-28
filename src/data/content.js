@@ -132,6 +132,7 @@ export const landingContent = {
                 ["Тип кріплення", "Основа з 3 неодимових магнітів"],
                 ["Довжина кабелю", "2, 5 або 10 м на вибір"],
                 ["Конектори", "Стандартні ВЧ-роз'єми"],
+                ["Живлення/АКБ", "В комплект не входять"],
               ],
             },
           ],
@@ -175,6 +176,7 @@ export const landingContent = {
                 ["Тип кріплення", "Стяжки (щогли, дерева, фортифікація)"],
                 ["Довжина кабелю", "14 або 20 м на вибір"],
                 ["Конектори", "Стандартні ВЧ-роз'єми"],
+                ["Живлення/АКБ", "В комплект не входять"],
               ],
             },
           ],
@@ -363,84 +365,196 @@ export const landingContent = {
       title: "D·Vision SDR",
       subtitle: "Детектор дронів широкого діапазону 500–8700 МГц",
       chips: ["FPV", "Крила", "Аналогові НРК"],
+      chipsLabel: "Ключові переваги",
       imageAlt: "D·Vision SDR детектор дронів з антенами",
     },
-    advantages: {
-      kicker: "Технічні переваги",
-      title: "Ширше покриття, ніж у типових детекторів",
-      text:
-        "Інноваційна запатентована технологія SDR-платформи дозволяє приймати радіосигнал та трансформувати його у відео, що забезпечує чітке кольорове зображення з БПЛА в межах зони сканування.",
-      stats: [
-        ["Компактність", "13 × 8 см без антен"],
-        ["Відображення", "Кольорове відео"],
-        ["Захист дисплея", "Додатковий PETG протектор"],
+    reels: {
+      kicker: "Огляд детектора",
+      title: "Відео-огляд D·Vision SDR",
+      text: "Огляд і інструкції з використання для детектора D·Vision SDR",
+      accountName: "D·Vision SDR",
+      handle: "@D·VisionSDR",
+      playLabel: "Відтворити відео",
+      closeLabel: "Закрити відео",
+      prevLabel: "Попередні відео",
+      nextLabel: "Наступні відео",
+      emptyText: "Відео скоро з’являться.",
+    },
+    product: {
+      kicker: "Про пристрій",
+      title: "Детектор БПЛА D·Vision SDR",
+      intro:
+        "D·Vision SDR — інноваційний детектор БПЛА на основі SDR-платформи, створений для моніторингу радіоефіру та завчасного виявлення дронів. Детектор оснащений розширеним набором інструментів (зокрема Водоспад, Віддалений моніторинг, Тест РЕБ тощо), які надають гнучкі можливості для аналізу частотного діапазону та ефективної роботи в польових умовах.",
+      imageAlt: "Детектор БПЛА D·Vision SDR — фото пристрою",
+      advantagesTitle: "Ключові переваги",
+      advantages: [
+        ["Широкий діапазон", ["Безперервний моніторинг частот від **500 до 8700 МГц**."]],
+        ["Без «сліпих зон»", ["Суцільне покриття робочого спектра завдяки **SDR-архітектурі**."]],
+        ["Висока дальність", ["Виявлення сигналів на відстані **до 10 км**."]],
+        ["Швидка детекція", ["Повний цикл сканування ефіру за **~9 секунд**."]],
+      ],
+      featuresTitle: "Функціональні особливості",
+      features: [
+        ["Маркування «Свій»", ["Швидка ідентифікація власних бортів."]],
+        ["Оцінка дистанції", ["Відстеження наближення та віддалення як цифрових, так і аналогових БПЛА."]],
+        ["Точковий контроль", ["Моніторинг конкретної частоти або заданого діапазону."]],
+        ["Безперервна робота", ["Можливість функціонування безпосередньо під час заряджання."]],
+        ["Нічний режим", ["Адаптація яскравості екрана та гучності звукових сповіщень для маскування."]],
+        ["Фіксація даних", ["Можливість запису відео та фото на SD-карту."]],
       ],
     },
-    design: {
-      kicker: "Характеристики",
-      title: "Детектор, спроектований за актуальними запитами",
-      cards: [
-        ["Автономність роботи", ["Підтримка зовнішнього живлення через USB Type-C.", "Робота під час заряджання."]],
-        [
-          "Формат віддаленого спостереження",
-          ["Підключення до ноутбука (Windows OS), планшета та телефона (Android OS).", "Запис відео та фіксація фото."],
-        ],
-        ["Захист дисплея", ["Захист екрана з ультраміцного пластику PETG."]],
-        ["Розміри девайсу", ["Компактний корпус: 13 × 8 см без антен.", "Оптимальний дисплей 4,3 дюйма."]],
-        ["Широкі можливості застосування", ["Підключення виносних антен.", "Автотримачі та кріплення на бронежилет MOLLE."]],
-        ["Адаптація під умови роботи", ["Нічний режим.", "Налаштування гучності звуку."]],
-        ["Доступність", ["Конкурентна ціна: від 24 000 грн.", "Терміни поставок: до 5 тижнів."]],
-      ],
-    },
-    comparison: {
-      kicker: "Альтернативи",
-      title: "Порівняння з рішеннями на ринку",
-      text: "",
-      otherLabel: "Інші",
-      columns: ["Характеристика", "D·Vision SDR", "Типовий прилад"],
-      rows: [
-        ["Архітектура", "SDR-платформа", "Відеоприймач"],
-        ["Покриття відеочастот", "500–8700 МГц", "Обмежене окремими діапазонами"],
-        ["Антени", "Дві антени з автоперемиканням", "Типово stock-підхід"],
-        ["Оновлення прошивки", "OTA-процес", "Залежить від виробника"],
-        ["Гучність роботи", "Пасивне охолодження, вентилятор відсутній", "Наявність шуму від вентилятора"],
-        ["Індикація заряду батареї", "Чітка індикація заряду", "Часто незрозуміла або відсутня"],
-        ["Конкурентна ціна", "24 000 грн", "25 000–33 000 грн"],
-      ],
-    },
-    useCases: {
-      kicker: "Застосування",
-      title: "Сценарії використання",
-      cards: [
-        ["Особиста безпека під час ротації", "Зручне кріплення на бронежилет робить D·Vision SDR елементом індивідуального захисту бійця."],
-        ["Захист екіпажу під час в'їзду та виїзду з позицій", "Кріплення в авто дозволяє водієві вчасно дізнатися про небезпеку та контролювати ситуацію."],
-        ["Сканування з броньованих авто", "Виносні антени нівелюють екранування броні, забезпечуючи максимальну дальність детекції та вчасне реагування."],
-        ["Взаємодія з системами РЕБ", "Висока чутливість дозволяє працювати поруч із увімкненим РЕБ, а дальність сканування до 10 км допомагає активувати РЕБ лише при виявленні БПЛА."],
-        ["Логістика в прифронтових зонах", "Волонтери, журналісти та логістичні місії потребують надійного прикриття від дронів. D·Vision SDR — доступне рішення для захисту кожної поїздки."],
+    tools: {
+      kicker: "Інструменти",
+      title: "Вбудовані інструменти D·Vision SDR",
+      lead: "Від віддаленого керування з укриття до аналізу складних сигналів та детекції цифрових БПЛА. Ознайомтеся з інструментами, які роблять виявлення дронів простим і надійним.",
+      characteristicsLabel: "Основні характеристики",
+      items: [
+        {
+          title: "Виявлення цифрових БПЛА (DJI)",
+          description:
+            "Модуль детекції цифрових сигналів БПЛА (DJI), який працює паралельно з моніторингом аналогових каналів.",
+          characteristics: [
+            "Єдиний зручний інтерфейс для одночасного перегляду аналогового відео та детекції цифрових сигналів.",
+            "Відсутність потреби перемикатися між різними вікнами чи режимами — усе на одному екрані.",
+            "Автоматичне сповіщення про виявлення цифрових дронів у зоні дії.",
+            "Моніторинг наближення та віддалення БПЛА за рівнем сигналу (дБм / dBm).",
+          ],
+          note: "Відео зображення недоступне — детектор забезпечує звукове сповіщення та відображення конкретних частот при їх виявленні.",
+          imageAlt: "Виявлення цифрових БПЛА (DJI) D·Vision SDR",
+          photo: "/tools/dji-detection.jpg",
+        },
+        {
+          title: "Водоспад (Waterfall)",
+          description:
+            "Візуальне відображення радіочастотного спектра у часі, що дозволяє виявляти, аналізувати та фіксувати радіовипромінювання від БПЛА на різних частотах.",
+          characteristics: [
+            "Наочна візуалізація інтенсивності сигналу залежно від часу та частоти.",
+            "Виявлення короткочасних сплесків, стрибків частот та прихованих сигналів.",
+            "Чітке розділення сигналів БПЛА та фонових радіозавад.",
+            "Колірна градація потужності сигналу для швидкого аналізу ситуації.",
+          ],
+          imageAlt: "Інструмент «Водоспад» D·Vision SDR",
+          photo: "/tools/waterfall.jpg",
+        },
+        {
+          title: "Тест РЕБ",
+          description:
+            "Спеціалізований інструмент для перевірки увімкнення та робочих частот засобів радіоелектронної боротьби (РЕБ).",
+          characteristics: [
+            "Контроль випромінювання та перевірка працездатності засобів РЕБ безпосередньо у польових умовах.",
+            "Фіксація частотних діапазонів, які закриваються обладнанням.",
+          ],
+          imageAlt: "Інструмент «Тест РЕБ» D·Vision SDR",
+          photo: "/tools/ew-test.jpg",
+        },
+        {
+          title: "Віддалений моніторинг",
+          description:
+            "Інструмент для дистанційного спостереження та керування детектором D·Vision SDR без необхідності перебувати безпосередньо поруч із пристроєм у небезпечній зоні.",
+          characteristics: [
+            "Підключення через USB Type-C кабель до ПК, ноутбука чи Android-пристрою (смартфона/планшета).",
+            "Можливість винести сам детектор на потрібну відстань і працювати зі стаціонарного укриття.",
+            "Відображення даних моніторингу в режимі реального часу на зовнішньому екрані.",
+            "Не потрібен окремий застосунок: з'єднання відбувається напряму між детектором і вашим пристроєм для спостереження.",
+          ],
+          imageAlt: "Віддалений моніторинг D·Vision SDR",
+          photo: "/tools/remote-monitoring.jpg",
+        },
       ],
     },
     faq: {
       kicker: "FAQ",
       title: "Часті питання",
       items: [
-        [
-          "Чим D·Vision SDR відрізняється від детектора на основі відеоприймачів?",
-          "D·Vision SDR побудований на базі SDR-платформи. Live Video, спектральний сканер, «Водоспад» та аналітика RSSI/SNR дозволяють виявляти активність аналогового відеосигналу значно раніше, забезпечуючи вчасне попередження про загрозу БПЛА.",
-        ],
-        ["Що таке «Водоспад» і навіщо він потрібен?", "«Водоспад» — це графічне відображення історії радіоефіру в реальному часі. Він дозволяє фіксувати навіть найслабші сигнали в спектрі, які ще занадто слабкі для декодування відео, але вже критично важливі для раннього попередження."],
-        ["Що показують RSSI та SNR?", "RSSI відображає загальну потужність отриманого сигналу, а SNR — співвідношення корисного сигналу до радіошуму. Разом вони допомагають оцінити якість зв'язку та виявити роботу БПЛА в умовах радіозавад."],
-        ["Чи виявляє D·Vision SDR усі дрони?", "Ні, універсального детектора для всіх дронів не існує. D·Vision SDR спеціалізований під раннє виявлення аналогових відеосигналів, які масово використовуються на ударних FPV-дронах та багатьох розвідувальних БПЛА."],
-        ["Чому пристрій доступніший за аналоги?", "Власний патент на SDR-платформу дозволяє сканувати ефір без використання стандартних відеоприймачів. Оптимізація архітектури знизила собівартість виробництва без компромісів із надійністю."],
-        ["Чи доступні інші мови інтерфейсу для іноземних користувачів?", "Так. Сайт доступний українською та англійською мовами. Інтерфейс пристрою локалізований українською та англійською."],
-      ],
-    },
-    team: {
-      kicker: "Про нас",
-      title: "Команда D·Vision SDR",
-      text: [
-        "Ми — команда інженерів та продукт-менеджерів/-ок, які з початку повномасштабного вторгнення активно задіяні у волонтерських ініціативах у сфері БПЛА.",
-        "Розробивши нову технологію сканування діапазону, ми віримо, що вона допоможе зберегти життя та здоров’я тисяч наших військових, волонтерів/-ок, а також цивільних громадян.",
-        "Наша мета — щоб усі наші захисники, захисниці та цивільні поверталися додому неушкодженими.",
+        {
+          question: "Чим D·Vision SDR відрізняється від детектора на основі відеоприймачів?",
+          intro: [
+            "Більшість класичних аналогових детекторів побудовані на базі стандартних відеоприймачів із фіксованою сіткою частот. D·Vision SDR використовує технологію програмно-визначеного радіо (SDR). Це дає два ключових технологічних плюси:",
+          ],
+          listType: "ul",
+          list: [
+            [
+              "Суцільний діапазон без «сліпих зон»",
+              "за рахунок відсутності класичних відеоприймачів у конструкції пристрою немає між діапазонних стиків, через що не виникають «сліпі зони» і детектор фіксує навіть нестандартні та зміщені частоти ворога.",
+            ],
+            ["Гнучкість", "розпізнавання нових типів БПЛА додається через оновлення ПЗ без необхідності змінювати «залізо»."],
+          ],
+        },
+        {
+          question: "Як працює SDR-платформа?",
+          intro: [
+            "Більшість детекторів чекають на готову картинку від стандартних відеоприймачів. D·Vision SDR оцифровує та аналізує сам радіосигнал.",
+          ],
+          listIntro: "Основний принцип роботи:",
+          listType: "ol",
+          list: [
+            [
+              "Сканування ефіру",
+              "пристрій покроково аналізує широкий діапазон частот (від 500 до 8700 МГц) з кроком в 10 МГц. Повний цикл перевірки займає лише 9 секунд.",
+            ],
+            [
+              "Аналіз «сирих» даних",
+              "SDR оцифровує весь ефір та досліджує безпосередньо склад радіосигналу, а не чекає на готову картинку.",
+            ],
+            [
+              "Пошук сигнатур",
+              "процесор шукає в отриманому сигналі специфічні радіо відбитки (сигнатури), характерні для FPV-відео, сигналів DJI тощо.",
+            ],
+            [
+              "Сповіщення та виведення",
+              "знайшовши сигнатуру, пристрій миттєво сповіщає про це, фіксує частоту в списку та виводить відеопотік на дисплей (за наявності сумісного відеосигналу).",
+            ],
+          ],
+          note: "Для цифрових БПЛА зображення недоступне — пристрій забезпечує звукове сповіщення та відображення конкретних частот при їх виявленні.",
+        },
+        {
+          question: "Скільки потоків сканування?",
+          intro: [
+            "D·Vision SDR — це однопотоковий SDR-детектор. Під час автосканування пристрій послідовно проходить весь діапазон від 500 до 8700 МГц за ~9 секунд. Якщо оператор зупиняється на конкретному каналі для детального перегляду відео трансляції FPV, сканування решти діапазону призупиняється.",
+          ],
+        },
+        {
+          question: "Чи правда, що D·Vision SDR дає суцільний діапазон?",
+          intro: [
+            "Так, це правда. Завдяки SDR-архітектурі пристрій забезпечує суцільне сканування в межах 500–8700 МГц без фіксованої сітки каналів чи «сліпих зон» між діапазонами. Це дозволяє виявляти дрони, які працюють на нестандартних, зсунутих або рідкісних частотах.",
+          ],
+        },
+        {
+          question: "Чому тільки 2 антени?",
+          intro: [
+            "Завдяки широкій смузі пропускання та ефективному SDR-модулю двох всеспрямованих антен повністю достатньо для покриття всього робочого діапазону. Перша антена оптимізована під низький та середній діапазони, а друга — під високі частоти.",
+          ],
+        },
+        {
+          question: "Які частоти цих антен?",
+          intro: ["Штатні антени покривають увесь спектр детектора:"],
+          listType: "ul",
+          list: [
+            ["Антена 1 (Low Band)", "діапазон від 500 до 3000 МГц."],
+            ["Антена 2 (High Band)", "діапазон від 3000 до 8700 МГц."],
+          ],
+        },
+        {
+          question: "Чи можна підключити до виносних антен?",
+          intro: ["Так, D·Vision SDR підтримує виносні антени. Ви можете підключати:"],
+          listType: "ul",
+          list: [
+            [
+              "Автомобільні виносні антени (кабель 2–10 м)",
+              "для винесення точки прийому на дах авто, щоб усунути екранування кузовом під час руху.",
+            ],
+            [
+              "Бліндажні / стаціонарні антени (кабель 14–20 м)",
+              "для винесення антен із підсилювачами на щоглу або відкриту місцевість.",
+            ],
+          ],
+        },
+        {
+          question: "Чому пристрій доступніший за аналоги?",
+          intro: [
+            "Завдяки оптимізованій SDR-архітектурі та пасивному охолодженню (без кулера та складних механічних вузлів) вдалося спростити апаратну частину та знизити собівартість виробництва без втрати надійності. Ціна 24 000 грн робить D·Vision SDR удвічі доступнішим за більшість аналогів на ринку при збереженні повного функціоналу та дальності детекції.",
+          ],
+        },
       ],
     },
     footer: "D·Vision SDR ™, 2026",
@@ -554,6 +668,7 @@ export const landingContent = {
                 ["Mount type", "Base with 3 neodymium magnets"],
                 ["Cable length", "2, 5, or 10 m, your choice"],
                 ["Connectors", "Standard RF connectors"],
+                ["Power/Battery", "Not included"],
               ],
             },
           ],
@@ -597,6 +712,7 @@ export const landingContent = {
                 ["Mount type", "Cable ties (masts, trees, fortifications)"],
                 ["Cable length", "14 or 20 m, your choice"],
                 ["Connectors", "Standard RF connectors"],
+                ["Power/Battery", "Not included"],
               ],
             },
           ],
@@ -785,78 +901,196 @@ export const landingContent = {
       title: "D·Vision SDR",
       subtitle: "Wide-band drone detector covering 500-8700 MHz",
       chips: ["FPV", "Fixed-wing UAVs", "Analog UGVs"],
+      chipsLabel: "Key advantages",
       imageAlt: "D·Vision SDR drone detector with antennas",
     },
-    advantages: {
-      kicker: "Technical advantages",
-      title: "Broader coverage than typical detectors",
-      text:
-        "An innovative patented SDR-platform technology receives a radio signal and transforms it into video, delivering a clear color image from a UAV within the scanning zone.",
-      stats: [
-        ["Compactness", "13 × 8 cm without antennas"],
-        ["Display", "Color video"],
-        ["Display protection", "Additional PETG protector"],
+    reels: {
+      kicker: "Detector overview",
+      title: "D·Vision SDR video overview",
+      text: "Overview and usage guides for the D·Vision SDR detector",
+      accountName: "D·Vision SDR",
+      handle: "@D·VisionSDR",
+      playLabel: "Play video",
+      closeLabel: "Close video",
+      prevLabel: "Previous videos",
+      nextLabel: "Next videos",
+      emptyText: "Videos are coming soon.",
+    },
+    product: {
+      kicker: "About the device",
+      title: "D·Vision SDR Drone Detector",
+      intro:
+        "D·Vision SDR is an innovative UAV detector built on an SDR platform, designed to monitor the radio spectrum and give early warning of drones. The detector ships with an extended toolset (including Waterfall, remote monitoring, an EW test, and more) that provides flexible options for frequency-band analysis and reliable operation in the field.",
+      imageAlt: "D·Vision SDR drone detector — device photo",
+      advantagesTitle: "Key advantages",
+      advantages: [
+        ["Wide range", ["Continuous monitoring of frequencies from **500 to 8700 MHz**."]],
+        ["No blind spots", ["Full coverage of the working spectrum thanks to the **SDR architecture**."]],
+        ["Long range", ["Detects signals at a distance of **up to 10 km**."]],
+        ["Fast detection", ["A full scanning cycle takes **~9 seconds**."]],
+      ],
+      featuresTitle: "Functional features",
+      features: [
+        ["Friend marking", ["Quickly identifies your own aircraft."]],
+        ["Distance estimate", ["Tracks both digital and analog UAVs approaching or moving away."]],
+        ["Targeted monitoring", ["Monitors a specific frequency or a selected band."]],
+        ["Uninterrupted operation", ["Works while charging."]],
+        ["Night mode", ["Adjusts screen brightness and alert volume for concealment."]],
+        ["Data logging", ["Records video and photos to an SD card."]],
       ],
     },
-    design: {
-      kicker: "Characteristics",
-      title: "A detector designed around current operational needs",
-      cards: [
-        ["Power autonomy", ["External power through USB Type-C.", "Works while charging."]],
-        ["Remote observation format", ["Connects to a laptop (Windows OS), tablet and phone (Android OS).", "Video recording and photo capture."]],
-        ["Screen protection", ["Screen protection made from ultra-strong PETG plastic."]],
-        ["Device dimensions", ["Compact body: 13 × 8 cm without antennas.", "Optimal 4.3-inch display."]],
-        ["Wide application options", ["External antenna connection.", "Car mounts and MOLLE vest mounting."]],
-        ["Adaptation to working conditions", ["Night mode.", "Sound volume settings."]],
-        ["Accessibility", ["Competitive price: from UAH 24,000.", "Delivery terms: up to 5 weeks."]],
-      ],
-    },
-    comparison: {
-      kicker: "Alternatives",
-      title: "Comparison with market solutions",
-      text: "",
-      otherLabel: "Others",
-      columns: ["Characteristic", "D·Vision SDR", "Typical device"],
-      rows: [
-        ["Architecture", "SDR platform", "Video receiver"],
-        ["Video-frequency coverage", "500-8700 MHz", "Limited to separate bands"],
-        ["Antennas", "Two antennas with auto-switching", "Typically stock approach"],
-        ["Firmware updates", "OTA process", "Depends on manufacturer"],
-        ["Operating noise", "Passive cooling, no fan", "Fan noise present"],
-        ["Battery charge indication", "Clear charge indication", "Often unclear or missing"],
-        ["Competitive price", "UAH 24,000", "UAH 25,000-33,000"],
-      ],
-    },
-    useCases: {
-      kicker: "Usage scenario",
-      title: "Use cases",
-      cards: [
-        ["Personal safety during rotation", "A convenient vest mount makes D·Vision SDR part of an individual protection setup."],
-        ["Crew protection when entering or leaving positions", "Vehicle mounting helps the driver learn about danger in time and maintain situational control."],
-        ["Scanning from armored vehicles", "External antennas reduce armor shielding and support maximum detection range and timely reaction."],
-        ["Interaction with EW systems", "High sensitivity supports operation near active EW, while up to 10 km scanning range helps keep EW off until a UAV is detected."],
-        ["Logistics in near-frontline zones", "Volunteers, journalists and logistics missions need reliable drone protection. D·Vision SDR is an accessible solution for every trip."],
+    tools: {
+      kicker: "Tools",
+      title: "Built-in D·Vision SDR tools",
+      lead: "From remote control out of a shelter to analyzing complex signals and detecting digital UAVs — explore the tools that make drone detection simple and reliable.",
+      characteristicsLabel: "Key features",
+      items: [
+        {
+          title: "Digital UAV detection (DJI)",
+          description:
+            "A detection module for digital UAV signals (DJI) that runs alongside analog-channel monitoring.",
+          characteristics: [
+            "One convenient interface for viewing analog video and digital-signal detection at the same time.",
+            "No need to switch between windows or modes — everything on one screen.",
+            "Automatic alert when a digital drone is detected in range.",
+            "Tracks a UAV approaching or moving away by signal level (dBm).",
+          ],
+          note: "No video image is available — the detector provides an audio alert and displays the specific frequencies detected.",
+          imageAlt: "D·Vision SDR digital UAV (DJI) detection",
+          photo: "/tools/dji-detection.jpg",
+        },
+        {
+          title: "Waterfall",
+          description:
+            "A visual display of the radio-frequency spectrum over time that helps detect, analyze, and record UAV radio emissions across different frequencies.",
+          characteristics: [
+            "Clear visualization of signal intensity over time and frequency.",
+            "Detects short bursts, frequency hopping, and hidden signals.",
+            "Clearly separates UAV signals from background radio interference.",
+            "Color-coded signal strength for a quick read of the situation.",
+          ],
+          imageAlt: "D·Vision SDR Waterfall tool",
+          photo: "/tools/waterfall.jpg",
+        },
+        {
+          title: "EW test",
+          description:
+            "A dedicated tool for checking whether your electronic-warfare (EW) equipment is active and verifying its operating frequencies.",
+          characteristics: [
+            "Checks emissions and verifies EW equipment performance directly in the field.",
+            "Records the frequency bands the equipment is jamming.",
+          ],
+          imageAlt: "D·Vision SDR EW test tool",
+          photo: "/tools/ew-test.jpg",
+        },
+        {
+          title: "Remote monitoring",
+          description:
+            "A tool for observing and controlling the D·Vision SDR detector remotely, without needing to stay right next to the device in a danger zone.",
+          characteristics: [
+            "Connects via a USB Type-C cable to a PC, laptop, or Android device (phone/tablet).",
+            "Lets you place the detector at a distance and work from a fixed shelter.",
+            "Shows monitoring data in real time on an external screen.",
+            "No separate app needed: the connection runs directly between the detector and your viewing device.",
+          ],
+          imageAlt: "D·Vision SDR remote monitoring",
+          photo: "/tools/remote-monitoring.jpg",
+        },
       ],
     },
     faq: {
       kicker: "FAQ",
       title: "Frequently asked questions",
       items: [
-        ["How is D·Vision SDR different from detectors based on video receivers?", "D·Vision SDR is built on an SDR platform. Live Video, spectrum scanner, Waterfall and RSSI/SNR analytics help detect analog video-signal activity much earlier and provide timely warning about UAV threats."],
-        ["What is Waterfall and why is it needed?", "Waterfall is a real-time graphical history of radio activity. It helps visually capture even weak spectrum signals that are too weak for video decoding but already critical for early warning."],
-        ["What do RSSI and SNR show?", "RSSI shows the received signal power, while SNR shows the useful signal-to-noise ratio. Together they help evaluate link quality and detect UAV operation in radio-interference conditions."],
-        ["Does D·Vision SDR detect every drone?", "No. A universal detector for every drone does not exist. D·Vision SDR specializes in early detection of analog video signals, which are widely used on FPV strike drones and many reconnaissance UAVs."],
-        ["Why is the device more accessible than alternatives?", "A proprietary patent for the SDR platform enables spectrum scanning without standard video receivers. Architecture optimization reduced production cost without compromising reliability."],
-        ["Are other interface languages available for foreign users?", "Yes. The website is available in Ukrainian and English. The device interface is localized in Ukrainian and English."],
-      ],
-    },
-    team: {
-      kicker: "About us",
-      title: "The D·Vision SDR team",
-      text: [
-        "We are a team of engineers and product managers who have been actively involved in UAV-related volunteer initiatives since the beginning of the full-scale invasion.",
-        "By developing a new range-scanning technology, we believe it can help preserve the lives and health of thousands of military personnel, volunteers and civilians.",
-        "Our goal is for defenders, volunteers and civilians to return home unharmed.",
+        {
+          question: "How is D·Vision SDR different from a detector based on video receivers?",
+          intro: [
+            "Most classic analog detectors are built on standard video receivers with a fixed frequency grid. D·Vision SDR uses software-defined radio (SDR) technology instead. This gives two key technical advantages:",
+          ],
+          listType: "ul",
+          list: [
+            [
+              "Continuous range with no blind spots",
+              "without classic video receivers in its design, there are no gaps between bands, so no blind spots appear and the detector picks up even non-standard or shifted enemy frequencies.",
+            ],
+            ["Flexibility", "support for new UAV types is added through firmware updates, with no need to change the hardware."],
+          ],
+        },
+        {
+          question: "How does the SDR platform work?",
+          intro: [
+            "Most detectors wait for a ready-made picture from a standard video receiver. D·Vision SDR digitizes and analyzes the radio signal itself.",
+          ],
+          listIntro: "The basic operating principle:",
+          listType: "ol",
+          list: [
+            [
+              "Scanning the air",
+              "the device steps through the wide frequency range (500 to 8700 MHz) in 10 MHz increments. A full check cycle takes only 9 seconds.",
+            ],
+            [
+              "Analyzing raw data",
+              "SDR digitizes the entire spectrum and examines the radio signal's composition directly, instead of waiting for a ready-made picture.",
+            ],
+            [
+              "Looking for signatures",
+              "the processor searches the received signal for specific radio fingerprints (signatures) typical of FPV video, DJI signals, and so on.",
+            ],
+            [
+              "Alert and output",
+              "once it finds a signature, the device instantly alerts you, logs the frequency in the list, and displays the video feed on-screen (if a compatible video signal is present).",
+            ],
+          ],
+          note: "For digital UAVs no image is available — the device provides an audio alert and shows the specific detected frequencies.",
+        },
+        {
+          question: "How many scanning streams does it have?",
+          intro: [
+            "D·Vision SDR is a single-stream SDR detector. During auto-scan, the device sequentially steps through the entire range from 500 to 8700 MHz in about 9 seconds. If the operator stops on a specific channel for a detailed look at the FPV video feed, scanning of the rest of the range is paused.",
+          ],
+        },
+        {
+          question: "Does D·Vision SDR really give continuous coverage?",
+          intro: [
+            "Yes, that's true. Thanks to its SDR architecture, the device provides continuous scanning within 500-8700 MHz with no fixed channel grid and no blind spots between bands. This makes it possible to detect drones operating on non-standard, shifted, or rare frequencies.",
+          ],
+        },
+        {
+          question: "Why only 2 antennas?",
+          intro: [
+            "Thanks to the wide bandwidth and an efficient SDR module, two omnidirectional antennas are fully sufficient to cover the entire working range. The first antenna is optimized for the low and mid bands, and the second for high frequencies.",
+          ],
+        },
+        {
+          question: "What frequencies do these antennas cover?",
+          intro: ["The stock antennas cover the detector's entire spectrum:"],
+          listType: "ul",
+          list: [
+            ["Antenna 1 (Low Band)", "range from 500 to 3000 MHz."],
+            ["Antenna 2 (High Band)", "range from 3000 to 8700 MHz."],
+          ],
+        },
+        {
+          question: "Can I connect external antennas?",
+          intro: ["Yes, D·Vision SDR supports external antennas. You can connect:"],
+          listType: "ul",
+          list: [
+            [
+              "Car external antennas (2-10 m cable)",
+              "for moving the receiving point to the car roof, to remove the body's shielding effect while driving.",
+            ],
+            [
+              "Bunker / stationary antennas (14-20 m cable)",
+              "for moving amplified antennas to a mast or open ground.",
+            ],
+          ],
+        },
+        {
+          question: "Why is the device more affordable than alternatives?",
+          intro: [
+            "Thanks to an optimized SDR architecture and passive cooling (no fan or complex mechanical parts), it was possible to simplify the hardware and lower production cost without losing reliability. At UAH 24,000, D·Vision SDR is twice as affordable as most market alternatives while keeping the full feature set and detection range.",
+          ],
+        },
       ],
     },
     footer: "D·Vision SDR ™, 2026",

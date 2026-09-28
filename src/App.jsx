@@ -1,11 +1,9 @@
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
-import { MarketProblem } from "./components/MarketProblem.jsx";
-import { Modes } from "./components/Modes.jsx";
-import { Capabilities } from "./components/Capabilities.jsx";
-import { MarketComparison } from "./components/MarketComparison.jsx";
-import { Trust } from "./components/Trust.jsx";
+import { ProductOverview } from "./components/ProductOverview.jsx";
+import { SocialReels } from "./components/SocialReels.jsx";
+import { Tools } from "./components/Tools.jsx";
 import { FAQ } from "./components/FAQ.jsx";
 import { FinalCTA } from "./components/FinalCTA.jsx";
 import { ManualPage } from "./components/ManualPage.jsx";
@@ -219,12 +217,10 @@ export default function App() {
       ) : (
         <main>
           <Hero content={content} />
-          <MarketProblem content={content} />
-          <Modes content={content} onLogoToggle={handleLogoToggle} />
-          <MarketComparison content={content} />
-          <Capabilities content={content} />
+          <ProductOverview content={content} onLogoToggle={handleLogoToggle} />
+          <SocialReels content={content} />
+          <Tools content={content} />
           <FAQ content={content} />
-          <Trust content={content} />
           <FinalCTA content={content} />
         </main>
       )}
