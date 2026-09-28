@@ -9,6 +9,10 @@
       "destination": "/"
     },
     {
+      "source": "/cart",
+      "destination": "/"
+    },
+    {
       "source": "/service",
       "destination": "/"
     }
