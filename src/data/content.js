@@ -36,6 +36,7 @@ export const landingContent = {
     nav: [
       ["/order", "Каталог"],
       ["/manual", "Інструкція"],
+      ["/payment-and-delivery", "Оплата і доставка"],
       ["/service", "Гарантія та сервіс"],
     ],
     order: {
@@ -268,6 +269,53 @@ export const landingContent = {
           },
           extras: [],
           price: "300 грн",
+        },
+      ],
+    },
+    paymentDelivery: {
+      navLabel: "Оплата і доставка",
+      title: "Оплата і доставка",
+      sections: [
+        {
+          icon: "check",
+          title: "Передзамовлення та терміни виготовлення",
+          items: [
+            [
+              "Термін очікування",
+              "Усі пристрої виготовляються під замовлення. Орієнтовний термін комплектації та відправки становить до 8 тижнів із моменту оформлення.",
+            ],
+          ],
+        },
+        {
+          icon: "check",
+          title: "Умови оплати",
+          items: [
+            [
+              "Один детектор",
+              "Для замовлення 1 одиниці товару передплата не потрібна. Повна оплата здійснюється перед безпосереднім відправленням пристрою.",
+            ],
+            [
+              "Від 2-х детекторів",
+              "При замовленні від 2 одиниць пристроїв діє передплата у розмірі 50% від загальної вартості. Друга частина (50%) сплачується безпосередньо перед відправленням замовлення.",
+            ],
+            ["Спосіб оплати", "Усі розрахунки здійснюються офіційним переказом на розрахунковий рахунок (IBAN)."],
+          ],
+          noteLabel: "Зверніть увагу",
+          note: "Наразі ми не надаємо послуги післяплати (накладеного платежу), розстрочки та оплати частинами. Відправка пристроїв здійснюється тільки після 100% оплати замовлення.",
+        },
+        {
+          icon: "check",
+          title: "Доставка",
+          items: [
+            [
+              "Служба доставки",
+              "Усі відправлення по території України здійснюються компанією «Нова Пошта» (у відділення, поштомат або кур'єром за адресою).",
+            ],
+            [
+              "Страхування та вартість",
+              "Доставка сплачується отримувачем за тарифами перевізника. Кожне відправлення застраховане на повну вартість пристрою.",
+            ],
+          ],
         },
       ],
     },
@@ -573,6 +621,7 @@ export const landingContent = {
     nav: [
       ["/order", "Catalog"],
       ["/manual", "Manual"],
+      ["/payment-and-delivery", "Payment & Delivery"],
       ["/service", "Service & Warranty"],
     ],
     order: {
@@ -804,6 +853,50 @@ export const landingContent = {
           },
           extras: [],
           price: "UAH 300",
+        },
+      ],
+    },
+    paymentDelivery: {
+      navLabel: "Payment & Delivery",
+      title: "Payment & Delivery",
+      sections: [
+        {
+          icon: "check",
+          title: "Pre-order & Production Timeline",
+          items: [
+            [
+              "Lead time",
+              "All devices are made to order. The estimated time to assemble and ship your order is up to 8 weeks from the date you place it.",
+            ],
+          ],
+        },
+        {
+          icon: "check",
+          title: "Payment Terms",
+          items: [
+            ["Single detector", "For an order of 1 unit, no prepayment is required. Full payment is made right before the device ships."],
+            [
+              "2+ detectors",
+              "For orders of 2 or more units, a 50% prepayment of the total order value applies. The remaining 50% is paid right before the order ships.",
+            ],
+            ["Payment method", "All payments are made by official bank transfer to our account (IBAN)."],
+          ],
+          noteLabel: "Please note",
+          note: "We do not currently offer cash on delivery, installment plans, or split payments. Devices ship only after the order has been paid in full.",
+        },
+        {
+          icon: "check",
+          title: "Delivery",
+          items: [
+            [
+              "Courier service",
+              "All shipments within Ukraine are handled by Nova Poshta (to a branch, parcel locker, or courier delivery to your address).",
+            ],
+            [
+              "Insurance & cost",
+              "Delivery is paid by the recipient at the carrier's rates. Every shipment is insured for the full value of the device.",
+            ],
+          ],
         },
       ],
     },

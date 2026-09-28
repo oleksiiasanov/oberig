@@ -10,6 +10,7 @@ import { ManualPage } from "./components/ManualPage.jsx";
 import { CartPage } from "./components/CartPage.jsx";
 import { OrderPage } from "./components/OrderPage.jsx";
 import { ServicePage } from "./components/ServicePage.jsx";
+import { PaymentDeliveryPage } from "./components/PaymentDeliveryPage.jsx";
 import { landingContent, LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "./data/content.js";
 
 const STORAGE_KEY = "dvision-language";
@@ -37,6 +38,7 @@ function getPageFromLocation() {
   if (path === "/order") return "order";
   if (path === "/cart") return "cart";
   if (path === "/service") return "service";
+  if (path === "/payment-and-delivery") return "payment-and-delivery";
   return "landing";
 }
 
@@ -114,9 +116,11 @@ export default function App() {
             ? content.cart.navLabel
             : page === "service"
               ? content.service.navLabel
-              : null;
+              : page === "payment-and-delivery"
+                ? content.paymentDelivery.navLabel
+                : null;
     document.title = pageLabel ? `${pageLabel} | D·Vision SDR` : baseTitle;
-  }, [content.manual.navLabel, content.order.navLabel, content.cart.navLabel, content.service.navLabel, page]);
+  }, [content.manual.navLabel, content.order.navLabel, content.cart.navLabel, content.service.navLabel, content.paymentDelivery.navLabel, page]);
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof window.gtag !== "function") return;
@@ -163,6 +167,13 @@ export default function App() {
     if (href === "/service") {
       window.history.pushState({}, "", "/service");
       setPage("service");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (href === "/payment-and-delivery") {
+      window.history.pushState({}, "", "/payment-and-delivery");
+      setPage("payment-and-delivery");
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
@@ -214,6 +225,8 @@ export default function App() {
         <CartPage content={content} search={cartSearch} onNavigate={handleNavigate} />
       ) : page === "service" ? (
         <ServicePage content={content} />
+      ) : page === "payment-and-delivery" ? (
+        <PaymentDeliveryPage content={content} />
       ) : (
         <main>
           <Hero content={content} />

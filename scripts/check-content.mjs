@@ -27,7 +27,7 @@ const forbidden = [
 ];
 
 const required = [
-  "D·Vision SDR - FPV-відеодетектор на основі SDR-платформи",
+  "D·Vision SDR. Детектор БПЛА на основі SDR-платформи",
   "D·Vision SDR",
   "SDR",
   "500–8700 МГц",
@@ -47,9 +47,9 @@ const required = [
   "menu-backdrop",
   "/logo-default.png",
   "/logo-exp.png",
-  "/og-image.png",
+  "/og-image-v2.png",
   "https://www.dvision.com.ua/",
-  "https://www.dvision.com.ua/og-image.png",
+  "https://www.dvision.com.ua/og-image-v2.png",
   "/favicon.ico",
   "/favicons/favicon-32x32.png",
   "/favicons/apple-icon-180x180.png",
