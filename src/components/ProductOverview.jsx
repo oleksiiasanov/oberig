@@ -6,6 +6,12 @@ import { CTAButtons } from "./CTAButtons.jsx";
 const LOGO_CLICK_COUNT = 10;
 const LOGO_CLICK_WINDOW_MS = 3500;
 
+function renderWithBold(text) {
+  return text.split(/\*\*(.+?)\*\*/g).map((part, index) =>
+    index % 2 === 1 ? <strong key={index}>{part}</strong> : part,
+  );
+}
+
 export function ProductOverview({ content, onLogoToggle }) {
   const { product } = content;
   const logoClickTimesRef = useRef([]);
@@ -35,7 +41,7 @@ export function ProductOverview({ content, onLogoToggle }) {
           {product.advantages.map(([title, items], index) => (
             <div className="advantage-spec-row" onClick={() => handleAdvantageClick(index)} key={title}>
               <span className="advantage-spec-label">{title}</span>
-              <span className="advantage-spec-value">{items[0]}</span>
+              <span className="advantage-spec-value">{renderWithBold(items[0])}</span>
             </div>
           ))}
         </div>
@@ -53,7 +59,7 @@ export function ProductOverview({ content, onLogoToggle }) {
         ))}
       </div>
 
-      <CTAButtons content={content} center />
+      <CTAButtons content={content} center secondary={false} />
     </AnimatedSection>
   );
 }

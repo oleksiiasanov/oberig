@@ -148,6 +148,62 @@ async function syncFromApi() {
   };
 }
 
+function decodeXmlEntities(value) {
+  return String(value || "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
+async function syncFromRss(channelId) {
+  if (!channelId) throw new Error("No channel id available for RSS sync.");
+
+  const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId)}`;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`RSS fetch failed: ${response.status} ${response.statusText}`);
+  const xml = await response.text();
+
+  const videos = [];
+  const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
+  let match;
+  while ((match = entryRegex.exec(xml))) {
+    const block = match[1];
+    const id = /<yt:videoId>(.*?)<\/yt:videoId>/.exec(block)?.[1];
+    if (!id) continue;
+    const title = cleanText(decodeXmlEntities(/<title>([\s\S]*?)<\/title>/.exec(block)?.[1]));
+    const publishedAt = /<published>(.*?)<\/published>/.exec(block)?.[1] || null;
+    videos.push({ id, title, publishedAt });
+  }
+
+  videos.sort((a, b) => new Date(b.publishedAt || 0) - new Date(a.publishedAt || 0));
+  const items = videos.slice(0, SHORTS_LIMIT);
+
+  const feedTitleMatch = /<feed[^>]*>[\s\S]*?<title>([\s\S]*?)<\/title>/.exec(xml);
+
+  return {
+    source: "youtube-rss",
+    channelId,
+    channelTitle: cleanText(decodeXmlEntities(feedTitleMatch?.[1])),
+    handle: HANDLE,
+    syncedAt: new Date().toISOString(),
+    items: items.map((video) => ({
+      id: video.id,
+      title: video.title,
+      publishedAt: video.publishedAt,
+      url: `https://www.youtube.com/shorts/${video.id}`,
+      thumbnail: `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+      thumbnails: [
+        `https://i.ytimg.com/vi/${video.id}/maxresdefault.jpg`,
+        `https://i.ytimg.com/vi/${video.id}/hq720.jpg`,
+        `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+      ],
+      embedUrl: `https://www.youtube-nocookie.com/embed/${video.id}`,
+    })),
+  };
+}
+
 async function readExisting() {
   try {
     return JSON.parse(await readFile(OUTPUT_PATH, "utf8"));
@@ -161,14 +217,24 @@ async function main() {
 
   try {
     payload = await syncFromApi();
-  } catch (error) {
-    if (STRICT) throw error;
+  } catch (apiError) {
+    if (STRICT && KEY) throw apiError;
 
-    console.warn(`YouTube Shorts sync fell back: ${error.message}`);
-    const existing = await readExisting();
-    payload = existing?.items?.length
-      ? { ...existing, source: existing.source === "youtube" ? "cache" : existing.source || "cache", syncedAt: new Date().toISOString(), error: error.message }
-      : { source: "fallback", handle: HANDLE, syncedAt: new Date().toISOString(), error: error.message, items: [] };
+    console.warn(`YouTube Data API sync unavailable: ${apiError.message}`);
+
+    try {
+      const existing = await readExisting();
+      const channelId = CHANNEL_ID || existing?.channelId;
+      payload = await syncFromRss(channelId);
+    } catch (rssError) {
+      if (STRICT) throw rssError;
+
+      console.warn(`YouTube Shorts sync fell back to cache: ${rssError.message}`);
+      const existing = await readExisting();
+      payload = existing?.items?.length
+        ? { ...existing, source: existing.source === "youtube" ? "cache" : existing.source || "cache", syncedAt: new Date().toISOString(), error: rssError.message }
+        : { source: "fallback", handle: HANDLE, syncedAt: new Date().toISOString(), error: rssError.message, items: [] };
+    }
   }
 
   await mkdir(dirname(OUTPUT_PATH), { recursive: true });

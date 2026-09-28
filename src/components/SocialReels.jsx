@@ -142,7 +142,7 @@ export function SocialReels({ content }) {
               {activeReel.embedUrl ? (
                 <iframe
                   key={activeReel.id}
-                  src={`${activeReel.embedUrl}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                  src={`${activeReel.embedUrl}?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1`}
                   title={activeReel.title || copy.accountName}
                   loading="lazy"
                   allow="autoplay; encrypted-media; picture-in-picture; fullscreen"

@@ -1,14 +1,92 @@
 {
-  "source": "youtube",
+  "source": "youtube-rss",
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-08-31T20:34:19.266Z",
+  "syncedAt": "2026-09-28T16:33:41.375Z",
   "items": [
+    {
+      "id": "4XQrcEzfMow",
+      "title": "Оновлена візуалізація інструменту 'Водоспад' в D·Vision SDR.",
+      "publishedAt": "2026-09-23T14:54:51+00:00",
+      "url": "https://www.youtube.com/shorts/4XQrcEzfMow",
+      "thumbnail": "https://i.ytimg.com/vi/4XQrcEzfMow/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/4XQrcEzfMow/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/4XQrcEzfMow/hq720.jpg",
+        "https://i.ytimg.com/vi/4XQrcEzfMow/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/4XQrcEzfMow"
+    },
+    {
+      "id": "7kp2EcHZkUU",
+      "title": "Демонструємо оновлений процес заряджання детектора D·Vision SDR.",
+      "publishedAt": "2026-09-18T13:18:34+00:00",
+      "url": "https://www.youtube.com/shorts/7kp2EcHZkUU",
+      "thumbnail": "https://i.ytimg.com/vi/7kp2EcHZkUU/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/7kp2EcHZkUU/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/7kp2EcHZkUU/hq720.jpg",
+        "https://i.ytimg.com/vi/7kp2EcHZkUU/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/7kp2EcHZkUU"
+    },
+    {
+      "id": "MTV1BMS2tQc",
+      "title": "Віддалене керування з телефону",
+      "publishedAt": "2026-09-12T12:54:25+00:00",
+      "url": "https://www.youtube.com/shorts/MTV1BMS2tQc",
+      "thumbnail": "https://i.ytimg.com/vi/MTV1BMS2tQc/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/MTV1BMS2tQc/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/MTV1BMS2tQc/hq720.jpg",
+        "https://i.ytimg.com/vi/MTV1BMS2tQc/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/MTV1BMS2tQc"
+    },
+    {
+      "id": "iGVczUFPWBQ",
+      "title": "Оновлений процес підключення детектора D·Vision SDR до ПК.",
+      "publishedAt": "2026-09-09T12:33:33+00:00",
+      "url": "https://www.youtube.com/shorts/iGVczUFPWBQ",
+      "thumbnail": "https://i.ytimg.com/vi/iGVczUFPWBQ/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/iGVczUFPWBQ/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/iGVczUFPWBQ/hq720.jpg",
+        "https://i.ytimg.com/vi/iGVczUFPWBQ/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/iGVczUFPWBQ"
+    },
+    {
+      "id": "UpsRv0j3llk",
+      "title": "Моніторинг конкретної частоти за допомогою D·Vision SDR",
+      "publishedAt": "2026-09-07T14:02:31+00:00",
+      "url": "https://www.youtube.com/shorts/UpsRv0j3llk",
+      "thumbnail": "https://i.ytimg.com/vi/UpsRv0j3llk/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/UpsRv0j3llk/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/UpsRv0j3llk/hq720.jpg",
+        "https://i.ytimg.com/vi/UpsRv0j3llk/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/UpsRv0j3llk"
+    },
+    {
+      "id": "d6j5kJcB4es",
+      "title": "Кріплення на бронежилет.",
+      "publishedAt": "2026-09-05T06:46:34+00:00",
+      "url": "https://www.youtube.com/shorts/d6j5kJcB4es",
+      "thumbnail": "https://i.ytimg.com/vi/d6j5kJcB4es/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/d6j5kJcB4es/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/d6j5kJcB4es/hq720.jpg",
+        "https://i.ytimg.com/vi/d6j5kJcB4es/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/d6j5kJcB4es"
+    },
     {
       "id": "uNOey86B9hY",
       "title": "Вбудована інструкція",
-      "publishedAt": "2026-08-31T16:44:47Z",
+      "publishedAt": "2026-08-31T16:44:47+00:00",
       "url": "https://www.youtube.com/shorts/uNOey86B9hY",
       "thumbnail": "https://i.ytimg.com/vi/uNOey86B9hY/hqdefault.jpg",
       "thumbnails": [
@@ -21,7 +99,7 @@
     {
       "id": "1FRwxI7KQ7Y",
       "title": "D·Vision SDR: інструмент \"Водоспад\"",
-      "publishedAt": "2026-08-27T13:59:27Z",
+      "publishedAt": "2026-08-27T13:59:27+00:00",
       "url": "https://www.youtube.com/shorts/1FRwxI7KQ7Y",
       "thumbnail": "https://i.ytimg.com/vi/1FRwxI7KQ7Y/hqdefault.jpg",
       "thumbnails": [
@@ -34,7 +112,7 @@
     {
       "id": "e4zW--7SxBM",
       "title": "Огляд виносної антени (2м) для детектора D·Vision SDR",
-      "publishedAt": "2026-08-23T15:11:59Z",
+      "publishedAt": "2026-08-23T15:11:59+00:00",
       "url": "https://www.youtube.com/shorts/e4zW--7SxBM",
       "thumbnail": "https://i.ytimg.com/vi/e4zW--7SxBM/hqdefault.jpg",
       "thumbnails": [
@@ -47,7 +125,7 @@
     {
       "id": "6rT7AG2HgeU",
       "title": "D·Vision SDR: Налаштування детектора",
-      "publishedAt": "2026-08-19T14:04:26Z",
+      "publishedAt": "2026-08-19T14:04:26+00:00",
       "url": "https://www.youtube.com/shorts/6rT7AG2HgeU",
       "thumbnail": "https://i.ytimg.com/vi/6rT7AG2HgeU/hqdefault.jpg",
       "thumbnails": [
@@ -60,7 +138,7 @@
     {
       "id": "QVhzFRaAvtc",
       "title": "Огляд складових детектора D·Vision SDR.",
-      "publishedAt": "2026-08-17T14:19:11Z",
+      "publishedAt": "2026-08-17T14:19:11+00:00",
       "url": "https://www.youtube.com/shorts/QVhzFRaAvtc",
       "thumbnail": "https://i.ytimg.com/vi/QVhzFRaAvtc/hqdefault.jpg",
       "thumbnails": [
@@ -73,7 +151,7 @@
     {
       "id": "n5zLTvZzQ10",
       "title": "D·Vision SDR: Формат віддаленого спостереження",
-      "publishedAt": "2026-08-16T17:50:48Z",
+      "publishedAt": "2026-08-16T17:50:48+00:00",
       "url": "https://www.youtube.com/shorts/n5zLTvZzQ10",
       "thumbnail": "https://i.ytimg.com/vi/n5zLTvZzQ10/hqdefault.jpg",
       "thumbnails": [
@@ -82,84 +160,6 @@
         "https://i.ytimg.com/vi/n5zLTvZzQ10/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/n5zLTvZzQ10"
-    },
-    {
-      "id": "Yp53L9Fkd2E",
-      "title": "D·Vision SDR: Виявлення дронів DJI",
-      "publishedAt": "2026-08-16T17:50:17Z",
-      "url": "https://www.youtube.com/shorts/Yp53L9Fkd2E",
-      "thumbnail": "https://i.ytimg.com/vi/Yp53L9Fkd2E/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/Yp53L9Fkd2E/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/Yp53L9Fkd2E/hq720.jpg",
-        "https://i.ytimg.com/vi/Yp53L9Fkd2E/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/Yp53L9Fkd2E"
-    },
-    {
-      "id": "7yUdFeR6KfM",
-      "title": "D·Vision SDR: Оновлення прошивки",
-      "publishedAt": "2026-08-16T17:49:29Z",
-      "url": "https://www.youtube.com/shorts/7yUdFeR6KfM",
-      "thumbnail": "https://i.ytimg.com/vi/7yUdFeR6KfM/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/7yUdFeR6KfM/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/7yUdFeR6KfM/hq720.jpg",
-        "https://i.ytimg.com/vi/7yUdFeR6KfM/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/7yUdFeR6KfM"
-    },
-    {
-      "id": "0A6R4571eq4",
-      "title": "Огляд роботи детектора D·Vision SDR",
-      "publishedAt": "2026-08-16T17:48:27Z",
-      "url": "https://www.youtube.com/shorts/0A6R4571eq4",
-      "thumbnail": "https://i.ytimg.com/vi/0A6R4571eq4/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/0A6R4571eq4/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/0A6R4571eq4/hq720.jpg",
-        "https://i.ytimg.com/vi/0A6R4571eq4/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/0A6R4571eq4"
-    },
-    {
-      "id": "fTz8IL_WQnY",
-      "title": "Огляд виносної антени для детектора D·Vision SDR",
-      "publishedAt": "2026-08-16T17:44:53Z",
-      "url": "https://www.youtube.com/shorts/fTz8IL_WQnY",
-      "thumbnail": "https://i.ytimg.com/vi/fTz8IL_WQnY/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/fTz8IL_WQnY/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/fTz8IL_WQnY/hq720.jpg",
-        "https://i.ytimg.com/vi/fTz8IL_WQnY/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/fTz8IL_WQnY"
-    },
-    {
-      "id": "RNZY45g2U5c",
-      "title": "Огляд кріплення в авто для детектора D·Vision SDR",
-      "publishedAt": "2026-08-16T17:42:41Z",
-      "url": "https://www.youtube.com/shorts/RNZY45g2U5c",
-      "thumbnail": "https://i.ytimg.com/vi/RNZY45g2U5c/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/RNZY45g2U5c/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/RNZY45g2U5c/hq720.jpg",
-        "https://i.ytimg.com/vi/RNZY45g2U5c/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/RNZY45g2U5c"
-    },
-    {
-      "id": "3iG0FXtapgw",
-      "title": "Перемикання між каналами на детекторі D·Vision SDR",
-      "publishedAt": "2026-08-16T17:41:47Z",
-      "url": "https://www.youtube.com/shorts/3iG0FXtapgw",
-      "thumbnail": "https://i.ytimg.com/vi/3iG0FXtapgw/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/3iG0FXtapgw/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/3iG0FXtapgw/hq720.jpg",
-        "https://i.ytimg.com/vi/3iG0FXtapgw/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/3iG0FXtapgw"
     }
   ]
 }
