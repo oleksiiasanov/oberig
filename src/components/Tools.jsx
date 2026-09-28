@@ -25,7 +25,14 @@ export function Tools({ content }) {
               {tool.note ? <p className="tool-note">{tool.note}</p> : null}
             </div>
             {tool.photo ? (
-              <img className="tool-media" src={tool.photo} alt={tool.imageAlt} loading="lazy" />
+              <img
+                className="tool-media"
+                src={tool.photo}
+                alt={tool.imageAlt}
+                loading="lazy"
+                width="800"
+                height="600"
+              />
             ) : (
               <ImagePlaceholder alt={tool.imageAlt} label={content.order.photoPendingLabel} className="tool-media" />
             )}
