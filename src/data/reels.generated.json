@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-09-29T08:58:10.344Z",
+  "syncedAt": "2026-09-30T08:57:04.563Z",
   "items": [
+    {
+      "id": "3r4hfHI4p7I",
+      "title": "D·Vision SDR: Новий інструмент \"Пошук\"",
+      "publishedAt": "2026-09-30T06:58:32Z",
+      "url": "https://www.youtube.com/shorts/3r4hfHI4p7I",
+      "thumbnail": "https://i.ytimg.com/vi/3r4hfHI4p7I/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/3r4hfHI4p7I/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/3r4hfHI4p7I/hq720.jpg",
+        "https://i.ytimg.com/vi/3r4hfHI4p7I/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/3r4hfHI4p7I"
+    },
     {
       "id": "4XQrcEzfMow",
       "title": "Оновлена візуалізація інструменту 'Водоспад' в D·Vision SDR.",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/QVhzFRaAvtc/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/QVhzFRaAvtc"
-    },
-    {
-      "id": "n5zLTvZzQ10",
-      "title": "D·Vision SDR: Формат віддаленого спостереження",
-      "publishedAt": "2026-08-16T17:50:48Z",
-      "url": "https://www.youtube.com/shorts/n5zLTvZzQ10",
-      "thumbnail": "https://i.ytimg.com/vi/n5zLTvZzQ10/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/n5zLTvZzQ10/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/n5zLTvZzQ10/hq720.jpg",
-        "https://i.ytimg.com/vi/n5zLTvZzQ10/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/n5zLTvZzQ10"
     }
   ]
 }
