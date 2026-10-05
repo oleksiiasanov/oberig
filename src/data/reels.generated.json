@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-04T08:42:41.912Z",
+  "syncedAt": "2026-10-05T09:34:05.196Z",
   "items": [
+    {
+      "id": "_DFyEEwfpjM",
+      "title": "Додаткові функції сканування D·Vision SDR: 'свій', моніторинг конкретної частоти, звуження діапазону",
+      "publishedAt": "2026-10-04T11:56:38Z",
+      "url": "https://www.youtube.com/shorts/_DFyEEwfpjM",
+      "thumbnail": "https://i.ytimg.com/vi/_DFyEEwfpjM/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/_DFyEEwfpjM/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/_DFyEEwfpjM/hq720.jpg",
+        "https://i.ytimg.com/vi/_DFyEEwfpjM/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/_DFyEEwfpjM"
+    },
     {
       "id": "3r4hfHI4p7I",
       "title": "D·Vision SDR: Новий інструмент \"Пошук\"",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/6rT7AG2HgeU/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/6rT7AG2HgeU"
-    },
-    {
-      "id": "QVhzFRaAvtc",
-      "title": "Огляд складових детектора D·Vision SDR.",
-      "publishedAt": "2026-08-17T14:19:11Z",
-      "url": "https://www.youtube.com/shorts/QVhzFRaAvtc",
-      "thumbnail": "https://i.ytimg.com/vi/QVhzFRaAvtc/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/QVhzFRaAvtc/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/QVhzFRaAvtc/hq720.jpg",
-        "https://i.ytimg.com/vi/QVhzFRaAvtc/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/QVhzFRaAvtc"
     }
   ]
 }
