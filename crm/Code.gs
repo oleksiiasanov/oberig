@@ -186,6 +186,121 @@ function setupProcessedRows() {
   highlightProcessedRows(sheet, index + 1, columnCount);
 }
 
+// ── Tracking spreadsheet ("трекінг оплат і відправок") ──────────────────────────────────────────────────────────────
+// Ticking "Контакт" on an order copies it to the tracking spreadsheet as a new row. Its address lives in Script
+// properties (TRACKING_SHEET_URL = the tab's full URL, with #gid=…), so it is not stored in the public repository.
+// Setup: add the property, then run installTrackingTrigger once from the editor and authorize.
+
+// Tracking header (exact text, row 1) → value taken from the CRM row. Other tracking columns are left alone.
+const TRACKING_COLUMNS = [
+  { header: "№ замовлення", value: (get) => get(ORDER_NUMBER_HEADER) },
+  { header: "Дата заявки", value: (get) => dateOnly(get("Timestamp")), format: "dd/mm/yy" },
+  { header: "ПІБ", value: (get) => String(get("Імʼя")).trim(), format: "@" },
+  { header: "Телефон", value: (get) => get("Номер"), format: "@" },
+  { header: "Кількість детекторів", value: (get) => get("Кількість детекторів") },
+  { header: "Додаткове обладнання", value: (get) => accessories(get), format: "@" },
+  { header: "Сума замовлення", value: (get) => get("Разом") },
+];
+const ACCESSORY_HEADERS = [
+  "Виносна антена для авто, 2м",
+  "Виносна антена для авто, 5м",
+  "Виносна антена для авто, 10м",
+  "Виносна антена для бліндажа, 14м",
+  "Виносна антена для бліндажа, 20м",
+  "Автомобільний тримач",
+  "Кріплення на бронежилет",
+];
+
+// One accessory per line, e.g. "Автомобільний тримач x2"; empty when the order has none.
+function accessories(get) {
+  return ACCESSORY_HEADERS.filter((header) => Number(get(header)) > 0)
+    .map((header) => header + " x" + get(header))
+    .join("\n");
+}
+
+function dateOnly(value) {
+  return value instanceof Date ? new Date(value.getFullYear(), value.getMonth(), value.getDate()) : value;
+}
+
+function trackingValues(headers, row) {
+  const get = (header) => {
+    const index = headers.indexOf(norm(header));
+    return index === -1 ? "" : row[index];
+  };
+  return TRACKING_COLUMNS.map((col) => ({ header: col.header, format: col.format, value: col.value(get) }));
+}
+
+// Installable onEdit trigger (a simple onEdit cannot open another spreadsheet). Unticking does nothing.
+function syncContactedOrder(e) {
+  const range = e && e.range;
+  if (!range || range.getSheet().getSheetId() !== SHEET_GID) return;
+  const sheet = range.getSheet();
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
+  const contactColumn = headers.indexOf(norm(CONTACT_HEADER)) + 1;
+  if (!contactColumn || range.getColumn() > contactColumn || range.getLastColumn() < contactColumn) return;
+
+  const first = Math.max(range.getRow(), 2);
+  const count = range.getLastRow() - first + 1;
+  if (count < 1) return;
+  sheet.getRange(first, 1, count, headers.length).getValues().forEach((row) => {
+    if (row[contactColumn - 1] === true) appendToTracking(trackingValues(headers, row));
+  });
+}
+
+function trackingSheet() {
+  const url = PropertiesService.getScriptProperties().getProperty("TRACKING_SHEET_URL");
+  if (!url) throw new Error("Script property TRACKING_SHEET_URL is not set");
+  const gid = Number((url.match(/[#&?]gid=(\d+)/) || [])[1]);
+  const sheets = SpreadsheetApp.openByUrl(url).getSheets();
+  return sheets.find((sheet) => sheet.getSheetId() === gid) || sheets[0];
+}
+
+// Adds the order below the last row, unless its number is already there.
+function appendToTracking(values) {
+  const number = values[0].value;
+  if (number === "" || number === null) return;
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    const sheet = trackingSheet();
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((header) => String(header).trim());
+    const numberColumn = headers.indexOf(values[0].header) + 1;
+    if (!numberColumn) throw new Error('Column "' + values[0].header + '" not found in the tracking sheet');
+
+    const lastRow = sheet.getLastRow();
+    const known = lastRow > 1 ? sheet.getRange(2, numberColumn, lastRow - 1, 1).getValues() : [];
+    if (known.some((cells) => String(cells[0]) === String(number))) return;
+
+    values.forEach((item) => {
+      const column = headers.indexOf(item.header) + 1; // first match: "Дата заявки", not the later "дата заявки"
+      if (!column) return;
+      const cell = sheet.getRange(lastRow + 1, column);
+      if (item.format) cell.setNumberFormat(item.format);
+      cell.setValue(item.value);
+    });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// Run once from the editor: asks for the permission to edit the tracking spreadsheet and installs the trigger.
+function installTrackingTrigger() {
+  trackingSheet(); // fails early if the property is missing or the spreadsheet is not accessible
+  ScriptApp.getProjectTriggers()
+    .filter((trigger) => trigger.getHandlerFunction() === "syncContactedOrder")
+    .forEach((trigger) => ScriptApp.deleteTrigger(trigger));
+  ScriptApp.newTrigger("syncContactedOrder").forSpreadsheet(SpreadsheetApp.getActiveSpreadsheet()).onEdit().create();
+}
+
+// Writes nothing: logs what ticking "Контакт" on the newest order (row 2) would send to the tracking spreadsheet.
+function previewTrackingRow() {
+  const sheet = findSheet(SpreadsheetApp.getActiveSpreadsheet());
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
+  const row = sheet.getRange(2, 1, 1, headers.length).getValues()[0];
+  trackingValues(headers, row).forEach((item) => console.log(item.header + ": " + item.value));
+}
+
 function json(body) {
   return ContentService.createTextOutput(JSON.stringify(body)).setMimeType(ContentService.MimeType.JSON);
 }
