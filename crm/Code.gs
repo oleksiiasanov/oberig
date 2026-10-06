@@ -7,6 +7,7 @@
 const SHEET_GID = 1570882665; // tab id from the sheet URL (#gid=…); 0/empty falls back to SHEET_NAME, then the first tab
 const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it after calling the customer → the row turns green
 const PROCESSED_COLOR = "#b6d7a8";
+const ORDER_NUMBER_HEADER = "№ замовлення"; // running order number: highest number already in the column + 1
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
@@ -74,6 +75,10 @@ function doPost(e) {
       cell.setValue(col.value(order));
     });
 
+    const numberIndex = headers.indexOf(norm(ORDER_NUMBER_HEADER));
+    const orderNumber = numberIndex !== -1 ? nextOrderNumber(sheet, numberIndex + 1) : "";
+    if (orderNumber) sheet.getRange(row, numberIndex + 1).setValue(orderNumber);
+
     const contactIndex = headers.indexOf(norm(CONTACT_HEADER));
     if (contactIndex !== -1) {
       sheet.getRange(row, contactIndex + 1).insertCheckboxes(); // unchecked
@@ -81,7 +86,7 @@ function doPost(e) {
     }
 
     try {
-      notify(order, book.getUrl() + "#gid=" + sheet.getSheetId());
+      notify(order, book.getUrl() + "#gid=" + sheet.getSheetId(), orderNumber);
     } catch (mailError) {
       console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
     }
@@ -94,9 +99,18 @@ function doPost(e) {
   }
 }
 
+// Rows without a number (tests, blanks) are ignored; the freshly inserted row is still empty at this point.
+function nextOrderNumber(sheet, column) {
+  if (sheet.getLastRow() < 2) return 1;
+  const numbers = sheet.getRange(2, column, sheet.getLastRow() - 1, 1).getValues()
+    .map((cells) => Number(cells[0]))
+    .filter((n) => n > 0);
+  return numbers.length ? Math.max(...numbers) + 1 : 1;
+}
+
 // Recipients live in Script properties (Project Settings → Script properties → NOTIFY_EMAILS, comma-separated),
 // so their addresses are not stored in the public repository.
-function notify(order, sheetUrl) {
+function notify(order, sheetUrl, orderNumber) {
   const recipients = (PropertiesService.getScriptProperties().getProperty("NOTIFY_EMAILS") || "")
     .split(",")
     .map((email) => email.trim())
@@ -110,6 +124,7 @@ function notify(order, sheetUrl) {
   });
   const body = [
     "Нове замовлення на dvision.com.ua",
+    orderNumber ? "Номер замовлення: " + orderNumber : "",
     "",
     "Імʼя: " + order.name,
     "Телефон: " + order.phone,
@@ -125,7 +140,7 @@ function notify(order, sheetUrl) {
 
   MailApp.sendEmail({
     to: recipients.join(","),
-    subject: "Нове замовлення D·Vision SDR — " + order.name + " (" + money(order.total) + ")",
+    subject: "Нове замовлення" + (orderNumber ? " №" + orderNumber : "") + " D·Vision SDR — " + order.name + " (" + money(order.total) + ")",
     body: body,
   });
 }
