@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/app-update",
+      "destination": "/SDR-Network-Bridge.exe",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/manual",
