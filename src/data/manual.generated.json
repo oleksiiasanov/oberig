@@ -3,8 +3,8 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача D·Vision SDR",
-  "syncedAt": "2026-10-06T08:56:49.165Z",
-  "lastEditedAt": "2026-09-18T16:28:40.223Z",
+  "syncedAt": "2026-10-06T20:19:04.106Z",
+  "lastEditedAt": "2026-10-06T20:13:01.786Z",
   "blocks": [
     {
       "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
@@ -1730,618 +1730,137 @@
       "children": []
     },
     {
-      "id": "374874c8-aa8d-80ac-a1b1-c567d5670b4f",
+      "id": "3f1874c8-aa8d-8066-841f-fc345cd7af96",
       "richText": [
         {
-          "text": "5. Оновлення прошивки (OTA)"
+          "text": "5. Оновлення прошивки ("
+        },
+        {
+          "text": "SDR-Network-Bridge)",
+          "bold": true
         }
       ],
       "children": [],
       "type": "heading_2"
     },
     {
-      "id": "374874c8-aa8d-8086-98e4-f58a0b6e34af",
+      "id": "3f1874c8-aa8d-80e2-9807-c0235b47dded",
       "richText": [
         {
-          "text": "Оновлення через мережу (OTA) дозволяють оновлювати програмне забезпечення пристрою через інтернет. Для цього пристрій має бути підключений до хоста з доступом до інтернету (Android-телефон або Windows ПК) через USB."
+          "text": "Для оновлення прошивки потрібно завантажити застосунок "
+        },
+        {
+          "text": "SDR-Network-Bridge",
+          "href": "https://dvision.com.ua/app-update",
+          "bold": true
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-80fc-82ef-f5ecb9105461",
-      "richText": [
-        {
-          "text": "1. Підключення пристрою до ПК"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ef-8ffa-cd3932ae068a",
-      "richText": [
-        {
-          "text": "Підключіть пристрій до комп'ютера через USB."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8050-a131-e8cca6ee6e00",
-      "richText": [
-        {
-          "text": "Дочекайтеся, поки Windows визначить новий мережевий адаптер."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ff-ba5e-cf00f748e25b",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-8096-8b4c-fe3b886a6ca1",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A1feac728-2a2a-4adb-a668-296478d9902a%3Aimage.png?table=block&id=3f1874c8-aa8d-8096-8b4c-fe3b886a6ca1&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-800d-a628-c3c0136583f4",
+      "id": "3f1874c8-aa8d-8009-b18d-c51e8a57f7ea",
       "richText": [
         {
-          "text": "2. Надання доступу до інтернету через Windows"
+          "text": "Запускаємо застосунок, підключаємо детектор до комп’ютера за допомогою USB кабеля. "
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-8027-942f-f199d3008032",
+      "id": "3f1874c8-aa8d-80ee-9b68-dfcfb6b0f325",
       "richText": [
         {
-          "text": "Натисніть "
-        },
-        {
-          "text": "Win + R",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-807e-8d83-ced5c16ae968",
-      "richText": [
-        {
-          "text": "Введіть:"
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-809e-a546-fc753d68dbd8",
-      "richText": [
-        {
-          "text": "ncpa.cpl"
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-8031-9b0c-ef8e6458bfde",
-      "richText": [
-        {
-          "text": "Відкриється вікно "
-        },
-        {
-          "text": "Мережеві підключення",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80a8-91fd-d7fda7f05c04",
-      "richText": [
-        {
-          "text": "Знайдіть підключення, через яке ПК має доступ до Інтернету (Wi-Fi або Ethernet)."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80a0-87d8-ee3eb1d5c5d0",
-      "richText": [
-        {
-          "text": "Клікніть по ньому правою кнопкою миші → "
-        },
-        {
-          "text": "Властивості",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8017-b294-eece750c8225",
-      "richText": [
-        {
-          "text": "Перейдіть на вкладку "
-        },
-        {
-          "text": "Спільний доступ",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8033-a355-c283a12e0f74",
-      "richText": [
-        {
-          "text": "Поставте галочку:"
-        }
-      ],
-      "children": [
-        {
-          "id": "3a4874c8-aa8d-80bd-b677-ecdaa11ed34b",
-          "richText": [
-            {
-              "text": "«Дозволити іншим користувачам мережі використовувати підключення до Інтернету цього комп'ютера»",
-              "bold": true
-            }
-          ],
-          "children": [],
-          "type": "paragraph"
-        }
-      ],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-802a-9535-d8e8dda94134",
-      "richText": [
-        {
-          "text": "У списку нижче виберіть адаптер пристрою:"
-        }
-      ],
-      "children": [
-        {
-          "id": "3a4874c8-aa8d-80f5-bd60-d8979b306ae4",
-          "richText": [
-            {
-              "text": "Ethernet 1 (приклад)",
-              "bold": true
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "3a4874c8-aa8d-8031-8c4b-eb8b8c74029d",
-          "richText": [
-            {
-              "text": "або "
-            },
-            {
-              "text": "SDR Device SDR Network",
-              "bold": true
-            },
-            {
-              "text": " (назва може відрізнятися)."
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        }
-      ],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ff-8665-d6a4ffc659b4",
-      "richText": [
-        {
-          "text": "Натисніть "
-        },
-        {
-          "text": "OK",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8071-bd4b-fe7449db8702",
-      "richText": [
-        {
-          "text": "Після цього пристрій має отримати IP-адресу від Windows."
+          "text": "В застосунку натискаємо кнопку “Почати”."
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-80a6-85a1-d34b4f9e6f6c",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-80a4-b630-f81e744ac3c4",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3Aed0e11e4-163c-4ff4-b6cf-2e68abca39d2%3Aimage.png?table=block&id=3f1874c8-aa8d-80a4-b630-f81e744ac3c4&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-80a1-af3d-dde1fc465ea6",
+      "id": "3f1874c8-aa8d-80a8-a743-ef491a589cfe",
       "richText": [
         {
-          "text": "3. Перевірка доступу до мережі"
+          "text": "Далі слідуємо інструкції і заходимо в налаштування детектора. В пунткі меню “Утиліти” натискаємо кнопку “Оновити через мережу”."
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-808c-adc5-ece5404ea3fd",
-      "richText": [
-        {
-          "text": "На екрані пристрою:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80de-a7d5-f658508b7c6c",
-      "richText": [
-        {
-          "text": "Відкрийте меню "
-        },
-        {
-          "text": "Налаштування",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80ef-aca5-ca11a80b9a41",
-      "richText": [
-        {
-          "text": "Перейдіть до "
-        },
-        {
-          "text": "OTA Оновлення (Мережа)",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8085-85fd-fb7dcb7794d7",
-      "richText": [
-        {
-          "text": "Якщо все налаштовано правильно, на екрані буде показано:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8016-896e-e1c552f6be7b",
-      "richText": [
-        {
-          "text": "USB Connection: Connected\nNetwork (IP): 192.168.xxx.xxx"
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-8034-8d71-c648cf41899e",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-804f-abfb-c11407feb3da",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A1096d2cd-d5f5-4158-9b84-a3a4c2115a9d%3APXL_20261006_181936564.jpg?table=block&id=3f1874c8-aa8d-804f-abfb-c11407feb3da&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-808b-b1d9-c7ab615f5867",
+      "id": "3f1874c8-aa8d-8092-8776-db06fb973eb1",
       "richText": [
         {
-          "text": "4. Перевірка нової прошивки"
+          "text": "В меню “ОТА оновлення прошивки” має бути вказано, що детектор підлюкчений через USB  і що він отримав адресу. Якщо цього немає, чекаємо, доки застосунок надасть адресу детектору. "
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-8004-88aa-cb64eddaee5c",
-      "richText": [
-        {
-          "text": "У меню OTA виберіть:"
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8013-9b42-cb14ad716a79",
-      "richText": [
-        {
-          "text": "Check Update"
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-80af-932d-eb4a239eac50",
-      "richText": [
-        {
-          "text": "Пристрій перевірить наявність нової версії."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80f9-9bbd-e1a5c1dd4dd4",
-      "richText": [
-        {
-          "text": "Якщо оновлення знайдено, побачите щось на кшталт:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80a0-8264-eee9736b0a39",
-      "richText": [
-        {
-          "text": "Install: Newer 0.3.10 stable"
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-801f-b610-db4f86e86d81",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-80bd-aa93-d186c25f1b65",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3Ad81d749d-38bc-49aa-864b-d163f405e35b%3APXL_20261006_181552862.jpg?table=block&id=3f1874c8-aa8d-80bd-aa93-d186c25f1b65&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-80f2-ad72-ebff56956704",
-      "richText": [
-        {
-          "text": "5. Встановлення прошивки"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8078-b4b4-e19397e1d522",
-      "richText": [
-        {
-          "text": "Натисніть:"
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8033-9e87-e781a528ac90",
-      "richText": [
-        {
-          "text": "Install"
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-8075-a117-d74611ab2f24",
-      "richText": [
-        {
-          "text": "Дочекайтеся завершення всіх етапів:"
-        }
-      ],
-      "children": [
-        {
-          "id": "3a4874c8-aa8d-8017-8f8f-d7481f54c8a7",
-          "richText": [
-            {
-              "text": "завантаження;"
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "3a4874c8-aa8d-80f9-a831-f92975c3f892",
-          "richText": [
-            {
-              "text": "стирання пам'яті;"
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "3a4874c8-aa8d-80ff-b60b-d314dd2f9ed1",
-          "richText": [
-            {
-              "text": "запису прошивки;"
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "3a4874c8-aa8d-8073-9070-d5dca9d38814",
-          "richText": [
-            {
-              "text": "перевірки."
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        }
-      ],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-80a2-9cff-de850b0d4eb7",
-      "richText": [
-        {
-          "text": "На екрані буде показуватися прогрес у відсотках."
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8066-8e56-d3b56035e9ab",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-8026-8144-e97619335dcf",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3Af2980d39-100f-4b3b-ac92-f5607c6f7038%3Aimage.png?table=block&id=3f1874c8-aa8d-8026-8144-e97619335dcf&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-80f6-8a5b-ccc39535f3c7",
+      "id": "3f1874c8-aa8d-8000-bff5-cd0f492be1e0",
       "richText": [
         {
-          "text": "6. Завершення оновлення"
+          "text": "Коли адреса вже надана, натискаємо “Перевірити оновлення” і бачимо список доступних для оновлення версій. Обираємо потрібно версію і чекаємо завершення оновлення."
         }
       ],
       "children": [],
       "type": "paragraph"
     },
     {
-      "id": "3a4874c8-aa8d-80a8-a3d6-f72e872d7b22",
-      "richText": [
-        {
-          "text": "Після успішного завершення з'явиться повідомлення:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8039-a46c-e6931abcfe14",
-      "richText": [
-        {
-          "text": "Update Successful!\nRebooting in 3s..."
-        }
-      ],
-      "children": [],
-      "language": "Plain Text",
-      "type": "code"
-    },
-    {
-      "id": "3a4874c8-aa8d-8056-a9f2-cd0e7116f97f",
-      "richText": [
-        {
-          "text": "Пристрій автоматично перезавантажиться."
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80d6-b3c4-d8f40975a719",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-805d-9715-d48508c77448",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A199ebec3-eb49-45a7-9741-54076765b92e%3APXL_20261006_181050075.jpg?table=block&id=3f1874c8-aa8d-805d-9715-d48508c77448&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
     {
-      "id": "3a4874c8-aa8d-803c-babc-f2b207598d23",
-      "richText": [
-        {
-          "text": "7. Перевірка версії"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-80e6-90d0-f021a3ed3330",
-      "richText": [
-        {
-          "text": "Після перезавантаження:"
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "3a4874c8-aa8d-8097-afa9-cfbd4ab507ca",
-      "richText": [
-        {
-          "text": "Відкрийте "
-        },
-        {
-          "text": "Налаштування → Утиліти",
-          "bold": true
-        },
-        {
-          "text": "."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-808f-b5e5-e2be39f81c02",
-      "richText": [
-        {
-          "text": "Переконайтеся, що відображається нова версія прошивки."
-        }
-      ],
-      "children": [],
-      "type": "numbered_list_item"
-    },
-    {
-      "id": "3a4874c8-aa8d-8070-afa0-c294db8af17a",
-      "richText": [
-        {
-          "text": "Оновлення завершено."
-        }
-      ],
-      "children": [],
-      "type": "paragraph"
-    },
-    {
-      "id": "374874c8-aa8d-80da-b1c3-fa3274e19593",
-      "type": "divider",
+      "id": "3f1874c8-aa8d-805e-8606-d77215b7d016",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A981860a4-27e3-40b4-a2cb-27be6e58b8fb%3APXL_20261006_181109411.jpg?table=block&id=3f1874c8-aa8d-805e-8606-d77215b7d016&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
       "richText": [],
       "children": []
     },
