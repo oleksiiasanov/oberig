@@ -119,7 +119,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "В наявності",
           name: "Виносна антена для авто",
-          model: "DV-Ext.C 2 SLL 240, DV-Ext.C 5 SLL 240, DV-Ext.C 10 SLL 240",
+          model: "DV-Ext.C L2, DV-Ext.C L5, DV-Ext.C L10",
           short:
             "Двохантенна система на магнітному кріпленні з кабелем 2, 5 або 10 м на вибір для винесення точки прийому сигналу за межі транспортного засобу.",
           description: [
@@ -163,7 +163,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "В наявності",
           name: "Виносна антена для бліндажа",
-          model: "DV-Ext.B 14 SLL 240, DV-Ext.B 20 SLL 300",
+          model: "DV-Ext.B L14, DV-Ext.B L20",
           short:
             "Двохантенна система з підсилювачем та ВЧ-кабелем (14 або 20 м) для винесення точки прийому сигналу з укриттів та захищених позицій.",
           description: [
@@ -207,7 +207,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "В наявності",
           name: "Автомобільний тримач",
-          model: "DV-CH 1.0",
+          model: "DV-CH",
           short: "Надійне кріплення на посиленій вакуумній присосці для фіксації детектора на панелі авто.",
           description: [
             "Автомобільний тримач призначений для надійної фіксації детектора D·Vision SDR всередині транспортного засобу. Кріплення дозволяє розмістити прилад у зоні видимості водія або оператора, забезпечуючи зручний моніторинг радіоелектронної обстановки під час руху.",
@@ -245,7 +245,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "В наявності",
           name: "Кріплення на бронежилет (MOLLE)",
-          model: "DV-MM 1.0",
+          model: "DV-MM",
           short: "Тактичне кріплення на систему MOLLE для надійної фіксації детектора на спорядженні та зручного моніторингу без задіяння рук.",
           description: [
             "Кріплення розроблене для фіксації детектора D·Vision SDR на бронежилеті, плитоносці або іншому елементі екіпірування з системою MOLLE. Воно дозволяє повністю звільнити руки для виконання паралельних завдань, зберігаючи при цьому постійний огляд екрана та оперативний контроль ситуації на місцевості.",
@@ -709,7 +709,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "In stock",
           name: "External Antenna for Car",
-          model: "DV-Ext.C 2 SLL 240, DV-Ext.C 5 SLL 240, DV-Ext.C 10 SLL 240",
+          model: "DV-Ext.C L2, DV-Ext.C L5, DV-Ext.C L10",
           short: "A dual-antenna magnetic-mount system with a 2, 5, or 10 m cable for moving the receiving point outside the vehicle.",
           description: [
             "The external antenna is designed specifically for the D·Vision SDR detector's operating frequencies. It moves the receiving elements onto the car's roof, eliminating signal shielding from the metal body and significantly improving UAV detection range and stability.",
@@ -752,7 +752,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "In stock",
           name: "External Antenna for Bunker/Dugout",
-          model: "DV-Ext.B 14 SLL 240, DV-Ext.B 20 SLL 300",
+          model: "DV-Ext.B L14, DV-Ext.B L20",
           short:
             "A dual-antenna system with a built-in amplifier and a 14 or 20 m RF cable for moving the receiving point out of shelters and protected positions.",
           description: [
@@ -796,7 +796,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "In stock",
           name: "Car Holder",
-          model: "DV-CH 1.0",
+          model: "DV-CH",
           short: "A reliable mount on a reinforced vacuum suction cup for securing the detector to a car dashboard.",
           description: [
             "The car holder is designed to securely mount the D·Vision SDR detector inside a vehicle. The mount places the device within the driver's or operator's line of sight, providing convenient monitoring of the radio-electronic environment while driving.",
@@ -834,7 +834,7 @@ export const landingContent = {
           tagStatus: "in-stock",
           tag: "In stock",
           name: "Body Armor Mount (MOLLE)",
-          model: "DV-MM 1.0",
+          model: "DV-MM",
           short: "A tactical MOLLE mount for securing the detector to your gear and monitoring hands-free.",
           description: [
             "The mount is designed to secure the D·Vision SDR detector on a body armor vest, plate carrier or any other gear with a MOLLE system. It frees your hands for parallel tasks while keeping the screen constantly in view and the situation on the ground under control.",
