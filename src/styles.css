@@ -2156,6 +2156,19 @@ img.tool-media {
   font-size: 1.3rem;
 }
 
+.order-item-model {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.order-item-model span {
+  display: inline-block;
+  white-space: pre;
+}
+
 .order-item-short {
   margin: 0;
   color: var(--text);
@@ -3640,6 +3653,13 @@ img.tool-media {
 .cart-total-name {
   flex: 1;
   min-width: 0;
+}
+
+.cart-total-model {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .cart-total-price {

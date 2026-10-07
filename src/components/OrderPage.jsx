@@ -35,6 +35,22 @@ export function ItemPhoto({ item, order }) {
   );
 }
 
+export function ItemModel({ item, order }) {
+  if (!item.model) return null;
+  const models = item.model.split(", ");
+  return (
+    <p className="order-item-model">
+      {order.modelLabel}:{" "}
+      {models.map((model, index) => (
+        <span key={model}>
+          {model}
+          {index < models.length - 1 ? ", " : ""}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 export function DescriptionScroll({ label, paragraphs }) {
   return (
     <div className="order-description">
@@ -137,6 +153,7 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
         <ItemPhoto item={item} order={order} />
         <div className="order-item-intro">
           <h3>{item.name}</h3>
+          <ItemModel item={item} order={order} />
           <p className="order-item-short">{item.short}</p>
           <a className="btn btn-primary order-item-cta-mobile" href={cartHref} onClick={goToCart}>
             <span>{orderLabel}</span>

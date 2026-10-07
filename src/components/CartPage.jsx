@@ -6,6 +6,7 @@ import {
   DescriptionScroll,
   ExtrasList,
   FunctionalityGrid,
+  ItemModel,
   ItemPhoto,
   PriceBlock,
 } from "./OrderPage.jsx";
@@ -147,6 +148,7 @@ function ProductPreview({ item, order, cart, onClose }) {
           <ItemPhoto item={item} order={order} />
           <div className="order-item-intro">
             <h3>{item.name}</h3>
+            <ItemModel item={item} order={order} />
             <p className="order-item-short">{item.short}</p>
             {firstGroup ? <CharacteristicsTable title={firstGroup.title} rows={firstGroup.rows} /> : null}
           </div>
@@ -385,10 +387,14 @@ export function CartPage({ content, search, onNavigate }) {
             <ul className="cart-total-lines">
               {orderLines.map((line) => {
                 const label = `${line.name}${line.cableLengthM ? `, ${line.cableLengthM} ${cart.lengthUnit}` : ""}`;
+                // Models are listed in the same order as cableLengths.
+                const item = order.items.find((candidate) => candidate.id === line.id);
+                const model = item?.model?.split(", ")[line.cableLengthM ? item.cableLengths.indexOf(line.cableLengthM) : 0];
                 return (
                   <li key={`${line.id}-${line.cableLengthM || ""}`}>
                     <span className="cart-total-name">
                       {label} × {line.quantity}
+                      {model ? <span className="cart-total-model">{model}</span> : null}
                     </span>
                     <span className="cart-total-price">{formatMoney(line.quantity * line.unitPrice)}</span>
                     <button type="button" className="cart-remove" aria-label={`${cart.remove}: ${label}`} onClick={() => removeLine(line)}>
