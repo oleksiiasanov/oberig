@@ -112,20 +112,19 @@ export const landingContent = {
         },
         {
           id: "car-antenna",
-          cableLengths: [2, 5, 10],
           category: "antenna",
           icon: "antenna",
           photo: "/products/external-antena-for-car.jpg",
           tagStatus: "in-stock",
           tag: "В наявності",
-          name: "Виносна антена для авто",
-          model: "DV-Ext.C L2, DV-Ext.C L5, DV-Ext.C L10",
+          name: "Виносна антена для авто 2м",
+          model: "DV-Ext.C L2",
           short:
-            "Двохантенна система на магнітному кріпленні з кабелем 2, 5 або 10 м на вибір для винесення точки прийому сигналу за межі транспортного засобу.",
+            "Двохантенна система на магнітному кріпленні з кабелем 2 м для винесення точки прийому сигналу за межі транспортного засобу.",
           description: [
             "Виносна антена розроблена спеціально під робочі частоти детектора D·Vision SDR. Вона призначена для винесення приймальних елементів на дах автомобіля, що дозволяє усунути екранування сигналу металевим кузовом і суттєво підвищує дальність та стабільність виявлення БПЛА.",
             "Конструкція містить дві внутрішні антени, оптимізовані для роботи в діапазонах детектора. Фіксація на металевих поверхнях здійснюється за допомогою потужної основи з трьох неодимових магнітів, що забезпечує надійне утримання модуля на даху авто під час руху на високій швидкості та в умовах інтенсивної вібрації.",
-            "Комплект поставляється з гнучким високочастотним кабелем довжиною 2, 5 або 10 метрів на вибір, який має мінімальне згасання сигналу та дозволяє зручно завести підключення в салон автомобіля.",
+            "Комплект поставляється з гнучким високочастотним кабелем довжиною 2 метри, який має мінімальне згасання сигналу та дозволяє зручно завести підключення в салон автомобіля.",
           ],
           characteristics: [
             {
@@ -133,9 +132,8 @@ export const landingContent = {
               rows: [
                 ["Кількість антен", "2 внутрішні всеспрямовані"],
                 ["Тип кріплення", "Основа з 3 неодимових магнітів"],
-                ["Довжина кабелю", "2, 5 або 10 м на вибір"],
+                ["Довжина кабелю", "2 м"],
                 ["Конектори", "Стандартні ВЧ-роз'єми"],
-                ["Живлення/АКБ", "В комплект не входять"],
               ],
             },
           ],
@@ -148,8 +146,51 @@ export const landingContent = {
             ],
           },
           extras: [],
+          price: "7 000 грн",
+        },
+        {
+          id: "car-antenna-amp",
+          cableLengths: [5, 10],
+          category: "antenna",
+          icon: "antenna",
+          photo: "/products/external-antena-for-car.jpg",
+          tagStatus: "in-stock",
+          tag: "В наявності",
+          name: "Виносна антена для авто з підсиленням",
+          model: "DV-Ext.C L5, DV-Ext.C L10",
+          short:
+            "Двохантенна система з активним підсилювачем на магнітному кріпленні. Призначена для винесення точки прийому сигналу за межі автомобіля (зокрема броньованого) з кабелем 5 або 10 метрів на вибір.",
+          description: [
+            "Виносна активна антена розроблена спеціально під робочі частоти детектора D·Vision SDR. Вона призначена для винесення приймальних елементів на дах або корпус автомобіля, що дозволяє усунути екранування сигналу металевим кузовом та суттєво підвищує дальність і стабільність виявлення БПЛА.",
+            "Особливості застосування на броньованій техніці: конструкція системи та гнучкий високочастотний кабель мінімального згасання адаптовані для встановлення на броньовані автомобілі. Довжина кабелю (5 або 10 м) дозволяє зручно завести підключення в салон через технологічні отвори, броненакладки або ущільнювач заднього скла без втрати герметичності та пошкодження кабелю.",
+            "Конструкція та підсилення: модуль містить дві внутрішні всеспрямовані антени з активним підсилювачем сигналу, оптимізовані під діапазони детектора.",
+            "⚠️ Зверніть увагу: активний підсилювач антени потребує додаткового живлення (від бортової мережі автомобіля або окремого зовнішнього акумулятора/АКБ).",
+            "Фіксація на металевих поверхнях здійснюється за допомогою основи з трьох неодимових магнітів. Це забезпечує надійне утримання модуля на даху чи корпусі авто під час руху на високій швидкості, а також в умовах інтенсивної вібрації та бездоріжжя.",
+          ],
+          characteristics: [
+            {
+              title: "Конструкція та кріплення",
+              rows: [
+                ["Кількість антен", "2 внутрішні всеспрямовані"],
+                ["Підсилення сигналу", "20 dBm (нижній) / 13 dBm (верхній діапазон)"],
+                ["Тип кріплення", "Основа з 3 неодимових магнітів"],
+                ["Довжина кабелю", "5 або 10 м на вибір"],
+                ["Конектори", "Стандартні ВЧ-роз'єми"],
+                ["Живлення/АКБ", "В комплект не входять"],
+              ],
+            },
+          ],
+          functionality: {
+            title: "Особливості",
+            items: [
+              "Оптимізація під діапазони D·Vision SDR",
+              "Надійне утримання на даху авто бездоріжжям",
+              "Усунення екранування кузовом авто",
+              "Підходить для прокладання кабелю в салон броньованих авто (під корпус або через ущільнювачі скла)",
+            ],
+          },
+          extras: [],
           price: [
-            ["Антена 2 м", "7 000 грн"],
             ["Антена 5 м", "13 200 грн"],
             ["Антена 10 м", "14 200 грн"],
           ],
@@ -702,19 +743,18 @@ export const landingContent = {
         },
         {
           id: "car-antenna",
-          cableLengths: [2, 5, 10],
           category: "antenna",
           icon: "antenna",
           photo: "/products/external-antena-for-car.jpg",
           tagStatus: "in-stock",
           tag: "In stock",
-          name: "External Antenna for Car",
-          model: "DV-Ext.C L2, DV-Ext.C L5, DV-Ext.C L10",
-          short: "A dual-antenna magnetic-mount system with a 2, 5, or 10 m cable for moving the receiving point outside the vehicle.",
+          name: "External Antenna for Car, 2 m",
+          model: "DV-Ext.C L2",
+          short: "A dual-antenna magnetic-mount system with a 2 m cable for moving the receiving point outside the vehicle.",
           description: [
             "The external antenna is designed specifically for the D·Vision SDR detector's operating frequencies. It moves the receiving elements onto the car's roof, eliminating signal shielding from the metal body and significantly improving UAV detection range and stability.",
             "The unit contains two internal antennas optimized for the detector's bands. It attaches to metal surfaces via a base with three powerful neodymium magnets, holding firmly on a car roof at high speed and under heavy vibration.",
-            "It ships with a flexible, low-loss RF cable 2, 5, or 10 meters long, making it easy to route the connection into the cabin.",
+            "It ships with a flexible, low-loss RF cable 2 meters long, making it easy to route the connection into the cabin.",
           ],
           characteristics: [
             {
@@ -722,9 +762,8 @@ export const landingContent = {
               rows: [
                 ["Antennas", "2 internal omnidirectional"],
                 ["Mount type", "Base with 3 neodymium magnets"],
-                ["Cable length", "2, 5, or 10 m, your choice"],
+                ["Cable length", "2 m"],
                 ["Connectors", "Standard RF connectors"],
-                ["Power/Battery", "Not included"],
               ],
             },
           ],
@@ -737,8 +776,51 @@ export const landingContent = {
             ],
           },
           extras: [],
+          price: "UAH 7,000",
+        },
+        {
+          id: "car-antenna-amp",
+          cableLengths: [5, 10],
+          category: "antenna",
+          icon: "antenna",
+          photo: "/products/external-antena-for-car.jpg",
+          tagStatus: "in-stock",
+          tag: "In stock",
+          name: "Amplified External Antenna for Car",
+          model: "DV-Ext.C L5, DV-Ext.C L10",
+          short:
+            "A dual-antenna magnetic-mount system with an active amplifier. Moves the receiving point outside the vehicle (including armored ones), with a 5 or 10 m cable of your choice.",
+          description: [
+            "The active external antenna is designed specifically for the D·Vision SDR detector's operating frequencies. It moves the receiving elements onto the car's roof or body, eliminating signal shielding from the metal body and significantly improving UAV detection range and stability.",
+            "Use on armored vehicles: the system's design and its flexible, low-loss RF cable are adapted for installation on armored cars. The cable length (5 or 10 m) makes it easy to route the connection into the cabin through service openings, armor plates, or the rear window seal without losing the seal or damaging the cable.",
+            "Build and amplification: the module contains two internal omnidirectional antennas with an active signal amplifier, optimized for the detector's bands.",
+            "⚠️ Please note: the antenna's active amplifier needs additional power (from the vehicle's onboard network or a separate external battery).",
+            "It attaches to metal surfaces via a base with three neodymium magnets, holding the module firmly on the car's roof or body at high speed, under heavy vibration, and off-road.",
+          ],
+          characteristics: [
+            {
+              title: "Build and mounting",
+              rows: [
+                ["Antennas", "2 internal omnidirectional"],
+                ["Signal amplification", "20 dBm (lower) / 13 dBm (upper band)"],
+                ["Mount type", "Base with 3 neodymium magnets"],
+                ["Cable length", "5 or 10 m, your choice"],
+                ["Connectors", "Standard RF connectors"],
+                ["Power/Battery", "Not included"],
+              ],
+            },
+          ],
+          functionality: {
+            title: "Usage notes",
+            items: [
+              "Optimized for the D·Vision SDR's bands",
+              "Holds firmly on a car roof over rough roads",
+              "Removes the vehicle body's shielding effect",
+              "Suited to routing the cable into armored vehicles (under the body or through window seals)",
+            ],
+          },
+          extras: [],
           price: [
-            ["2 m antenna", "UAH 7,000"],
             ["5 m antenna", "UAH 13,200"],
             ["10 m antenna", "UAH 14,200"],
           ],
