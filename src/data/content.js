@@ -398,7 +398,6 @@ export const landingContent = {
       terms: [
         "Очікування по передзамовленню: до 8 тижнів",
         "При замовленні від 2од. необхідно внести передплату 50% від суми замовлення.",
-        "До 1 жовтня можна зафіксувати попередню ціну детектора (22 000 грн), внісши передплату 50% (від 1 од.).",
         "Повна оплата здійснюється перед відправленням замовлення на розрахунковий рахунок. Післяплата наразі недоступна.",
       ],
       consent: "Оформлюючи замовлення, я надаю згоду на отримання сповіщень щодо статусу замовлення, оновлень та спілкування з представником D·Vision SDR у WhatsApp на вказаний номер.",
@@ -1025,7 +1024,6 @@ export const landingContent = {
       terms: [
         "Pre-order lead time: up to 8 weeks",
         "For orders of 2 or more units, a 50% prepayment of the order total is required.",
-        "Until October 1 you can lock in the current detector price (UAH 22,000) with a 50% prepayment (from 1 unit).",
         "Full payment is made to our bank account before the order is shipped. Cash on delivery is not available at the moment.",
       ],
       consent: "By placing this order, I agree to receive notifications about the order status and updates, and to communicate with a D·Vision SDR representative on WhatsApp at the number provided.",
