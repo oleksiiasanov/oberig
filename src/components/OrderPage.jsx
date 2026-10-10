@@ -1,4 +1,4 @@
-import { ArrowUp, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff } from "lucide-react";
+import { ArrowUp, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff, TriangleAlert } from "lucide-react";
 import { motion } from "framer-motion";
 import { FinalCTA } from "./FinalCTA.jsx";
 
@@ -8,6 +8,10 @@ const ITEM_ICONS = {
   antenna: Antenna,
   "shield-half": ShieldHalf,
 };
+
+// Spare parts live in order.items too (so the cart can order them) but get their own section on /order.
+export const PART_CATEGORY = "part";
+export const PARTS_ANCHOR = "parts";
 
 export function ItemTag({ item }) {
   if (!item.tag) return null;
@@ -96,6 +100,24 @@ export function FunctionalityGrid({ title, items }) {
   );
 }
 
+export function ItemNotice({ notice }) {
+  return (
+    <div className="order-notice" role="note">
+      <h4>
+        <TriangleAlert aria-hidden="true" />
+        {notice.title}
+      </h4>
+      <ul>
+        {notice.items.map(([label, text]) => (
+          <li key={label}>
+            <strong>{label}:</strong> {text}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function ExtrasList({ title, items }) {
   return (
     <div className="order-extra-group">
@@ -171,6 +193,8 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
         <FunctionalityGrid title={item.functionality.title} items={item.functionality.items} />
       ) : null}
 
+      {item.notice ? <ItemNotice notice={item.notice} /> : null}
+
       {item.extras?.length ? (
         <div className="order-extras">
           {item.extras.map((extra) => (
@@ -188,9 +212,47 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
   );
 }
 
+function PartItem({ item, order, orderLabel, onNavigate }) {
+  const cartHref = `/cart?item=${item.id}`;
+  const goToCart = (event) => {
+    event.preventDefault();
+    onNavigate(cartHref);
+  };
+
+  return (
+    <motion.article
+      className="order-part"
+      id={item.id}
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ type: "spring", stiffness: 90, damping: 18 }}
+    >
+      <ItemPhoto item={item} order={order} />
+      <div className="order-item-intro">
+        <h3>{item.name}</h3>
+        <ItemModel item={item} order={order} />
+        <p className="order-item-short">{item.short}</p>
+      </div>
+      <div className="order-part-details">
+        <DescriptionScroll label={item.descriptionLabel || order.descriptionLabel} paragraphs={item.description} />
+        <div className="order-part-buy">
+          {item.price ? <PriceBlock label={order.priceLabel} price={item.price} /> : null}
+          <a className="btn btn-primary order-part-cta" href={cartHref} onClick={goToCart}>
+            <span>{orderLabel}</span>
+          </a>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 function QuickNav({ items, quickNav }) {
   const links = quickNav
-    .map(([label, category]) => [label, items.find((item) => item.category === category)?.id])
+    .map(([label, category]) => {
+      const first = items.find((item) => item.category === category);
+      return [label, first && category === PART_CATEGORY ? PARTS_ANCHOR : first?.id];
+    })
     .filter(([, id]) => id);
 
   if (!links.length) return null;
@@ -221,6 +283,8 @@ function BackToTop() {
 
 export function OrderPage({ content, onNavigate }) {
   const { order } = content;
+  const products = order.items.filter((item) => item.category !== PART_CATEGORY);
+  const parts = order.items.filter((item) => item.category === PART_CATEGORY);
 
   return (
     <main className="order-page">
@@ -233,11 +297,22 @@ export function OrderPage({ content, onNavigate }) {
 
       <section className="section order-list-section">
         <div className="order-list">
-          {order.items.map((item) => (
+          {products.map((item) => (
             <OrderItem item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate} key={item.id} />
           ))}
         </div>
       </section>
+
+      {parts.length ? (
+        <section className="section order-parts-section" id={PARTS_ANCHOR}>
+          <h2 className="order-parts-title">{order.partsTitle}</h2>
+          <div className="order-parts-list">
+            {parts.map((item) => (
+              <PartItem item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate} key={item.id} />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <BackToTop />
 

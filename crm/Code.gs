@@ -24,6 +24,8 @@ const COLUMNS = [
   { header: "Виносна антена для бліндажа, 20м", value: (o) => qty(o, "bunker-antenna", 20) },
   { header: "Автомобільний тримач", value: (o) => qty(o, "car-holder") },
   { header: "Кріплення на бронежилет", value: (o) => qty(o, "molle-mount") },
+  { header: "Антена 2.8 – 12 (більша)", value: (o) => qty(o, "antenna-high") },
+  { header: "Антена 0.5 – 3 (менша)", value: (o) => qty(o, "antenna-low") },
   { header: "Разом", value: (o) => Number(o.total) || 0 },
 ];
 
@@ -33,9 +35,9 @@ function qty(order, id, length) {
     .reduce((sum, i) => sum + Number(i.quantity || 0), 0) || "";
 }
 
-// Treat ʼ ’ ' and stray spaces as the same character so header typos don't break matching.
+// Treat ʼ ’ ' (and – — -) and stray spaces as the same character so header typos don't break matching.
 function norm(text) {
-  return String(text).replace(/[ʼ’‘`']/g, "'").replace(/\s+/g, " ").trim().toLowerCase();
+  return String(text).replace(/[ʼ’‘`']/g, "'").replace(/[–—−]/g, "-").replace(/\s+/g, " ").trim().toLowerCase();
 }
 
 function findSheet(book) {
@@ -209,6 +211,8 @@ const ACCESSORY_HEADERS = [
   "Виносна антена для бліндажа, 20м",
   "Автомобільний тримач",
   "Кріплення на бронежилет",
+  "Антена 2.8 – 12 (більша)",
+  "Антена 0.5 – 3 (менша)",
 ];
 
 // One accessory per line, e.g. "Автомобільний тримач x2"; empty when the order has none.

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Brand } from "./Brand.jsx";
 import { LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "../data/content.js";
+import { PART_CATEGORY, PARTS_ANCHOR } from "./OrderPage.jsx";
 import { SocialIcon } from "./SocialIcon.jsx";
 
 function LanguageSwitcher({ language, onLanguageChange }) {
@@ -102,6 +103,10 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
   const scrollYRef = useRef(0);
 
   const closeMenu = () => setIsMenuOpen(false);
+  // Spare parts share one dropdown entry that leads to their section on /order.
+  const { items, partsTitle } = content.order;
+  const catalogItems = items.filter((item) => item.category !== PART_CATEGORY);
+  if (catalogItems.length < items.length) catalogItems.push({ id: PARTS_ANCHOR, name: partsTitle });
   const handleNavClick = (event, href) => {
     if (href.startsWith("http")) {
       closeMenu();
@@ -168,7 +173,7 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
               <CatalogDropdown
                 href={href}
                 label={label}
-                items={content.order.items}
+                items={catalogItems}
                 onNavigate={onNavigate}
                 closeMenu={closeMenu}
                 key={href}

@@ -7,7 +7,9 @@ import {
   ExtrasList,
   FunctionalityGrid,
   ItemModel,
+  ItemNotice,
   ItemPhoto,
+  PART_CATEGORY,
   PriceBlock,
 } from "./OrderPage.jsx";
 import { FinalCTA } from "./FinalCTA.jsx";
@@ -154,12 +156,13 @@ function ProductPreview({ item, order, cart, onClose }) {
           </div>
         </div>
         <div className={`order-description-row ${secondGroup ? "" : "order-description-row-single"}`}>
-          <DescriptionScroll label={order.descriptionLabel} paragraphs={item.description} />
+          <DescriptionScroll label={item.descriptionLabel || order.descriptionLabel} paragraphs={item.description} />
           {secondGroup ? <CharacteristicsTable title={secondGroup.title} rows={secondGroup.rows} /> : null}
         </div>
         {item.functionality?.items?.length ? (
           <FunctionalityGrid title={item.functionality.title} items={item.functionality.items} />
         ) : null}
+        {item.notice ? <ItemNotice notice={item.notice} /> : null}
         {item.extras?.length ? (
           <div className="order-extras">
             {item.extras.map((extra) => (
@@ -177,7 +180,9 @@ export function CartPage({ content, search, onNavigate }) {
   const { cart, order } = content;
   const requestedId = new URLSearchParams(search).get("item");
   const mainItem = order.items.find((item) => item.id === requestedId) || order.items[0];
-  const accessories = useMemo(() => order.items.filter((item) => item.id !== mainItem.id), [order.items, mainItem.id]);
+  const others = useMemo(() => order.items.filter((item) => item.id !== mainItem.id), [order.items, mainItem.id]);
+  const accessories = others.filter((item) => item.category !== PART_CATEGORY);
+  const parts = others.filter((item) => item.category === PART_CATEGORY);
 
   // Quantities keyed by line: "<id>" or "<id>:<cableLength>" for items sold in several lengths.
   const [quantities, setQuantities] = useState({});
@@ -208,7 +213,7 @@ export function CartPage({ content, search, onNavigate }) {
       : lineQty(item);
   const setLineQty = (item, length, value) =>
     setQuantities((current) => ({ ...current, [lineKey(item, length)]: value }));
-  const orderLines = [mainItem, ...accessories].flatMap((item) => {
+  const orderLines = [mainItem, ...others].flatMap((item) => {
     if (item.cableLengths?.length) {
       return item.cableLengths
         .map((length, index) => ({
@@ -377,6 +382,13 @@ export function CartPage({ content, search, onNavigate }) {
         <section className="section cart-section">
           <h2 className="cart-subtitle">{cart.accessoriesTitle}</h2>
           <div className="cart-list">{accessories.map(renderRow)}</div>
+        </section>
+      ) : null}
+
+      {parts.length ? (
+        <section className="section cart-section">
+          <h2 className="cart-subtitle">{cart.partsTitle}</h2>
+          <div className="cart-list">{parts.map(renderRow)}</div>
         </section>
       ) : null}
 
