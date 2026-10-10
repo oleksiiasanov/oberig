@@ -2294,6 +2294,49 @@ img.tool-media {
   line-height: 1.45;
 }
 
+.order-notice {
+  padding: 16px;
+  border: 1px solid rgba(255, 200, 87, 0.45);
+  border-left-width: 4px;
+  border-radius: 8px;
+  background: rgba(255, 200, 87, 0.08);
+}
+
+.order-notice h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 10px;
+  color: #ffc857;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-notice h4 svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+}
+
+.order-notice ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.order-notice li::marker {
+  color: #ffc857;
+}
+
+.order-notice strong {
+  color: #eef4f8;
+}
+
 .order-extra-group li::marker {
   color: var(--muted);
 }
@@ -2344,6 +2387,72 @@ img.tool-media {
   justify-self: start;
   width: 100%;
   margin-top: 10px;
+}
+
+.order-page .order-parts-section {
+  padding-top: clamp(20px, 4vw, 40px);
+  scroll-margin-top: 96px;
+}
+
+.order-parts-title {
+  margin: 0 0 16px;
+  color: #eef4f8;
+  font-size: clamp(1.5rem, 6vw, 2.2rem);
+  font-weight: 720;
+}
+
+.order-parts-list {
+  display: grid;
+  gap: 16px;
+}
+
+.order-part {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(8, 15, 24, 0.58);
+  scroll-margin-top: 96px;
+}
+
+.order-part .order-item-photo {
+  padding: 8px;
+}
+
+.order-part .order-item-photo-label {
+  display: none;
+}
+
+.order-part .order-item-intro h3 {
+  font-size: 1.1rem;
+}
+
+.order-part-details {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 14px;
+}
+
+.order-part .order-description-full {
+  max-height: none;
+  overflow-y: visible;
+  padding-right: 0;
+}
+
+.order-part-buy {
+  display: grid;
+  gap: 12px;
+}
+
+.order-part-buy .order-price {
+  padding-top: 0;
+}
+
+.order-part-cta {
+  width: 100%;
 }
 
 .order-back-to-top,
@@ -2654,6 +2763,29 @@ img.tool-media {
   }
 
   .order-item-cta {
+    width: auto;
+  }
+
+  .order-parts-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .order-part {
+    grid-template-columns: 132px minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    padding: 20px;
+  }
+
+  .order-part-details {
+    align-content: space-between;
+  }
+
+  .order-part-buy {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .order-part-cta {
     width: auto;
   }
 

@@ -51,7 +51,9 @@ export const landingContent = {
         ["Виносна антена", "antenna"],
         ["Кріплення в авто", "holder"],
         ["Кріплення на бронежилет", "molle"],
+        ["Комплектуючі", "part"],
       ],
+      partsTitle: "Комплектуючі",
       items: [
         {
           id: "detector",
@@ -189,6 +191,13 @@ export const landingContent = {
               "Підходить для прокладання кабелю в салон броньованих авто (під корпус або через ущільнювачі скла)",
             ],
           },
+          notice: {
+            title: "Особливості експлуатації",
+            items: [
+              ["Ризик пошкодження", "Підсилювач може вийти з ладу від роботи РЕБ поруч. Суворо контролюйте черговість їх увімкнення."],
+              ["Для звичайних авто", "Рекомендуємо антену без підсилювача з кабелем 2 м — це оптимальне рішення для неброньованого транспорту."],
+            ],
+          },
           extras: [],
           price: [
             ["Антена 5 м", "13 200 грн"],
@@ -316,6 +325,34 @@ export const landingContent = {
           extras: [],
           price: "300 грн",
         },
+        {
+          id: "antenna-high",
+          category: "part",
+          icon: "antenna",
+          photo: "/products/antenna-2800-12000.png",
+          name: "Антена 2800 – 12000 МГц",
+          model: "DV-A 2.8-12",
+          short: "Запасна антена верхнього діапазону для детектора D·Vision SDR.",
+          descriptionLabel: "Особливості",
+          description: [
+            "Антена розроблена та протестована спеціально під робочі частоти й параметри D·Vision SDR. Для збереження максимальної чутливості та стабільності детекції не рекомендується використовувати сторонні антени, навіть із аналогічним діапазоном.",
+          ],
+          price: "250 грн",
+        },
+        {
+          id: "antenna-low",
+          category: "part",
+          icon: "antenna",
+          photo: "/products/antenna-500-3000.png",
+          name: "Антена 500 – 3000 МГц",
+          model: "DV-A 0.5-3",
+          short: "Запасна антена нижнього діапазону для детектора D·Vision SDR.",
+          descriptionLabel: "Особливості",
+          description: [
+            "Антена розроблена та протестована спеціально під робочі частоти й параметри D·Vision SDR. Для збереження максимальної чутливості та стабільності детекції не рекомендується використовувати сторонні антени, навіть із аналогічним діапазоном.",
+          ],
+          price: "200 грн",
+        },
       ],
     },
     paymentDelivery: {
@@ -375,6 +412,7 @@ export const landingContent = {
       details: "Детальніше",
       close: "Закрити",
       accessoriesTitle: "Виберіть супутнє обладнання",
+      partsTitle: "Комплектуючі",
       contactTitle: "Контактні дані",
       nameLabel: "Ім’я",
       phoneLabel: "Телефон",
@@ -681,7 +719,9 @@ export const landingContent = {
         ["External Antenna", "antenna"],
         ["Car Mount", "holder"],
         ["Body Armor Mount", "molle"],
+        ["Spare Parts", "part"],
       ],
+      partsTitle: "Spare Parts",
       items: [
         {
           id: "detector",
@@ -818,6 +858,13 @@ export const landingContent = {
               "Suited to routing the cable into armored vehicles (under the body or through window seals)",
             ],
           },
+          notice: {
+            title: "Operating notes",
+            items: [
+              ["Risk of damage", "The amplifier can fail when EW systems operate nearby. Strictly control the order in which they are switched on."],
+              ["For regular cars", "We recommend the non-amplified antenna with a 2 m cable — the optimal choice for unarmored vehicles."],
+            ],
+          },
           extras: [],
           price: [
             ["5 m antenna", "UAH 13,200"],
@@ -945,6 +992,34 @@ export const landingContent = {
           extras: [],
           price: "UAH 300",
         },
+        {
+          id: "antenna-high",
+          category: "part",
+          icon: "antenna",
+          photo: "/products/antenna-2800-12000.png",
+          name: "Antenna 2800 – 12000 MHz",
+          model: "DV-A 2.8-12",
+          short: "A spare upper-band antenna for the D·Vision SDR detector.",
+          descriptionLabel: "Notes",
+          description: [
+            "The antenna is designed and tested specifically for the D·Vision SDR's operating frequencies and parameters. To keep maximum sensitivity and stable detection, we do not recommend third-party antennas, even ones with a similar range.",
+          ],
+          price: "UAH 250",
+        },
+        {
+          id: "antenna-low",
+          category: "part",
+          icon: "antenna",
+          photo: "/products/antenna-500-3000.png",
+          name: "Antenna 500 – 3000 MHz",
+          model: "DV-A 0.5-3",
+          short: "A spare lower-band antenna for the D·Vision SDR detector.",
+          descriptionLabel: "Notes",
+          description: [
+            "The antenna is designed and tested specifically for the D·Vision SDR's operating frequencies and parameters. To keep maximum sensitivity and stable detection, we do not recommend third-party antennas, even ones with a similar range.",
+          ],
+          price: "UAH 200",
+        },
       ],
     },
     paymentDelivery: {
@@ -1001,6 +1076,7 @@ export const landingContent = {
       details: "Details",
       close: "Close",
       accessoriesTitle: "Choose additional equipment",
+      partsTitle: "Spare parts",
       contactTitle: "Contact details",
       nameLabel: "Name",
       phoneLabel: "Phone",
