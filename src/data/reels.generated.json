@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-10T08:54:07.066Z",
+  "syncedAt": "2026-10-11T09:15:02.914Z",
   "items": [
+    {
+      "id": "G4NpKcNPwD4",
+      "title": "Кріплення на систему MOLLE для D·Vision SDR",
+      "publishedAt": "2026-10-10T12:25:02Z",
+      "url": "https://www.youtube.com/shorts/G4NpKcNPwD4",
+      "thumbnail": "https://i.ytimg.com/vi/G4NpKcNPwD4/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/G4NpKcNPwD4/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/G4NpKcNPwD4/hq720.jpg",
+        "https://i.ytimg.com/vi/G4NpKcNPwD4/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/G4NpKcNPwD4"
+    },
     {
       "id": "_DFyEEwfpjM",
       "title": "Додаткові функції сканування D·Vision SDR: 'свій', моніторинг конкретної частоти, звуження діапазону",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/e4zW--7SxBM/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/e4zW--7SxBM"
-    },
-    {
-      "id": "6rT7AG2HgeU",
-      "title": "D·Vision SDR: Налаштування детектора",
-      "publishedAt": "2026-08-19T14:04:26Z",
-      "url": "https://www.youtube.com/shorts/6rT7AG2HgeU",
-      "thumbnail": "https://i.ytimg.com/vi/6rT7AG2HgeU/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/6rT7AG2HgeU/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/6rT7AG2HgeU/hq720.jpg",
-        "https://i.ytimg.com/vi/6rT7AG2HgeU/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/6rT7AG2HgeU"
     }
   ]
 }
