@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-11T09:15:02.914Z",
+  "syncedAt": "2026-10-12T09:41:04.069Z",
   "items": [
+    {
+      "id": "N2ekCBInMGE",
+      "title": "Оновлений нічний режим для D·Vision SDR",
+      "publishedAt": "2026-10-12T08:38:48Z",
+      "url": "https://www.youtube.com/shorts/N2ekCBInMGE",
+      "thumbnail": "https://i.ytimg.com/vi/N2ekCBInMGE/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/N2ekCBInMGE/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/N2ekCBInMGE/hq720.jpg",
+        "https://i.ytimg.com/vi/N2ekCBInMGE/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/N2ekCBInMGE"
+    },
     {
       "id": "G4NpKcNPwD4",
       "title": "Кріплення на систему MOLLE для D·Vision SDR",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/1FRwxI7KQ7Y/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/1FRwxI7KQ7Y"
-    },
-    {
-      "id": "e4zW--7SxBM",
-      "title": "Огляд виносної антени (2м) для детектора D·Vision SDR",
-      "publishedAt": "2026-08-23T15:11:59Z",
-      "url": "https://www.youtube.com/shorts/e4zW--7SxBM",
-      "thumbnail": "https://i.ytimg.com/vi/e4zW--7SxBM/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/e4zW--7SxBM/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/e4zW--7SxBM/hq720.jpg",
-        "https://i.ytimg.com/vi/e4zW--7SxBM/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/e4zW--7SxBM"
     }
   ]
 }
