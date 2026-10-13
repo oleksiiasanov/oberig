@@ -14,12 +14,12 @@ import {
 } from "./OrderPage.jsx";
 import { FinalCTA } from "./FinalCTA.jsx";
 import { submitOrder } from "../lib/submitOrder.js";
+import { lineKey, useCart } from "../lib/cartStore.js";
 
 const MAX_QUANTITY = 99;
 
 const parsePrice = (value) => Number(String(value).replace(/\D/g, "")) || 0;
 
-const lineKey = (item, length) => (length ? `${item.id}:${length}` : item.id);
 const DEFAULT_PHONE = "+380";
 
 // Keeps only "+" and digits so words and symbols can't be typed in.
@@ -179,13 +179,14 @@ function ProductPreview({ item, order, cart, onClose }) {
 export function CartPage({ content, search, onNavigate }) {
   const { cart, order } = content;
   const requestedId = new URLSearchParams(search).get("item");
-  const mainItem = order.items.find((item) => item.id === requestedId) || order.items[0];
-  const others = useMemo(() => order.items.filter((item) => item.id !== mainItem.id), [order.items, mainItem.id]);
+  // Opened from a "Замовити" button: that product goes on top. Opened from the header: no product is preselected.
+  const mainItem = order.items.find((item) => item.id === requestedId);
+  const others = useMemo(() => order.items.filter((item) => item.id !== mainItem?.id), [order.items, mainItem?.id]);
   const accessories = others.filter((item) => item.category !== PART_CATEGORY);
   const parts = others.filter((item) => item.category === PART_CATEGORY);
 
   // Quantities keyed by line: "<id>" or "<id>:<cableLength>" for items sold in several lengths.
-  const [quantities, setQuantities] = useState({});
+  const [quantities, setQuantities] = useCart();
   const [comment, setComment] = useState("");
   const [consent, setConsent] = useState(true);
   const [previewId, setPreviewId] = useState(null);
@@ -195,11 +196,16 @@ export function CartPage({ content, search, onNavigate }) {
   const successRef = useRef(null);
 
   useEffect(() => {
-    setQuantities({ [lineKey(mainItem, mainItem.cableLengths?.[0])]: 1 });
+    if (mainItem) {
+      const keys = mainItem.cableLengths?.length
+        ? mainItem.cableLengths.map((length) => lineKey(mainItem, length))
+        : [lineKey(mainItem)];
+      setQuantities((current) => (keys.some((key) => current[key] > 0) ? current : { ...current, [keys[0]]: 1 }));
+    }
     setErrors({});
     setPreviewId(null);
     setStatus("idle");
-  }, [mainItem.id]);
+  }, [mainItem?.id]);
 
   useEffect(() => {
     if (status === "done") successRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -213,7 +219,7 @@ export function CartPage({ content, search, onNavigate }) {
       : lineQty(item);
   const setLineQty = (item, length, value) =>
     setQuantities((current) => ({ ...current, [lineKey(item, length)]: value }));
-  const orderLines = [mainItem, ...others].flatMap((item) => {
+  const orderLines = [...(mainItem ? [mainItem] : []), ...others].flatMap((item) => {
     if (item.cableLengths?.length) {
       return item.cableLengths
         .map((length, index) => ({
@@ -335,6 +341,7 @@ export function CartPage({ content, search, onNavigate }) {
           })),
         });
       }
+      setQuantities({});
       setStatus("done");
     } catch {
       setStatus("error");
@@ -376,11 +383,11 @@ export function CartPage({ content, search, onNavigate }) {
         </motion.div>
       </section>
 
-      <section className="section cart-section">{renderRow(mainItem)}</section>
+      {mainItem ? <section className="section cart-section">{renderRow(mainItem)}</section> : null}
 
       {accessories.length ? (
         <section className="section cart-section">
-          <h2 className="cart-subtitle">{cart.accessoriesTitle}</h2>
+          <h2 className="cart-subtitle">{mainItem ? cart.accessoriesTitle : cart.productsTitle}</h2>
           <div className="cart-list">{accessories.map(renderRow)}</div>
         </section>
       ) : null}

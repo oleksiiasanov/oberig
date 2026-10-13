@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
 import { Brand } from "./Brand.jsx";
 import { LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "../data/content.js";
 import { PART_CATEGORY, PARTS_ANCHOR } from "./OrderPage.jsx";
 import { SocialIcon } from "./SocialIcon.jsx";
+import { useCart } from "../lib/cartStore.js";
 
 function LanguageSwitcher({ language, onLanguageChange }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,6 +103,9 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollYRef = useRef(0);
 
+  const [cartQuantities] = useCart();
+  const cartCount = Object.values(cartQuantities).reduce((sum, quantity) => sum + (Number(quantity) || 0), 0);
+
   const closeMenu = () => setIsMenuOpen(false);
   // Spare parts share one dropdown entry that leads to their section on /order.
   const { items, partsTitle } = content.order;
@@ -195,6 +199,15 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
         </div>
       </div>
       <div className="header-controls">
+        <a
+          className="cart-link"
+          href="/cart"
+          aria-label={cartCount ? `${content.cart.openLabel}: ${cartCount}` : content.cart.openLabel}
+          onClick={(event) => handleNavClick(event, "/cart")}
+        >
+          <ShoppingCart aria-hidden="true" />
+          {cartCount ? <span className="cart-link-count" aria-hidden="true">{cartCount > 99 ? "99+" : cartCount}</span> : null}
+        </a>
         <LanguageSwitcher language={language} onLanguageChange={onLanguageChange} />
         <button
           type="button"

@@ -1,0 +1,951 @@
+{
+  "Посібник користувача D·Vision SDR": "D·Vision SDR User Manual",
+  "Портативний пасивний пристрій для пошуку та виявлення сумісних аналогових і цифрових відеосигналів. Цей посібник пояснює, як підготувати D·Vision SDR до роботи, виявляти й аналізувати сигнали, переглядати сумісне аналогове відео, зберігати результати та оновлювати прошивку.": [
+    {
+      "text": "A portable passive device for finding and detecting compatible analog and digital video signals. This manual explains how to prepare the "
+    },
+    {
+      "text": "D·Vision SDR",
+      "href": "http://Dvision.com.ua"
+    },
+    {
+      "text": " for use, detect and analyze signals, view compatible analog video, save results, and update the firmware."
+    }
+  ],
+  "⚠️ Пристрій працює виключно на прийом і нічого не випромінює в ефір.": "⚠️ The device is receive-only and transmits nothing.",
+  "1. Технічні характеристики": "1. Technical specifications",
+  "Параметр": "Parameter",
+  "Значення": "Value",
+  "Діапазон частот": "Frequency range",
+  "500 – 8700 МГц": "500 – 8700 MHz",
+  "Стандарти відео": "Video standards",
+  "Аналогове відео PAL / NTSC (FM-модуляція); виявлення DJI Mavic; тестове виявлення Wi-Fi камер і Walksnail FPV. Цифрове відео не декодується.": "Analog PAL / NTSC video (FM modulation); DJI Mavic detection; test detection of Wi-Fi cameras and Walksnail FPV. Digital video is not decoded.",
+  "Орієнтовна дальність виявлення": "Approximate detection range",
+  "DJI Mavic — виявлення сумісного цифрового відеосигналу до 2,5 км; цифрове відео не декодується, детекція за сигналом керування поки не реалізована. Аналогове відео: приймання та перегляд зображення у діапазоні 540–6000 МГц — близько 10 км; вище 6000 МГц — 3,5–5 км. Значення наведені для штатних антен і сприятливих умов на відкритій місцевості та не є гарантованими для будь-якого сценарію. На фактичну дальність впливають потужність і висота передавача, частота, рельєф, забудова, рослинність, радіозавади та положення пристрою.": "DJI Mavic — detection of a compatible digital video signal at up to 2.5 km; digital video is not decoded, and detection by control signal is not implemented yet. Analog video: reception and image viewing in the 540–6000 MHz range — about 10 km; above 6000 MHz — 3.5–5 km. These figures apply to the stock antennas in favorable open-terrain conditions and are not guaranteed for every scenario. Actual range depends on transmitter power and altitude, frequency, terrain, buildings, vegetation, radio interference, and the position of the device.",
+  "Антенні входи": "Antenna inputs",
+  "2 × SMA (всеспрямовані антени в комплекті)": "2 × SMA (omnidirectional antennas included)",
+  "Інтерфейс": "Interface",
+  "Носій даних": "Storage",
+  "microSD до 512 ГБ (FAT32)": "microSD up to 512 GB (FAT32)",
+  "Живлення": "Power",
+  "Перша версія з одним акумулятором — орієнтовно до 3 год; друга версія з двома акумуляторами загальною ємністю 10 000 мА·год — до 6 год. Час залежить від інтенсивності використання.": "First version with one battery — approximately up to 3 hours; second version with two batteries with a total capacity of 10,000 mAh — up to 6 hours. Runtime depends on how intensively the device is used.",
+  "Габарити / маса": "Dimensions / weight",
+  "130 × 80 × 22 мм / ~290 г без антен": "130 × 80 × 22 mm / ~290 g without antennas",
+  "Захист": "Protection",
+  "2. Початок роботи": "2. Getting started",
+  "Комплект поставки": "What's in the box",
+  "Пристрій SDR — 1 шт.": "SDR device — 1 pc.",
+  "Всеспрямована антена SMA — 2 шт.": "Omnidirectional SMA antenna — 2 pcs.",
+  "Кабель USB-C до комплекту не входить.": [
+    {
+      "text": "A USB-C cable is not included.",
+      "italic": true
+    }
+  ],
+  "Підключення антен": "Connecting the antennas",
+  "Пристрій має два антенні входи SMA:": "The device has two SMA antenna inputs:",
+  "Вхід 1 — антена 540–3000 МГц; більша антена, встановлюється зліва, якщо дивитися на екран.": [
+    {
+      "text": "Input 1",
+      "bold": true
+    },
+    {
+      "text": " — 540–3000 MHz antenna; the larger antenna, mounted on the left when you face the screen."
+    }
+  ],
+  "Вхід 2 — антена 2800–12000 МГц; менша антена, встановлюється справа.": [
+    {
+      "text": "Input 2",
+      "bold": true
+    },
+    {
+      "text": " — 2800–12000 MHz antenna; the smaller antenna, mounted on the right."
+    }
+  ],
+  "Діапазони антен перекриваються в межах 2800–3000 МГц.": "The antenna ranges overlap within 2800–3000 MHz.",
+  "Діапазон другої антени ширший за робочий діапазон поточної ревізії пристрою. Верхня межа 8700 МГц визначається апаратною частиною SDR, а не антеною. У наступній ревізії плати планується розширення до 9700 МГц.": [
+    {
+      "text": "The second antenna's range is wider than the operating range of the current device revision. The upper limit of "
+    },
+    {
+      "text": "8700 MHz",
+      "bold": true
+    },
+    {
+      "text": " is set by the SDR hardware, not by the antenna. An extension to "
+    },
+    {
+      "text": "9700 MHz",
+      "bold": true
+    },
+    {
+      "text": " is planned for the next board revision."
+    }
+  ],
+  "Пристрій автоматично перемикається між входами на пороговій частоті, заданій у налаштуваннях (Налаштування → Сканер → Перемикач антени 2). Заводське значення — 3000 МГц.": [
+    {
+      "text": "The device switches between the inputs automatically at the threshold frequency set in the settings ("
+    },
+    {
+      "text": "Settings → Scanner → Antenna 2 switch",
+      "bold": true
+    },
+    {
+      "text": "). The factory value is "
+    },
+    {
+      "text": "3000 MHz",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Напрямлену або іншу зовнішню антену підключайте до входу, що відповідає її робочому діапазону: вхід 1 — 540–3000 МГц, вхід 2 — 2800–12000 МГц. Для роботи у вузькій смузі відповідно обмежте діапазон сканування. У зоні перекриття 2800–3000 МГц вибір входу визначається налаштуванням Перемикач антени 2.": [
+    {
+      "text": "Connect a directional or other external antenna to the input that matches its operating range: input 1 — 540–3000 MHz, input 2 — 2800–12000 MHz. To work in a narrow band, limit the scanning range accordingly. In the 2800–3000 MHz overlap zone, the input is chosen by the "
+    },
+    {
+      "text": "Antenna 2 switch",
+      "bold": true
+    },
+    {
+      "text": " setting."
+    }
+  ],
+  "Закрутіть обидві антени від руки до упору. Не докладайте надмірних зусиль до роз'ємів SMA.": "Screw both antennas on by hand until they stop. Do not apply excessive force to the SMA connectors.",
+  "Встановлення SD-карти": "Inserting the SD card",
+  "Вставте microSD-карту до клацання. Карта потрібна для збереження фото і відео — без карти зйомка не працює. Якщо карта нова або з іншої техніки, відформатуйте її: Налаштування → Утиліти → Форматувати SD-карту.": [
+    {
+      "text": "Insert the microSD card until it clicks. The card is needed to save photos and video — "
+    },
+    {
+      "text": "capture does not work without a card",
+      "bold": true
+    },
+    {
+      "text": ". If the card is new or was used in another device, format it: "
+    },
+    {
+      "text": "Settings → Utilities → Format SD card",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Перше ввімкнення та зарядка": "First power-on and charging",
+  "Зарядіть пристрій через порт USB-C. Використовуйте зарядний адаптер із підтримкою струму від 2А.": "Charge the device through the USB-C port. Use a charging adapter that supports a current of 2 A or more.",
+  "Під час зарядки поруч із роз'ємом світиться світлодіод, а у верхньому правому куті екрана з'являється іконка блискавки та іконка батареї з поточним рівнем заряду (виділено на скріншоті нижче):": "While charging, an LED next to the connector lights up, and a lightning icon and a battery icon with the current charge level appear in the top right corner of the screen (highlighted in the screenshot below):",
+  "Повна зарядка займає в середньому 4–6 годин залежно від початкового рівня заряду та навантаження. Пристроєм можна користуватися під час зарядки.": "A full charge takes 4–6 hours on average, depending on the starting charge level and the load. The device can be used while charging.",
+  "Утримуйте кнопку ЖИВЛЕННЯ ~2 секунди для ввімкнення.": [
+    {
+      "text": "Hold the "
+    },
+    {
+      "text": "POWER",
+      "bold": true
+    },
+    {
+      "text": " button for ~2 seconds to turn the device on."
+    }
+  ],
+  "За потреби змініть мову інтерфейсу: Menu → Settings → Device → Language.": [
+    {
+      "text": "If needed, change the interface language: "
+    },
+    {
+      "text": "Menu → Settings → Device → Language",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "3. Керування та навігація": "3. Controls and navigation",
+  "Таблиця кнопок": "Button table",
+  "Кнопка": "Button",
+  "Коротке натискання": "Short press",
+  "Довге натискання (2 с)": "Long press (2 s)",
+  "ЖИВЛЕННЯ": [
+    {
+      "text": "POWER",
+      "bold": true
+    }
+  ],
+  "Фото або старт/стоп запису відео — залежно від налаштування «Запис відео»; у меню — повернення назад": [
+    {
+      "text": "Photo "
+    },
+    {
+      "text": "or",
+      "bold": true
+    },
+    {
+      "text": " start/stop video recording — depending on the \"Video recording\" setting; in a menu — go back"
+    }
+  ],
+  "Вимкнення пристрою (або повернення до екрана зарядки, якщо підключене живлення)": "Turns the device off (or returns to the charging screen if power is connected)",
+  "МЕНЮ": [
+    {
+      "text": "MENU",
+      "bold": true
+    }
+  ],
+  "Відкриває Швидке меню з будь-якого екрана": "Opens the Quick menu from any screen",
+  "ВВІД": [
+    {
+      "text": "ENTER",
+      "bold": true
+    }
+  ],
+  "Підтвердження вибору; вибір каналу в режимі Сканер": "Confirms a selection; selects a channel in Scanner mode",
+  "ВГОРУ / ВНИЗ": [
+    {
+      "text": "UP / DOWN",
+      "bold": true
+    }
+  ],
+  "Навігація списками; зум у режимі Водоспад": "List navigation; zoom in Waterfall mode",
+  "ВЛІВО / ВПРАВО": [
+    {
+      "text": "LEFT / RIGHT",
+      "bold": true
+    }
+  ],
+  "Налаштування частоти; зміна параметрів": "Frequency adjustment; changing parameters",
+  "4. Меню та налаштування": "4. Menu and settings",
+  "Головне меню D·Vision SDR забезпечує доступ до основних режимів роботи пристрою:": "The D·Vision SDR main menu gives access to the device's main operating modes:",
+  "Сканування — пошук та виявлення сигналів.": [
+    {
+      "text": "Scanning",
+      "bold": true
+    },
+    {
+      "text": " — searching for and detecting signals."
+    }
+  ],
+  "Перегляд — перегляд виявлених сигналів.": [
+    {
+      "text": "Viewing",
+      "bold": true
+    },
+    {
+      "text": " — viewing detected signals."
+    }
+  ],
+  "Інструменти — додаткові функції пристрою:": [
+    {
+      "text": "Tools",
+      "bold": true
+    },
+    {
+      "text": " — additional device functions:"
+    }
+  ],
+  "Водоспад — візуальне відображення активності радіочастотного спектра.": [
+    {
+      "text": "Waterfall",
+      "bold": true
+    },
+    {
+      "text": " — a visual display of radio-frequency spectrum activity."
+    }
+  ],
+  "РЕБ Тест — робочий режим для перевірки активності власного пристрою РЕБ. Після ввімкнення режиму приймальні підсилювачі D·Vision SDR вимикаються, тому перевірка є безпечною для детектора. Поза режимом РЕБ Тест близьке розміщення біля потужної передавальної антени може перевантажити або пошкодити приймальний тракт.": [
+    {
+      "text": "EW Test",
+      "bold": true
+    },
+    {
+      "text": " — an operating mode for checking the activity of your own EW device. Once the mode is enabled, the "
+    },
+    {
+      "text": "D·Vision",
+      "code": true
+    },
+    {
+      "text": " SDR receive amplifiers are switched off, so the check is safe for the detector. Outside "
+    },
+    {
+      "text": "EW Test",
+      "bold": true
+    },
+    {
+      "text": " mode, placing the device close to a powerful transmitting antenna can overload or damage the receive path."
+    }
+  ],
+  "Браузер — робота зі збереженими даними.": [
+    {
+      "text": "Browser",
+      "bold": true
+    },
+    {
+      "text": " — working with saved data."
+    }
+  ],
+  "Налаштування — конфігурація параметрів пристрою.": [
+    {
+      "text": "Settings",
+      "bold": true
+    },
+    {
+      "text": " — configuring device parameters."
+    }
+  ],
+  "Довідка — довідкова інформація.": [
+    {
+      "text": "Help",
+      "bold": true
+    },
+    {
+      "text": " — reference information."
+    }
+  ],
+  "Налаштування": "Settings",
+  "Розділ Налаштування складається з п'яти основних категорій.": [
+    {
+      "text": "The "
+    },
+    {
+      "text": "Settings",
+      "bold": true
+    },
+    {
+      "text": " section consists of five main categories."
+    }
+  ],
+  "1. Пристрій і система": "1. Device and system",
+  "Містить основні системні параметри D·Vision SDR:": "Contains the main D·Vision SDR system parameters:",
+  "Мова — вибір мови інтерфейсу: українська або англійська.": [
+    {
+      "text": "Language",
+      "bold": true
+    },
+    {
+      "text": " — interface language: Ukrainian or English."
+    }
+  ],
+  "Яскравість — регулювання яскравості дисплея під час роботи.": [
+    {
+      "text": "Brightness",
+      "bold": true
+    },
+    {
+      "text": " — display brightness during operation."
+    }
+  ],
+  "Яскравість у сні — рівень яскравості дисплея в режимі очікування.": [
+    {
+      "text": "Sleep brightness",
+      "bold": true
+    },
+    {
+      "text": " — display brightness level in standby mode."
+    }
+  ],
+  "Затемнити через — час бездіяльності, після якого яскравість дисплея автоматично зменшується.": [
+    {
+      "text": "Dim after",
+      "bold": true
+    },
+    {
+      "text": " — the idle time after which display brightness is reduced automatically."
+    }
+  ],
+  "Звук — увімкнення або вимкнення звукових сповіщень.": [
+    {
+      "text": "Sound",
+      "bold": true
+    },
+    {
+      "text": " — turns sound alerts on or off."
+    }
+  ],
+  "Гучність — регулювання рівня гучності.": [
+    {
+      "text": "Volume",
+      "bold": true
+    },
+    {
+      "text": " — adjusts the volume level."
+    }
+  ],
+  "Для застосування змінених параметрів натисніть Зберегти.": [
+    {
+      "text": "To apply changed parameters, press "
+    },
+    {
+      "text": "Save",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Скинути зміни — скасовує внесені, але ще не збережені зміни.": [
+    {
+      "text": "Discard changes",
+      "bold": true
+    },
+    {
+      "text": " — cancels changes that have been made but not yet saved."
+    }
+  ],
+  "2. Сканування і виявлення": "2. Scanning and detection",
+  "Використовується для налаштування діапазону сканування та типів сигналів, які необхідно виявляти.": "Used to set the scanning range and the signal types to detect.",
+  "Діапазон сканування": "Scanning range",
+  "Сканувати від — нижня межа сканування.": [
+    {
+      "text": "Scan from",
+      "bold": true
+    },
+    {
+      "text": " — lower scanning limit."
+    }
+  ],
+  "Сканувати до — верхня межа сканування.": [
+    {
+      "text": "Scan to",
+      "bold": true
+    },
+    {
+      "text": " — upper scanning limit."
+    }
+  ],
+  "Доступний діапазон сканування D·Vision SDR — 500–8700 МГц.": [
+    {
+      "text": "The available D·Vision SDR scanning range is "
+    },
+    {
+      "text": "500–8700 MHz",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Зменшення діапазону дозволяє обмежити сканування лише необхідною частиною спектра.": "Narrowing the range limits scanning to only the part of the spectrum you need.",
+  "Що шукати": "What to look for",
+  "Кожен тип детекції можна незалежно увімкнути або вимкнути:": "Each detection type can be turned on or off independently:",
+  "Аналогове відео — пошук аналогових відеосигналів.": [
+    {
+      "text": "Analog video",
+      "bold": true
+    },
+    {
+      "text": " — search for analog video signals."
+    }
+  ],
+  "Дрони DJI — пошук сигналів дронів серії DJI Mavic.": [
+    {
+      "text": "DJI drones",
+      "bold": true
+    },
+    {
+      "text": " — search for signals from DJI Mavic series drones."
+    }
+  ],
+  "Wi-Fi камери — тестовий режим пошуку сигналів Wi-Fi камер.": [
+    {
+      "text": "Wi-Fi cameras",
+      "bold": true
+    },
+    {
+      "text": " — a test mode that searches for Wi-Fi camera signals."
+    }
+  ],
+  "Walksnail FPV — тестовий режим пошуку сигналів систем Walksnail FPV.": [
+    {
+      "text": "Walksnail FPV",
+      "bold": true
+    },
+    {
+      "text": " — a test mode that searches for Walksnail FPV system signals."
+    }
+  ],
+  "Відображення": "Display",
+  "Показувати рівень — відображає рівень прийнятого сигналу для виявленого джерела.": [
+    {
+      "text": "Show level",
+      "bold": true
+    },
+    {
+      "text": " — shows the received signal level for a detected source."
+    }
+  ],
+  "Додаткова індикація стрілками показує зміну рівня сигналу та допомагає визначити тенденцію: наближення до джерела сигналу або віддалення від нього.": [
+    {
+      "text": "Additional arrow indicators show how the signal level is changing and help identify the trend: "
+    },
+    {
+      "text": "approaching the signal source or moving away from it",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Рівень сигналу не є вимірюванням відстані. Його не можна напряму перевести в метри, оскільки показник залежить від потужності передавача, частоти, антен, перешкод і положення об’єкта.": "Signal level is not a distance measurement. It cannot be converted directly into meters, because it depends on transmitter power, frequency, antennas, obstacles, and the position of the object.",
+  "Зі штатними всеспрямованими антенами пристрій також не визначає точний напрямок, азимут або координати джерела. Під час переміщення можна лише приблизно оцінити напрямок, у якому сигнал посилюється або слабшає.": "With the stock omnidirectional antennas the device also does not determine the exact direction, azimuth, or coordinates of the source. While moving, you can only roughly estimate the direction in which the signal gets stronger or weaker.",
+  "Для приблизного пошуку напрямку можна підключити сумісну напрямлену антену та повертати її, спостерігаючи за зміною рівня сигналу. Антена має відповідати потрібному частотному діапазону, SMA-роз’єму та електричним характеристикам; рекомендовано використовувати моделі, погоджені виробником. Пристрій однаково не розраховуватиме азимут або координати автоматично.": "For rough direction finding, you can connect a compatible directional antenna and rotate it while watching the signal level change. The antenna must match the required frequency range, the SMA connector, and the electrical characteristics; models approved by the manufacturer are recommended. The device still will not calculate azimuth or coordinates automatically.",
+  "3. Запис і сценарій": "3. Recording and scenario",
+  "Визначає поведінку D·Vision SDR під час виявлення сигналу та роботу функцій запису.": "Defines how the D·Vision SDR behaves when a signal is detected and how the recording functions work.",
+  "Кнопка ЖИВЛЕННЯ — визначає дію короткого натискання кнопки: Фото або Відео.": [
+    {
+      "text": "POWER button",
+      "bold": true
+    },
+    {
+      "text": " — sets the action for a short press of the button: "
+    },
+    {
+      "text": "Photo",
+      "bold": true
+    },
+    {
+      "text": " or "
+    },
+    {
+      "text": "Video",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Зберігати знахідки — автоматично зберігає інформацію про виявлення на microSD-карту. Для кожної знахідки зберігаються:": [
+    {
+      "text": "Save findings",
+      "bold": true
+    },
+    {
+      "text": " — automatically saves detection information to the microSD card. For each finding the device saves:"
+    }
+  ],
+  "скріншот;": "a screenshot;",
+  "лог детекції у форматі CSV.": [
+    {
+      "text": "a detection log in "
+    },
+    {
+      "text": "CSV",
+      "bold": true
+    },
+    {
+      "text": " format."
+    }
+  ],
+  "Відкривати перегляд — після виявлення сигналу автоматично відкриває екран його перегляду.": [
+    {
+      "text": "Open viewing",
+      "bold": true
+    },
+    {
+      "text": " — automatically opens the viewing screen once a signal is detected."
+    }
+  ],
+  "Показувати знахідку — визначає час відображення знайденого сигналу.": [
+    {
+      "text": "Show finding",
+      "bold": true
+    },
+    {
+      "text": " — sets how long a found signal is displayed."
+    }
+  ],
+  "Лишатися у перегляді — визначає, чи залишиться пристрій у режимі перегляду після виявлення або повернеться до сканування.": [
+    {
+      "text": "Stay in viewing",
+      "bold": true
+    },
+    {
+      "text": " — sets whether the device stays in viewing mode after a detection or returns to scanning."
+    }
+  ],
+  "Дата і час": "Date and time",
+  "Дата й час використовуються у назвах збережених файлів.": "The date and time are used in the names of saved files.",
+  "⚠️ У поточній ревізії плати дата й час скидаються після кожного вимкнення пристрою. Якщо коректні часові позначки важливі, встановлюйте дату й час після ввімкнення. Це буде виправлено в наступній ревізії плати.": "⚠️ In the current board revision the date and time are reset every time the device is turned off. If correct timestamps matter, set the date and time after turning the device on. This will be fixed in the next board revision.",
+  "4. USB-підключення": "4. USB connection",
+  "Містить параметри USB та веб-доступу.": "Contains the USB and web access parameters.",
+  "USB-пристрій": "USB device",
+  "USB — вмикає роботу USB-підключення.": [
+    {
+      "text": "USB",
+      "bold": true
+    },
+    {
+      "text": " — enables the USB connection."
+    }
+  ],
+  "Веб-камера — вмикає режим веб-камери.": [
+    {
+      "text": "Webcam",
+      "bold": true
+    },
+    {
+      "text": " — enables webcam mode."
+    }
+  ],
+  "Мережа — вмикає мережеве з'єднання через USB.": [
+    {
+      "text": "Network",
+      "bold": true
+    },
+    {
+      "text": " — enables a network connection over USB."
+    }
+  ],
+  "Консоль — сервісна функція. Для звичайної роботи користувача не потрібна.": [
+    {
+      "text": "Console",
+      "bold": true
+    },
+    {
+      "text": " — a service function. Not needed for normal use."
+    }
+  ],
+  "Після першого ввімкнення параметрів USB, Веб-камера та Мережа необхідно перезапустити D·Vision SDR.": [
+    {
+      "text": "After turning on the "
+    },
+    {
+      "text": "USB",
+      "bold": true
+    },
+    {
+      "text": ", "
+    },
+    {
+      "text": "Webcam",
+      "bold": true
+    },
+    {
+      "text": ", and "
+    },
+    {
+      "text": "Network",
+      "bold": true
+    },
+    {
+      "text": " parameters for the first time, you must "
+    },
+    {
+      "text": "restart the D·Vision SDR",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Порт USB-хост": "USB host port",
+  "Порт USB-хост — сервісна функція. Для звичайної роботи користувача не потрібна.": [
+    {
+      "text": "USB host port",
+      "bold": true
+    },
+    {
+      "text": " — a service function. Not needed for normal use."
+    }
+  ],
+  "Веб-доступ": "Web access",
+  "Веб-перегляд — дозволяє переглядати екран D·Vision SDR через веб-інтерфейс.": [
+    {
+      "text": "Web view",
+      "bold": true
+    },
+    {
+      "text": " — lets you view the D·Vision SDR screen through the web interface."
+    }
+  ],
+  "Веб-керування — дозволяє дистанційно керувати пристроєм через веб-інтерфейс.": [
+    {
+      "text": "Web control",
+      "bold": true
+    },
+    {
+      "text": " — lets you control the device remotely through the web interface."
+    }
+  ],
+  "Видавати адреси — необхідно використовувати при підключенні до iPad та інших пристроїв, які не призначають мережеву адресу USB-з'єднанню автоматично.": [
+    {
+      "text": "Assign addresses",
+      "bold": true
+    },
+    {
+      "text": " — must be used when connecting to an iPad and other devices that do not assign a network address to a USB connection automatically."
+    }
+  ],
+  "Для повної процедури підключення див. розділ «Віддалене керування через USB».": [
+    {
+      "text": "For the full connection procedure, see the "
+    },
+    {
+      "text": "\"Remote control over USB\"",
+      "bold": true
+    },
+    {
+      "text": " section."
+    }
+  ],
+  "5. Утиліти": "5. Utilities",
+  "Містить функції обслуговування та керування програмним забезпеченням пристрою.": "Contains maintenance and device software management functions.",
+  "Прошивка — відображає поточну версію програмного забезпечення D·Vision SDR.": [
+    {
+      "text": "Firmware",
+      "bold": true
+    },
+    {
+      "text": " — shows the current D·Vision SDR software version."
+    }
+  ],
+  "Оновити через мережу — запускає оновлення програмного забезпечення через мережеве підключення. Детальну процедуру див. у розділі «Оновлення програмного забезпечення».": [
+    {
+      "text": "Update over network",
+      "bold": true
+    },
+    {
+      "text": " — starts a software update over a network connection. For the detailed procedure, see the "
+    },
+    {
+      "text": "\"Software update\"",
+      "bold": true
+    },
+    {
+      "text": " section."
+    }
+  ],
+  "Форматувати SD — форматує встановлену microSD-карту. Усі дані на карті буде видалено.": [
+    {
+      "text": "Format SD",
+      "bold": true
+    },
+    {
+      "text": " — formats the inserted microSD card. "
+    },
+    {
+      "text": "All data on the card will be deleted.",
+      "bold": true
+    }
+  ],
+  "Скинути налаштування — повертає налаштування пристрою до початкового стану.": [
+    {
+      "text": "Reset settings",
+      "bold": true
+    },
+    {
+      "text": " — returns the device settings to their initial state."
+    }
+  ],
+  "5. Оновлення прошивки (SDR-Network-Bridge)": [
+    {
+      "text": "5. Firmware update ("
+    },
+    {
+      "text": "SDR-Network-Bridge)",
+      "bold": true
+    }
+  ],
+  "Для оновлення прошивки потрібно завантажити застосунок SDR-Network-Bridge": [
+    {
+      "text": "To update the firmware, download the "
+    },
+    {
+      "text": "SDR-Network-Bridge",
+      "bold": true,
+      "href": "https://dvision.com.ua/app-update"
+    },
+    {
+      "text": " app"
+    }
+  ],
+  "Запускаємо застосунок, підключаємо детектор до комп’ютера за допомогою USB кабеля.": "Launch the app and connect the detector to the computer with a USB cable.",
+  "В застосунку натискаємо кнопку “Почати”.": "In the app, press the \"Start\" button.",
+  "Далі слідуємо інструкції і заходимо в налаштування детектора. В пунткі меню “Утиліти” натискаємо кнопку “Оновити через мережу”.": "Then follow the instructions and open the detector's settings. In the \"Utilities\" menu item, press the \"Update over network\" button.",
+  "В меню “ОТА оновлення прошивки” має бути вказано, що детектор підлюкчений через USB  і що він отримав адресу. Якщо цього немає, чекаємо, доки застосунок надасть адресу детектору.": "The \"OTA firmware update\" menu should show that the detector is connected over USB and has received an address. If it does not, wait until the app assigns an address to the detector.",
+  "Коли адреса вже надана, натискаємо “Перевірити оновлення” і бачимо список доступних для оновлення версій. Обираємо потрібно версію і чекаємо завершення оновлення.": "Once the address is assigned, press \"Check for updates\" to see the list of versions available for update. Choose the version you need and wait for the update to finish.",
+  "6. Підключення до USB та ПК": "6. Connecting to USB and a PC",
+  "Віддалене керування через USB": "Remote control over USB",
+  "Підключіть D·Vision SDR до комп’ютера через USB-C.": "Connect the D·Vision SDR to a computer over USB-C.",
+  "На пристрої відкрийте MENU → Налаштування → USB підключення.": [
+    {
+      "text": "On the device, open "
+    },
+    {
+      "text": "MENU → Settings → USB connection",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "У секції USB-пристрій увімкніть(якщо вимкнуто):": [
+    {
+      "text": "In the "
+    },
+    {
+      "text": "USB device",
+      "bold": true
+    },
+    {
+      "text": " section, turn on (if turned off):"
+    }
+  ],
+  "Веб-камера": [
+    {
+      "text": "Webcam",
+      "bold": true
+    }
+  ],
+  "Мережа": [
+    {
+      "text": "Network",
+      "bold": true
+    }
+  ],
+  "Після першого ввімкнення цих параметрів перезапустіть пристрій.": [
+    {
+      "text": "After turning these parameters on for the first time, "
+    },
+    {
+      "text": "restart the device",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Після перезапуску знову відкрийте MENU → Налаштування → USB підключення.": [
+    {
+      "text": "After the restart, open "
+    },
+    {
+      "text": "MENU → Settings → USB connection",
+      "bold": true
+    },
+    {
+      "text": " again."
+    }
+  ],
+  "У секції Веб-доступ увімкніть:": [
+    {
+      "text": "In the "
+    },
+    {
+      "text": "Web access",
+      "bold": true
+    },
+    {
+      "text": " section, turn on:"
+    }
+  ],
+  "Веб-перегляд": [
+    {
+      "text": "Web view",
+      "bold": true
+    }
+  ],
+  "Веб-керування": [
+    {
+      "text": "Web control",
+      "bold": true
+    }
+  ],
+  "На екрані пристрою з’явиться локальна HTTPS-адреса з індивідуальним ключем доступу у форматі https://192.168.xxx.xxx/?k=XXXXXXXXXX. Також відображається QR-код для швидкого відкриття адреси з мобільного телефону чи планшету.": [
+    {
+      "text": "The device screen will show a local HTTPS address with an individual access key in the format "
+    },
+    {
+      "text": "https://192.168.xxx.xxx/?k=XXXXXXXXXX",
+      "code": true
+    },
+    {
+      "text": ". A QR code is also displayed for quickly opening the address on a mobile phone or tablet."
+    }
+  ],
+  "На комп’ютері відкрийте повну актуальну адресу у браузері.": [
+    {
+      "text": "On the computer, open the "
+    },
+    {
+      "text": "full current address",
+      "bold": true
+    },
+    {
+      "text": " in a browser."
+    }
+  ],
+  "Під час першого підключення браузер може показати попередження про недовірений локальний HTTPS-сертифікат. У такому випадку виберіть «Розширені» та перейдіть на локальну адресу пристрою.": [
+    {
+      "text": "On the first connection the browser may show a warning about an untrusted local HTTPS certificate. In that case, choose "
+    },
+    {
+      "text": "\"Advanced\"",
+      "bold": true
+    },
+    {
+      "text": " and proceed to the device's local address."
+    }
+  ],
+  "Після підключення відкриється SDR Control Center, у якому доступні:": [
+    {
+      "text": "After connecting, the "
+    },
+    {
+      "text": "SDR Control Center",
+      "bold": true
+    },
+    {
+      "text": " opens, which provides:"
+    }
+  ],
+  "трансляція екрана пристрою;": "a live view of the device screen;",
+  "дистанційне керування кнопками ↑ / ↓ / ← / →": [
+    {
+      "text": "remote control with the "
+    },
+    {
+      "text": "↑ / ↓ / ← / →",
+      "bold": true
+    },
+    {
+      "text": " buttons"
+    }
+  ],
+  "Важливо для Android: для коректної роботи на Android-смартфонах і планшетах потрібна Android 14 або новіша версія. Під час підключення до D·Vision SDR необхідно вимкнути Wi-Fi та мобільну мережу на смартфоні або планшеті.": [
+    {
+      "text": "Important for Android: Android 14 or newer is required for correct operation on Android smartphones and tablets. While connecting to the D·Vision SDR, you must turn off Wi-Fi and mobile data on the smartphone or tablet.",
+      "bold": true
+    }
+  ],
+  "Додаткова інформація по виносам:": "Additional information on external antennas:",
+  "Виріб": "Product",
+  "Кабель": "Cable",
+  "Затухання": "Attenuation",
+  "Підсилення": "Gain",
+  "Фінальний показник": "Final figure",
+  "Бліндаж 14 м": [
+    {
+      "text": "Bunker 14 m",
+      "bold": true
+    }
+  ],
+  "Бліндаж 20 м": [
+    {
+      "text": "Bunker 20 m",
+      "bold": true
+    }
+  ],
+  "Авто 2 м": [
+    {
+      "text": "Car 2 m",
+      "bold": true
+    }
+  ],
+  "Авто 10 м": [
+    {
+      "text": "Car 10 m",
+      "bold": true
+    }
+  ]
+}
