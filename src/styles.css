@@ -139,6 +139,50 @@ main {
   gap: 8px;
 }
 
+.cart-link {
+  position: relative;
+  display: inline-flex;
+  width: 44px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: rgba(8, 15, 24, 0.58);
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.cart-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cart-link:hover,
+.cart-link:focus-visible {
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.36);
+  background: rgba(var(--accent-rgb), 0.1);
+  outline: none;
+}
+
+.cart-link-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
 .menu-toggle {
   display: inline-flex;
   width: 44px;

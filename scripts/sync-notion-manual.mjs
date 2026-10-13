@@ -1,8 +1,10 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { collectRichTexts, richTextKey } from "../src/lib/manualText.js";
 
 const DEFAULT_NOTION_URL = "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383";
 const OUTPUT_PATH = join(process.cwd(), "src/data/manual.generated.json");
+const TRANSLATION_PATH = join(process.cwd(), "src/data/manual.en.json");
 const NOTION_VERSION = "2022-06-28";
 const MAX_PUBLIC_CHUNKS = 40;
 
@@ -371,6 +373,17 @@ function fallbackManual(error) {
   };
 }
 
+// The English manual falls back to the Ukrainian original for text edited in Notion since the last translation.
+async function reportUntranslated(manual) {
+  const dictionary = JSON.parse(await readFile(TRANSLATION_PATH, "utf8").catch(() => "{}"));
+  const missing = [...new Set(collectRichTexts(manual.blocks).map(richTextKey))].filter(
+    (text) => /[А-Яа-яІіЇїЄєҐґ]/.test(text) && !dictionary[text],
+  );
+  if (!missing.length) return;
+  console.warn(`${missing.length} manual text(s) have no English translation in src/data/manual.en.json:`);
+  for (const text of missing) console.warn(`- ${text}`);
+}
+
 async function main() {
   let manual;
 
@@ -385,6 +398,7 @@ async function main() {
   await mkdir(dirname(OUTPUT_PATH), { recursive: true });
   await writeFile(OUTPUT_PATH, `${JSON.stringify(manual, null, 2)}\n`);
   console.log(`Synced ${manual.blocks.length} manual blocks from ${manual.source} to ${OUTPUT_PATH}`);
+  await reportUntranslated(manual);
 }
 
 main();

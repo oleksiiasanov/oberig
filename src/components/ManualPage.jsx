@@ -1,20 +1,29 @@
+import { createContext, useContext } from "react";
 import { ArrowUp, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import manualData from "../data/manual.generated.json";
+import manualEn from "../data/manual.en.json";
+import { richTextKey, translateRichText } from "../lib/manualText.js";
 import { FinalCTA } from "./FinalCTA.jsx";
 
-function richTextKey(run, index) {
+// The Notion source is Ukrainian; other languages read their translations from a dictionary.
+const DICTIONARIES = { en: manualEn };
+const DictionaryContext = createContext(null);
+
+function runKey(run, index) {
   return `${run.text}-${run.href || ""}-${index}`;
 }
 
-function plainText(value = []) {
-  return value.map((run) => run.text).join("").trim();
+function usePlainText() {
+  const dictionary = useContext(DictionaryContext);
+  return (value) => richTextKey(translateRichText(value, dictionary));
 }
 
 function RichText({ value = [] }) {
-  if (!value.length) return null;
+  const runs = translateRichText(value, useContext(DictionaryContext));
+  if (!runs.length) return null;
 
-  return value.map((run, index) => {
+  return runs.map((run, index) => {
     let node = run.text;
 
     if (run.code) node = <code>{node}</code>;
@@ -29,7 +38,7 @@ function RichText({ value = [] }) {
       );
     }
 
-    return <span key={richTextKey(run, index)}>{node}</span>;
+    return <span key={runKey(run, index)}>{node}</span>;
   });
 }
 
@@ -49,6 +58,8 @@ function renderList(blocks, ordered) {
 }
 
 function ManualBlock({ block }) {
+  const plainText = usePlainText();
+
   switch (block.type) {
     case "heading_1":
       return (
@@ -97,7 +108,7 @@ function ManualBlock({ block }) {
     case "image":
       return block.src ? (
         <figure>
-          <img src={block.src} alt={block.caption?.map((run) => run.text).join("") || manualData.title} loading="lazy" />
+          <img src={block.src} alt={plainText(block.caption) || plainText([{ text: manualData.title }])} loading="lazy" />
           {block.caption?.length ? (
             <figcaption>
               <RichText value={block.caption} />
@@ -210,12 +221,13 @@ function ManualToc({ items, label }) {
   );
 }
 
-export function ManualPage({ content }) {
+export function ManualPage({ content, language }) {
   const manual = content.manual;
+  const dictionary = DICTIONARIES[language] || null;
   const hasBlocks = Array.isArray(manualData.blocks) && manualData.blocks.length > 0;
   const tocItems = (manualData.blocks || [])
     .filter((block) => block.type === "heading_2")
-    .map((block) => ({ id: block.id, title: plainText(block.richText) }))
+    .map((block) => ({ id: block.id, title: richTextKey(translateRichText(block.richText, dictionary)) }))
     .filter((item) => item.title)
     .slice(0, 8);
 
@@ -237,7 +249,9 @@ export function ManualPage({ content }) {
       <section className="section manual-reader-section">
         <article className="manual-reader">
           {hasBlocks ? (
-            <ManualBlocks blocks={manualData.blocks} />
+            <DictionaryContext.Provider value={dictionary}>
+              <ManualBlocks blocks={manualData.blocks} />
+            </DictionaryContext.Provider>
           ) : (
             <aside className="manual-empty">
               <BookOpen aria-hidden="true" />
