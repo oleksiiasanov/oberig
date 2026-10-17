@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-16T07:28:50.408Z",
+  "syncedAt": "2026-10-17T07:09:48.336Z",
   "items": [
+    {
+      "id": "ms02CE9y03c",
+      "title": "Інтерфейс детектора D·Vision SDR повністю локалізований англійською мовою.",
+      "publishedAt": "2026-10-16T12:16:12Z",
+      "url": "https://www.youtube.com/shorts/ms02CE9y03c",
+      "thumbnail": "https://i.ytimg.com/vi/ms02CE9y03c/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/ms02CE9y03c/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/ms02CE9y03c/hq720.jpg",
+        "https://i.ytimg.com/vi/ms02CE9y03c/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/ms02CE9y03c"
+    },
     {
       "id": "N2ekCBInMGE",
       "title": "Оновлений нічний режим для D·Vision SDR",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/uNOey86B9hY/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/uNOey86B9hY"
-    },
-    {
-      "id": "1FRwxI7KQ7Y",
-      "title": "D·Vision SDR: інструмент \"Водоспад\"",
-      "publishedAt": "2026-08-27T13:59:27Z",
-      "url": "https://www.youtube.com/shorts/1FRwxI7KQ7Y",
-      "thumbnail": "https://i.ytimg.com/vi/1FRwxI7KQ7Y/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/1FRwxI7KQ7Y/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/1FRwxI7KQ7Y/hq720.jpg",
-        "https://i.ytimg.com/vi/1FRwxI7KQ7Y/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/1FRwxI7KQ7Y"
     }
   ]
 }
