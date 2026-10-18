@@ -346,10 +346,10 @@ function applyTrackingStatuses(write) {
   const inBlock = (index) => (hasColumns || write) && index >= first - 1 && index < first - 1 + STATUS_COLUMNS.length;
   const column = (header) => headers.findIndex((h, index) => h === header && !inBlock(index));
   const shippedIndex = column("Відправлено");
-  const prepaidIndex = column("Передплата");
+  const prepaidIndex = column("Сума передплати") !== -1 ? column("Сума передплати") : column("Передплата"); // amount column, renamed later
   const numberIndex = column(ORDER_NUMBER_HEADER);
   const nameIndex = column("ПІБ");
-  if (shippedIndex === -1 || prepaidIndex === -1) throw new Error('Columns "Відправлено" and "Передплата" are required');
+  if (shippedIndex === -1 || prepaidIndex === -1) throw new Error('Columns "Відправлено" and "Сума передплати" are required');
 
   const rowCount = sheet.getLastRow() - 1;
   if (rowCount < 1) return;
@@ -395,11 +395,14 @@ function applyTrackingStatuses(write) {
   if (prepaidText.length) console.log("У «Передплата» текст замість суми (статус не поставлено): " + prepaidText.join(", "));
   if (!write) return;
 
-  [status, payment, prepaid].forEach((columnValues, i) => sheet.getRange(2, first + i, rowCount, 1).setValues(columnValues));
+  // Dropdowns first, so renamed options are accepted; then only the cells that change, so edits made meanwhile are kept.
   STATUS_COLUMNS.forEach((col, i) => {
     const rule = SpreadsheetApp.newDataValidation().requireValueInList(col.options, true).setAllowInvalid(false).build();
     sheet.getRange(2, first + i, sheet.getMaxRows() - 1, 1).setDataValidation(rule);
   });
+  [status, payment, prepaid].forEach((columnValues, i) => columnValues.forEach(([value], r) => {
+    if (value !== filled(values[r], i)) sheet.getRange(r + 2, first + i).setValue(value);
+  }));
 }
 
 // Any shade of the orange column in the Sheets palette (#fce5cd … #783f04, #ff9900); yellow and red are not orange.
