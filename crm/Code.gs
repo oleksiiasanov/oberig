@@ -305,6 +305,107 @@ function previewTrackingRow() {
   trackingValues(headers, row).forEach((item) => console.log(item.header + ": " + item.value));
 }
 
+// ── Order statuses in the tracking spreadsheet ──────────────────────────────────────────────────────────────────────
+// setupTrackingStatuses (run once from the editor) adds three dropdown columns right after "Додаткове обладнання" and
+// fills them for existing orders. Safe to run again: the columns are added only once and filled cells are not changed.
+// previewTrackingStatuses writes nothing and logs what setupTrackingStatuses would do.
+
+const STATUS_AFTER_HEADER = "Додаткове обладнання";
+const STATUS_COLUMNS = [
+  { header: "Статус", options: ["Підтверджено", "Готове", "Очікується оплата", "Очікується відправка", "Відправлено", "Отримано", "Скасовано"] },
+  { header: "Статус оплати", options: ["Очікується оплата", "Оплачено", "Відтерміновано"] },
+  { header: "Передплата", options: ["Очікується передплата", "Передплата зроблена"] },
+];
+
+function setupTrackingStatuses() {
+  applyTrackingStatuses(true);
+}
+
+function previewTrackingStatuses() {
+  applyTrackingStatuses(false);
+}
+
+function applyTrackingStatuses(write) {
+  const sheet = trackingSheet();
+  const readHeaders = () => sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((header) => String(header).trim());
+  let headers = readHeaders();
+  const after = headers.indexOf(STATUS_AFTER_HEADER) + 1;
+  if (!after) throw new Error('Column "' + STATUS_AFTER_HEADER + '" not found in the tracking sheet');
+  const first = after + 1; // column of "Статус"
+  const hasColumns = STATUS_COLUMNS.every((col, i) => headers[first - 1 + i] === col.header);
+
+  if (!hasColumns && write) {
+    sheet.insertColumnsAfter(after, STATUS_COLUMNS.length); // takes the formatting of "Додаткове обладнання"
+    sheet.getRange(1, first, 1, STATUS_COLUMNS.length).setValues([STATUS_COLUMNS.map((col) => col.header)]);
+    headers = readHeaders();
+  }
+
+  // The new "Передплата" (status) sits before the existing "Передплата" (amount), so source columns are looked up
+  // outside the status block.
+  const inBlock = (index) => (hasColumns || write) && index >= first - 1 && index < first - 1 + STATUS_COLUMNS.length;
+  const column = (header) => headers.findIndex((h, index) => h === header && !inBlock(index));
+  const shippedIndex = column("Відправлено");
+  const prepaidIndex = column("Передплата");
+  const numberIndex = column(ORDER_NUMBER_HEADER);
+  const nameIndex = column("ПІБ");
+  if (shippedIndex === -1 || prepaidIndex === -1) throw new Error('Columns "Відправлено" and "Передплата" are required');
+
+  const rowCount = sheet.getLastRow() - 1;
+  if (rowCount < 1) return;
+  const width = headers.length;
+  const range = sheet.getRange(2, 1, rowCount, width);
+  const values = range.getValues();
+  const backgrounds = range.getBackgrounds();
+  const sourceIndexes = headers.map((h, index) => index).filter((index) => !inBlock(index));
+  const current = (row, i) => (hasColumns || write ? String(row[first - 1 + i]).trim() : "");
+
+  const status = [], payment = [], prepaid = [];
+  const counts = { cancelled: 0, shipped: 0, prepaid: 0 };
+  const cancelledAndShipped = [], prepaidText = [];
+  values.forEach((row, r) => {
+    const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
+    const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
+    const orangeCells = sourceIndexes.filter((index) => isOrange(backgrounds[r][index])).length;
+    const cancelled = isOrder && orangeCells * 2 >= sourceIndexes.length;
+    const shipped = isOrder && typeof row[shippedIndex] === "number";
+    const paid = isOrder && typeof row[prepaidIndex] === "number";
+    if (cancelled && shipped) cancelledAndShipped.push(label);
+    if (isOrder && !paid && String(row[prepaidIndex]).trim() !== "") prepaidText.push(label);
+
+    // Cancelled wins over shipped: an orange row is a cancelled order even if it has a shipped quantity.
+    const nextStatus = current(row, 0) || (cancelled ? "Скасовано" : shipped ? "Відправлено" : "");
+    const nextPrepaid = current(row, 2) || (paid ? "Передплата зроблена" : "");
+    if (!current(row, 0) && nextStatus) counts[cancelled ? "cancelled" : "shipped"] += 1;
+    if (!current(row, 2) && nextPrepaid) counts.prepaid += 1;
+    status.push([nextStatus]);
+    payment.push([current(row, 1)]);
+    prepaid.push([nextPrepaid]);
+  });
+
+  console.log("Аркуш: " + sheet.getName() + (hasColumns ? " (колонки статусів уже є)" : write ? " (додано колонки статусів)" : " (колонки статусів буде додано)"));
+  console.log("Статус «Скасовано»: " + counts.cancelled + ", «Відправлено»: " + counts.shipped + ", «Передплата зроблена»: " + counts.prepaid);
+  if (cancelledAndShipped.length) console.log("Помаранчеві, але з кількістю у «Відправлено» (поставлено «Скасовано»): " + cancelledAndShipped.join(", "));
+  if (prepaidText.length) console.log("У «Передплата» текст замість суми (статус не поставлено): " + prepaidText.join(", "));
+  if (!write) return;
+
+  [status, payment, prepaid].forEach((columnValues, i) => sheet.getRange(2, first + i, rowCount, 1).setValues(columnValues));
+  STATUS_COLUMNS.forEach((col, i) => {
+    const rule = SpreadsheetApp.newDataValidation().requireValueInList(col.options, true).setAllowInvalid(false).build();
+    sheet.getRange(2, first + i, sheet.getMaxRows() - 1, 1).setDataValidation(rule);
+  });
+}
+
+// Any shade of the orange column in the Sheets palette (#fce5cd … #783f04, #ff9900); yellow and red are not orange.
+function isOrange(color) {
+  const hex = String(color || "").replace("#", "");
+  if (!/^[0-9a-f]{6}$/i.test(hex)) return false;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  if (max - min < 0.08 || max !== r) return false;
+  const hue = 60 * ((g - b) / (max - min));
+  return hue >= 15 && hue <= 40;
+}
+
 function json(body) {
   return ContentService.createTextOutput(JSON.stringify(body)).setMimeType(ContentService.MimeType.JSON);
 }

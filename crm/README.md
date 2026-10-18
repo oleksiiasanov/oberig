@@ -14,3 +14,10 @@ Ticking "Контакт" on an order adds it as a new row to the tracking spread
 1. Apps Script → Project Settings → Script properties → add `TRACKING_SHEET_URL` with the full URL of the tracking tab (including `#gid=…`).
 2. In the editor, select `installTrackingTrigger` → Run → authorize.
 3. `previewTrackingRow` logs what would be written for the newest order without writing anything.
+
+## Order statuses in the tracking spreadsheet
+
+`setupTrackingStatuses` adds the dropdown columns "Статус", "Статус оплати" and "Передплата" right after "Додаткове обладнання" and fills them for existing orders: orange rows get "Скасовано", rows with a number in "Відправлено" get "Відправлено", rows with a number in the old "Передплата" (amount) column get "Передплата зроблена". Running it again does not add the columns twice or change values that are already filled in.
+
+1. In the editor, select `previewTrackingStatuses` → Run: it writes nothing and logs how many rows will get each status and which rows need a manual look.
+2. Select `setupTrackingStatuses` → Run.
