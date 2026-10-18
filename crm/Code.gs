@@ -312,7 +312,8 @@ function previewTrackingRow() {
 
 const STATUS_AFTER_HEADER = "Додаткове обладнання";
 const STATUS_COLUMNS = [
-  { header: "Статус", options: ["Підтверджено", "Готове", "Очікується оплата", "Очікується відправка", "Відправлено", "Отримано", "Скасовано"] },
+  // renamed: old option → new one; filled cells with the old text are switched over on the next setupTrackingStatuses run.
+  { header: "Статус", options: ["Підтверджено", "Готове", "Оплата", "Очікується відправка", "Відправлено", "Отримано", "Скасовано"], renamed: { "Очікується оплата": "Оплата" } },
   { header: "Статус оплати", options: ["Очікується оплата", "Оплачено", "Відтерміновано"] },
   { header: "Передплата", options: ["Очікується передплата", "Передплата зроблена"] },
 ];
@@ -357,12 +358,17 @@ function applyTrackingStatuses(write) {
   const values = range.getValues();
   const backgrounds = range.getBackgrounds();
   const sourceIndexes = headers.map((h, index) => index).filter((index) => !inBlock(index));
-  const current = (row, i) => (hasColumns || write ? String(row[first - 1 + i]).trim() : "");
+  const filled = (row, i) => (hasColumns || write ? String(row[first - 1 + i]).trim() : "");
+  const current = (row, i) => {
+    const value = filled(row, i);
+    return (STATUS_COLUMNS[i].renamed || {})[value] || value;
+  };
 
   const status = [], payment = [], prepaid = [];
-  const counts = { cancelled: 0, shipped: 0, prepaid: 0 };
+  const counts = { cancelled: 0, shipped: 0, prepaid: 0, renamed: 0 };
   const cancelledAndShipped = [], prepaidText = [];
   values.forEach((row, r) => {
+    counts.renamed += STATUS_COLUMNS.filter((col, i) => current(row, i) !== filled(row, i)).length;
     const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
     const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
     const orangeCells = sourceIndexes.filter((index) => isOrange(backgrounds[r][index])).length;
@@ -384,6 +390,7 @@ function applyTrackingStatuses(write) {
 
   console.log("Аркуш: " + sheet.getName() + (hasColumns ? " (колонки статусів уже є)" : write ? " (додано колонки статусів)" : " (колонки статусів буде додано)"));
   console.log("Статус «Скасовано»: " + counts.cancelled + ", «Відправлено»: " + counts.shipped + ", «Передплата зроблена»: " + counts.prepaid);
+  if (counts.renamed) console.log("Перейменовано старих значень: " + counts.renamed);
   if (cancelledAndShipped.length) console.log("Помаранчеві, але з кількістю у «Відправлено» (поставлено «Скасовано»): " + cancelledAndShipped.join(", "));
   if (prepaidText.length) console.log("У «Передплата» текст замість суми (статус не поставлено): " + prepaidText.join(", "));
   if (!write) return;
