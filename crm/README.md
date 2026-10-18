@@ -21,3 +21,7 @@ Ticking "Контакт" on an order adds it as a new row to the tracking spread
 
 1. In the editor, select `previewTrackingStatuses` → Run: it writes nothing and logs how many rows will get each status and which rows need a manual look.
 2. Select `setupTrackingStatuses` → Run.
+
+## Order dates in the tracking spreadsheet
+
+"Дата заявки" is the order date. `fillOrderDates` fills its empty cells from "Стара дата заявки" (text like "14,06,2026" or "14.06.2026"), shown as dd/mm/yy. Cells that already have a date are not changed. `previewOrderDates` logs what would be filled without writing.

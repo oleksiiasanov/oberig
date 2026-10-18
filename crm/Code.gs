@@ -277,7 +277,7 @@ function appendToTracking(values) {
     if (known.some((cells) => String(cells[0]) === String(number))) return;
 
     values.forEach((item) => {
-      const column = headers.indexOf(item.header) + 1; // first match: "Дата заявки", not the later "дата заявки"
+      const column = headers.indexOf(item.header) + 1; // exact header: "Дата заявки", not "Стара дата заявки"
       if (!column) return;
       const cell = sheet.getRange(lastRow + 1, column);
       if (item.format) cell.setNumberFormat(item.format);
@@ -414,6 +414,64 @@ function isOrange(color) {
   if (max - min < 0.08 || max !== r) return false;
   const hue = 60 * ((g - b) / (max - min));
   return hue >= 15 && hue <= 40;
+}
+
+// ── Order dates in the tracking spreadsheet ─────────────────────────────────────────────────────────────────────────
+// "Дата заявки" is the order date. fillOrderDates (run from the editor) fills its empty cells from "Стара дата заявки"
+// ("14,06,2026", "14.06.2026" or a date), shown as dd/mm/yy like the rest of the column. Filled cells are not changed.
+// previewOrderDates writes nothing and logs what fillOrderDates would do.
+
+const ORDER_DATE_HEADER = "Дата заявки";
+const OLD_ORDER_DATE_HEADER = "Стара дата заявки";
+const ORDER_DATE_FORMAT = "dd/mm/yy";
+
+function fillOrderDates() {
+  applyOrderDates(true);
+}
+
+function previewOrderDates() {
+  applyOrderDates(false);
+}
+
+function applyOrderDates(write) {
+  const sheet = trackingSheet();
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((header) => String(header).trim());
+  const dateColumn = headers.indexOf(ORDER_DATE_HEADER) + 1;
+  const oldIndex = headers.indexOf(OLD_ORDER_DATE_HEADER);
+  const numberIndex = headers.indexOf(ORDER_NUMBER_HEADER);
+  const nameIndex = headers.indexOf("ПІБ");
+  if (!dateColumn || oldIndex === -1) throw new Error('Columns "' + ORDER_DATE_HEADER + '" and "' + OLD_ORDER_DATE_HEADER + '" are required');
+
+  const rowCount = sheet.getLastRow() - 1;
+  if (rowCount < 1) return;
+  const values = sheet.getRange(2, 1, rowCount, headers.length).getValues();
+  const filled = [], noDate = [], unreadable = [];
+  values.forEach((row, r) => {
+    const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
+    if (!isOrder || row[dateColumn - 1] !== "") return;
+    const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
+    const old = row[oldIndex];
+    if (old === "") return noDate.push(label);
+    const date = parseOrderDate(old);
+    if (!date) return unreadable.push(label + ": " + old);
+    filled.push(label);
+    if (write) sheet.getRange(r + 2, dateColumn).setNumberFormat(ORDER_DATE_FORMAT).setValue(date);
+  });
+
+  console.log((write ? "Заповнено" : "Буде заповнено") + " «" + ORDER_DATE_HEADER + "» зі старої дати: " + filled.length);
+  if (noDate.length) console.log("Немає жодної дати (залишено порожнім): " + noDate.join(", "));
+  if (unreadable.length) console.log("Не вдалося прочитати стару дату (залишено порожнім): " + unreadable.join(", "));
+}
+
+// Date cells are used as they are; text like "14,06,2026", "14.06.26" or "14/06/2026" is read as day, month, year.
+function parseOrderDate(value) {
+  if (value instanceof Date) return dateOnly(value);
+  const match = String(value).trim().match(/^(\d{1,2})[.,\/](\d{1,2})[.,\/](\d{2}|\d{4})$/);
+  if (!match) return null;
+  const [day, month] = [Number(match[1]), Number(match[2])];
+  const year = match[3].length === 2 ? 2000 + Number(match[3]) : Number(match[3]);
+  const date = new Date(year, month - 1, day);
+  return date.getDate() === day && date.getMonth() === month - 1 ? date : null;
 }
 
 function json(body) {
