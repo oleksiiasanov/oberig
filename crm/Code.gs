@@ -222,8 +222,9 @@ function accessories(get) {
     .join("\n");
 }
 
+// Midday, so the tracking sheet shows the same day even when its time zone differs from the script's.
 function dateOnly(value) {
-  return value instanceof Date ? new Date(value.getFullYear(), value.getMonth(), value.getDate()) : value;
+  return value instanceof Date ? new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12) : value;
 }
 
 function trackingValues(headers, row) {
@@ -448,30 +449,38 @@ function applyOrderDates(write) {
   const filled = [], noDate = [], unreadable = [];
   values.forEach((row, r) => {
     const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
-    if (!isOrder || row[dateColumn - 1] !== "") return;
-    const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
     const old = row[oldIndex];
-    if (old === "") return noDate.push(label);
     const date = parseOrderDate(old);
+    // The first run wrote midnight in the script's time zone, which the sheet shows a day early: those cells are redone.
+    const shifted = date && row[dateColumn - 1] instanceof Date && row[dateColumn - 1].getTime() === midnight(date).getTime();
+    if (!isOrder || (row[dateColumn - 1] !== "" && !shifted)) return;
+    const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
+    if (old === "") return noDate.push(label);
     if (!date) return unreadable.push(label + ": " + old);
     filled.push(label);
     if (write) sheet.getRange(r + 2, dateColumn).setNumberFormat(ORDER_DATE_FORMAT).setValue(date);
   });
 
+  console.log("Часовий пояс скрипта: " + Session.getScriptTimeZone() + ", таблиці: " + sheet.getParent().getSpreadsheetTimeZone());
   console.log((write ? "Заповнено" : "Буде заповнено") + " «" + ORDER_DATE_HEADER + "» зі старої дати: " + filled.length);
   if (noDate.length) console.log("Немає жодної дати (залишено порожнім): " + noDate.join(", "));
   if (unreadable.length) console.log("Не вдалося прочитати стару дату (залишено порожнім): " + unreadable.join(", "));
 }
 
 // Date cells are used as they are; text like "14,06,2026", "14.06.26" or "14/06/2026" is read as day, month, year.
+// The result is midday, so the sheet shows the same day even when its time zone differs from the script's.
 function parseOrderDate(value) {
-  if (value instanceof Date) return dateOnly(value);
+  if (value instanceof Date) return new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12);
   const match = String(value).trim().match(/^(\d{1,2})[.,\/](\d{1,2})[.,\/](\d{2}|\d{4})$/);
   if (!match) return null;
   const [day, month] = [Number(match[1]), Number(match[2])];
   const year = match[3].length === 2 ? 2000 + Number(match[3]) : Number(match[3]);
-  const date = new Date(year, month - 1, day);
+  const date = new Date(year, month - 1, day, 12);
   return date.getDate() === day && date.getMonth() === month - 1 ? date : null;
+}
+
+function midnight(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 function json(body) {
