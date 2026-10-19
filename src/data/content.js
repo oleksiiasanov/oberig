@@ -84,8 +84,8 @@ export const landingContent = {
               rows: [
                 ["Батарея", "10 000 мА/год"],
                 ["Живлення", "USB Type-C, робота під час заряджання"],
-                ["Корпус", "130 × 80 × 22 мм (без антен)"],
-                ["Вага", "290 г"],
+                ["Корпус", "130 × 80 × 25 мм (без антен)"],
+                ["Вага", "340 г"],
                 ["Дисплей", "4,3 дюйма"],
                 ["Режими", "Нічний режим, сплячий режим, гучність"],
                 ["Інтерфейс", "Українською та англійською"],
@@ -754,8 +754,8 @@ export const landingContent = {
               rows: [
                 ["Battery", "10,000 mAh"],
                 ["Power", "USB Type-C, works while charging"],
-                ["Body", "130 x 80 x 22 mm (without antennas)"],
-                ["Weight", "290 g"],
+                ["Body", "130 x 80 x 25 mm (without antennas)"],
+                ["Weight", "340 g"],
                 ["Display", "4.3 inches"],
                 ["Modes", "Night mode, sleep mode, volume settings"],
                 ["Interface", "Ukrainian and English"],
