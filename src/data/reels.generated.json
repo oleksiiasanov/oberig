@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-18T07:24:02.075Z",
+  "syncedAt": "2026-10-19T08:03:03.474Z",
   "items": [
+    {
+      "id": "-z9ZazLAXJg",
+      "title": "Новий процес оновлення ПЗ для детектора D·Vision SDR.",
+      "publishedAt": "2026-10-18T14:52:32Z",
+      "url": "https://www.youtube.com/shorts/-z9ZazLAXJg",
+      "thumbnail": "https://i.ytimg.com/vi/-z9ZazLAXJg/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/-z9ZazLAXJg/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/-z9ZazLAXJg/hq720.jpg",
+        "https://i.ytimg.com/vi/-z9ZazLAXJg/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/-z9ZazLAXJg"
+    },
     {
       "id": "ms02CE9y03c",
       "title": "Інтерфейс детектора D·Vision SDR повністю локалізований англійською мовою.",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/d6j5kJcB4es/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/d6j5kJcB4es"
-    },
-    {
-      "id": "uNOey86B9hY",
-      "title": "Вбудована інструкція",
-      "publishedAt": "2026-08-31T16:44:47Z",
-      "url": "https://www.youtube.com/shorts/uNOey86B9hY",
-      "thumbnail": "https://i.ytimg.com/vi/uNOey86B9hY/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/uNOey86B9hY/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/uNOey86B9hY/hq720.jpg",
-        "https://i.ytimg.com/vi/uNOey86B9hY/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/uNOey86B9hY"
     }
   ]
 }
