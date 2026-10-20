@@ -9,6 +9,7 @@ const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it af
 const PROCESSED_COLOR = "#b6d7a8";
 const ORDER_NUMBER_HEADER = "№ замовлення"; // running order number: highest number already in the column + 1
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
+const SOURCE_HEADER = "Звідки дізналися"; // "where did you hear about us" answer from the thank-you screen; added as the last column if missing
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -52,6 +53,10 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
     const order = JSON.parse(e.postData.contents);
+    if (order && order.type === "survey") {
+      lock.waitLock(20000);
+      return json(saveSurvey(findSheet(SpreadsheetApp.getActiveSpreadsheet()), order));
+    }
     if (!order || !String(order.name || "").trim() || !String(order.phone || "").trim() || !Array.isArray(order.items) || !order.items.length) {
       return json({ ok: false, error: "invalid order" });
     }
@@ -93,12 +98,44 @@ function doPost(e) {
       console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
     }
 
-    return json({ ok: true });
+    return json({ ok: true, orderNumber: orderNumber });
   } catch (error) {
     return json({ ok: false, error: String(error) });
   } finally {
     lock.releaseLock();
   }
+}
+
+// Writes the survey answer into the order's row: matched by order number and phone (so nobody can fill in someone
+// else's row); without an order number column, the newest row with that phone.
+function saveSurvey(sheet, answer) {
+  const source = String(answer.source || "").trim().slice(0, 300);
+  const phone = String(answer.phone || "").replace(/\D/g, "");
+  if (!source || !phone || sheet.getLastRow() < 2) return { ok: false, error: "invalid survey" };
+
+  let headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
+  let sourceIndex = headers.indexOf(norm(SOURCE_HEADER));
+  if (sourceIndex === -1) {
+    sourceIndex = headers.length;
+    if (sheet.getMaxColumns() <= sourceIndex) sheet.insertColumnsAfter(sheet.getMaxColumns(), 1); // tab has no spare column
+    sheet.getRange(1, sourceIndex + 1).setValue(SOURCE_HEADER);
+    headers = headers.concat(norm(SOURCE_HEADER));
+  }
+  const phoneIndex = headers.indexOf(norm("Номер"));
+  const numberIndex = headers.indexOf(norm(ORDER_NUMBER_HEADER));
+  if (phoneIndex === -1) return { ok: false, error: "phone column not found" };
+
+  const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, headers.length).getValues();
+  const rowIndex = rows.findIndex((row) =>
+    String(row[phoneIndex]).replace(/\D/g, "") === phone &&
+    (numberIndex === -1 || !answer.orderNumber || String(row[numberIndex]) === String(answer.orderNumber))
+  );
+  if (rowIndex === -1) return { ok: false, error: "order not found" };
+
+  const cell = sheet.getRange(rowIndex + 2, sourceIndex + 1);
+  cell.setNumberFormat("@");
+  cell.setValue(source);
+  return { ok: true };
 }
 
 // Rows without a number (tests, blanks) are ignored; the freshly inserted row is still empty at this point.

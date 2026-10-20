@@ -7,6 +7,10 @@
 
 After changing `Code.gs`, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
 
+## "Where did you hear about us" survey
+
+After the thank-you message the customer can answer where they heard about D·Vision SDR. The answer is written into that order's row in the "Звідки дізналися" column (matched by order number and phone). If the column does not exist yet, the first answer adds it as the last column.
+
 ## Copying contacted orders to the tracking spreadsheet
 
 Ticking "Контакт" on an order adds it as a new row to the tracking spreadsheet (only the columns listed in `TRACKING_COLUMNS`; an order number that is already there is skipped).
