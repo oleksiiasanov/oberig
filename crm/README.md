@@ -11,6 +11,8 @@ After changing `Code.gs`, use Deploy → Manage deployments → Edit → New ver
 
 After the thank-you message the customer can answer where they heard about D·Vision SDR. The answer is written into that order's row in the "Звідки дізналися" column (matched by order number and phone). If the column does not exist yet, the first answer adds it as the last column.
 
+The answer is also copied to the tracking spreadsheet, into its "Звідки дізнались" column (add that header to row 1 yourself, wherever it should be): with the order when "Контакт" is ticked, or into the order's existing tracking row when the customer answers after the tick.
+
 ## Copying contacted orders to the tracking spreadsheet
 
 Ticking "Контакт" on an order adds it as a new row to the tracking spreadsheet (only the columns listed in `TRACKING_COLUMNS`; an order number that is already there is skipped).

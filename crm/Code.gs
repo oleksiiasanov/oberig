@@ -133,9 +133,32 @@ function saveSurvey(sheet, answer) {
   if (rowIndex === -1) return { ok: false, error: "order not found" };
 
   const cell = sheet.getRange(rowIndex + 2, sourceIndex + 1);
+  cell.clearDataValidations(); // rows copy the format of the row below, which can bring a "Контакт"-style checkbox along
   cell.setNumberFormat("@");
   cell.setValue(source);
+
+  // The order may already be in the tracking spreadsheet if "Контакт" was ticked before the customer answered.
+  const orderNumber = numberIndex === -1 ? "" : rows[rowIndex][numberIndex];
+  try {
+    if (orderNumber !== "") updateTrackingSource(orderNumber, source);
+  } catch (trackingError) {
+    console.error("Tracking update failed: " + trackingError); // the answer is already saved, don't fail it
+  }
   return { ok: true };
+}
+
+// Fills "Звідки дізнались" for an order that is already in the tracking spreadsheet; does nothing otherwise.
+// Called inside doPost's lock.
+function updateTrackingSource(orderNumber, source) {
+  const sheet = trackingSheet();
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((header) => String(header).trim());
+  const numberColumn = headers.indexOf(ORDER_NUMBER_HEADER) + 1;
+  const sourceColumn = headers.indexOf(TRACKING_SOURCE_HEADER) + 1;
+  if (!numberColumn || !sourceColumn || sheet.getLastRow() < 2) return;
+  const numbers = sheet.getRange(2, numberColumn, sheet.getLastRow() - 1, 1).getValues();
+  const index = numbers.findIndex((cells) => String(cells[0]) === String(orderNumber));
+  if (index === -1) return;
+  sheet.getRange(index + 2, sourceColumn).setNumberFormat("@").setValue(source);
 }
 
 // Rows without a number (tests, blanks) are ignored; the freshly inserted row is still empty at this point.
@@ -230,6 +253,8 @@ function setupProcessedRows() {
 // properties (TRACKING_SHEET_URL = the tab's full URL, with #gid=…), so it is not stored in the public repository.
 // Setup: add the property, then run installTrackingTrigger once from the editor and authorize.
 
+const TRACKING_SOURCE_HEADER = "Звідки дізнались"; // survey answer, copied from SOURCE_HEADER in the CRM sheet
+
 // Tracking header (exact text, row 1) → value taken from the CRM row. Other tracking columns are left alone.
 const TRACKING_COLUMNS = [
   { header: "№ замовлення", value: (get) => get(ORDER_NUMBER_HEADER) },
@@ -239,6 +264,7 @@ const TRACKING_COLUMNS = [
   { header: "Кількість детекторів", value: (get) => get("Кількість детекторів") },
   { header: "Додаткове обладнання", value: (get) => accessories(get), format: "@" },
   { header: "Сума замовлення", value: (get) => get("Разом") },
+  { header: TRACKING_SOURCE_HEADER, value: (get) => (get(SOURCE_HEADER) === false ? "" : String(get(SOURCE_HEADER))), format: "@" }, // false: empty checkbox
 ];
 const ACCESSORY_HEADERS = [
   "Виносна антена для авто, 2м",
