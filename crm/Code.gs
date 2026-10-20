@@ -9,7 +9,7 @@ const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it af
 const PROCESSED_COLOR = "#b6d7a8";
 const ORDER_NUMBER_HEADER = "№ замовлення"; // running order number: highest number already in the column + 1
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
-const SOURCE_HEADER = "Звідки дізналися"; // "where did you hear about us" answer from the thank-you screen; added as the last column if missing
+const SOURCE_HEADER = "Опитування"; // "where did you hear about us" answer from the thank-you screen; added as the last column if missing
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -253,7 +253,7 @@ function setupProcessedRows() {
 // properties (TRACKING_SHEET_URL = the tab's full URL, with #gid=…), so it is not stored in the public repository.
 // Setup: add the property, then run installTrackingTrigger once from the editor and authorize.
 
-const TRACKING_SOURCE_HEADER = "Звідки дізнались"; // survey answer, copied from SOURCE_HEADER in the CRM sheet
+const TRACKING_SOURCE_HEADER = "Опитування"; // survey answer, copied from SOURCE_HEADER in the CRM sheet
 
 // Tracking header (exact text, row 1) → value taken from the CRM row. Other tracking columns are left alone.
 const TRACKING_COLUMNS = [
