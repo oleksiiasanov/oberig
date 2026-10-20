@@ -263,6 +263,22 @@ for (const origin of fetchOrigins) {
   }
 }
 
+// Cloudflare Pages serves the site from public/_headers and public/_redirects; Vercel stays as a fallback,
+// so both must send the same headers and routes.
+const pagesHeaders = readFileSync(join(root, "public/_headers"), "utf8");
+for (const { key, value } of vercelJson.headers?.find((rule) => rule.source === "/(.*)")?.headers || []) {
+  if (!pagesHeaders.includes(`  ${key}: ${value}\n`)) failures.push(`public/_headers does not match vercel.json for ${key}`);
+}
+const pagesRedirects = readFileSync(join(root, "public/_redirects"), "utf8").split("\n");
+for (const { source, destination, permanent } of vercelJson.redirects || []) {
+  if (!pagesRedirects.includes(`${source} ${destination} ${permanent ? 301 : 302}`)) {
+    failures.push(`public/_redirects is missing the redirect ${source} → ${destination}`);
+  }
+}
+for (const { source } of vercelJson.rewrites || []) {
+  if (!pagesRedirects.includes(`${source} /index.html 200`)) failures.push(`public/_redirects is missing the SPA route ${source}`);
+}
+
 if (failures.length) {
   console.error("Content/design checks failed:");
   for (const failure of failures) console.error(`- ${failure}`);

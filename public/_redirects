@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects and SPA routes, mirroring vercel.json.
+/app-update /SDR-Network-Bridge.exe 302
+/manual /index.html 200
+/order /index.html 200
+/cart /index.html 200
+/service /index.html 200
