@@ -4,10 +4,20 @@ const WEBHOOK_URL =
   import.meta.env.VITE_ORDER_WEBHOOK_URL ||
   "https://script.google.com/macros/s/AKfycbzOeaAX0HWsMI0JMJ5WsO-ZmGUmTlhuAQJZl7ItiLaCBmQjiYtA1DGtiZhOr4tbDzuf/exec";
 
+// Resolves with { ok, orderNumber } — the number lets the "where did you hear about us" answer find the order row.
 export async function submitOrder(payload) {
+  return post(payload, "Order submitted");
+}
+
+// Survey answer for an order that was just placed: { type: "survey", orderNumber, phone, source }.
+export async function submitSurvey(payload) {
+  return post({ type: "survey", ...payload }, "Survey submitted");
+}
+
+async function post(payload, devLabel) {
   if (!WEBHOOK_URL) {
     if (import.meta.env.DEV) {
-      console.info("Order submitted (no VITE_ORDER_WEBHOOK_URL set)", payload);
+      console.info(`${devLabel} (no VITE_ORDER_WEBHOOK_URL set)`, payload);
       return { ok: true };
     }
     throw new Error("Order webhook is not configured");
@@ -22,5 +32,5 @@ export async function submitOrder(payload) {
 
   const result = await response.json().catch(() => null);
   if (!response.ok || !result?.ok) throw new Error(result?.error || "Order webhook failed");
-  return { ok: true };
+  return { ok: true, orderNumber: result.orderNumber ?? "" };
 }

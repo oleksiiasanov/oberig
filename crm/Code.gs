@@ -9,6 +9,7 @@ const CONTACT_HEADER = "Контакт"; // checkbox column: manager ticks it af
 const PROCESSED_COLOR = "#b6d7a8";
 const ORDER_NUMBER_HEADER = "№ замовлення"; // running order number: highest number already in the column + 1
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
+const SOURCE_HEADER = "Звідки дізналися"; // "where did you hear about us" answer from the thank-you screen; added as the last column if missing
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -52,6 +53,10 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   try {
     const order = JSON.parse(e.postData.contents);
+    if (order && order.type === "survey") {
+      lock.waitLock(20000);
+      return json(saveSurvey(findSheet(SpreadsheetApp.getActiveSpreadsheet()), order));
+    }
     if (!order || !String(order.name || "").trim() || !String(order.phone || "").trim() || !Array.isArray(order.items) || !order.items.length) {
       return json({ ok: false, error: "invalid order" });
     }
@@ -93,12 +98,44 @@ function doPost(e) {
       console.error("Notification failed: " + mailError); // the order is already saved, don't fail it
     }
 
-    return json({ ok: true });
+    return json({ ok: true, orderNumber: orderNumber });
   } catch (error) {
     return json({ ok: false, error: String(error) });
   } finally {
     lock.releaseLock();
   }
+}
+
+// Writes the survey answer into the order's row: matched by order number and phone (so nobody can fill in someone
+// else's row); without an order number column, the newest row with that phone.
+function saveSurvey(sheet, answer) {
+  const source = String(answer.source || "").trim().slice(0, 300);
+  const phone = String(answer.phone || "").replace(/\D/g, "");
+  if (!source || !phone || sheet.getLastRow() < 2) return { ok: false, error: "invalid survey" };
+
+  let headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(norm);
+  let sourceIndex = headers.indexOf(norm(SOURCE_HEADER));
+  if (sourceIndex === -1) {
+    sourceIndex = headers.length;
+    if (sheet.getMaxColumns() <= sourceIndex) sheet.insertColumnsAfter(sheet.getMaxColumns(), 1); // tab has no spare column
+    sheet.getRange(1, sourceIndex + 1).setValue(SOURCE_HEADER);
+    headers = headers.concat(norm(SOURCE_HEADER));
+  }
+  const phoneIndex = headers.indexOf(norm("Номер"));
+  const numberIndex = headers.indexOf(norm(ORDER_NUMBER_HEADER));
+  if (phoneIndex === -1) return { ok: false, error: "phone column not found" };
+
+  const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, headers.length).getValues();
+  const rowIndex = rows.findIndex((row) =>
+    String(row[phoneIndex]).replace(/\D/g, "") === phone &&
+    (numberIndex === -1 || !answer.orderNumber || String(row[numberIndex]) === String(answer.orderNumber))
+  );
+  if (rowIndex === -1) return { ok: false, error: "order not found" };
+
+  const cell = sheet.getRange(rowIndex + 2, sourceIndex + 1);
+  cell.setNumberFormat("@");
+  cell.setValue(source);
+  return { ok: true };
 }
 
 // Rows without a number (tests, blanks) are ignored; the freshly inserted row is still empty at this point.
@@ -222,8 +259,9 @@ function accessories(get) {
     .join("\n");
 }
 
+// Midday, so the tracking sheet shows the same day even when its time zone differs from the script's.
 function dateOnly(value) {
-  return value instanceof Date ? new Date(value.getFullYear(), value.getMonth(), value.getDate()) : value;
+  return value instanceof Date ? new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12) : value;
 }
 
 function trackingValues(headers, row) {
@@ -277,7 +315,7 @@ function appendToTracking(values) {
     if (known.some((cells) => String(cells[0]) === String(number))) return;
 
     values.forEach((item) => {
-      const column = headers.indexOf(item.header) + 1; // first match: "Дата заявки", not the later "дата заявки"
+      const column = headers.indexOf(item.header) + 1; // exact header: "Дата заявки", not "Стара дата заявки"
       if (!column) return;
       const cell = sheet.getRange(lastRow + 1, column);
       if (item.format) cell.setNumberFormat(item.format);
@@ -312,7 +350,8 @@ function previewTrackingRow() {
 
 const STATUS_AFTER_HEADER = "Додаткове обладнання";
 const STATUS_COLUMNS = [
-  { header: "Статус", options: ["Підтверджено", "Готове", "Очікується оплата", "Очікується відправка", "Відправлено", "Отримано", "Скасовано"] },
+  // renamed: old option → new one; filled cells with the old text are switched over on the next setupTrackingStatuses run.
+  { header: "Статус", options: ["Підтверджено", "Готове", "Оплата", "Очікується відправка", "Відправлено", "Отримано", "Скасовано"], renamed: { "Очікується оплата": "Оплата" } },
   { header: "Статус оплати", options: ["Очікується оплата", "Оплачено", "Відтерміновано"] },
   { header: "Передплата", options: ["Очікується передплата", "Передплата зроблена"] },
 ];
@@ -345,10 +384,10 @@ function applyTrackingStatuses(write) {
   const inBlock = (index) => (hasColumns || write) && index >= first - 1 && index < first - 1 + STATUS_COLUMNS.length;
   const column = (header) => headers.findIndex((h, index) => h === header && !inBlock(index));
   const shippedIndex = column("Відправлено");
-  const prepaidIndex = column("Передплата");
+  const prepaidIndex = column("Сума передплати") !== -1 ? column("Сума передплати") : column("Передплата"); // amount column, renamed later
   const numberIndex = column(ORDER_NUMBER_HEADER);
   const nameIndex = column("ПІБ");
-  if (shippedIndex === -1 || prepaidIndex === -1) throw new Error('Columns "Відправлено" and "Передплата" are required');
+  if (shippedIndex === -1 || prepaidIndex === -1) throw new Error('Columns "Відправлено" and "Сума передплати" are required');
 
   const rowCount = sheet.getLastRow() - 1;
   if (rowCount < 1) return;
@@ -357,12 +396,17 @@ function applyTrackingStatuses(write) {
   const values = range.getValues();
   const backgrounds = range.getBackgrounds();
   const sourceIndexes = headers.map((h, index) => index).filter((index) => !inBlock(index));
-  const current = (row, i) => (hasColumns || write ? String(row[first - 1 + i]).trim() : "");
+  const filled = (row, i) => (hasColumns || write ? String(row[first - 1 + i]).trim() : "");
+  const current = (row, i) => {
+    const value = filled(row, i);
+    return (STATUS_COLUMNS[i].renamed || {})[value] || value;
+  };
 
   const status = [], payment = [], prepaid = [];
-  const counts = { cancelled: 0, shipped: 0, prepaid: 0 };
+  const counts = { cancelled: 0, shipped: 0, prepaid: 0, renamed: 0 };
   const cancelledAndShipped = [], prepaidText = [];
   values.forEach((row, r) => {
+    counts.renamed += STATUS_COLUMNS.filter((col, i) => current(row, i) !== filled(row, i)).length;
     const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
     const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
     const orangeCells = sourceIndexes.filter((index) => isOrange(backgrounds[r][index])).length;
@@ -384,15 +428,19 @@ function applyTrackingStatuses(write) {
 
   console.log("Аркуш: " + sheet.getName() + (hasColumns ? " (колонки статусів уже є)" : write ? " (додано колонки статусів)" : " (колонки статусів буде додано)"));
   console.log("Статус «Скасовано»: " + counts.cancelled + ", «Відправлено»: " + counts.shipped + ", «Передплата зроблена»: " + counts.prepaid);
+  if (counts.renamed) console.log("Перейменовано старих значень: " + counts.renamed);
   if (cancelledAndShipped.length) console.log("Помаранчеві, але з кількістю у «Відправлено» (поставлено «Скасовано»): " + cancelledAndShipped.join(", "));
   if (prepaidText.length) console.log("У «Передплата» текст замість суми (статус не поставлено): " + prepaidText.join(", "));
   if (!write) return;
 
-  [status, payment, prepaid].forEach((columnValues, i) => sheet.getRange(2, first + i, rowCount, 1).setValues(columnValues));
+  // Dropdowns first, so renamed options are accepted; then only the cells that change, so edits made meanwhile are kept.
   STATUS_COLUMNS.forEach((col, i) => {
     const rule = SpreadsheetApp.newDataValidation().requireValueInList(col.options, true).setAllowInvalid(false).build();
     sheet.getRange(2, first + i, sheet.getMaxRows() - 1, 1).setDataValidation(rule);
   });
+  [status, payment, prepaid].forEach((columnValues, i) => columnValues.forEach(([value], r) => {
+    if (value !== filled(values[r], i)) sheet.getRange(r + 2, first + i).setValue(value);
+  }));
 }
 
 // Any shade of the orange column in the Sheets palette (#fce5cd … #783f04, #ff9900); yellow and red are not orange.
@@ -404,6 +452,72 @@ function isOrange(color) {
   if (max - min < 0.08 || max !== r) return false;
   const hue = 60 * ((g - b) / (max - min));
   return hue >= 15 && hue <= 40;
+}
+
+// ── Order dates in the tracking spreadsheet ─────────────────────────────────────────────────────────────────────────
+// "Дата заявки" is the order date. fillOrderDates (run from the editor) fills its empty cells from "Стара дата заявки"
+// ("14,06,2026", "14.06.2026" or a date), shown as dd/mm/yy like the rest of the column. Filled cells are not changed.
+// previewOrderDates writes nothing and logs what fillOrderDates would do.
+
+const ORDER_DATE_HEADER = "Дата заявки";
+const OLD_ORDER_DATE_HEADER = "Стара дата заявки";
+const ORDER_DATE_FORMAT = "dd/mm/yy";
+
+function fillOrderDates() {
+  applyOrderDates(true);
+}
+
+function previewOrderDates() {
+  applyOrderDates(false);
+}
+
+function applyOrderDates(write) {
+  const sheet = trackingSheet();
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map((header) => String(header).trim());
+  const dateColumn = headers.indexOf(ORDER_DATE_HEADER) + 1;
+  const oldIndex = headers.indexOf(OLD_ORDER_DATE_HEADER);
+  const numberIndex = headers.indexOf(ORDER_NUMBER_HEADER);
+  const nameIndex = headers.indexOf("ПІБ");
+  if (!dateColumn || oldIndex === -1) throw new Error('Columns "' + ORDER_DATE_HEADER + '" and "' + OLD_ORDER_DATE_HEADER + '" are required');
+
+  const rowCount = sheet.getLastRow() - 1;
+  if (rowCount < 1) return;
+  const values = sheet.getRange(2, 1, rowCount, headers.length).getValues();
+  const filled = [], noDate = [], unreadable = [];
+  values.forEach((row, r) => {
+    const isOrder = (numberIndex !== -1 && row[numberIndex] !== "") || (nameIndex !== -1 && String(row[nameIndex]).trim() !== "");
+    const old = row[oldIndex];
+    const date = parseOrderDate(old);
+    // The first run wrote midnight in the script's time zone, which the sheet shows a day early: those cells are redone.
+    const shifted = date && row[dateColumn - 1] instanceof Date && row[dateColumn - 1].getTime() === midnight(date).getTime();
+    if (!isOrder || (row[dateColumn - 1] !== "" && !shifted)) return;
+    const label = "рядок " + (r + 2) + (numberIndex !== -1 && row[numberIndex] !== "" ? " (№ " + row[numberIndex] + ")" : "");
+    if (old === "") return noDate.push(label);
+    if (!date) return unreadable.push(label + ": " + old);
+    filled.push(label);
+    if (write) sheet.getRange(r + 2, dateColumn).setNumberFormat(ORDER_DATE_FORMAT).setValue(date);
+  });
+
+  console.log("Часовий пояс скрипта: " + Session.getScriptTimeZone() + ", таблиці: " + sheet.getParent().getSpreadsheetTimeZone());
+  console.log((write ? "Заповнено" : "Буде заповнено") + " «" + ORDER_DATE_HEADER + "» зі старої дати: " + filled.length);
+  if (noDate.length) console.log("Немає жодної дати (залишено порожнім): " + noDate.join(", "));
+  if (unreadable.length) console.log("Не вдалося прочитати стару дату (залишено порожнім): " + unreadable.join(", "));
+}
+
+// Date cells are used as they are; text like "14,06,2026", "14.06.26" or "14/06/2026" is read as day, month, year.
+// The result is midday, so the sheet shows the same day even when its time zone differs from the script's.
+function parseOrderDate(value) {
+  if (value instanceof Date) return new Date(value.getFullYear(), value.getMonth(), value.getDate(), 12);
+  const match = String(value).trim().match(/^(\d{1,2})[.,\/](\d{1,2})[.,\/](\d{2}|\d{4})$/);
+  if (!match) return null;
+  const [day, month] = [Number(match[1]), Number(match[2])];
+  const year = match[3].length === 2 ? 2000 + Number(match[3]) : Number(match[3]);
+  const date = new Date(year, month - 1, day, 12);
+  return date.getDate() === day && date.getMonth() === month - 1 ? date : null;
+}
+
+function midnight(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
 
 function json(body) {

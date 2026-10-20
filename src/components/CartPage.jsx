@@ -13,10 +13,91 @@ import {
   PriceBlock,
 } from "./OrderPage.jsx";
 import { FinalCTA } from "./FinalCTA.jsx";
-import { submitOrder } from "../lib/submitOrder.js";
+import { submitOrder, submitSurvey } from "../lib/submitOrder.js";
 import { lineKey, useCart } from "../lib/cartStore.js";
 
 const MAX_QUANTITY = 99;
+
+// "Where did you hear about us" after the thank-you message; the answer lands in the order's row in the CRM sheet.
+function SourceSurvey({ survey, order }) {
+  const [choice, setChoice] = useState("");
+  const [other, setOther] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | sending | error | done
+  const options = [
+    { value: survey.recommendation, label: survey.recommendation },
+    ...survey.social.map((name) => ({ value: `${survey.socialTitle}: ${name}`, label: name, social: true })),
+    { value: survey.google, label: survey.google },
+    { value: survey.other, label: survey.other },
+  ];
+  const isOther = choice === survey.other;
+  const source = isOther ? (other.trim() ? `${survey.other}: ${other.trim()}` : "") : choice;
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!source) return;
+    setStatus("sending");
+    try {
+      await submitSurvey({ orderNumber: order.orderNumber, phone: order.phone, source });
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "done") {
+    return (
+      <div className="cart-survey" role="status">
+        <p className="cart-survey-thanks">{survey.thanks}</p>
+      </div>
+    );
+  }
+
+  const renderOption = (option) => (
+    <label className="cart-survey-option" key={option.value}>
+      <input
+        type="radio"
+        name="source"
+        value={option.value}
+        checked={choice === option.value}
+        onChange={() => setChoice(option.value)}
+      />
+      <span>{option.label}</span>
+    </label>
+  );
+
+  return (
+    <form className="cart-survey" onSubmit={handleSubmit}>
+      <fieldset>
+        <legend>
+          <strong>{survey.title}</strong>
+          <span>{survey.question}</span>
+        </legend>
+        {renderOption(options[0])}
+        <div className="cart-survey-group">
+          <span className="cart-survey-group-title">{survey.socialTitle}</span>
+          {options.filter((option) => option.social).map(renderOption)}
+        </div>
+        {options.filter((option, index) => index > 0 && !option.social).map(renderOption)}
+        {isOther ? (
+          <input
+            className="cart-survey-other"
+            type="text"
+            maxLength={200}
+            value={other}
+            placeholder={survey.otherPlaceholder}
+            aria-label={survey.otherPlaceholder}
+            onChange={(event) => setOther(event.target.value)}
+            autoFocus
+          />
+        ) : null}
+      </fieldset>
+      {status === "error" ? <p className="cart-error">{survey.error}</p> : null}
+      <button type="submit" className="btn btn-primary" disabled={!source || status === "sending"}>
+        <span>{status === "sending" ? survey.sending : survey.submit}</span>
+      </button>
+    </form>
+  );
+}
 
 const parsePrice = (value) => Number(String(value).replace(/\D/g, "")) || 0;
 
@@ -193,6 +274,7 @@ export function CartPage({ content, search, onNavigate }) {
   const [contact, setContact] = useState({ name: "", phone: DEFAULT_PHONE });
   const [status, setStatus] = useState("idle"); // idle | error | sending | done
   const [errors, setErrors] = useState({});
+  const [placedOrder, setPlacedOrder] = useState(null); // { orderNumber, phone } for the survey after the thank-you
   const successRef = useRef(null);
 
   useEffect(() => {
@@ -318,7 +400,7 @@ export function CartPage({ content, search, onNavigate }) {
     setStatus("sending");
 
     try {
-      await submitOrder({
+      const result = await submitOrder({
         items: orderLines,
         total,
         name: contact.name.trim(),
@@ -341,6 +423,7 @@ export function CartPage({ content, search, onNavigate }) {
           })),
         });
       }
+      setPlacedOrder({ orderNumber: result.orderNumber, phone: contact.phone.trim() });
       setQuantities({});
       setStatus("done");
     } catch {
@@ -369,6 +452,7 @@ export function CartPage({ content, search, onNavigate }) {
               <span>{cart.backToCatalog}</span>
             </a>
           </div>
+          {placedOrder ? <SourceSurvey survey={cart.survey} order={placedOrder} /> : null}
         </section>
         <FinalCTA content={content} />
       </main>
