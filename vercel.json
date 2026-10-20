@@ -30,7 +30,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; connect-src 'self' https://ipapi.co https://script.google.com https://script.googleusercontent.com; font-src 'self' data:; frame-ancestors 'none'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' data: https:; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; connect-src 'self' https://ipapi.co https://script.google.com https://script.googleusercontent.com https://api.dvision.com.ua; font-src 'self' data:; frame-ancestors 'none'; frame-src 'self' https://www.youtube-nocookie.com; img-src 'self' data: https:; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests"
         },
         {
           "key": "Permissions-Policy",
@@ -47,6 +47,15 @@
         {
           "key": "X-Frame-Options",
           "value": "DENY"
+        }
+      ]
+    },
+    {
+      "source": "/catalog.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300"
         }
       ]
     }

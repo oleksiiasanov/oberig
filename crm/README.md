@@ -4,8 +4,13 @@
 2. In the copy: Extensions → Apps Script → replace the code with `crm/Code.gs` → Save.
 3. Deploy → New deployment → type **Web app** → Execute as **Me**, Who has access **Anyone** → Deploy → authorize → copy the `/exec` URL.
 4. Put that URL into `WEBHOOK_URL` in `src/lib/submitOrder.js` (or set `VITE_ORDER_WEBHOOK_URL` to override it), then deploy.
+5. Add a `clientOrderId` header to row 1. The cart sends one id per order attempt; an order whose id is already in that column is answered `ok` without a new row or email, so a retry after a timeout is not saved twice.
 
 After changing `Code.gs`, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
+
+## Copy of each order to the OMS
+
+After the spreadsheet answers `ok`, the cart also posts the order (same `clientOrderId`) to `VITE_ORDER_MIRROR_URL`, the CRM/OMS order intake. It is set at build time and is not a secret; empty means no copy is sent. The copy never affects what the visitor sees: a missed one is found by reconciling the sheet's `clientOrderId` column with the OMS.
 
 ## "Where did you hear about us" survey
 

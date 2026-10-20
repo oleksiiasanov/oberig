@@ -1,8 +1,14 @@
+import { mirrorOrder } from "./orderMirror.js";
+
 // Sends the order to the CRM spreadsheet through the Google Apps Script web app in /crm/Code.gs.
 // The URL is public by design (it ships in the browser bundle); VITE_ORDER_WEBHOOK_URL can override it.
 const WEBHOOK_URL =
   import.meta.env.VITE_ORDER_WEBHOOK_URL ||
   "https://script.google.com/macros/s/AKfycbzOeaAX0HWsMI0JMJ5WsO-ZmGUmTlhuAQJZl7ItiLaCBmQjiYtA1DGtiZhOr4tbDzuf/exec";
+// CRM/OMS order intake that gets a copy of every saved order; empty (the default) means no copy is sent.
+const MIRROR_URL = import.meta.env.VITE_ORDER_MIRROR_URL || "";
+
+export const sendOrderCopy = (order) => mirrorOrder(MIRROR_URL, order);
 
 // Resolves with { ok, orderNumber } — the number lets the "where did you hear about us" answer find the order row.
 export async function submitOrder(payload) {

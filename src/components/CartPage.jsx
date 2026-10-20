@@ -13,8 +13,10 @@ import {
   PriceBlock,
 } from "./OrderPage.jsx";
 import { FinalCTA } from "./FinalCTA.jsx";
-import { submitOrder, submitSurvey } from "../lib/submitOrder.js";
+import { orderAttempt } from "../lib/orderMirror.js";
+import { sendOrderCopy, submitOrder, submitSurvey } from "../lib/submitOrder.js";
 import { lineKey, useCart } from "../lib/cartStore.js";
+import { parsePrice } from "../lib/catalog.js";
 
 const MAX_QUANTITY = 99;
 
@@ -98,8 +100,6 @@ function SourceSurvey({ survey, order }) {
     </form>
   );
 }
-
-const parsePrice = (value) => Number(String(value).replace(/\D/g, "")) || 0;
 
 const DEFAULT_PHONE = "+380";
 
@@ -276,6 +276,7 @@ export function CartPage({ content, search, onNavigate }) {
   const [errors, setErrors] = useState({});
   const [placedOrder, setPlacedOrder] = useState(null); // { orderNumber, phone } for the survey after the thank-you
   const successRef = useRef(null);
+  const attemptRef = useRef(null);
 
   useEffect(() => {
     if (mainItem) {
@@ -399,17 +400,23 @@ export function CartPage({ content, search, onNavigate }) {
 
     setStatus("sending");
 
+    const orderData = {
+      items: orderLines,
+      total,
+      name: contact.name.trim(),
+      phone: contact.phone.trim(),
+      comment: comment.trim(),
+      whatsappConsent: consent,
+      language: content.meta.lang,
+    };
+    const attempt = orderAttempt(attemptRef.current, orderData);
+    attemptRef.current = attempt;
+
     try {
-      const result = await submitOrder({
-        items: orderLines,
-        total,
-        name: contact.name.trim(),
-        phone: contact.phone.trim(),
-        comment: comment.trim(),
-        whatsappConsent: consent,
-        language: content.meta.lang,
-        submittedAt: new Date().toISOString(),
-      });
+      const payload = { clientOrderId: attempt.clientOrderId, ...orderData, submittedAt: attempt.submittedAt };
+      const result = await submitOrder(payload);
+      sendOrderCopy(payload);
+      attemptRef.current = null;
       if (typeof window !== "undefined" && typeof window.gtag === "function") {
         window.gtag("event", "purchase", {
           transaction_id: `order-${Date.now()}`,
