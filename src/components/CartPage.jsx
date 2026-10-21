@@ -542,6 +542,7 @@ export function CartPage({ content, search, onNavigate }) {
                 type="text"
                 name="name"
                 autoComplete="name"
+                maxLength={200}
                 aria-invalid={errors.name || undefined}
                 value={contact.name}
                 onChange={(event) => {
