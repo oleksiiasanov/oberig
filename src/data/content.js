@@ -323,7 +323,7 @@ export const landingContent = {
             ],
           },
           extras: [],
-          price: "300 грн",
+          price: "500 грн",
         },
         {
           id: "antenna-high",
@@ -1006,7 +1006,7 @@ export const landingContent = {
             ],
           },
           extras: [],
-          price: "UAH 300",
+          price: "UAH 500",
         },
         {
           id: "antenna-high",
