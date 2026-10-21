@@ -10,6 +10,7 @@ const PROCESSED_COLOR = "#b6d7a8";
 const ORDER_NUMBER_HEADER = "№ замовлення"; // running order number: highest number already in the column + 1
 const SHEET_NAME = ""; // optional tab name, used only when SHEET_GID is empty
 const SOURCE_HEADER = "Опитування"; // "where did you hear about us" answer from the thank-you screen; added as the last column if missing
+const CLIENT_ORDER_ID_HEADER = "clientOrderId"; // set by the website cart; an id already in this column is not added again
 
 // Header text in row 1 → how to fill it. Items are matched by product id (+ cable length in metres).
 const COLUMNS = [
@@ -28,6 +29,7 @@ const COLUMNS = [
   { header: "Антена 2.8 – 12 (більша)", value: (o) => qty(o, "antenna-high") },
   { header: "Антена 0.5 – 3 (менша)", value: (o) => qty(o, "antenna-low") },
   { header: "Разом", value: (o) => Number(o.total) || 0 },
+  { header: CLIENT_ORDER_ID_HEADER, value: (o) => o.clientOrderId || "", text: true },
 ];
 
 function qty(order, id, length) {
@@ -64,8 +66,25 @@ function doPost(e) {
     lock.waitLock(20000);
     const book = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = findSheet(book);
-    const columnCount = sheet.getLastColumn();
-    const headers = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm);
+    let columnCount = sheet.getLastColumn();
+    let headers = sheet.getRange(1, 1, 1, columnCount).getValues()[0].map(norm);
+    if (order.clientOrderId && !headers.includes(norm(CLIENT_ORDER_ID_HEADER))) {
+      if (sheet.getMaxColumns() <= columnCount) sheet.insertColumnsAfter(columnCount, 1);
+      sheet.getRange(1, ++columnCount).setValue(CLIENT_ORDER_ID_HEADER);
+      headers.push(norm(CLIENT_ORDER_ID_HEADER));
+    }
+
+    // A resent order (retry after a timeout) is already saved: answer ok without a second row or email.
+    const idIndex = headers.indexOf(norm(CLIENT_ORDER_ID_HEADER));
+    if (order.clientOrderId && idIndex !== -1 && sheet.getLastRow() > 1) {
+      const ids = sheet.getRange(2, idIndex + 1, sheet.getLastRow() - 1, 1).getValues();
+      const found = ids.findIndex((cells) => String(cells[0]) === String(order.clientOrderId));
+      if (found !== -1) {
+        const savedNumberIndex = headers.indexOf(norm(ORDER_NUMBER_HEADER));
+        const savedNumber = savedNumberIndex !== -1 ? sheet.getRange(found + 2, savedNumberIndex + 1).getValue() : "";
+        return json({ ok: true, duplicate: true, orderNumber: savedNumber }); // the survey still finds the row
+      }
+    }
 
     // Newest order goes right under the header row: insert a row and copy the look of the order below it.
     const row = 2;
@@ -126,7 +145,9 @@ function saveSurvey(sheet, answer) {
   if (phoneIndex === -1) return { ok: false, error: "phone column not found" };
 
   const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, headers.length).getValues();
+  const clientIdIndex = headers.indexOf(norm(CLIENT_ORDER_ID_HEADER));
   const rowIndex = rows.findIndex((row) =>
+    (!answer.clientOrderId || (clientIdIndex !== -1 && String(row[clientIdIndex]) === String(answer.clientOrderId))) &&
     String(row[phoneIndex]).replace(/\D/g, "") === phone &&
     (numberIndex === -1 || !answer.orderNumber || String(row[numberIndex]) === String(answer.orderNumber))
   );

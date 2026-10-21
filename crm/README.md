@@ -4,8 +4,16 @@
 2. In the copy: Extensions → Apps Script → replace the code with `crm/Code.gs` → Save.
 3. Deploy → New deployment → type **Web app** → Execute as **Me**, Who has access **Anyone** → Deploy → authorize → copy the `/exec` URL.
 4. Put that URL into `WEBHOOK_URL` in `src/lib/submitOrder.js` (or set `VITE_ORDER_WEBHOOK_URL` to override it), then deploy.
+5. The new script adds a `clientOrderId` header to row 1 when needed. The cart sends one id per order attempt; an order whose id is already in that column is answered `ok` without a new row or email, so a retry after a timeout is not saved twice.
 
 After changing `Code.gs`, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
+
+## CRM checkout and temporary Sheets copy
+
+The revised approved architecture keeps Vercel and uses CRM acknowledgement for
+checkout success. The existing Sheets write runs independently for temporary manual
+comparison. See `crm/WEBSITE-CHECKOUT.md` for activation, public configuration and
+rollback. PR36's `VITE_ORDER_MIRROR_URL` best-effort behavior is superseded.
 
 ## "Where did you hear about us" survey
 

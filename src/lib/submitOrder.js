@@ -28,6 +28,7 @@ async function post(payload, devLabel) {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(15000),
   });
 
   const result = await response.json().catch(() => null);

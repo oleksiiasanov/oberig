@@ -10,7 +10,8 @@
     "sync:manual": "node scripts/sync-notion-manual.mjs",
     "sync:shorts": "node scripts/sync-youtube-shorts.mjs",
     "check:content": "node scripts/check-content.mjs",
-    "check": "npm run check:content && npm run build"
+    "check": "npm run check:content && npm test && npm run build",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

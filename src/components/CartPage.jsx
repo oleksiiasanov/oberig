@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ChevronDown, CircleCheck, Trash2, X } from "lucide-react";
+import { CircleCheck, Trash2, X } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   CharacteristicsTable,
@@ -12,11 +12,17 @@ import {
   PART_CATEGORY,
   PriceBlock,
 } from "./OrderPage.jsx";
+import { CheckoutChallenge } from "./CheckoutChallenge.jsx";
+import { clearAttempt, readAttempt, saveAttempt, orderAttempt, sendCrmOrder, submitCheckout } from "../lib/checkout.js";
+import { parsePrice } from "../lib/catalog.js";
 import { FinalCTA } from "./FinalCTA.jsx";
 import { submitOrder, submitSurvey } from "../lib/submitOrder.js";
 import { lineKey, useCart } from "../lib/cartStore.js";
 
-const MAX_QUANTITY = 99;
+const ORDER_API_URL = import.meta.env.VITE_ORDER_API_URL || "";
+const TURNSTILE_SITEKEY = import.meta.env.VITE_TURNSTILE_SITEKEY || "";
+const tabStorage = () => { try { return window.sessionStorage; } catch { return null; } };
+
 
 // "Where did you hear about us" after the thank-you message; the answer lands in the order's row in the CRM sheet.
 function SourceSurvey({ survey, order }) {
@@ -37,7 +43,7 @@ function SourceSurvey({ survey, order }) {
     if (!source) return;
     setStatus("sending");
     try {
-      await submitSurvey({ orderNumber: order.orderNumber, phone: order.phone, source });
+      await submitSurvey({ orderNumber: order.orderNumber, clientOrderId: order.clientOrderId, phone: order.phone, source });
       setStatus("done");
     } catch {
       setStatus("error");
@@ -99,7 +105,6 @@ function SourceSurvey({ survey, order }) {
   );
 }
 
-const parsePrice = (value) => Number(String(value).replace(/\D/g, "")) || 0;
 
 const DEFAULT_PHONE = "+380";
 
@@ -114,67 +119,23 @@ function isValidPhone(value) {
   return digits.length >= 8 && digits.length <= 15;
 }
 
-function QuantityDropdown({ id, label, value, min, onChange }) {
-  const [open, setOpen] = useState(false);
-  const rootRef = useRef(null);
-  const listRef = useRef(null);
-  const options = [];
-  for (let n = min; n <= MAX_QUANTITY; n += 1) options.push(n);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    const close = (event) => {
-      if (!rootRef.current?.contains(event.target)) setOpen(false);
-    };
-    document.addEventListener("pointerdown", close);
-    listRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
-    return () => document.removeEventListener("pointerdown", close);
-  }, [open]);
-
-  const choose = (n) => {
-    onChange(n);
-    setOpen(false);
-  };
-  const handleKey = (event) => {
-    if (event.key === "Escape") setOpen(false);
-    if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      event.preventDefault();
-      const next = Math.min(MAX_QUANTITY, Math.max(min, value + (event.key === "ArrowDown" ? 1 : -1)));
-      onChange(next);
-    }
-  };
-
-  return (
-    <div className="qty-dropdown" ref={rootRef} onKeyDown={handleKey}>
-      <button
-        type="button"
-        id={id}
-        className="qty-dropdown-btn"
-        aria-label={`${label}: ${value}`}
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span>{value}</span>
-        <ChevronDown aria-hidden="true" />
-      </button>
-      {open ? (
-        <ul className="qty-dropdown-list" role="listbox" aria-label={label} ref={listRef}>
-          {options.map((n) => (
-            <li
-              key={n}
-              role="option"
-              aria-selected={n === value}
-              className={n === value ? "is-selected" : ""}
-              onClick={() => choose(n)}
-            >
-              {n}
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </div>
-  );
+function QuantityInput({ id, label, value, min, onChange }) {
+  const [draft, setDraft] = useState(String(value));
+  const inputRef = useRef(null);
+  useEffect(() => { setDraft(String(value)); inputRef.current?.setCustomValidity(""); }, [value]);
+  return <input ref={inputRef} id={id} className="qty-input" form="checkout-form" type="number" inputMode="numeric"
+    aria-label={label} min={min} step="1" required value={draft}
+    onChange={(event) => {
+      const raw = event.target.value;
+      setDraft(raw);
+      const next = Number(raw);
+      const valid = raw !== "" && Number.isSafeInteger(next) && next >= min;
+      event.target.setCustomValidity(valid ? "" : (document.documentElement.lang === "en" ? "Enter a whole quantity." : "Вкажіть цілу кількість."));
+      if (valid) onChange(next);
+    }}
+    onBlur={(event) => {
+      if (draft === "") { setDraft(String(min)); onChange(min); event.target.setCustomValidity(""); }
+    }} />;
 }
 
 function AddedBadge({ label, iconOnly }) {
@@ -190,7 +151,7 @@ function QuantitySelect({ label, value, min, onChange, id }) {
   return (
     <div className="cart-qty">
       <span>{label}</span>
-      <QuantityDropdown id={id} label={label} value={value} min={min} onChange={onChange} />
+      <QuantityInput id={id} label={label} value={value} min={min} onChange={onChange} />
     </div>
   );
 }
@@ -268,10 +229,15 @@ export function CartPage({ content, search, onNavigate }) {
 
   // Quantities keyed by line: "<id>" or "<id>:<cableLength>" for items sold in several lengths.
   const [quantities, setQuantities] = useCart();
-  const [comment, setComment] = useState("");
-  const [consent, setConsent] = useState(true);
+  const [restored] = useState(() => readAttempt(tabStorage()));
+  const attemptRef = useRef(restored);
+  const challengeRef = useRef(null);
+  const submittingRef = useRef(false);
+  const submittedIdRef = useRef(null);
+  const [comment, setComment] = useState(restored?.payload.comment || "");
+  const [consent, setConsent] = useState(restored?.payload.whatsappConsent ?? true);
   const [previewId, setPreviewId] = useState(null);
-  const [contact, setContact] = useState({ name: "", phone: DEFAULT_PHONE });
+  const [contact, setContact] = useState({ name: restored?.payload.name || "", phone: restored?.payload.phone || DEFAULT_PHONE });
   const [status, setStatus] = useState("idle"); // idle | error | sending | done
   const [errors, setErrors] = useState({});
   const [placedOrder, setPlacedOrder] = useState(null); // { orderNumber, phone } for the survey after the thank-you
@@ -341,7 +307,7 @@ export function CartPage({ content, search, onNavigate }) {
               <span className="cart-length-price">{item.price?.[index]?.[1]}</span>
               <div className="cart-length-qty">
                 <span className="sr-only">{`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}</span>
-                <QuantityDropdown
+                <QuantityInput
                   id={id}
                   label={`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}
                   value={qty}
@@ -389,7 +355,7 @@ export function CartPage({ content, search, onNavigate }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!orderLines.length) return;
+    if (submittingRef.current || !orderLines.length || !event.currentTarget.reportValidity()) return;
     const nextErrors = {
       name: !contact.name.trim(),
       phone: !isValidPhone(contact.phone),
@@ -397,20 +363,36 @@ export function CartPage({ content, search, onNavigate }) {
     setErrors(nextErrors);
     if (nextErrors.name || nextErrors.phone) return;
 
+    submittingRef.current = true;
     setStatus("sending");
-
+    const data = { items: orderLines, total, name: contact.name.trim(), phone: contact.phone.trim(),
+      comment: comment.trim(), whatsappConsent: consent, language: content.meta.lang };
     try {
-      const result = await submitOrder({
-        items: orderLines,
-        total,
-        name: contact.name.trim(),
-        phone: contact.phone.trim(),
-        comment: comment.trim(),
-        whatsappConsent: consent,
-        language: content.meta.lang,
-        submittedAt: new Date().toISOString(),
-      });
-      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const attempt = orderAttempt(attemptRef.current, data);
+      attemptRef.current = attempt;
+      submittedIdRef.current = attempt.payload.clientOrderId;
+      saveAttempt(tabStorage(), attempt);
+      const payload = attempt.payload;
+      const onSheets = (result) => {
+        if (submittedIdRef.current === payload.clientOrderId)
+          setPlacedOrder({ orderNumber: result.orderNumber, phone: payload.phone, clientOrderId: payload.clientOrderId });
+      };
+      if (ORDER_API_URL) {
+        await submitCheckout({ payload, submitSheets: submitOrder, onSheets,
+          submitCrm: async () => {
+            if (!TURNSTILE_SITEKEY || !challengeRef.current) throw new Error("verification_unavailable");
+            const token = await challengeRef.current();
+            return sendCrmOrder(ORDER_API_URL, payload, token);
+          },
+          report: (code, clientOrderId) => console.error("checkout", { code, clientOrderId }),
+        });
+      } else {
+        // Deployment gate: existing checkout stays operational until the API is ready.
+        onSheets(await submitOrder(payload));
+      }
+      clearAttempt(tabStorage());
+      attemptRef.current = null;
+      try { if (typeof window !== "undefined" && typeof window.gtag === "function") {
         window.gtag("event", "purchase", {
           transaction_id: `order-${Date.now()}`,
           currency: "UAH",
@@ -423,12 +405,12 @@ export function CartPage({ content, search, onNavigate }) {
           })),
         });
       }
-      setPlacedOrder({ orderNumber: result.orderNumber, phone: contact.phone.trim() });
+      } catch { /* Analytics cannot turn a saved order into a failed checkout. */ }
       setQuantities({});
       setStatus("done");
     } catch {
       setStatus("error");
-    }
+    } finally { submittingRef.current = false; }
   };
 
   if (status === "done") {
@@ -518,7 +500,7 @@ export function CartPage({ content, search, onNavigate }) {
       </section>
 
       <section className="section cart-section">
-        <form className="cart-submit" onSubmit={handleSubmit} noValidate>
+        <form id="checkout-form" className="cart-submit" onSubmit={handleSubmit} noValidate>
           <h2 className="cart-subtitle">
             {cart.commentTitle} <span className="cart-optional">{cart.optionalLabel}</span>
           </h2>
@@ -534,6 +516,7 @@ export function CartPage({ content, search, onNavigate }) {
               <input
                 type="text"
                 name="name"
+                maxLength={200}
                 autoComplete="name"
                 aria-invalid={errors.name || undefined}
                 value={contact.name}
@@ -575,6 +558,7 @@ export function CartPage({ content, search, onNavigate }) {
             <span>{cart.consent}</span>
           </label>
           {status === "error" ? <p className="cart-error" role="alert">{cart.errorMessage}</p> : null}
+          {ORDER_API_URL && TURNSTILE_SITEKEY ? <CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={challengeRef} /> : null}
           <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || !orderLines.length}>
             <span>{status === "sending" ? cart.sending : cart.submit}</span>
           </button>
