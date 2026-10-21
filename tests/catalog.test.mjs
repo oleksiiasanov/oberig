@@ -18,7 +18,7 @@ describe("catalog.json", () => {
         { id: "bunker-antenna", cableLengthM: 14, price: 15600 },
         { id: "bunker-antenna", cableLengthM: 20, price: 16000 },
         { id: "car-holder", price: 1000 },
-        { id: "molle-mount", price: 300 },
+        { id: "molle-mount", price: 500 },
         { id: "antenna-high", price: 250 },
         { id: "antenna-low", price: 200 },
       ],
