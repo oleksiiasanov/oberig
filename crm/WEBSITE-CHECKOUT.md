@@ -1,5 +1,9 @@
 # CRM checkout on Vercel
 
+Owner setup guide (Ukrainian): [CRM setup instructions](https://github.com/oleksiiasanov/crm_oberig/blob/feat/website-order-api/docs/OWNER-WEBSITE-SETUP.md).
+Paired changes: [website #37](https://github.com/oleksiiasanov/oberig/pull/37),
+[CRM #1](https://github.com/oleksiiasanov/crm_oberig/pull/1).
+
 Approved2026-10-21. Replaces PR36; PR35 Pages move is cancelled. Keep Vercel static
 hosting and the existing Apps Script endpoint. CRM counterpart is
 `crm_oberig:feat/website-order-api`, documented in `docs/WEBSITE-INTAKE.md` there.
@@ -38,10 +42,10 @@ cannot itself produce a server log; uptime monitoring is a separate deployment c
 
 ## Rollback / limitations
 
-Clear API URL and rebuild to restore Sheets-authoritative checkout temporarily; do
+Clear both API URL and Turnstile sitekey and rebuild to restore Sheets-authoritative checkout temporarily; do
 not erase CRM orders. The deploy-time empty-URL mode is deliberate staging/rollback,
-not evidence that integration is active. If URL is set but sitekey is missing, checkout
-fails closed. Turnstile/frontend behavior needs browser acceptance in the actual
+not evidence that integration is active. If only one of URL/sitekey is set, the build
+rejects the incomplete configuration. Turnstile/frontend behavior needs browser acceptance in the actual
 production configuration. Local tests use synthetic data and do not submit live orders.
 
 A closed tab ends sessionStorage persistence. No web client can guarantee delivery
