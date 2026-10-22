@@ -47,5 +47,3 @@ no production orders submitted. Full local129 unit+199 integration tests and11 l
 tests passed; synthetic browser also covered price consent, removal, fast quantities,
 lost-ack replay without duplicates and admin position displacement. Independent code
 and release-helper review passed. See the CRM repository docs/WEBSITE-CATALOG.md for operation and limits.
-
-
