@@ -55,3 +55,9 @@ test("public request has no CRM credentials and only a matching acknowledgement 
   for (const response of [Response.json({ ok: true, clientOrderId: "other" }), Response.json({ error: "unavailable" }, { status: 502 }), new Response("not JSON")])
     await assert.rejects(sendCrmOrder("https://api.dvision.com.ua/order", payload, "proof", async () => response));
 });
+
+test('pending business-identical order keeps original identity and payload after display name or language changes',()=>{
+ const first=orderAttempt(null,{...data,items:data.items.map(i=>({...i,name:'Original'}))});
+ const again=orderAttempt(first,{...data,language:'en',items:data.items.map(i=>({...i,name:'Renamed'}))});
+ assert.equal(again,first);assert.equal(again.payload.items[0].name,'Original');
+});

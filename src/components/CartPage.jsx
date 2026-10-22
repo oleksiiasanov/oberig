@@ -14,12 +14,12 @@ import {
 } from "./OrderPage.jsx";
 import { CheckoutChallenge } from "./CheckoutChallenge.jsx";
 import { clearAttempt, readAttempt, saveAttempt, orderAttempt, sendCrmOrder, submitCheckout } from "../lib/checkout.js";
-import { parsePrice } from "../lib/catalog.js";
+import { itemPrice, checkCart } from "../lib/liveCatalog.js";
 import { FinalCTA } from "./FinalCTA.jsx";
 import { submitOrder, submitSurvey } from "../lib/submitOrder.js";
 import { lineKey, useCart } from "../lib/cartStore.js";
 
-const ORDER_API_URL = import.meta.env.VITE_ORDER_API_URL || "";
+const ORDER_API_URL = import.meta.env.VITE_ORDER_API_URL || "https://api.dvision.com.ua/order";
 const TURNSTILE_SITEKEY = import.meta.env.VITE_TURNSTILE_SITEKEY || "";
 const tabStorage = () => { try { return window.sessionStorage; } catch { return null; } };
 
@@ -147,11 +147,11 @@ function AddedBadge({ label, iconOnly }) {
   );
 }
 
-function QuantitySelect({ label, value, min, onChange, id }) {
+function QuantitySelect({ label, value, min, onChange, id, reset }) {
   return (
     <div className="cart-qty">
       <span>{label}</span>
-      <QuantityInput id={id} label={label} value={value} min={min} onChange={onChange} />
+      <QuantityInput key={reset} id={id} label={label} value={value} min={min} onChange={onChange} />
     </div>
   );
 }
@@ -240,19 +240,25 @@ export function CartPage({ content, search, onNavigate }) {
   const [contact, setContact] = useState({ name: restored?.payload.name || "", phone: restored?.payload.phone || DEFAULT_PHONE });
   const [status, setStatus] = useState("idle"); // idle | error | sending | done
   const [errors, setErrors] = useState({});
+  const [snapshots,setSnapshots] = useState(()=>{try{return JSON.parse(tabStorage()?.getItem('dvision-cart-prices')||'{}')}catch{return {}}});
+  const [changes,setChanges] = useState([]);
+  const [pendingAdd,setPendingAdd] = useState(null);
+  const [checking,setChecking] = useState(false);
+  const [quantityRevision,setQuantityRevision]=useState(0);
+  const checkingRef=useRef(false);
+  const quantityChecks=useRef({});
+  const [catalogError,setCatalogError] = useState('');
+  useEffect(()=>{try{tabStorage()?.setItem('dvision-cart-prices',JSON.stringify(snapshots));}catch{}},[snapshots]);
   const [placedOrder, setPlacedOrder] = useState(null); // { orderNumber, phone } for the survey after the thank-you
   const successRef = useRef(null);
 
   useEffect(() => {
     if (mainItem) {
-      const keys = mainItem.cableLengths?.length
-        ? mainItem.cableLengths.map((length) => lineKey(mainItem, length))
-        : [lineKey(mainItem)];
-      setQuantities((current) => (keys.some((key) => current[key] > 0) ? current : { ...current, [keys[0]]: 1 }));
+      const length=mainItem.cableLengths?.[0];
+      const keys=mainItem.cableLengths?.map(x=>lineKey(mainItem,x)) || [lineKey(mainItem)];
+      if(!keys.some(key=>quantities[key]>0)) void setLineQty(mainItem,length,1);
     }
-    setErrors({});
-    setPreviewId(null);
-    setStatus("idle");
+    setErrors({});setPreviewId(null);setStatus('idle');
   }, [mainItem?.id]);
 
   useEffect(() => {
@@ -265,30 +271,47 @@ export function CartPage({ content, search, onNavigate }) {
     item.cableLengths?.length
       ? item.cableLengths.reduce((sum, length) => sum + lineQty(item, length), 0)
       : lineQty(item);
-  const setLineQty = (item, length, value) =>
-    setQuantities((current) => ({ ...current, [lineKey(item, length)]: value }));
-  const orderLines = [...(mainItem ? [mainItem] : []), ...others].flatMap((item) => {
-    if (item.cableLengths?.length) {
-      return item.cableLengths
-        .map((length, index) => ({
-          id: item.id,
-          name: item.name,
-          cableLengthM: length,
-          quantity: lineQty(item, length),
-          unitPrice: parsePrice(item.price?.[index]?.[1]),
-        }))
-        .filter((line) => line.quantity > 0);
-    }
-    const quantity = lineQty(item);
-    return quantity > 0 ? [{ id: item.id, name: item.name, quantity, unitPrice: parsePrice(item.price) }] : [];
+  const setLineQty = async (item,length,value) => {
+    if(submittingRef.current)return;
+    const key=lineKey(item,length),current=quantities[key]||0;
+    const ticket=Symbol();quantityChecks.current[key]=ticket;
+    if(value<=current){delete quantityChecks.current[key];checkingRef.current=Object.keys(quantityChecks.current).length>0;setChecking(checkingRef.current);setQuantities(q=>({...q,[key]:value}));return;}
+    const line={id:item.id,name:item.name,...(length===undefined?{}:{cableLengthM:length}),unitPrice:snapshots[key]?.unitPrice ?? itemPrice(item,length)};
+    checkingRef.current=true;setChecking(true);setCatalogError('');
+    try{const next=await checkCart([line]);if(quantityChecks.current[key]!==ticket)return;if(next.length){setChanges(next);setPendingAdd({line,key,value});return;}
+      setSnapshots(p=>({...p,[key]:line}));setQuantities(q=>({...q,[key]:value}));
+    }catch{if(quantityChecks.current[key]!==ticket)return;setQuantityRevision(x=>x+1);setCatalogError(content.meta.lang==='uk'?'Не вдалося перевірити товар. Спробуйте ще раз.':'Unable to verify product. Please retry.');}
+    finally{if(quantityChecks.current[key]===ticket)delete quantityChecks.current[key];checkingRef.current=Object.keys(quantityChecks.current).length>0;setChecking(checkingRef.current);}
+  };
+  const orderLines = Object.entries(quantities).filter(([,quantity])=>quantity>0).map(([key,quantity])=>{
+    const [id,length]=key.split(':'),cableLengthM=length?Number(length):undefined;
+    const item=order.items.find(x=>x.id===id);
+    const prior=snapshots[key] || restored?.payload.items.find(x=>lineKey(x,x.cableLengthM)===key);
+    return {id,name:prior?.name||item?.name||id,...(cableLengthM===undefined?{}:{cableLengthM}),quantity,unitPrice:prior?.unitPrice ?? (item?itemPrice(item,cableLengthM):0)};
   });
-  const total = orderLines.reduce((sum, line) => sum + line.quantity * line.unitPrice, 0);
+  const confirmChanges = async () => {
+    if(checkingRef.current)return;checkingRef.current=true;setChecking(true);setCatalogError('');
+    const proposed=(pendingAdd?[pendingAdd.line]:orderLines).filter(line=>!changes.some(c=>c.type==='unavailable'&&lineKey(c,c.cableLengthM)===lineKey(line,line.cableLengthM))).map(line=>{
+      const change=changes.find(c=>lineKey(c,c.cableLengthM)===lineKey(line,line.cableLengthM));
+      return change?.type==='price_changed'?{...line,unitPrice:change.priceMinor/100}:line;
+    });
+    try{
+      const newer=proposed.length?await checkCart(proposed):[];
+      if(newer.length){setChanges(newer);return;}
+      setSnapshots(p=>({...p,...Object.fromEntries(proposed.map(l=>[lineKey(l,l.cableLengthM),l]))}));
+      setQuantities(q=>{const next={...q};for(const c of changes)if(c.type==='unavailable')next[lineKey(c,c.cableLengthM)]=0;if(pendingAdd&&proposed.length)next[pendingAdd.key]=pendingAdd.value;return next;});
+      setChanges([]);setPendingAdd(null);setStatus('idle');
+    }catch{setCatalogError(content.meta.lang==='uk'?'Не вдалося перевірити кошик. Спробуйте ще раз.':'Unable to verify cart. Please retry.');}
+    finally{checkingRef.current=false;setChecking(false);}
+  };
+  useEffect(()=>{setSnapshots(prior=>{const missing=orderLines.filter(l=>!prior[lineKey(l,l.cableLengthM)]);return missing.length?{...prior,...Object.fromEntries(missing.map(l=>[lineKey(l,l.cableLengthM),l]))}:prior;});},[order.items,quantities]);
+  const total = orderLines.reduce((sum, line) => sum + line.quantity * Math.round(line.unitPrice * 100), 0) / 100;
   const formatMoney = (value) =>
     `${cart.moneyPrefix}${value.toLocaleString(content.meta.lang === "uk" ? "uk-UA" : "en-US")}${cart.moneySuffix}`;
   const renderPrice = (item) =>
     typeof item.price === "string" ? (
       <span className="cart-row-price">
-        {order.priceLabel}: <strong>{item.price}</strong>
+        {order.priceLabel}: <strong>{formatMoney(snapshots[lineKey(item)]?.unitPrice ?? itemPrice(item))}</strong>
       </span>
     ) : null;
   const renderLengths = (item) => {
@@ -304,10 +327,11 @@ export function CartPage({ content, search, onNavigate }) {
               <span className="cart-length-name">
                 {length} {cart.lengthUnit}
               </span>
-              <span className="cart-length-price">{item.price?.[index]?.[1]}</span>
+              <span className="cart-length-price">{formatMoney(snapshots[lineKey(item,length)]?.unitPrice ?? itemPrice(item,length))}</span>
               <div className="cart-length-qty">
                 <span className="sr-only">{`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}</span>
                 <QuantityInput
+                  key={quantityRevision}
                   id={id}
                   label={`${cart.quantityLabel}, ${length} ${cart.lengthUnit}`}
                   value={qty}
@@ -322,8 +346,10 @@ export function CartPage({ content, search, onNavigate }) {
       </div>
     );
   };
-  const removeLine = (line) =>
-    setQuantities((current) => ({ ...current, [lineKey({ id: line.id }, line.cableLengthM)]: 0 }));
+  const removeLine = (line) => {
+    const key=lineKey(line,line.cableLengthM);delete quantityChecks.current[key];checkingRef.current=Object.keys(quantityChecks.current).length>0;setChecking(checkingRef.current);
+    setQuantities(current=>({...current,[key]:0}));
+  };
   const renderRow = (item) => {
     const qty = totalQty(item);
     return (
@@ -339,6 +365,7 @@ export function CartPage({ content, search, onNavigate }) {
         {item.cableLengths?.length ? null : (
           <div className="cart-row-controls">
             <QuantitySelect
+              reset={quantityRevision}
               id={`cart-qty-${item.id}`}
               label={cart.quantityLabel}
               value={qty}
@@ -355,7 +382,7 @@ export function CartPage({ content, search, onNavigate }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (submittingRef.current || !orderLines.length || !event.currentTarget.reportValidity()) return;
+    if (submittingRef.current || checkingRef.current || changes.length || !orderLines.length || !event.currentTarget.reportValidity()) return;
     const nextErrors = {
       name: !contact.name.trim(),
       phone: !isValidPhone(contact.phone),
@@ -369,6 +396,12 @@ export function CartPage({ content, search, onNavigate }) {
       comment: comment.trim(), whatsappConsent: consent, language: content.meta.lang };
     try {
       const attempt = orderAttempt(attemptRef.current, data);
+      // A pending unchanged order may already be committed: replay its original ID
+      // before current catalog checks. The CRM validates new attempts atomically.
+      if(attempt !== attemptRef.current){
+        const fresh = await checkCart(orderLines);
+        if(fresh.length){setChanges(fresh);setPendingAdd(null);setStatus('idle');return;}
+      }
       attemptRef.current = attempt;
       submittedIdRef.current = attempt.payload.clientOrderId;
       saveAttempt(tabStorage(), attempt);
@@ -377,7 +410,6 @@ export function CartPage({ content, search, onNavigate }) {
         if (submittedIdRef.current === payload.clientOrderId)
           setPlacedOrder({ orderNumber: result.orderNumber, phone: payload.phone, clientOrderId: payload.clientOrderId });
       };
-      if (ORDER_API_URL) {
         await submitCheckout({ payload, submitSheets: submitOrder, onSheets,
           submitCrm: async () => {
             if (!TURNSTILE_SITEKEY || !challengeRef.current) throw new Error("verification_unavailable");
@@ -386,10 +418,6 @@ export function CartPage({ content, search, onNavigate }) {
           },
           report: (code, clientOrderId) => console.error("checkout", { code, clientOrderId }),
         });
-      } else {
-        // Deployment gate: existing checkout stays operational until the API is ready.
-        onSheets(await submitOrder(payload));
-      }
       clearAttempt(tabStorage());
       attemptRef.current = null;
       try { if (typeof window !== "undefined" && typeof window.gtag === "function") {
@@ -407,9 +435,11 @@ export function CartPage({ content, search, onNavigate }) {
       }
       } catch { /* Analytics cannot turn a saved order into a failed checkout. */ }
       setQuantities({});
+      setSnapshots({});
       setStatus("done");
-    } catch {
-      setStatus("error");
+    } catch (error) {
+      if(error.code==='cart_changed'){setChanges(error.changes);setPendingAdd(null);setStatus('idle');}
+      else setStatus("error");
     } finally { submittingRef.current = false; }
   };
 
@@ -465,6 +495,16 @@ export function CartPage({ content, search, onNavigate }) {
         </section>
       ) : null}
 
+      {(changes.length>0 || catalogError || checking) && <section className="section cart-section" aria-live="polite">
+        {checking&&<p>{content.meta.lang==='uk'?'Перевіряємо актуальну ціну та доступність…':'Checking price and availability…'}</p>}
+        {catalogError&&<p role="alert" className="cart-error">{catalogError}</p>}
+        {changes.length>0&&<div role="alert" className="cart-total">
+          {changes.map(c=>{const key=lineKey(c,c.cableLengthM),line=pendingAdd?.key===key?pendingAdd.line:orderLines.find(l=>lineKey(l,l.cableLengthM)===key);const name=line?.name||order.items.find(i=>i.id===c.id)?.name||c.id;
+            return <p key={key}>{c.type==='unavailable' ? (content.meta.lang==='uk'?`Товар «${name}» більше недоступний для замовлення. Оберіть інший товар.`:`“${name}” is no longer available. Please choose another product.`) : (content.meta.lang==='uk'?`Ціна «${name}» змінилася з ${formatMoney(line?.unitPrice||0)} на ${formatMoney(c.priceMinor/100)}.`:`The price of “${name}” changed from ${formatMoney(line?.unitPrice||0)} to ${formatMoney(c.priceMinor/100)}.`)}</p>;})}
+          <button type="button" className="btn btn-primary" disabled={checking} onClick={confirmChanges}>{content.meta.lang==='uk'?(changes.some(c=>c.type==='unavailable')?'Прибрати недоступне та підтвердити зміни':'Підтвердити нову ціну'):'Confirm cart changes'}</button>
+          {pendingAdd&&<button type="button" className="btn btn-secondary" onClick={()=>{setChanges([]);setPendingAdd(null);setQuantityRevision(x=>x+1);}}>{content.meta.lang==='uk'?'Скасувати':'Cancel'}</button>}
+        </div>}
+      </section>}
       <section className="section cart-section cart-total-section">
         <div className="cart-total">
           <h2 className="cart-subtitle">{cart.totalTitle}</h2>
@@ -559,7 +599,7 @@ export function CartPage({ content, search, onNavigate }) {
           </label>
           {status === "error" ? <p className="cart-error" role="alert">{cart.errorMessage}</p> : null}
           {ORDER_API_URL && TURNSTILE_SITEKEY ? <CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={challengeRef} /> : null}
-          <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || !orderLines.length}>
+          <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || checking || changes.length > 0 || !orderLines.length}>
             <span>{status === "sending" ? cart.sending : cart.submit}</span>
           </button>
         </form>

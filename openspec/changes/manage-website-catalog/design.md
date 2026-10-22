@@ -1,0 +1,9 @@
+## Decisions
+One website listing groups one or more existing sellable CRM products (cable variants). A listing stores localized public content, publication/availability and unique nullable position; variant prices come directly from products, without duplicated price storage. Public raster media lives in the existing backed-up PostgreSQL infrastructure, separate from private document files. The gateway has only its existing private intake token and proxies explicit catalog/media routes. It never receives DB/admin credentials.
+
+Catalog data is read fresh for add-to-cart and checkout. The private order transaction serializes against product edits and validates the submitted prices/availability before creating records. Idempotency replay is checked before current catalog validation, so a lost successful acknowledgement remains recoverable after price changes. Public errors expose only current public item information. Browser never silently accepts a changed price or drops unavailable cart lines.
+
+CRM's existing stock/sourcing state and historical snapshots remain intact during import. Website orderability is separate from warehouse completeness, consistent with existing draft-product intake. New website content is entered in normal form fields, not raw JSON. English fields fall back to Ukrainian only when not supplied.
+
+## Migration and release
+Add schema026, rehearse with synthetic and encrypted production backup, verify preserved business facts. Import source matches the live site and checks current product versions before apply. Deploy CRM/gateway before switching landing; verify public/private boundaries, media, order negatives and isolated successful checkout. Keep old published site working during cutover through existing request shape and identifiers. Update controlled-delivery contract through reviewed maintenance, never bypass its gate.

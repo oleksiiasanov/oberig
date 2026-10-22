@@ -109,8 +109,7 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
   const closeMenu = () => setIsMenuOpen(false);
   // Spare parts share one dropdown entry that leads to their section on /order.
   const { items, partsTitle } = content.order;
-  const catalogItems = items.filter((item) => item.category !== PART_CATEGORY);
-  if (catalogItems.length < items.length) catalogItems.push({ id: PARTS_ANCHOR, name: partsTitle });
+  const catalogItems = items;
   const handleNavClick = (event, href) => {
     if (href.startsWith("http")) {
       closeMenu();
