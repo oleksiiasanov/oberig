@@ -1,37 +1,16 @@
-import { describe, it } from "node:test";
-import assert from "node:assert/strict";
-import { landingContent } from "../src/data/content.js";
-import { buildCatalog } from "../src/lib/catalog.js";
-
-describe("catalog.json", () => {
-  const catalog = buildCatalog(landingContent.uk.order.items);
-
-  it("lists the 10 sellable lines with whole-hryvnia prices", () => {
-    assert.deepEqual(catalog, {
-      version: 1,
-      currency: "UAH",
-      items: [
-        { id: "detector", price: 24000 },
-        { id: "car-antenna", price: 7000 },
-        { id: "car-antenna-amp", cableLengthM: 5, price: 13200 },
-        { id: "car-antenna-amp", cableLengthM: 10, price: 14200 },
-        { id: "bunker-antenna", cableLengthM: 14, price: 15600 },
-        { id: "bunker-antenna", cableLengthM: 20, price: 16000 },
-        { id: "car-holder", price: 1000 },
-        { id: "molle-mount", price: 500 },
-        { id: "antenna-high", price: 250 },
-        { id: "antenna-low", price: 200 },
-      ],
-    });
-  });
-
-  it("matches the English cart, so prices do not depend on the visitor's language", () => {
-    assert.deepEqual(buildCatalog(landingContent.en.order.items), catalog);
-  });
-
-  it("has no unpriced or duplicate lines", () => {
-    const keys = catalog.items.map((line) => `${line.id}:${line.cableLengthM ?? ""}`);
-    assert.equal(new Set(keys).size, keys.length);
-    assert.ok(catalog.items.every((line) => Number.isInteger(line.price) && line.price > 0));
-  });
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { catalogItems,itemPrice,checkCart,loadCatalog } from '../src/lib/liveCatalog.js';
+import {landingContent} from '../src/data/content.js';
+const data={version:2,currency:'UAH',items:[{id:'example',available:true,imageId:'a'.repeat(64),content:{uk:{name:'Приклад',description:[]},en:{name:'Example',description:[]}},variants:[{sku:'SYNTHETIC',priceMinor:12345,available:true}]}]};
+test('catalog has no hardcoded products; API money is exact in both languages',()=>{
+ assert.deepEqual(landingContent.uk.order.items,[]);assert.deepEqual(landingContent.en.order.items,[]);
+ for(const lang of ['uk','en']){const item=catalogItems(data,lang)[0];assert.equal(itemPrice(item),123.45);assert.ok(item.photo.endsWith('/'+'a'.repeat(64)));}
+});
+test('fresh checks send only public line inputs and surface availability/price changes',async()=>{
+ const changes=[{id:'example',type:'price_changed',priceMinor:15000}];
+ assert.deepEqual(await checkCart([{id:'example',unitPrice:123.45,name:'not forwarded',secret:'never'}],async(url,options)=>{
+  assert.equal(options.cache,'no-store');assert.equal(options.credentials,'omit');assert.deepEqual(JSON.parse(options.body),{items:[{id:'example',unitPrice:123.45}]});return {ok:true,json:async()=>({changes})};
+ }),changes);
+ await assert.rejects(loadCatalog(async()=>({ok:false})),/catalog_unavailable/);
 });

@@ -1,3 +1,5 @@
+import { useCatalog } from "./lib/useCatalog.js";
+import { catalogItems } from "./lib/liveCatalog.js";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Header } from "./components/Header.jsx";
 import { Hero } from "./components/Hero.jsx";
@@ -55,7 +57,8 @@ export default function App() {
   });
   const [page, setPage] = useState(getPageFromLocation);
   const [cartSearch, setCartSearch] = useState(() => (typeof window === "undefined" ? "" : window.location.search));
-  const content = useMemo(() => landingContent[language] || landingContent.en, [language]);
+  const catalog = useCatalog();
+  const content = useMemo(() => {const base=landingContent[language] || landingContent.en;return {...base,order:{...base.order,items:catalogItems(catalog.data,language)}};}, [language,catalog.data]);
 
   useEffect(() => {
     if (typeof window === "undefined" || localStorage.getItem(STORAGE_KEY)) return;
@@ -217,7 +220,9 @@ export default function App() {
         onLanguageChange={handleLanguageChange}
         onNavigate={handleNavigate}
       />
-      {page === "manual" ? (
+      {(page === "order" || page === "cart") && !catalog.data ? (
+        <main className="order-page"><section className="section"><p role="status">{catalog.error ? (language==='uk'?'Не вдалося завантажити товари. Спробуйте ще раз.':'Unable to load products. Please retry.') : (language==='uk'?'Завантажуємо товари…':'Loading products…')}</p>{catalog.error && <button className="btn btn-primary" onClick={catalog.retry}>{language==='uk'?'Повторити':'Retry'}</button>}</section></main>
+      ) : page === "manual" ? (
         <ManualPage content={content} language={language} />
       ) : page === "order" ? (
         <OrderPage content={content} onNavigate={handleNavigate} />

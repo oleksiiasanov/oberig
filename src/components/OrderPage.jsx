@@ -158,7 +158,7 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
   const cartHref = `/cart?item=${item.id}`;
   const goToCart = (event) => {
     event.preventDefault();
-    onNavigate(cartHref);
+    if(item.available !== false) onNavigate(cartHref);
   };
   const [firstGroup, secondGroup] = item.characteristics || [];
 
@@ -178,7 +178,7 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
           <ItemModel item={item} order={order} />
           <p className="order-item-short">{item.short}</p>
           <a className="btn btn-primary order-item-cta-mobile" href={cartHref} onClick={goToCart}>
-            <span>{orderLabel}</span>
+            <span>{item.available === false ? (order.unavailableLabel || "Недоступний для замовлення") : orderLabel}</span>
           </a>
           {firstGroup ? <CharacteristicsTable title={firstGroup.title} rows={firstGroup.rows} /> : null}
         </div>
@@ -206,7 +206,7 @@ function OrderItem({ item, order, orderLabel, onNavigate }) {
       {item.price ? <PriceBlock label={order.priceLabel} price={item.price} /> : null}
 
       <a className="btn btn-primary order-item-cta" href={cartHref} onClick={goToCart}>
-        <span>{orderLabel}</span>
+        <span>{item.available === false ? (order.unavailableLabel || "Недоступний для замовлення") : orderLabel}</span>
       </a>
     </motion.article>
   );
@@ -216,7 +216,7 @@ function PartItem({ item, order, orderLabel, onNavigate }) {
   const cartHref = `/cart?item=${item.id}`;
   const goToCart = (event) => {
     event.preventDefault();
-    onNavigate(cartHref);
+    if(item.available !== false) onNavigate(cartHref);
   };
 
   return (
@@ -239,7 +239,7 @@ function PartItem({ item, order, orderLabel, onNavigate }) {
         <div className="order-part-buy">
           {item.price ? <PriceBlock label={order.priceLabel} price={item.price} /> : null}
           <a className="btn btn-primary order-part-cta" href={cartHref} onClick={goToCart}>
-            <span>{orderLabel}</span>
+            <span>{item.available === false ? (order.unavailableLabel || "Недоступний для замовлення") : orderLabel}</span>
           </a>
         </div>
       </div>
@@ -297,22 +297,11 @@ export function OrderPage({ content, onNavigate }) {
 
       <section className="section order-list-section">
         <div className="order-list">
-          {products.map((item) => (
-            <OrderItem item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate} key={item.id} />
-          ))}
+          {order.items.map(item => item.category === PART_CATEGORY ?
+            <PartItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/> :
+            <OrderItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/>)}
         </div>
       </section>
-
-      {parts.length ? (
-        <section className="section order-parts-section" id={PARTS_ANCHOR}>
-          <h2 className="order-parts-title">{order.partsTitle}</h2>
-          <div className="order-parts-list">
-            {parts.map((item) => (
-              <PartItem item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate} key={item.id} />
-            ))}
-          </div>
-        </section>
-      ) : null}
 
       <BackToTop />
 

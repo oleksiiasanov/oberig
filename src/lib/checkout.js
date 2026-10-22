@@ -17,8 +17,9 @@ export function clearAttempt(storage) {
 }
 export function orderAttempt(previous, data, now = Date.now()) {
   const normalized = { ...data, items: [...data.items].sort((a, b) => a.id.localeCompare(b.id) || (a.cableLengthM ?? 0) - (b.cableLengthM ?? 0)) };
-  const fingerprint = JSON.stringify(normalized);
-  if (previous?.fingerprint === fingerprint) return previous;
+  const business = value => JSON.stringify({items:value.items.map(({id,cableLengthM,quantity,unitPrice})=>({id,...(cableLengthM===undefined?{}:{cableLengthM}),quantity,unitPrice})).sort((a,b)=>a.id.localeCompare(b.id)||(a.cableLengthM??0)-(b.cableLengthM??0)),total:value.total,name:value.name,phone:value.phone,comment:value.comment,whatsappConsent:value.whatsappConsent});
+  const fingerprint = business(normalized);
+  if (previous?.payload && business(previous.payload) === fingerprint) return previous;
   return { fingerprint, savedAt: now, payload: { ...normalized, clientOrderId: crypto.randomUUID(), submittedAt: new Date(now).toISOString() } };
 }
 export async function sendCrmOrder(url, payload, challengeToken, fetchImpl = fetch) {
@@ -30,7 +31,7 @@ export async function sendCrmOrder(url, payload, challengeToken, fetchImpl = fet
   });
   const result = await response.json().catch(() => null);
   if (!response.ok || result?.ok !== true || result.clientOrderId !== payload.clientOrderId)
-    throw new Error("order_not_confirmed");
+    {const error=new Error("order_not_confirmed");if(result?.error==='cart_changed' && Array.isArray(result.changes)){error.code='cart_changed';error.changes=result.changes;}throw error;}
   return result;
 }
 export async function submitCheckout({ payload, submitCrm, submitSheets, onSheets = () => {}, report = () => {} }) {
