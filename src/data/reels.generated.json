@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-21T07:57:33.938Z",
+  "syncedAt": "2026-10-22T07:54:20.827Z",
   "items": [
+    {
+      "id": "YB__BCAXMCw",
+      "title": "Підключення D·Vision SDR до планшета на Android",
+      "publishedAt": "2026-10-21T15:03:08Z",
+      "url": "https://www.youtube.com/shorts/YB__BCAXMCw",
+      "thumbnail": "https://i.ytimg.com/vi/YB__BCAXMCw/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/YB__BCAXMCw/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/YB__BCAXMCw/hq720.jpg",
+        "https://i.ytimg.com/vi/YB__BCAXMCw/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/YB__BCAXMCw"
+    },
     {
       "id": "-z9ZazLAXJg",
       "title": "Новий процес оновлення ПЗ для детектора D·Vision SDR.",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/UpsRv0j3llk/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/UpsRv0j3llk"
-    },
-    {
-      "id": "d6j5kJcB4es",
-      "title": "Кріплення на бронежилет.",
-      "publishedAt": "2026-09-05T06:46:34Z",
-      "url": "https://www.youtube.com/shorts/d6j5kJcB4es",
-      "thumbnail": "https://i.ytimg.com/vi/d6j5kJcB4es/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/d6j5kJcB4es/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/d6j5kJcB4es/hq720.jpg",
-        "https://i.ytimg.com/vi/d6j5kJcB4es/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/d6j5kJcB4es"
     }
   ]
 }
