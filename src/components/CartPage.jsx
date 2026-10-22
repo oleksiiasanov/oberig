@@ -287,7 +287,7 @@ export function CartPage({ content, search, onNavigate }) {
     const [id,length]=key.split(':'),cableLengthM=length?Number(length):undefined;
     const item=order.items.find(x=>x.id===id);
     const prior=snapshots[key] || restored?.payload.items.find(x=>lineKey(x,x.cableLengthM)===key);
-    return {id,name:prior?.name||item?.name||id,...(cableLengthM===undefined?{}:{cableLengthM}),quantity,unitPrice:prior?.unitPrice ?? (item?itemPrice(item,cableLengthM):0)};
+    return {id,name:item?.name||prior?.name||id,...(cableLengthM===undefined?{}:{cableLengthM}),quantity,unitPrice:prior?.unitPrice ?? (item?itemPrice(item,cableLengthM):0)};
   });
   const confirmChanges = async () => {
     if(checkingRef.current)return;checkingRef.current=true;setChecking(true);setCatalogError('');
