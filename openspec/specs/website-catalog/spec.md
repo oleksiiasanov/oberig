@@ -1,7 +1,7 @@
 # website-catalog Specification
 
 ## Purpose
-TBD - created by archiving change manage-website-catalog. Update Purpose after archive.
+Maintain one CRM-managed public catalog for the website, with current prices, explicit buyer consent for changes, protected administration and safe order retries.
 ## Requirements
 ### Requirement: Authoritative public catalog
 The system SHALL manage localized product descriptions, parameters, SKU, raster images, prices, publication and orderability through protected CRM controls and expose only explicitly public data.
@@ -32,4 +32,3 @@ The system SHALL copy current website content and images into the managed catalo
 #### Scenario: Existing sales product
 - **WHEN** a website variant matches an existing sales product
 - **THEN** its current public fields and price are updated without altering historical snapshots or deleting referenced records.
-
