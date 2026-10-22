@@ -1,6 +1,6 @@
 # D·Vision landing — current change context
 
-## Managed website catalog — implementation/release authorized (2026-10-22)
+## Managed website catalog — production released (2026-10-22)
 
 Owner approved central CRM-managed public product descriptions, parameters, models,
 photos, prices, publishing, orderability and nullable unique display positions;
@@ -23,23 +23,27 @@ prices/unavailable lines, preserves contacts, and never falls back to Sheets-onl
 success. Sheets remains the temporary independent copy. Money uses integer minor
 units; no99-unit limit. Descriptions/images may be cached; checkout checks no-store.
 
-OpenSpec manage-website-catalog records acceptance and release gates. Source/local
-verification is not a production release; fill in actual release evidence after
-backup/restore, schema/data reconciliation, gateway route and site deployment.
+Released CRM PR12, source/contract `82dc66aeb79d89a383a33f0887eb1d1f5cd3ceef`,
+image `sha256:5f4eb69662f4058591d4408be468487e50de4362ac241429814844f13338f8ee`,
+schema26. Exact-main CI39813840135 passed both jobs. Gateway independently pins
+this same reviewed image. DB and tunnel were not recreated; access-sync retained
+its container/image. Delivery timer resumed, state unblocked. Landing PR39 released
+`077892980613e0d3ecae0ba8895d0075b5f3e0bd` to Vercel production. PR40 followed with
+`bf39cfc777600178b177aede32884301d20b47da`: totals use the current catalog language
+while retaining accepted prices and pending retry payloads.
 
+Online and frozen encrypted backups were restored in isolated tmpfs environments;
+migration26 passed twice (second run no-op), and the source import rehearsed twice.
+Production reconciled8 listings/10 variants:9 updates,1 new antenna,0 deletions.
+All58 untouched business-table digests plus protected existing product/inventory
+fields matched. Existing IDs, stock, recipes, orders and document snapshots retained.
+Public route expansion preserved unrelated routes and Access configuration.
 
-Owner-approved2026-10-21: static site remains on Vercel. Clean branch
-`feat/crm-order-checkout` from remote main1d07156 replaces PR36, while PR35 Pages
-move is cancelled. `add-order-relay` is the updated approved plan. Checkout success
-will depend on CRM acknowledgement; the existing Apps Script write remains an
-independent temporary copy. No business cap99; stable retry identity across reload.
-CRM counterpart: `crm_oberig` branch `feat/website-order-api`.
-Production activation follows API readiness and private Turnstile configuration.
-No live release or verification is claimed by local source completion.
-See `openspec/project.md` for existing product conventions.
-
-Local content/build, checkout and Apps Script synthetic tests pass; strict OpenSpec8
-passes. Browser discovery returned no connections. Real Turnstile, Vercel public env
-and Apps Script deployment remain activation prerequisites. See crm/WEBSITE-CHECKOUT.md.
-Clean PR #37 is paired with crm_oberig PR #1; hosted Vercel checks passed. Owner
-will configure external services using the linked Ukrainian setup guide.
+Public verification at16:36UTC matched all source prices/SKUs, bilingual names,
+descriptions and all8 image hashes. Catalog/check no-store, changed-price/unavailable
+responses, foreign-origin and public-admin negatives passed. Real production browser
+loaded catalog/photos and checked a500-UAH MOLLE cart addition on desktop/mobile;
+no production orders submitted. Full local129 unit+199 integration tests and11 landing
+tests passed; synthetic browser also covered price consent, removal, fast quantities,
+lost-ack replay without duplicates and admin position displacement. Independent code
+and release-helper review passed. See the CRM repository docs/WEBSITE-CATALOG.md for operation and limits.
