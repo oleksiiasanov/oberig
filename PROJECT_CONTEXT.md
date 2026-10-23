@@ -1,5 +1,15 @@
 # D·Vision landing — current change context
 
+## Website display groups (2026-10-23)
+
+Owner approved immediate release of `group-catalog-by-display-type`. The CRM public
+catalog supplies displayGroup MAIN/ADDITIONAL. Catalog renders MAIN first and
+ADDITIONAL below the “Комплектуючі” heading (English: Accessories), preserving the
+API order within each group. Empty sections are omitted. This is exclusively a
+website presentation field, unrelated to CRM inventory components. Existing cards,
+identities, prices, fresh cart checks and explicit price consent are retained.
+Older API responses without the field fall back to MAIN for compatibility.
+
 ## Checkout price-consent visibility fix (2026-10-23)
 
 Bug fix follows the existing website-catalog price-consent requirement. Previously
