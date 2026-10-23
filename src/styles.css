@@ -3981,6 +3981,14 @@ img.tool-media {
 
 /* Checkout changes must be visible next to the action, including narrow screens. */
 .cart-checkout-feedback, .cart-change-notice, .cart-updated-notice { display: grid; gap: 16px; min-width: 0; }
+.cart-change-notice {
+  --accent-rgb: 250, 204, 21;
+  --accent: rgb(var(--accent-rgb));
+  --accent-line: rgba(var(--accent-rgb), 0.45);
+  --accent-surface: rgba(var(--accent-rgb), 0.1);
+  --yellow: var(--accent);
+  --yellow-soft: #fef08a;
+}
 .cart-change-notice, .cart-updated-notice {
   padding: 20px;
   border: 1px solid var(--accent-line);

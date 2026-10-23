@@ -14,7 +14,9 @@ Validated with all11 unit tests, content/build and strict OpenSpec checks.
 visible consent on1440px/390px viewports, repeated price changes, failed checks,
 retained fields, final409, successful checkout, add cancellation and unavailable
 items using fully intercepted synthetic endpoints. Independent review passed.
-Release evidence is recorded in the associated PR.
+The price/availability warning uses a yellow border, focus ring, tinted surface
+and confirmation button (owner-requested follow-up); accepted-cart feedback stays
+in the standard success accent. Release evidence is recorded in the associated PR.
 
 
 ## Managed website catalog — production released (2026-10-22)
