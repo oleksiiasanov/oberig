@@ -248,6 +248,21 @@ export function CartPage({ content, search, onNavigate }) {
   const checkingRef=useRef(false);
   const quantityChecks=useRef({});
   const [catalogError,setCatalogError] = useState('');
+  const [cartUpdated,setCartUpdated] = useState(false);
+  const changeNoticeRef = useRef(null);
+  const updatedNoticeRef = useRef(null);
+  useEffect(() => {
+    if (!changes.length && !catalogError) return;
+    // Checkout can be several screens below the cart. Reveal the action where
+    // the buyer is completing the order instead of silently disabling submit.
+    changeNoticeRef.current?.focus({preventScroll:true});
+    changeNoticeRef.current?.scrollIntoView({block:'center',behavior:'instant'});
+  }, [changes,catalogError]);
+  useEffect(() => {
+    if (!cartUpdated || changes.length) return;
+    updatedNoticeRef.current?.focus({preventScroll:true});
+    updatedNoticeRef.current?.scrollIntoView({block:'center',behavior:'instant'});
+  }, [cartUpdated,changes]);
   useEffect(()=>{try{tabStorage()?.setItem('dvision-cart-prices',JSON.stringify(snapshots));}catch{}},[snapshots]);
   const [placedOrder, setPlacedOrder] = useState(null); // { orderNumber, phone } for the survey after the thank-you
   const successRef = useRef(null);
@@ -273,6 +288,7 @@ export function CartPage({ content, search, onNavigate }) {
       : lineQty(item);
   const setLineQty = async (item,length,value) => {
     if(submittingRef.current)return;
+    setCartUpdated(false);
     const key=lineKey(item,length),current=quantities[key]||0;
     const ticket=Symbol();quantityChecks.current[key]=ticket;
     if(value<=current){delete quantityChecks.current[key];checkingRef.current=Object.keys(quantityChecks.current).length>0;setChecking(checkingRef.current);setQuantities(q=>({...q,[key]:value}));return;}
@@ -300,7 +316,7 @@ export function CartPage({ content, search, onNavigate }) {
       if(newer.length){setChanges(newer);return;}
       setSnapshots(p=>({...p,...Object.fromEntries(proposed.map(l=>[lineKey(l,l.cableLengthM),l]))}));
       setQuantities(q=>{const next={...q};for(const c of changes)if(c.type==='unavailable')next[lineKey(c,c.cableLengthM)]=0;if(pendingAdd&&proposed.length)next[pendingAdd.key]=pendingAdd.value;return next;});
-      setChanges([]);setPendingAdd(null);setStatus('idle');
+      setChanges([]);setPendingAdd(null);setStatus('idle');setCartUpdated(changes.some(c=>c.type==='price_changed')?'price':'availability');
     }catch{setCatalogError(content.meta.lang==='uk'?'Не вдалося перевірити кошик. Спробуйте ще раз.':'Unable to verify cart. Please retry.');}
     finally{checkingRef.current=false;setChecking(false);}
   };
@@ -495,16 +511,6 @@ export function CartPage({ content, search, onNavigate }) {
         </section>
       ) : null}
 
-      {(changes.length>0 || catalogError || checking) && <section className="section cart-section" aria-live="polite">
-        {checking&&<p>{content.meta.lang==='uk'?'Перевіряємо актуальну ціну та доступність…':'Checking price and availability…'}</p>}
-        {catalogError&&<p role="alert" className="cart-error">{catalogError}</p>}
-        {changes.length>0&&<div role="alert" className="cart-total">
-          {changes.map(c=>{const key=lineKey(c,c.cableLengthM),line=pendingAdd?.key===key?pendingAdd.line:orderLines.find(l=>lineKey(l,l.cableLengthM)===key);const name=line?.name||order.items.find(i=>i.id===c.id)?.name||c.id;
-            return <p key={key}>{c.type==='unavailable' ? (content.meta.lang==='uk'?`Товар «${name}» більше недоступний для замовлення. Оберіть інший товар.`:`“${name}” is no longer available. Please choose another product.`) : (content.meta.lang==='uk'?`Ціна «${name}» змінилася з ${formatMoney(line?.unitPrice||0)} на ${formatMoney(c.priceMinor/100)}.`:`The price of “${name}” changed from ${formatMoney(line?.unitPrice||0)} to ${formatMoney(c.priceMinor/100)}.`)}</p>;})}
-          <button type="button" className="btn btn-primary" disabled={checking} onClick={confirmChanges}>{content.meta.lang==='uk'?(changes.some(c=>c.type==='unavailable')?'Прибрати недоступне та підтвердити зміни':'Підтвердити нову ціну'):'Confirm cart changes'}</button>
-          {pendingAdd&&<button type="button" className="btn btn-secondary" onClick={()=>{setChanges([]);setPendingAdd(null);setQuantityRevision(x=>x+1);}}>{content.meta.lang==='uk'?'Скасувати':'Cancel'}</button>}
-        </div>}
-      </section>}
       <section className="section cart-section cart-total-section">
         <div className="cart-total">
           <h2 className="cart-subtitle">{cart.totalTitle}</h2>
@@ -597,6 +603,32 @@ export function CartPage({ content, search, onNavigate }) {
             <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} />
             <span>{cart.consent}</span>
           </label>
+          {(changes.length>0 || catalogError || checking) && <div className="cart-checkout-feedback">
+            {checking && <p role="status">{content.meta.lang==='uk'?'Перевіряємо актуальну ціну та доступність…':'Checking price and availability…'}</p>}
+            {(changes.length>0 || catalogError) && <div ref={changeNoticeRef} tabIndex={-1} role="alert" className="cart-change-notice" aria-labelledby="cart-change-title">
+              <h3 id="cart-change-title">{content.meta.lang==='uk'?(changes.length?'Перевірте зміни в замовленні':'Не вдалося перевірити замовлення'):(changes.length?'Review changes to your order':'Unable to check your order')}</h3>
+              {changes.map(c=>{
+                const key=lineKey(c,c.cableLengthM),line=pendingAdd?.key===key?pendingAdd.line:orderLines.find(l=>lineKey(l,l.cableLengthM)===key);
+                const name=order.items.find(i=>i.id===c.id)?.name||line?.name||c.id;
+                return <div className="cart-change-item" key={key}>
+                  <strong>{name}{c.cableLengthM?`, ${c.cableLengthM} ${cart.lengthUnit}`:''}</strong>
+                  {c.type==='unavailable'
+                    ? <p>{content.meta.lang==='uk'?'Цей товар більше недоступний для замовлення. Його потрібно прибрати з кошика.':'This product is no longer available and needs to be removed from the cart.'}</p>
+                    : <p>{content.meta.lang==='uk'?'Ціна змінилася: ':'The price changed: '}<s>{formatMoney(line?.unitPrice||0)}</s>{' → '}<strong>{formatMoney(c.priceMinor/100)}</strong></p>}
+                </div>;
+              })}
+              {changes.length>0 && <p>{content.meta.lang==='uk'?'Якщо зміни вам підходять, підтвердьте їх і продовжіть оформлення. Контактні дані та коментар збережено.':'If these changes work for you, confirm them and continue checkout. Your contact details and comment are kept.'}</p>}
+              {catalogError && <p className="cart-error">{catalogError}</p>}
+              {changes.length>0 && <div className="cart-change-actions">
+                <button type="button" className="btn btn-primary" disabled={checking} onClick={confirmChanges}>{content.meta.lang==='uk'?(changes.some(c=>c.type==='unavailable')?'Прибрати недоступне та підтвердити зміни':'Підтвердити нову ціну'):'Confirm cart changes'}</button>
+                {pendingAdd && <button type="button" className="btn btn-secondary" onClick={()=>{setChanges([]);setPendingAdd(null);setQuantityRevision(x=>x+1);}}>{content.meta.lang==='uk'?'Скасувати':'Cancel'}</button>}
+              </div>}
+            </div>}
+          </div>}
+          {cartUpdated && !changes.length && <div ref={updatedNoticeRef} tabIndex={-1} role="status" className="cart-updated-notice">
+            <strong>{content.meta.lang==='uk'?(cartUpdated==='price'?'Ціни оновлено. ':'Кошик оновлено. '):(cartUpdated==='price'?'Prices updated. ':'Cart updated. ')}{cart.totalLabel}: {formatMoney(total)}</strong>
+            <p>{content.meta.lang==='uk'?(orderLines.length?'Тепер натисніть «Залишити заявку», щоб завершити замовлення.':'Кошик порожній. Оберіть інший товар у каталозі.'):(orderLines.length?'Now submit the order to complete checkout.':'Your cart is empty. Choose another product from the catalog.')}</p>
+          </div>}
           {status === "error" ? <p className="cart-error" role="alert">{cart.errorMessage}</p> : null}
           {ORDER_API_URL && TURNSTILE_SITEKEY ? <CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={challengeRef} /> : null}
           <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || checking || changes.length > 0 || !orderLines.length}>

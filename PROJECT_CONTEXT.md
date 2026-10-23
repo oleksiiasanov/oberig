@@ -1,5 +1,22 @@
 # D·Vision landing — current change context
 
+## Checkout price-consent visibility fix (2026-10-23)
+
+Bug fix follows the existing website-catalog price-consent requirement. Previously
+the change notice appeared above cart totals, outside the viewport when the buyer
+submitted the form, leaving only a disabled button visible. The notice now sits
+next to checkout, receives focus/scroll when a price or availability change occurs,
+and shows old/new unit prices with explicit consent. Confirmation refreshes prices
+and displays the new total plus the next checkout action. Contact/comment state,
+server validation and idempotent replay remain intact. No catalog/data migration.
+Validated with all11 unit tests, content/build and strict OpenSpec checks.
+`scripts/cart-price-consent.qa.mjs` reproduces the old hidden notice and verifies
+visible consent on1440px/390px viewports, repeated price changes, failed checks,
+retained fields, final409, successful checkout, add cancellation and unavailable
+items using fully intercepted synthetic endpoints. Independent review passed.
+Release evidence is recorded in the associated PR.
+
+
 ## Managed website catalog — production released (2026-10-22)
 
 Owner approved central CRM-managed public product descriptions, parameters, models,

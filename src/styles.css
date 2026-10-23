@@ -3978,3 +3978,23 @@ img.tool-media {
 }
 
 .checkout-verification { min-width: 0; max-width: 100%; }
+
+/* Checkout changes must be visible next to the action, including narrow screens. */
+.cart-checkout-feedback, .cart-change-notice, .cart-updated-notice { display: grid; gap: 16px; min-width: 0; }
+.cart-change-notice, .cart-updated-notice {
+  padding: 20px;
+  border: 1px solid var(--accent-line);
+  border-radius: 12px;
+  background: var(--accent-surface);
+  scroll-margin-block: 100px 24px;
+  overflow-wrap: anywhere;
+}
+.cart-change-notice:focus, .cart-updated-notice:focus { outline: 2px solid var(--accent); outline-offset: 3px; }
+.cart-change-notice h3, .cart-change-notice p, .cart-updated-notice p, .cart-checkout-feedback > p { margin: 0; }
+.cart-change-notice h3 { font-size: 1.1rem; }
+.cart-change-item { display: grid; gap: 8px; }
+.cart-change-item s { color: var(--muted); }
+.cart-change-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.cart-change-actions .btn { min-width: 0; width: 100%; padding-inline: 16px; white-space: normal; text-align: center; }
+.cart-change-actions .btn:disabled { opacity: .45; cursor: wait; }
+@media (min-width: 601px) { .cart-change-actions .btn { width: auto; } }
