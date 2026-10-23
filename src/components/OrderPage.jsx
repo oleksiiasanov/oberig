@@ -1,3 +1,4 @@
+import { catalogGroups } from '../lib/liveCatalog.js';
 import { ArrowUp, Antenna, CarFront, CircleCheck, Radar, ShieldHalf, ImageOff, TriangleAlert } from "lucide-react";
 import { motion } from "framer-motion";
 import { FinalCTA } from "./FinalCTA.jsx";
@@ -9,7 +10,7 @@ const ITEM_ICONS = {
   "shield-half": ShieldHalf,
 };
 
-// Spare parts live in order.items too (so the cart can order them) but get their own section on /order.
+// Legacy part anchors remain compatible; display sections now follow the API group.
 export const PART_CATEGORY = "part";
 export const PARTS_ANCHOR = "parts";
 
@@ -283,8 +284,10 @@ function BackToTop() {
 
 export function OrderPage({ content, onNavigate }) {
   const { order } = content;
-  const products = order.items.filter((item) => item.category !== PART_CATEGORY);
-  const parts = order.items.filter((item) => item.category === PART_CATEGORY);
+  const { main, additional } = catalogGroups(order.items);
+  const renderItem = item => item.category === PART_CATEGORY ?
+    <PartItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/> :
+    <OrderItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/>;
 
   return (
     <main className="order-page">
@@ -292,16 +295,14 @@ export function OrderPage({ content, onNavigate }) {
         <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, type: "spring", stiffness: 90, damping: 18 }}>
           <h1>{order.title}</h1>
         </motion.div>
-        <QuickNav items={order.items} quickNav={order.quickNav} />
+        <QuickNav items={[...main,...additional]} quickNav={order.quickNav} />
       </section>
 
-      <section className="section order-list-section">
-        <div className="order-list">
-          {order.items.map(item => item.category === PART_CATEGORY ?
-            <PartItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/> :
-            <OrderItem key={item.id} item={item} order={order} orderLabel={content.meta.primaryAction} onNavigate={onNavigate}/>)}
-        </div>
-      </section>
+      {main.length > 0 && <section className="section order-list-section"><div className="order-list">{main.map(renderItem)}</div></section>}
+      {additional.length > 0 && <section className="section order-list-section" aria-labelledby="additional-products-title">
+        <h2 id="additional-products-title" className="catalog-group-title">{order.additionalProductsTitle}</h2>
+        <div className="order-list">{additional.map(renderItem)}</div>
+      </section>}
 
       <BackToTop />
 

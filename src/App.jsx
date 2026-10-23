@@ -58,7 +58,7 @@ export default function App() {
   const [page, setPage] = useState(getPageFromLocation);
   const [cartSearch, setCartSearch] = useState(() => (typeof window === "undefined" ? "" : window.location.search));
   const catalog = useCatalog();
-  const content = useMemo(() => {const base=landingContent[language] || landingContent.en;return {...base,order:{...base.order,items:catalogItems(catalog.data,language)}};}, [language,catalog.data]);
+  const content = useMemo(() => {const base=landingContent[language] || landingContent.en;return {...base,order:{...base.order,additionalProductsTitle:language==='uk'?'Комплектуючі':'Accessories',items:catalogItems(catalog.data,language)}};}, [language,catalog.data]);
 
   useEffect(() => {
     if (typeof window === "undefined" || localStorage.getItem(STORAGE_KEY)) return;

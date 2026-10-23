@@ -13,7 +13,7 @@ export function catalogItems(data, language='uk') {
     const content=language==='en' && en?.name ? {...uk,...en} : uk;
     const variants=item.variants;
     const variable=variants.some(v=>v.cableLengthM!==undefined);
-    return {...content,id:item.id,available:item.available,variants,photo:item.imageId?`${CATALOG_API}/catalog/images/${item.imageId}`:null,
+    return {...content,id:item.id,displayGroup:item.displayGroup === 'ADDITIONAL' ? 'ADDITIONAL' : 'MAIN',available:item.available,variants,photo:item.imageId?`${CATALOG_API}/catalog/images/${item.imageId}`:null,
       ...(variable ? {cableLengths:variants.map(v=>v.cableLengthM),price:variants.map(v=>[`${v.cableLengthM} ${language==='uk'?'м':'m'}`,format(v.priceMinor)])} : {price:format(variants[0].priceMinor)})};
   });
 }
@@ -24,4 +24,8 @@ export async function checkCart(items,fetchImpl=fetch) {
   const result=await response.json();
   if(!Array.isArray(result.changes))throw new Error('cart_unavailable');
   return result.changes;
+}
+
+export function catalogGroups(items) {
+  return { main: items.filter(item => item.displayGroup !== 'ADDITIONAL'), additional: items.filter(item => item.displayGroup === 'ADDITIONAL') };
 }
