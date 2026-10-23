@@ -9,3 +9,6 @@ raw-assets/
 
 .env
 .env.local
+
+# Synthetic checkout browser regression screenshots
+/artifacts/cart-price-consent/
