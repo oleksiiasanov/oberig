@@ -10,9 +10,8 @@ const ITEM_ICONS = {
   "shield-half": ShieldHalf,
 };
 
-// Legacy part anchors remain compatible; display sections now follow the API group.
+// Card layout follows category; display sections follow the API group.
 export const PART_CATEGORY = "part";
-export const PARTS_ANCHOR = "parts";
 
 export function ItemTag({ item }) {
   if (!item.tag) return null;
@@ -252,7 +251,7 @@ function QuickNav({ items, quickNav }) {
   const links = quickNav
     .map(([label, category]) => {
       const first = items.find((item) => item.category === category);
-      return [label, first && category === PART_CATEGORY ? PARTS_ANCHOR : first?.id];
+      return [label, first?.id];
     })
     .filter(([, id]) => id);
 
