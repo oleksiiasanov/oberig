@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
 import { Brand } from "./Brand.jsx";
 import { LANGUAGES, SELECTABLE_LANGUAGE_CODES } from "../data/content.js";
-import { PART_CATEGORY, PARTS_ANCHOR } from "./OrderPage.jsx";
 import { SocialIcon } from "./SocialIcon.jsx";
 import { useCart } from "../lib/cartStore.js";
 
@@ -107,8 +106,8 @@ export function Header({ content, language, logoVariant, onLanguageChange, onNav
   const cartCount = Object.values(cartQuantities).reduce((sum, quantity) => sum + (Number(quantity) || 0), 0);
 
   const closeMenu = () => setIsMenuOpen(false);
-  // Spare parts share one dropdown entry that leads to their section on /order.
-  const { items, partsTitle } = content.order;
+  // Each entry links to its catalog card.
+  const { items } = content.order;
   const catalogItems = items;
   const handleNavClick = (event, href) => {
     if (href.startsWith("http")) {

@@ -9,6 +9,9 @@ API order within each group. Empty sections are omitted. This is exclusively a
 website presentation field, unrelated to CRM inventory components. Existing cards,
 identities, prices, fresh cart checks and explicit price consent are retained.
 Older API responses without the field fall back to MAIN for compatibility.
+Released through PR44, Vercel91d66eb; live API and desktop/mobile grouping verified.
+Quick navigation targets individual product cards, including spare parts inside
+the new display groups.
 
 ## Checkout price-consent visibility fix (2026-10-23)
 
