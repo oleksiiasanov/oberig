@@ -4,7 +4,7 @@ const WEBHOOK_URL =
   import.meta.env.VITE_ORDER_WEBHOOK_URL ||
   "https://script.google.com/macros/s/AKfycbzOeaAX0HWsMI0JMJ5WsO-ZmGUmTlhuAQJZl7ItiLaCBmQjiYtA1DGtiZhOr4tbDzuf/exec";
 
-// Resolves with { ok, orderNumber } — the number lets the "where did you hear about us" answer find the order row.
+// The number can be pending; surveys use immutable clientOrderId, never the visible number.
 export async function submitOrder(payload) {
   return post(payload, "Order submitted");
 }

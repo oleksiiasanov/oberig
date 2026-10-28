@@ -27,7 +27,7 @@ test("Apps Script adds the ID column, deduplicates retries and attaches surveys 
     PropertiesService: { getScriptProperties: () => ({ getProperty: () => "" }) },
     ContentService: { MimeType: { JSON: "json" }, createTextOutput: (text) => ({ setMimeType: () => text }) },
   });
-  vm.runInContext(readFileSync(new URL("../crm/Code.gs", import.meta.url), "utf8"), context);
+  vm.runInContext(readFileSync(new URL("../crm/Code.gs", import.meta.url), "utf8") + "\n" + readFileSync(new URL("../crm/DirectOrders.gs", import.meta.url), "utf8"), context);
   const post = (body) => JSON.parse(context.doPost({ postData: { contents: JSON.stringify(body) } }));
   const body = { clientOrderId: "11111111-1111-4111-8111-111111111111", name: "Synthetic", phone: "+380501234567", items: [{ id: "detector", quantity: 1000 }], total: 24000000 };
   const first = post(body);

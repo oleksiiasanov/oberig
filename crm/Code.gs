@@ -52,6 +52,10 @@ function findSheet(book) {
 }
 
 function doPost(e) {
+  if (directEnabled()) {
+    let body;try {body=JSON.parse(e.postData.contents);}catch(_){return json({ok:false,error:'invalid_payload'});}
+    return directPost(body);
+  }
   const lock = LockService.getScriptLock();
   try {
     const order = JSON.parse(e.postData.contents);
@@ -321,6 +325,7 @@ function trackingValues(headers, row) {
 
 // Installable onEdit trigger (a simple onEdit cannot open another spreadsheet). Unticking does nothing.
 function syncContactedOrder(e) {
+  if (directEnabled()) return; // Direct Orders cutover retires the intermediate transfer.
   const range = e && e.range;
   if (!range || range.getSheet().getSheetId() !== SHEET_GID) return;
   const sheet = range.getSheet();
