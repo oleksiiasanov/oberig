@@ -116,3 +116,17 @@ test('timer failures do not claim a healthy last reconciliation',()=>{
   assert.equal(s.value(o.clientOrderId,'_crm_sync'),'CONFLICT');
   assert.equal(s.props.has('ORDERS_SYNC_LAST_OK'),false);
 });
+
+test('standalone entrypoint has no primary-sheet fallback, including when disabled',()=>{
+  const s=sandbox(),o=order();
+  assert.equal(JSON.parse(s.context.doGet().text).version,'standalone-orders-v1');
+  s.props.set('DIRECT_ORDERS_ENABLED','false');
+  assert.equal(JSON.parse(s.context.doPost({postData:{contents:JSON.stringify(o)}}).text).error,'intake_disabled');
+  assert.equal(s.rows.length,2);
+  s.props.set('DIRECT_ORDERS_ENABLED','true');
+  assert.equal(JSON.parse(s.context.doPost({postData:{contents:'null'}}).text).error,'invalid_payload');
+  assert.equal(JSON.parse(s.context.doPost({postData:{contents:JSON.stringify(o)}}).text).ok,true);
+  assert.equal(s.rows.length,3);
+  assert.equal(typeof s.context.syncContactedOrder,'undefined');
+  assert.equal(typeof s.context.nextOrderNumber,'undefined');
+});

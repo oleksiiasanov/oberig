@@ -1,5 +1,9 @@
 # CRM checkout on Vercel
 
+Historical2026-10-21 rollout. Its bound Apps Script, old URL and activation/rollback
+instructions are superseded by [standalone Orders](DIRECT-ORDERS.md), approved
+2026-10-28. The independent CRM acknowledgement behavior described below remains.
+
 Owner setup guide (Ukrainian): [CRM setup instructions](https://github.com/oleksiiasanov/crm_oberig/blob/feat/website-order-api/docs/OWNER-WEBSITE-SETUP.md).
 Paired changes: [website #37](https://github.com/oleksiiasanov/oberig/pull/37),
 [CRM #1](https://github.com/oleksiiasanov/crm_oberig/pull/1).

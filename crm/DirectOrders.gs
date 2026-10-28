@@ -1,4 +1,4 @@
-/** Direct Orders intake. Deploy alongside Code.gs; activate only after the CRM bridge is ready. */
+/** Direct Orders intake. Standalone project alongside Code.gs; activate only after the CRM bridge is ready. */
 const DIRECT_HEADERS = ['№ замовлення','Дата заявки','ПІБ','Телефон','Кількість детекторів','Ціна детектора','Ціна кріплення на бронежилет','Додаткове обладнання','Статус','Сума замовлення','Коментар','Опитування'];
 const DIRECT_TECH = ['clientOrderId','_crm_payload','_crm_received_at','_crm_sync','_crm_error','_crm_verified'];
 const DIRECT_NAMES = {

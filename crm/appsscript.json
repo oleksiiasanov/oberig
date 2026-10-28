@@ -1,0 +1,9 @@
+{
+  "timeZone": "Europe/Kyiv",
+  "runtimeVersion": "V8",
+  "exceptionLogging": "STACKDRIVER",
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "executeAs": "USER_DEPLOYING"
+  }
+}
