@@ -1,0 +1,6 @@
+## Decisions
+CRM owns Статус, Статус оплати, Передплата, Отримано and Проблемні for linked website rows. Other business fields including comments, money amounts and dates remain untouched. Payment fields mirror manual CRM labels. NEW status and its default payment/prepayment labels stay blank. Prepayment applies only to two or more detectors. Received quantity is detector quantity only after physical delivery confirmation; a partial shipment alone contributes zero. Problem is explicit manual boolean (Так/blank), never inferred from cancellation.
+
+The existing signed bridge returns a current state snapshot with the order version. A transactional order-update trigger marks existing captured keys due. API actions wake after commit, failure leaves durable retry. The sheet saves the last applied state version in a new hidden column; older snapshots cannot overwrite newer ones. Ack only succeeds for the currently matching CRM version. Full reconciliation rechecks linked rows and repairs manager overrides of owned fields. No row is matched by visible number alone; historical linking is outside this change.
+
+Rollout upgrades script metadata/code compatibly first, then CRM. Rollback can disable state writes without deleting capture/history. Existing script endpoints, credentials and notifications remain in place.

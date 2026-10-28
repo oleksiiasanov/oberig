@@ -1,6 +1,8 @@
 /** Direct Orders intake. Standalone project alongside Code.gs; activate only after the CRM bridge is ready. */
 const DIRECT_HEADERS = ['№ замовлення','Дата заявки','ПІБ','Телефон','Кількість детекторів','Ціна детектора','Ціна кріплення на бронежилет','Додаткове обладнання','Статус','Сума замовлення','Коментар','Опитування'];
 const DIRECT_TECH = ['clientOrderId','_crm_payload','_crm_received_at','_crm_sync','_crm_error','_crm_verified'];
+const DIRECT_STATE_REVISION = '_crm_state_revision';
+const DIRECT_STATE_COLUMNS = {status:'Статус',payment:'Статус оплати',prepayment:'Передплата',received:'Отримано',problem:'Проблемні'};
 const DIRECT_NAMES = {
   detector:'Детектор', 'car-antenna':'Виносна антена для авто, 2м',
   'car-antenna-amp:5':'Виносна антена для авто, 5м', 'car-antenna-amp:10':'Виносна антена для авто, 10м',
@@ -39,6 +41,12 @@ function directLayout(sheet, install) {
     headers=sheet.getRange(1,1,1,sheet.getLastColumn()).getValues()[0].map(String);
   }
   for(const h of DIRECT_TECH) if(headers.filter(x=>x===h).length!==1) throw new Error('sheet_schema');
+  if(install && !headers.includes(DIRECT_STATE_REVISION)) {
+    const first=sheet.getMaxColumns()+1;
+    sheet.insertColumnsAfter(first-1,1);
+    sheet.getRange(1,first).setValue(DIRECT_STATE_REVISION);sheet.hideColumns(first,1);
+    headers=sheet.getRange(1,1,1,sheet.getLastColumn()).getValues()[0].map(String);
+  }
   return {headers, col:h=>headers.findIndex(x=>norm(x)===norm(h))+1};
 }
 function directFind(sheet, layout, key) {
@@ -152,7 +160,32 @@ function directMark(key,state,code) {
   directLocked(()=>{const s=directBook(),l=directLayout(s,false),r=directFind(s,l,key);if(!r)return;
     s.getRange(r,l.col('_crm_sync')).setValue(state);s.getRange(r,l.col('_crm_error')).setValue(code||'');});
 }
-function directNumber(key,number,expected) {
+function directStateCells(sheet,layout,row,state) {
+  if(!state)return []; // Compatible with the previous CRM bridge during rollout.
+  const choices={status:['','Підтверджено','Готове','Оплата','Очікується відправка','Відправлено','Отримано','Скасовано'],
+    payment:['','Очікується оплата','Часткова оплата','Оплачено','Відтерміновано'],
+    prepayment:['','Очікується передплата','Передплата зроблена'],problem:['','Так']};
+  if(!Number.isSafeInteger(state.revision)||state.revision<1||!Number.isSafeInteger(state.received)||state.received<0
+    ||Object.keys(choices).some(k=>!choices[k].includes(state[k])))throw new Error('invalid_state');
+  for(const h of [...Object.values(DIRECT_STATE_COLUMNS),DIRECT_STATE_REVISION])
+    if(layout.headers.filter(x=>norm(x)===norm(h)).length!==1)throw new Error('sheet_schema');
+  const revision=sheet.getRange(row,layout.col(DIRECT_STATE_REVISION)),saved=revision.getValue();
+  if(saved!=='' && (!Number.isSafeInteger(Number(saved))||Number(saved)<1))throw new Error('sheet_schema');
+  if(Number(saved)>state.revision)throw new Error('stale_state');
+  const cells=Object.entries(DIRECT_STATE_COLUMNS).map(([key,header])=>({range:sheet.getRange(row,layout.col(header)),value:state[key]}));
+  cells.push({range:revision,value:state.revision});
+  if(cells.some(c=>c.range.getFormula()))throw new Error('managed_field_formula');
+  // The legacy payment dropdown has no partial-payment option. Extend only the owned cell's list.
+  for(const cell of cells) {
+    const rule=cell.range.getDataValidation();
+    if(rule && cell.value!=='' && rule.getCriteriaType()===SpreadsheetApp.DataValidationCriteria.VALUE_IN_LIST) {
+      const args=rule.getCriteriaValues(),values=args[0];
+      if(!values.includes(cell.value))cell.validation=rule.copy().requireValueInList([...values,cell.value],args[1]!==false).build();
+    }
+  }
+  return cells;
+}
+function directNumber(key,number,expected,state) {
   if(!/^OMS-[1-9]\d*$/.test(number))throw new Error('number_collision');
   const visible=number.slice(4);
   if(!Number.isSafeInteger(Number(visible)))throw new Error('number_collision');
@@ -163,7 +196,10 @@ function directNumber(key,number,expected) {
     if(directBusiness(current)!==directBusiness(directCanonical(expected)))throw new Error('payload_conflict');
     const rows=s.getLastRow()>1?s.getRange(2,1,s.getLastRow()-1,l.headers.length).getValues():[];
     if(rows.some((v,i)=>i+2!==r&&String(v[l.col('№ замовлення')-1]).replace(/^OMS-0*/,'').replace(/^0+/,'')===visible))throw new Error('number_collision');
+    const cells=directStateCells(s,l,r,state); // Validate every destination before any write.
     s.getRange(r,l.col('№ замовлення')).setNumberFormat('0').setValue(Number(visible));
+    // Only the owned fields; never rewrite entire rows or infer payment amounts.
+    for(const cell of cells){if(cell.validation)cell.range.setDataValidation(cell.validation);if(cell.range.getValue()!==cell.value)cell.range.setValue(cell.value);}
     s.getRange(r,l.col('_crm_sync')).setValue('SYNCED');s.getRange(r,l.col('_crm_error')).setValue('');
   });
 }
@@ -182,11 +218,12 @@ function syncDirectOrder(key) {
       if(restored.created)directNotify(restored.order);
       snapshot=directSnapshot(key);
     }
-    directNumber(key,result.number,snapshot.payload);
-    directCrm({op:'ack',key,number:result.number});
+    directNumber(key,result.number,snapshot.payload,result.state);
+    const ack=directCrm({op:'ack',key,number:result.number,...(result.state?{revision:result.state.revision}:{})});
+    if(!ack.ok){directMark(key,'PENDING',ack.code||'state_changed');scheduleDirectRetry();return ack;}
     return {ok:true,orderNumber:result.number.slice(4)};
   }catch(error){
-    const terminal=['duplicate_key','payload_conflict','number_collision','sheet_schema','invalid_payload'].includes(error.message);
+    const terminal=['duplicate_key','payload_conflict','number_collision','sheet_schema','invalid_payload','managed_field_formula'].includes(error.message);
     try{directMark(key,terminal?'CONFLICT':'PENDING',terminal?error.message:'crm_unavailable');}catch(_){}
     if(terminal){try{directCrm({op:'conflict',key,code:error.message});}catch(_){}console.error('ORDERS_SYNC_CONFLICT');}
     else scheduleDirectRetry();
@@ -257,7 +294,8 @@ function reconcileDirectOrders(full) {
   try {
     if(all)for(let i=0;i<snapshots.length;i+=100){
       const batch=snapshots.slice(i,i+100),result=directCrm({op:'inspect',keys:batch.map(r=>r.key)});
-      for(const row of result.rows||[])if(row.state!=='FOUND'||row.number!=='OMS-'+batch.find(b=>b.key===row.key).number)queue.add(row.key);
+      // Reapply current owned state even if numbers match, repairing missed wakes and manual overrides.
+      for(const row of result.rows||[])queue.add(row.key);
     }
     const pending=directCrm({op:'pending'});for(const key of pending.keys||[])queue.add(key);
     let failures=0;

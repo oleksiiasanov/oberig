@@ -1,3 +1,9 @@
+## Retail state mirror — implementation candidate, 2026-10-28
+
+Owner approved one-way CRM → linked Orders synchronization of order status, manual payment/prepayment labels, customer-received detector quantity and an explicit manual problem flag. NEW sheet status stays blank. CRM is authoritative for these five columns; amounts, dates, comments and other fields remain manager-owned. Unkeyed historical/imported/manual orders are not automatically linked.
+
+Migration034 adds the audited retail_problem flag and transactional requeue trigger. The signed bridge exports current state with order version; post-commit API wakes and the existing15-minute reconciliation repair delivery. Apps Script stores the applied revision in a seventh hidden column; stale snapshots and acknowledgements retry without overwriting newer state. The legacy payment dropdown is extended per linked cell for partial payment. Receipt uses physical DELIVERED and detector quantity only, never dispatch count. Implementation and local validation are in progress; production deployment is not yet complete.
+
 ## Direct Orders production cutover complete — 2026-10-28
 
 Owner approved running the new standalone Apps Script under personal Google account
