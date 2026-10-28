@@ -124,7 +124,7 @@ function directSign(direction,data) {
   const secret=PropertiesService.getScriptProperties().getProperty('ORDERS_SYNC_SECRET');
   if(!secret||secret.length<32)throw new Error('sync_configuration');
   const timestamp=String(Date.now()),body=JSON.stringify(data);
-  const signature=Utilities.computeHmacSha256Signature('dvision-orders-sync-v1\n'+direction+'\n'+timestamp+'\n'+body,secret)
+  const signature=Utilities.computeHmacSha256Signature('dvision-orders-sync-v1\n'+direction+'\n'+timestamp+'\n'+body,secret,Utilities.Charset.UTF_8)
     .map(b=>('0'+((b+256)%256).toString(16)).slice(-2)).join('');
   return {type:'sheetSync',timestamp,body,signature};
 }
@@ -132,7 +132,7 @@ function directVerify(envelope) {
   if(!envelope||envelope.type!=='sheetSync'||!/^\d{13}$/.test(envelope.timestamp||'')||Math.abs(Date.now()-Number(envelope.timestamp))>300000||typeof envelope.body!=='string'||envelope.body.length>1000||!/^[a-f0-9]{64}$/.test(envelope.signature||''))throw new Error('invalid_signature');
   const secret=PropertiesService.getScriptProperties().getProperty('ORDERS_SYNC_SECRET');
   if(!secret||secret.length<32)throw new Error('sync_configuration');
-  const expected=Utilities.computeHmacSha256Signature('dvision-orders-sync-v1\ncrm-to-sheet\n'+envelope.timestamp+'\n'+envelope.body,secret).map(b=>('0'+((b+256)%256).toString(16)).slice(-2)).join('');
+  const expected=Utilities.computeHmacSha256Signature('dvision-orders-sync-v1\ncrm-to-sheet\n'+envelope.timestamp+'\n'+envelope.body,secret,Utilities.Charset.UTF_8).map(b=>('0'+((b+256)%256).toString(16)).slice(-2)).join('');
   let diff=0;for(let i=0;i<expected.length;i++)diff|=expected.charCodeAt(i)^envelope.signature.charCodeAt(i);
   if(diff)throw new Error('invalid_signature');
   const data=JSON.parse(envelope.body);
@@ -142,7 +142,7 @@ function directVerify(envelope) {
 function directCrm(data) {
   const url=PropertiesService.getScriptProperties().getProperty('ORDERS_CRM_URL');
   if(!/^https:\/\/api\.dvision\.com\.ua\/order$/.test(url||''))throw new Error('sync_configuration');
-  const response=UrlFetchApp.fetch(url,{method:'post',contentType:'text/plain',payload:JSON.stringify(directSign('sheet-to-crm',data)),muteHttpExceptions:true,followRedirects:false});
+  const response=UrlFetchApp.fetch(url,{method:'post',contentType:'text/plain; charset=utf-8',payload:JSON.stringify(directSign('sheet-to-crm',data)),muteHttpExceptions:true,followRedirects:false});
   if(response.getResponseCode()!==200)throw new Error('crm_unavailable');
   const result=JSON.parse(response.getContentText());
   if(typeof result.ok!=='boolean')throw new Error('crm_unavailable');

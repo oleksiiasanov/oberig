@@ -27,10 +27,11 @@ function sandbox() {
     LockService:{getScriptLock:()=>({waitLock(){assert.equal(locked,false);locked=true;},releaseLock(){locked=false;}})},
     SpreadsheetApp:{openById:()=>book},
     ScriptApp:{getProjectTriggers:()=>triggers.slice(),deleteTrigger:t=>triggers.splice(triggers.indexOf(t),1),newTrigger(name){return {timeBased(){return this;},after(){return this;},everyMinutes(n){assert.equal(n,15);return this;},create(){const t={getHandlerFunction:()=>name,getUniqueId:()=>String(triggers.length)};triggers.push(t);return t;}};}},
-    Utilities:{formatDate(d,tz){const p=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(d);return p;},computeHmacSha256Signature:(message,key)=>[...createHmac('sha256',key).update(message).digest()]},
+    Utilities:{Charset:{UTF_8:'UTF-8'},formatDate(d,tz){const p=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(d);return p;},computeHmacSha256Signature:(message,key,charset)=>{assert.equal(charset,'UTF-8','Apps Script must explicitly encode HMAC input as UTF-8');return [...createHmac('sha256',key).update(message,'utf8').digest()];}},
     ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({text,setMimeType(){return this;}})},
     UrlFetchApp:{fetch(url,opts){assert.equal(locked,false,'never hold a sheet lock over remote calls');
       if(url.includes('siteverify'))return {getResponseCode:()=>200,getContentText:()=>JSON.stringify({success:true,hostname:'dvision.com.ua',action:'checkout'})};
+      assert.equal(opts.contentType,'text/plain; charset=utf-8');
       const envelope=JSON.parse(opts.payload),q=JSON.parse(envelope.body);requests.push(q);
       assert.equal(envelope.signature,createHmac('sha256',secret).update(`dvision-orders-sync-v1\nsheet-to-crm\n${envelope.timestamp}\n${envelope.body}`).digest('hex'));
       const result=fakeCrm[q.op](q);return {getResponseCode:()=>200,getContentText:()=>JSON.stringify(result)};
@@ -42,6 +43,16 @@ function sandbox() {
 }
 const order=(extra={})=>({clientOrderId:randomUUID(),name:'Synthetic',phone:'+380501234567',comment:'Original comment',language:'uk',whatsappConsent:true,submittedAt:'2026-10-27T23:30:00Z',
   items:[{id:'detector',quantity:2,unitPrice:24000},{id:'car-antenna',quantity:1,unitPrice:7000},{id:'bunker-antenna',cableLengthM:14,quantity:1,unitPrice:15000},{id:'molle-mount',quantity:2,unitPrice:500}],total:71000,...extra});
+
+test('Ukrainian names and emoji survive authenticated Google-to-CRM reconciliation',()=>{
+  const s=sandbox(),o=order({name:'Олексій Асанов',comment:'Перевірка — кріплення 🧪'});
+  s.fakeCrm.resolve=q=>({ok:true,number:'OMS-403',payload:q.payload});
+  const result=JSON.parse(s.context.directPost(o).text);
+  assert.equal(result.orderNumber,'403');
+  const sent=s.requests.find(q=>q.op==='resolve').payload;
+  assert.equal(sent.name,o.name);assert.equal(sent.comment,o.comment);
+  assert.equal(s.value(o.clientOrderId,'_crm_sync'),'SYNCED');
+});
 
 test('direct mapping preserves all historical cells, appends hidden metadata and leaves business status blank',()=>{
   const s=sandbox(),o=order(),before=JSON.stringify(s.rows[1]);
