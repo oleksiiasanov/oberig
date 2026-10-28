@@ -7,25 +7,25 @@ const code=readFileSync(new URL('../crm/Code.gs',import.meta.url),'utf8')+'\n'+r
 const headers=['№ замовлення','Дата заявки','ПІБ','Телефон','Кількість детекторів','Ціна детектора','Ціна кріплення на бронежилет','Додаткове обладнання','Статус','Статус оплати','Передплата','Сума замовлення','Сума передплати','Отримано','Проблемні','Коментар','Стара дата заявки','передача','Всього замовлень','aggregate','Дата оплати','Адреса відправки','Номер ен','Опитування'];
 const secret='synthetic-script-secret-never-production';
 function sandbox() {
-  const rows=[headers.slice(),['402',46000,'Historical','','','','','','Підтверджено','Оплачено','','24000']],formats=new Map();
+  const rows=[headers.slice(),['402',46000,'Historical','','','','','','Підтверджено','Оплачено','','24000']],formats=new Map(),validations=new Map();
   let columns=38,locked=false,lostWrite=false;const triggers=[],mail=[],requests=[];
   const props=new Map(Object.entries({DIRECT_ORDERS_ENABLED:'true',ORDERS_SPREADSHEET_ID:'synthetic',ORDERS_SHEET_GID:'337346995',ORDERS_SYNC_SECRET:secret,ORDERS_CRM_URL:'https://api.dvision.com.ua/order',ORDERS_TURNSTILE_SECRET:'synthetic-turnstile'}));
   const get=(r,c)=>rows[r-1]?.[c-1]??'';
   const range=(r,c,h=1,w=1)=>({
     getValues:()=>Array.from({length:h},(_,i)=>Array.from({length:w},(_,j)=>get(r+i,c+j))),
-    getValue:()=>get(r,c),getDataValidation:()=>null,setDataValidation(){return this;},
+    getValue:()=>get(r,c),getFormula:()=>typeof get(r,c)==='string'&&get(r,c).startsWith('=')?get(r,c):'',getDataValidation:()=>validations.get(`${r}:${c}`)||null,setDataValidation(v){validations.set(`${r}:${c}`,v);return this;},
     setValues(values){assert.equal(values.length,h);for(let i=0;i<h;i++){assert.equal(values[i].length,w);rows[r+i-1]??=[];for(let j=0;j<w;j++)rows[r+i-1][c+j-1]=values[i][j];}if(lostWrite){lostWrite=false;throw new Error('lost_response');}return this;},
     setValue(v){return this.setValues([[v]]);},setNumberFormat(v){formats.set(`${r}:${c}`,v);return this;},
   });
   const sheet={getLastColumn:()=>Math.max(...rows.map(r=>r.length)),getLastRow:()=>rows.length,getMaxColumns:()=>columns,getMaxRows:()=>1000,
-    getRange:range,insertColumnsAfter(n,count){assert.equal(n,columns);columns+=count;},hideColumns(first,count){assert.equal(first,39);assert.equal(count,6);},
+    getRange:range,insertColumnsAfter(n,count){assert.equal(n,columns);columns+=count;},hideColumns(first,count){assert.ok(first===39&&count===6 || first===45&&count===1);},
     getSheetId:()=>337346995,getParent:()=>book};
   const book={getSheets:()=>[sheet],getUrl:()=> 'https://sheets.test/synthetic'};
   const fakeCrm={resolve:()=>({ok:false,code:'pending'}),pending:()=>({ok:true,keys:[]}),inspect:q=>({ok:true,rows:q.keys.map(key=>({key,state:'MISSING'}))}),ack:()=>({ok:true}),conflict:()=>({ok:true})};
   const context=vm.createContext({console:{error(){}},Date,Math,JSON,Object,Array,Set,Number,String,Error,
     PropertiesService:{getScriptProperties:()=>({getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v)})},
     LockService:{getScriptLock:()=>({waitLock(){assert.equal(locked,false);locked=true;},releaseLock(){locked=false;}})},
-    SpreadsheetApp:{openById:()=>book},
+    SpreadsheetApp:{openById:()=>book,DataValidationCriteria:{VALUE_IN_LIST:'VALUE_IN_LIST'}},
     ScriptApp:{getProjectTriggers:()=>triggers.slice(),deleteTrigger:t=>triggers.splice(triggers.indexOf(t),1),newTrigger(name){return {timeBased(){return this;},after(){return this;},everyMinutes(n){assert.equal(n,15);return this;},create(){const t={getHandlerFunction:()=>name,getUniqueId:()=>String(triggers.length)};triggers.push(t);return t;}};}},
     Utilities:{Charset:{UTF_8:'UTF-8'},formatDate(d,tz){const p=new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(d);return p;},computeHmacSha256Signature:(message,key,charset)=>{assert.equal(charset,'UTF-8','Apps Script must explicitly encode HMAC input as UTF-8');return [...createHmac('sha256',key).update(message,'utf8').digest()];}},
     ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({text,setMimeType(){return this;}})},
@@ -39,7 +39,7 @@ function sandbox() {
   vm.runInContext(code,context);
   context.installDirectOrders();
   const col=h=>rows[0].indexOf(h),value=(key,h)=>rows.find(r=>r[col('clientOrderId')]===key)?.[col(h)];
-  return {context,rows,col,value,props,formats,requests,triggers,fakeCrm,mail,loseNextWrite:()=>{lostWrite=true;}};
+  return {context,rows,col,value,props,formats,validations,requests,triggers,fakeCrm,mail,loseNextWrite:()=>{lostWrite=true;}};
 }
 const order=(extra={})=>({clientOrderId:randomUUID(),name:'Synthetic',phone:'+380501234567',comment:'Original comment',language:'uk',whatsappConsent:true,submittedAt:'2026-10-27T23:30:00Z',
   items:[{id:'detector',quantity:2,unitPrice:24000},{id:'car-antenna',quantity:1,unitPrice:7000},{id:'bunker-antenna',cableLengthM:14,quantity:1,unitPrice:15000},{id:'molle-mount',quantity:2,unitPrice:500}],total:71000,...extra});
@@ -140,4 +140,45 @@ test('standalone entrypoint has no primary-sheet fallback, including when disabl
   assert.equal(s.rows.length,3);
   assert.equal(typeof s.context.syncContactedOrder,'undefined');
   assert.equal(typeof s.context.nextOrderNumber,'undefined');
+});
+
+const state=(extra={})=>({revision:2,status:'Скасовано',payment:'Часткова оплата',prepayment:'Передплата зроблена',received:0,problem:'Так',...extra});
+test('CRM state owns exactly five fields; moved rows, repeated writes and unrelated cells are preserved',()=>{
+ const s=sandbox(),o=order();s.context.directWrite(o,true);const row=s.rows[2];
+ row[s.col('Коментар')]='Manager note';row[s.col('Сума передплати')]=23300;row[s.col('Дата оплати')]='Unknown';
+ const before=row.slice();s.rows.splice(2,0,['unrelated','','Other']);
+ s.fakeCrm.resolve=()=>({ok:true,number:'OMS-403',payload:o,state:state()});
+ assert.equal(s.context.syncDirectOrder(o.clientOrderId).ok,true);
+ assert.equal(s.value(o.clientOrderId,'Статус'),'Скасовано');assert.equal(s.value(o.clientOrderId,'Статус оплати'),'Часткова оплата');
+ assert.equal(s.value(o.clientOrderId,'Передплата'),'Передплата зроблена');assert.equal(s.value(o.clientOrderId,'Отримано'),0);assert.equal(s.value(o.clientOrderId,'Проблемні'),'Так');
+ for(let i=1;i<38;i++)if(![8,9,10,13,14].includes(i))assert.equal(row[i],before[i]);
+ assert.equal(s.requests.findLast(q=>q.op==='ack').revision,2);
+ row[s.col('Статус')]='Manager override';s.context.reconcileDirectOrders();assert.equal(row[s.col('Статус')],'Скасовано');
+});
+test('late state cannot overwrite newer fields and stale ack schedules retry',()=>{
+ const s=sandbox(),o=order();s.context.directWrite(o,true);
+ s.context.directNumber(o.clientOrderId,'OMS-403',o,state({revision:4,problem:''}));
+ assert.throws(()=>s.context.directNumber(o.clientOrderId,'OMS-403',o,state({revision:3})),/stale_state/);
+ assert.equal(s.value(o.clientOrderId,'Проблемні'),'');assert.equal(s.value(o.clientOrderId,'_crm_state_revision'),4);
+ s.fakeCrm.resolve=()=>({ok:true,number:'OMS-403',payload:o,state:state({revision:5,received:2})});
+ s.fakeCrm.ack=()=>({ok:false,code:'state_changed'});
+ assert.equal(s.context.syncDirectOrder(o.clientOrderId).code,'state_changed');assert.equal(s.value(o.clientOrderId,'_crm_sync'),'PENDING');
+ assert.equal(s.value(o.clientOrderId,'Отримано'),2);assert.ok(s.triggers.some(t=>t.getHandlerFunction()==='retryDirectOrders'));
+});
+test('state validates all columns, quantities and formulas before changing a row',()=>{
+ const s=sandbox(),o=order();s.context.directWrite(o,true);const row=s.rows[2];
+ assert.throws(()=>s.context.directNumber(o.clientOrderId,'OMS-403',o,state({received:-1})),/invalid_state/);
+ row[s.col('Отримано')]='=SUM(A1:A2)';const before=JSON.stringify(row);
+ assert.throws(()=>s.context.directNumber(o.clientOrderId,'OMS-403',o,state()),/managed_field_formula/);assert.equal(JSON.stringify(row),before);
+ row[s.col('Отримано')]='';s.rows[0][s.col('Передплата')]='Renamed';
+ assert.throws(()=>s.context.directNumber(o.clientOrderId,'OMS-403',o,state()),/sheet_schema/);
+});
+
+test('strict legacy dropdown gets only the missing owned payment option',()=>{
+ const s=sandbox(),o=order();s.context.directWrite(o,true);
+ const rule=values=>({getCriteriaType:()=> 'VALUE_IN_LIST',getCriteriaValues:()=>[values,true],copy(){return {requireValueInList(next,show){assert.equal(show,true);return {build:()=>rule(next)};}};}});
+ const address=`3:${s.col('Статус оплати')+1}`;s.validations.set(address,rule(['Очікується оплата','Оплачено','Відтерміновано']));
+ s.context.directNumber(o.clientOrderId,'OMS-403',o,state());
+ assert.deepEqual([...s.validations.get(address).getCriteriaValues()[0]],['Очікується оплата','Оплачено','Відтерміновано','Часткова оплата']);
+ assert.equal(s.validations.size,1);
 });
