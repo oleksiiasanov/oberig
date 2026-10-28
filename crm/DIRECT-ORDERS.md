@@ -19,7 +19,9 @@ Retries run after approximately two minutes; the full comparison runs every15
 minutes. CRM owns order numbers. Surveys and retries use immutable clientOrderId.
 Existing rows are updated only in the number and technical metadata columns.
 
-Validation: `npm run check` passes21 tests plus content/build checks. The standalone Google project is authorized and published; the CRM runtime is
-deployed. Trigger installation and live checkout verification remain pending
-Editor access for its executing account and the coordinated website cutover.
-See PROJECT_CONTEXT.md for the published URL and current state.
+Validation: `npm run check` passes22 tests plus content/build checks. The standalone Google project is live at version3, with explicit UTF-8 signatures.
+Website routing and CRM capture are enabled; the old endpoint is archived. Live
+integration checks verified one row/order, matching CRM number, automatic wake,
+timed retry and preservation of manager edits. No test notifications were sent;
+full browser/Turnstile checkout was not part of this controlled smoke.
+See PROJECT_CONTEXT.md for exact deployment evidence and the historical boundary.
