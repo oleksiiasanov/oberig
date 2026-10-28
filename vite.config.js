@@ -1,3 +1,4 @@
+import { validateOrderWebhook } from "./src/lib/order-endpoint.js";
 import react from "@vitejs/plugin-react";
 import { defineConfig, loadEnv } from "vite";
 export default defineConfig(({ mode }) => {
@@ -6,5 +7,6 @@ export default defineConfig(({ mode }) => {
   const key = env.VITE_TURNSTILE_SITEKEY || "";
   if (Boolean(url) !== Boolean(key)) throw new Error("Configure public order API URL and Turnstile sitekey together");
   if (url && url !== "https://api.dvision.com.ua/order") throw new Error("Unexpected public order API URL");
+  validateOrderWebhook(env.VITE_ORDER_WEBHOOK_URL || "", Boolean(url));
   return { plugins: [react()] };
 });

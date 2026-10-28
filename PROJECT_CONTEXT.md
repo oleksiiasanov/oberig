@@ -1,3 +1,29 @@
+## Direct Orders implementation candidate — 2026-10-28
+
+Owner approved implementation. Local candidate in branch feat/direct-orders-sheet;
+NOT deployed/activated. Independent website writes now have a direct Orders Apps
+Script implementation, immutable-key matching, CRM-owned numbers, blank initial
+sheet status and original snapshot retention. Schema033 stores accepted modern
+website requests atomically; a signed bridge schedules event checks and Apps Script
+provides durable short retries plus a15-minute fallback. Two-minute grace avoids
+racing parallel requests. Existing manager fields/history remain untouched. Deleted,
+unverified, conflicting or historical unlinked records are not blindly recovered.
+Separate single-use Turnstile verification protects automatic Sheets-only recovery.
+
+Owner explicitly approved direct replacement on2026-10-28: “просто переводимо на нове”.
+Use a NEW standalone Apps Script project and its NEW /exec URL. The current source
+has no primary-sheet writer or fallback; disabled intake returns intake_disabled.
+Code.gs, DirectOrders.gs and appsscript.json are the complete project. The website
+requires VITE_ORDER_WEBHOOK_URL for CRM-enabled builds and rejects the retired URL.
+The old primary spreadsheet remains history; retire its transfer trigger and public
+deployment at cutover. There is no dual-writer transition.
+
+Main spreadsheet14h5grcwup_d5UNHABC8NiGCAL2wLMyZbeRXYdVpz3vo, Orders337346995.
+Service-account Editor capabilities were verified earlier; standalone Apps Script
+creation/deployment access is still unavailable (no connected browser). Live deployment,
+Google write smoke and trigger activation are pending. See docs/DIRECT-ORDERS-SYNC.md
+in the CRM repository for configuration, coordinated cutover and rollback.
+
 # D·Vision landing — current change context
 
 ## Website display groups (2026-10-23)

@@ -232,6 +232,7 @@ export function CartPage({ content, search, onNavigate }) {
   const [restored] = useState(() => readAttempt(tabStorage()));
   const attemptRef = useRef(restored);
   const challengeRef = useRef(null);
+  const sheetChallengeRef = useRef(null);
   const submittingRef = useRef(false);
   const submittedIdRef = useRef(null);
   const [comment, setComment] = useState(restored?.payload.comment || "");
@@ -426,7 +427,13 @@ export function CartPage({ content, search, onNavigate }) {
         if (submittedIdRef.current === payload.clientOrderId)
           setPlacedOrder({ orderNumber: result.orderNumber, phone: payload.phone, clientOrderId: payload.clientOrderId });
       };
-        await submitCheckout({ payload, submitSheets: submitOrder, onSheets,
+        await submitCheckout({ payload, onSheets,
+          submitSheets: async () => {
+            // Separate single-use challenge: either destination can succeed independently.
+            let challengeToken;
+            try { challengeToken = await sheetChallengeRef.current?.(); } catch { /* Backup remains available; CRM recovery requires verification. */ }
+            return submitOrder({...payload,challengeToken});
+          },
           submitCrm: async () => {
             if (!TURNSTILE_SITEKEY || !challengeRef.current) throw new Error("verification_unavailable");
             const token = await challengeRef.current();
@@ -630,7 +637,7 @@ export function CartPage({ content, search, onNavigate }) {
             <p>{content.meta.lang==='uk'?(orderLines.length?'Тепер натисніть «Залишити заявку», щоб завершити замовлення.':'Кошик порожній. Оберіть інший товар у каталозі.'):(orderLines.length?'Now submit the order to complete checkout.':'Your cart is empty. Choose another product from the catalog.')}</p>
           </div>}
           {status === "error" ? <p className="cart-error" role="alert">{cart.errorMessage}</p> : null}
-          {ORDER_API_URL && TURNSTILE_SITEKEY ? <CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={challengeRef} /> : null}
+          {ORDER_API_URL && TURNSTILE_SITEKEY ? <><CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={challengeRef} /><CheckoutChallenge sitekey={TURNSTILE_SITEKEY} challengeRef={sheetChallengeRef} /></> : null}
           <button type="submit" className="btn btn-primary cart-submit-btn" disabled={status === "sending" || checking || changes.length > 0 || !orderLines.length}>
             <span>{status === "sending" ? cart.sending : cart.submit}</span>
           </button>

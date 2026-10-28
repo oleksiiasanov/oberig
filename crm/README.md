@@ -1,41 +1,18 @@
-# Orders → Google Sheet (CRM)
+# Website orders → CRM and Orders
 
-1. Make a copy of the CRM spreadsheet (File → Make a copy). Row 1 must contain the column headers listed in `Code.gs`.
-2. In the copy: Extensions → Apps Script → replace the code with `crm/Code.gs` → Save.
-3. Deploy → New deployment → type **Web app** → Execute as **Me**, Who has access **Anyone** → Deploy → authorize → copy the `/exec` URL.
-4. Put that URL into `WEBHOOK_URL` in `src/lib/submitOrder.js` (or set `VITE_ORDER_WEBHOOK_URL` to override it), then deploy.
-5. The new script adds a `clientOrderId` header to row 1 when needed. The cart sends one id per order attempt; an order whose id is already in that column is answered `ok` without a new row or email, so a retry after a timeout is not saved twice.
+The approved2026-10-28 implementation keeps independent website writes to CRM and
+a NEW standalone Apps Script writing directly to the main `Orders` tab. It removes
+the intermediate spreadsheet and manual Contact transfer from new order intake.
 
-After changing `Code.gs`, use Deploy → Manage deployments → Edit → New version (the URL stays the same).
+Use [the standalone deployment guide](DIRECT-ORDERS.md). The complete script project
+is `Code.gs` + `DirectOrders.gs` + `appsscript.json`. Configure the new public /exec
+URL through `VITE_ORDER_WEBHOOK_URL`; it is not hardcoded in the website source.
+The production cutover is still pending publication access.
 
-## CRM checkout and temporary Sheets copy
+CRM owns visible numbers. Both destinations share clientOrderId for deduplication,
+surveys and automatic recovery. Initial sheet statuses are blank. Existing manager
+fields are preserved, and original requests remain in hidden technical columns.
+The old spreadsheet is retained as history after its endpoint/transfer is retired.
 
-The revised approved architecture keeps Vercel and uses CRM acknowledgement for
-checkout success. The existing Sheets write runs independently for temporary manual
-comparison. See `crm/WEBSITE-CHECKOUT.md` for activation, public configuration and
-rollback. PR36's `VITE_ORDER_MIRROR_URL` best-effort behavior is superseded.
-
-## "Where did you hear about us" survey
-
-After the thank-you message the customer can answer where they heard about D·Vision SDR. The answer is written into that order's row in the "Опитування" column (matched by order number and phone). If the column does not exist yet, the first answer adds it as the last column.
-
-The answer is also copied to the tracking spreadsheet, into its "Опитування" column: with the order when "Контакт" is ticked, or into the order's existing tracking row when the customer answers after the tick.
-
-## Copying contacted orders to the tracking spreadsheet
-
-Ticking "Контакт" on an order adds it as a new row to the tracking spreadsheet (only the columns listed in `TRACKING_COLUMNS`; an order number that is already there is skipped).
-
-1. Apps Script → Project Settings → Script properties → add `TRACKING_SHEET_URL` with the full URL of the tracking tab (including `#gid=…`).
-2. In the editor, select `installTrackingTrigger` → Run → authorize.
-3. `previewTrackingRow` logs what would be written for the newest order without writing anything.
-
-## Order statuses in the tracking spreadsheet
-
-`setupTrackingStatuses` adds the dropdown columns "Статус", "Статус оплати" and "Передплата" right after "Додаткове обладнання" and fills them for existing orders: orange rows get "Скасовано", rows with a number in "Відправлено" get "Відправлено", rows with a number in "Сума передплати" (the amount column, formerly "Передплата") get "Передплата зроблена". Running it again does not add the columns twice or change values that are already filled in.
-
-1. In the editor, select `previewTrackingStatuses` → Run: it writes nothing and logs how many rows will get each status and which rows need a manual look.
-2. Select `setupTrackingStatuses` → Run.
-
-## Order dates in the tracking spreadsheet
-
-"Дата заявки" is the order date. `fillOrderDates` fills its empty cells from "Стара дата заявки" (text like "14,06,2026" or "14.06.2026"), shown as dd/mm/yy. Cells that already have a date are not changed. `previewOrderDates` logs what would be filled without writing.
+[The earlier checkout guide](WEBSITE-CHECKOUT.md) documents the original2026-10-21
+rollout; its bound-script/old-URL activation instructions are superseded.
