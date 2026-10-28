@@ -19,6 +19,7 @@ Retries run after approximately two minutes; the full comparison runs every15
 minutes. CRM owns order numbers. Surveys and retries use immutable clientOrderId.
 Existing rows are updated only in the number and technical metadata columns.
 
-Validation: `npm run check` passes21 tests plus content/build checks. Actual Google
-publication, trigger execution and live checkout verification remain pending;
-no new project/deployment URL has been created yet.
+Validation: `npm run check` passes21 tests plus content/build checks. The standalone Google project is authorized and published; the CRM runtime is
+deployed. Trigger installation and live checkout verification remain pending
+Editor access for its executing account and the coordinated website cutover.
+See PROJECT_CONTEXT.md for the published URL and current state.
