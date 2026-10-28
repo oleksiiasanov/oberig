@@ -26,8 +26,10 @@ timed retry and preservation of manager edits. No test notifications were sent;
 full browser/Turnstile checkout was not part of this controlled smoke.
 See PROJECT_CONTEXT.md for exact deployment evidence and the historical boundary.
 
-## Retail state mirror candidate (2026-10-28)
+## Retail state mirror — live since2026-10-28
 
 The owner approved replacing number-only behavior for linked rows with CRM authority over five columns: Статус, Статус оплати, Передплата, Отримано, Проблемні. This supersedes the earlier preservation rule only for these columns. Payment labels remain separate from posted money; no amount or payment date is inferred. NEW remains blank; AWAITING_PAYMENT maps to the existing Статус option «Оплата», UNPAID to «Очікується оплата», PARTIAL to «Часткова оплата». Prepayment is applicable to at least two detectors. Actual customer delivery, not dispatch, sets received detector quantity. A manual problem flag maps to «Так»/blank independently of cancellation.
 
 Schema034 queues captured keys transactionally. The existing HTTP action sends a best-effort wake only after commit. The full15-minute check repairs the five owned fields, including manual sheet overrides. The bridge includes order version and validates that same version when acknowledging under the domain write lock. The script rejects older versions before any write and saves _crm_state_revision in a new hidden column appended after the current grid. Formulas in owned destinations become conflicts rather than being destroyed. Install the script metadata upgrade before the CRM release. No historical mass backfill, extra credentials or browser checkout changes are included.
+
+Published Apps Script version4 and CRM schema34 are deployed. OMS-408 state readback and preservation checks passed; see PROJECT_CONTEXT.md for source/image/CI and exact verification scope.
