@@ -4,4 +4,4 @@
 - [x] Update only owned Sheets columns, with stale-write protection and retries.
 - [x] Verify mapping, authorization, concurrency, outages and preservation of other cells.
 - [x] Document behavior and release readiness.
-- [ ] Deploy and verify linked order408 and production health.
+- [x] Deploy and verify linked order408 and production health.
