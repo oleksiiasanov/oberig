@@ -3,8 +3,8 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача D·Vision SDR",
-  "syncedAt": "2026-10-29T08:25:38.810Z",
-  "lastEditedAt": "2026-10-13T21:51:00.240Z",
+  "syncedAt": "2026-10-30T08:35:49.436Z",
+  "lastEditedAt": "2026-10-29T09:09:08.314Z",
   "blocks": [
     {
       "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
@@ -2335,6 +2335,16 @@
         },
         {
           "text": " SDR"
+        }
+      ],
+      "children": [],
+      "type": "child_page"
+    },
+    {
+      "id": "408874c8-aa8d-81f4-a2bf-de7d46c655c2",
+      "richText": [
+        {
+          "text": "D·Vision SDR + Raspberry Pi: встановлення з Windows"
         }
       ],
       "children": [],
