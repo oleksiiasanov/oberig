@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-10-30T08:54:39.264Z",
+  "syncedAt": "2026-10-31T08:47:41.880Z",
   "items": [
+    {
+      "id": "QmB-p83NlnE",
+      "title": "Новий інструмент RC-керування",
+      "publishedAt": "2026-10-30T19:06:22Z",
+      "url": "https://www.youtube.com/shorts/QmB-p83NlnE",
+      "thumbnail": "https://i.ytimg.com/vi/QmB-p83NlnE/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/QmB-p83NlnE/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/QmB-p83NlnE/hq720.jpg",
+        "https://i.ytimg.com/vi/QmB-p83NlnE/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/QmB-p83NlnE"
+    },
     {
       "id": "YB__BCAXMCw",
       "title": "Підключення D·Vision SDR до планшета на Android",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/iGVczUFPWBQ/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/iGVczUFPWBQ"
-    },
-    {
-      "id": "UpsRv0j3llk",
-      "title": "Моніторинг конкретної частоти за допомогою D·Vision SDR",
-      "publishedAt": "2026-09-07T14:02:31Z",
-      "url": "https://www.youtube.com/shorts/UpsRv0j3llk",
-      "thumbnail": "https://i.ytimg.com/vi/UpsRv0j3llk/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/UpsRv0j3llk/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/UpsRv0j3llk/hq720.jpg",
-        "https://i.ytimg.com/vi/UpsRv0j3llk/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/UpsRv0j3llk"
     }
   ]
 }
