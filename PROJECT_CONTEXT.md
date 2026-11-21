@@ -1,3 +1,21 @@
+## Checkout diagnostics and sheet recovery — local candidate, 2026-11-21
+
+Owner requested diagnostics after a sheet-only order remained missing in CRM, then
+explicitly chose automatic ordinary CRM orders from saved sheet requests regardless
+of anti-bot result, accepting potential spam. Candidate: fix/checkout-diagnostics
+in paired crm_oberig-checkout-diagnostics and oberig-checkout-diagnostics worktrees.
+The authenticated bridge retains capture grace/boundary, normal catalog/price
+validation, tombstones and original-key deduplication. _crm_verified remains honest;
+verification_required conflicts become retryable. No database migration.
+Structured allowlisted logs cover browser, gateway, signed bridge and Apps Script.
+A separate bounded browser telemetry budget does not consume checkout capacity.
+Transient CRM delivery retries once with a fresh token and the original payload/key.
+Browser evidence cannot authorize writes; no customer fields/tokens enter logs.
+Owner explicitly authorized release after the policy choice. Do NOT manually
+recover or wake the reported real order: owner will observe scheduled reconciliation.
+Local checks passed (CRM152 unit/242 integration, website33 tests, both builds;
+strict specifications36 CRM/13 website). Production rollout is pending. See CRM docs/CHECKOUT-DIAGNOSTICS.md and add-checkout-diagnostics.
+
 ## Retail state mirror — production complete, 2026-10-28
 
 Owner approved one-way CRM → linked Orders synchronization of order status, manual payment/prepayment labels, customer-received detector quantity and an explicit manual problem flag. NEW sheet status stays blank. CRM is authoritative for these five columns; amounts, dates, comments and other fields remain manager-owned. Unkeyed historical/imported/manual orders are not automatically linked.
