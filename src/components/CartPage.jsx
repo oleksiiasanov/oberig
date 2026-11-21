@@ -12,14 +12,16 @@ import {
   PART_CATEGORY,
   PriceBlock,
 } from "./OrderPage.jsx";
+import { createCheckoutReporter, checkoutFailure, emitCheckout } from '../lib/checkout-diagnostics.js';
 import { CheckoutChallenge } from "./CheckoutChallenge.jsx";
-import { clearAttempt, readAttempt, saveAttempt, orderAttempt, sendCrmOrder, submitCheckout } from "../lib/checkout.js";
+import { clearAttempt, readAttempt, saveAttempt, orderAttempt, submitVerifiedCrm, submitCheckout } from "../lib/checkout.js";
 import { itemPrice, checkCart } from "../lib/liveCatalog.js";
 import { FinalCTA } from "./FinalCTA.jsx";
 import { submitOrder, submitSurvey } from "../lib/submitOrder.js";
 import { lineKey, useCart } from "../lib/cartStore.js";
 
 const ORDER_API_URL = import.meta.env.VITE_ORDER_API_URL || "https://api.dvision.com.ua/order";
+const reportCheckout = createCheckoutReporter(ORDER_API_URL);
 const TURNSTILE_SITEKEY = import.meta.env.VITE_TURNSTILE_SITEKEY || "";
 const tabStorage = () => { try { return window.sessionStorage; } catch { return null; } };
 
@@ -430,16 +432,24 @@ export function CartPage({ content, search, onNavigate }) {
         await submitCheckout({ payload, onSheets,
           submitSheets: async () => {
             // Separate single-use challenge: either destination can succeed independently.
-            let challengeToken;
-            try { challengeToken = await sheetChallengeRef.current?.(); } catch { /* Backup remains available; CRM recovery requires verification. */ }
+            let challengeToken;const started=Date.now();
+            emitCheckout(reportCheckout,'sheet_verification',payload.clientOrderId,{code:'started'});
+            try {
+              challengeToken = await sheetChallengeRef.current?.();
+              if(!challengeToken)throw new Error('verification_unavailable');
+              emitCheckout(reportCheckout,'sheet_verification',payload.clientOrderId,{code:'ok',durationMs:Date.now()-started});
+            } catch(error) {
+              emitCheckout(reportCheckout,'sheet_verification',payload.clientOrderId,{...checkoutFailure(error),durationMs:Date.now()-started});
+            }
             return submitOrder({...payload,challengeToken});
           },
           submitCrm: async () => {
-            if (!TURNSTILE_SITEKEY || !challengeRef.current) throw new Error("verification_unavailable");
-            const token = await challengeRef.current();
-            return sendCrmOrder(ORDER_API_URL, payload, token);
+            return submitVerifiedCrm({url:ORDER_API_URL,payload,report:reportCheckout,challenge:async()=>{
+              if (!TURNSTILE_SITEKEY || !challengeRef.current) throw new Error('verification_unavailable');
+              return challengeRef.current();
+            }});
           },
-          report: (code, clientOrderId) => console.error("checkout", { code, clientOrderId }),
+          report: reportCheckout,
         });
       clearAttempt(tabStorage());
       attemptRef.current = null;

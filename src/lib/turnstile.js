@@ -29,7 +29,12 @@ export function createChallenge(container, sitekey, load = loadTurnstile) {
       widget = api.render(container, {
         sitekey, action: "checkout", execution: "execute", appearance: "interaction-only",
         callback: (token) => finish(null, token),
-        "error-callback": () => finish(new Error("verification_failed")),
+        "error-callback": (code) => {
+          const error=new Error('verification_failed');
+          if(typeof code==='string' && /^\d{6}$/.test(code))error.widgetError=code;
+          finish(error);return true;
+        },
+        "timeout-callback": () => finish(new Error('verification_timeout')),
         "expired-callback": () => finish(new Error("verification_expired")),
       });
     }).finally(() => { initializing = null; });

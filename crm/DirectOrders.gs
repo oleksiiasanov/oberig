@@ -203,10 +203,11 @@ function directNumber(key,number,expected,state) {
     s.getRange(r,l.col('_crm_sync')).setValue('SYNCED');s.getRange(r,l.col('_crm_error')).setValue('');
   });
 }
-function syncDirectOrder(key) {
+function syncDirectOrder(key, verificationCode) {
   try {
     let snapshot=directSnapshot(key);
-    const result=directCrm({op:'resolve',key,payload:snapshot?.payload||null,observedAt:snapshot?.observedAt,verified:snapshot?.verified===true});
+    const result=directCrm({op:'resolve',key,payload:snapshot?.payload||null,observedAt:snapshot?.observedAt,verified:snapshot?.verified===true,...(verificationCode?{verificationCode}:{})});
+    directDiagnostic(key,'sheet_result',result.ok?'ok':result.code);
     if(!result.ok){
       const pending=['pending','missing','catalog_unavailable'].includes(result.code);
       directMark(key,pending?'PENDING':'CONFLICT',result.code);
@@ -221,8 +222,10 @@ function syncDirectOrder(key) {
     directNumber(key,result.number,snapshot.payload,result.state);
     const ack=directCrm({op:'ack',key,number:result.number,...(result.state?{revision:result.state.revision}:{})});
     if(!ack.ok){directMark(key,'PENDING',ack.code||'state_changed');scheduleDirectRetry();return ack;}
+    directDiagnostic(key,'sheet_synced','ok');
     return {ok:true,orderNumber:result.number.slice(4)};
   }catch(error){
+    directDiagnostic(key,'sheet_result',error.message);
     const terminal=['duplicate_key','payload_conflict','number_collision','sheet_schema','invalid_payload','managed_field_formula'].includes(error.message);
     try{directMark(key,terminal?'CONFLICT':'PENDING',terminal?error.message:'crm_unavailable');}catch(_){}
     if(terminal){try{directCrm({op:'conflict',key,code:error.message});}catch(_){}console.error('ORDERS_SYNC_CONFLICT');}
@@ -245,29 +248,49 @@ function directSurvey(answer) {
     return {ok:true};
   });
 }
-function directVerifyChallenge(token) {
-  if(typeof token!=='string'||!token||token.length>2048)return false;
+function directDiagnostic(key,event,code,httpStatus) {
+  const codes=['ok','unknown','missing_token','invalid_token','missing_secret','provider_http_error','provider_invalid_response','provider_unavailable',
+    'provider_rejected','timeout-or-duplicate','missing-input-secret','invalid-input-secret','missing-input-response','invalid-input-response',
+    'bad-request','internal-error','hostname_mismatch','action_mismatch','pending','missing','verification_required','historical_unlinked',
+    'payload_conflict','duplicate_key','number_collision','sheet_schema','invalid_payload','managed_field_formula','deleted_order',
+    'unsupported_process','number_changed','state_changed','stale_state','crm_unavailable','sheet_unavailable'];
+  if(!['sheet_verification','sheet_received','sheet_result','sheet_synced'].includes(event))return;
+  const record={type:'checkout_diagnostic',source:'apps_script',timestamp:new Date().toISOString(),event,code:codes.includes(code)?code:'unknown'};
+  if(typeof key==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(key))record.clientOrderId=key;
+  if(Number.isInteger(httpStatus)&&httpStatus>=100&&httpStatus<=599)record.httpStatus=httpStatus;
+  try{console.log(JSON.stringify(record));}catch(_){} // Logging never interrupts intake.
+}
+function directVerifyChallenge(token,key,onResult) {
+  const finish=(ok,code,status)=>{directDiagnostic(key,'sheet_verification',code,status);if(onResult)onResult(code);return ok;};
+  if(typeof token!=='string'||!token||token.length>2048)return finish(false,token?'invalid_token':'missing_token');
   const secret=PropertiesService.getScriptProperties().getProperty('ORDERS_TURNSTILE_SECRET');
-  if(!secret)return false;
+  if(!secret)return finish(false,'missing_secret');
   try {
     const response=UrlFetchApp.fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{
       method:'post',contentType:'application/json',payload:JSON.stringify({secret,response:token}),muteHttpExceptions:true,followRedirects:false});
-    if(response.getResponseCode()!==200)return false;
-    const result=JSON.parse(response.getContentText());
-    return result.success===true&&['dvision.com.ua','www.dvision.com.ua'].includes(result.hostname)&&result.action==='checkout';
-  }catch(_){return false;}
+    if(response.getResponseCode()!==200)return finish(false,'provider_http_error',response.getResponseCode());
+    let result;try{result=JSON.parse(response.getContentText());}catch(_){return finish(false,'provider_invalid_response');}
+    if(!result||typeof result!=='object')return finish(false,'provider_invalid_response');
+    const codes=['timeout-or-duplicate','missing-input-secret','invalid-input-secret','missing-input-response','invalid-input-response','bad-request','internal-error'];
+    if(result.success!==true)return finish(false,codes.find(c=>Array.isArray(result['error-codes'])&&result['error-codes'].includes(c))||'provider_rejected');
+    if(!['dvision.com.ua','www.dvision.com.ua'].includes(result.hostname))return finish(false,'hostname_mismatch');
+    if(result.action!=='checkout')return finish(false,'action_mismatch');
+    return finish(true,'ok');
+  }catch(_){return finish(false,'provider_unavailable');}
 }
 function directPost(order) {
   try {
     if(order.type==='sheetSync'){const signed=directVerify(order);return json(syncDirectOrder(signed.key));}
     if(order.type==='survey')return json(directSurvey(order));
-    const verified=directVerifyChallenge(order.challengeToken);
-    // Old cached clients may still preserve a backup row, but unverified sheet-only rows cannot create CRM orders.
+    let verificationCode;
+    const verified=directVerifyChallenge(order.challengeToken,order.clientOrderId,code=>{verificationCode=code;});
+    // Owner-approved policy: saved sheet requests can create CRM orders; retain the actual verification result for diagnostics.
     const saved=directWrite(order,verified);
+    directDiagnostic(saved.order.clientOrderId,'sheet_received','ok');
     // Persist retry before external calls; a CRM timeout cannot roll back independent sheet capture.
     scheduleDirectRetry();
     if(saved.created)directNotify(saved.order);
-    const synced=syncDirectOrder(saved.order.clientOrderId);
+    const synced=syncDirectOrder(saved.order.clientOrderId,verificationCode);
     return json({ok:true,clientOrderId:saved.order.clientOrderId,orderNumber:synced.orderNumber||saved.orderNumber||''});
   }catch(error){
     const code=['invalid_payload','payload_conflict','duplicate_key','invalid_signature','order_not_found','invalid_survey'].includes(error.message)?error.message:'sheet_unavailable';
@@ -288,9 +311,9 @@ function reconcileDirectOrders(full) {
   const started=Date.now(),all=full!==false;
   const snapshots=directLocked(()=>{
     const s=directBook(),l=directLayout(s,false);
-    return s.getLastRow()<2?[]:s.getRange(2,1,s.getLastRow()-1,l.headers.length).getValues().filter(r=>r[l.col('clientOrderId')-1]).map(r=>({key:r[l.col('clientOrderId')-1],state:r[l.col('_crm_sync')-1],number:String(r[l.col('№ замовлення')-1])}));
+    return s.getLastRow()<2?[]:s.getRange(2,1,s.getLastRow()-1,l.headers.length).getValues().filter(r=>r[l.col('clientOrderId')-1]).map(r=>({key:r[l.col('clientOrderId')-1],state:r[l.col('_crm_sync')-1],number:String(r[l.col('№ замовлення')-1]),error:r[l.col('_crm_error')-1]}));
   });
-  const queue=new Set(snapshots.filter(r=>r.state!=='SYNCED'&&r.state!=='CONFLICT').map(r=>r.key));
+  const queue=new Set(snapshots.filter(r=>r.state!=='SYNCED'&&(r.state!=='CONFLICT'||r.error==='verification_required')).map(r=>r.key));
   try {
     if(all)for(let i=0;i<snapshots.length;i+=100){
       const batch=snapshots.slice(i,i+100),result=directCrm({op:'inspect',keys:batch.map(r=>r.key)});

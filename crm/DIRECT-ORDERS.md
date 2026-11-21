@@ -1,3 +1,13 @@
+## Recovery policy candidate — 2026-11-21
+
+Owner approved creating ordinary CRM orders from saved sheet requests even when
+Turnstile verification failed, accepting possible spam. The original verification
+marker is diagnostic only; never forge it. Signed bridge, post-cutover boundary,
+commercial validation and idempotency remain required. Older verification-required
+conflicts now enter short retries. Structured Apps Script logs preserve the actual
+verification reason. This candidate is not yet deployed; older restrictions below
+are historical. See paired CRM docs/CHECKOUT-DIAGNOSTICS.md for release order.
+
 # Standalone Orders deployment
 
 Create a NEW standalone Apps Script project using `Code.gs`, `DirectOrders.gs` and

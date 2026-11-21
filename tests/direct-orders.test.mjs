@@ -8,7 +8,7 @@ const headers=['№ замовлення','Дата заявки','ПІБ','Те
 const secret='synthetic-script-secret-never-production';
 function sandbox() {
   const rows=[headers.slice(),['402',46000,'Historical','','','','','','Підтверджено','Оплачено','','24000']],formats=new Map(),validations=new Map();
-  let columns=38,locked=false,lostWrite=false;const triggers=[],mail=[],requests=[];
+  let columns=38,locked=false,lostWrite=false;const triggers=[],mail=[],requests=[],logs=[];
   const props=new Map(Object.entries({DIRECT_ORDERS_ENABLED:'true',ORDERS_SPREADSHEET_ID:'synthetic',ORDERS_SHEET_GID:'337346995',ORDERS_SYNC_SECRET:secret,ORDERS_CRM_URL:'https://api.dvision.com.ua/order',ORDERS_TURNSTILE_SECRET:'synthetic-turnstile'}));
   const get=(r,c)=>rows[r-1]?.[c-1]??'';
   const range=(r,c,h=1,w=1)=>({
@@ -22,7 +22,7 @@ function sandbox() {
     getSheetId:()=>337346995,getParent:()=>book};
   const book={getSheets:()=>[sheet],getUrl:()=> 'https://sheets.test/synthetic'};
   const fakeCrm={resolve:()=>({ok:false,code:'pending'}),pending:()=>({ok:true,keys:[]}),inspect:q=>({ok:true,rows:q.keys.map(key=>({key,state:'MISSING'}))}),ack:()=>({ok:true}),conflict:()=>({ok:true})};
-  const context=vm.createContext({console:{error(){}},Date,Math,JSON,Object,Array,Set,Number,String,Error,
+  const context=vm.createContext({console:{error(){},log(value){logs.push(JSON.parse(value));}},Date,Math,JSON,Object,Array,Set,Number,String,Error,
     PropertiesService:{getScriptProperties:()=>({getProperty:k=>props.get(k),setProperty:(k,v)=>props.set(k,v)})},
     LockService:{getScriptLock:()=>({waitLock(){assert.equal(locked,false);locked=true;},releaseLock(){locked=false;}})},
     SpreadsheetApp:{openById:()=>book,DataValidationCriteria:{VALUE_IN_LIST:'VALUE_IN_LIST'}},
@@ -39,7 +39,7 @@ function sandbox() {
   vm.runInContext(code,context);
   context.installDirectOrders();
   const col=h=>rows[0].indexOf(h),value=(key,h)=>rows.find(r=>r[col('clientOrderId')]===key)?.[col(h)];
-  return {context,rows,col,value,props,formats,validations,requests,triggers,fakeCrm,mail,loseNextWrite:()=>{lostWrite=true;}};
+  return {context,rows,col,value,props,formats,validations,requests,triggers,fakeCrm,mail,logs,loseNextWrite:()=>{lostWrite=true;}};
 }
 const order=(extra={})=>({clientOrderId:randomUUID(),name:'Synthetic',phone:'+380501234567',comment:'Original comment',language:'uk',whatsappConsent:true,submittedAt:'2026-10-27T23:30:00Z',
   items:[{id:'detector',quantity:2,unitPrice:24000},{id:'car-antenna',quantity:1,unitPrice:7000},{id:'bunker-antenna',cableLengthM:14,quantity:1,unitPrice:15000},{id:'molle-mount',quantity:2,unitPrice:500}],total:71000,...extra});
@@ -181,4 +181,30 @@ test('strict legacy dropdown gets only the missing owned payment option',()=>{
  s.context.directNumber(o.clientOrderId,'OMS-403',o,state());
  assert.deepEqual([...s.validations.get(address).getCriteriaValues()[0]],['Очікується оплата','Оплачено','Відтерміновано','Часткова оплата']);
  assert.equal(s.validations.size,1);
+});
+
+
+test('unverified sheet-only submission retains exact verification cause without secrets or customer data',()=>{
+ const s=sandbox(),o=order();s.fakeCrm.resolve=()=>({ok:false,code:'verification_required'});
+ const result=JSON.parse(s.context.directPost(o).text);assert.equal(result.ok,true);
+ assert.equal(s.value(o.clientOrderId,'_crm_verified'),'false');assert.equal(s.value(o.clientOrderId,'_crm_error'),'verification_required');
+ assert.ok(s.logs.some(e=>e.clientOrderId===o.clientOrderId&&e.event==='sheet_verification'&&e.code==='missing_token'));
+ assert.equal(s.requests.find(q=>q.op==='resolve').verificationCode,'missing_token');
+ const serialized=JSON.stringify(s.logs);for(const secret of [o.name,o.phone,o.comment,'synthetic-turnstile'])assert.ok(!serialized.includes(secret));
+ s.context.directDiagnostic(o.phone,'sheet_result',o.name);assert.equal(s.logs.at(-1).code,'unknown');assert.equal(s.logs.at(-1).clientOrderId,undefined);
+});
+test('Apps Script verification reasons distinguish provider, expiry and malformed responses',()=>{
+ for(const [response,code] of [[{success:false,'error-codes':['timeout-or-duplicate']},'timeout-or-duplicate'],[null,'provider_invalid_response'],[{success:true,hostname:'wrong',action:'checkout'},'hostname_mismatch']]){
+  const s=sandbox(),key=randomUUID();s.context.UrlFetchApp.fetch=()=>({getResponseCode:()=>200,getContentText:()=>JSON.stringify(response)});
+  assert.equal(s.context.directVerifyChallenge('PRIVATE-TOKEN',key),false);assert.equal(s.logs.at(-1).code,code);
+  assert.ok(!JSON.stringify(s.logs).includes('PRIVATE-TOKEN'));
+ }
+});
+
+
+test('legacy verification conflict is retried and synced without falsifying its verification marker',()=>{
+ const s=sandbox(),o=order();s.context.directWrite(o,false);s.context.directMark(o.clientOrderId,'CONFLICT','verification_required');
+ s.fakeCrm.resolve=q=>({ok:true,number:'OMS-403',payload:q.payload});s.context.reconcileDirectOrders(false);
+ assert.equal(s.value(o.clientOrderId,'№ замовлення'),403);assert.equal(s.value(o.clientOrderId,'_crm_sync'),'SYNCED');
+ assert.equal(s.value(o.clientOrderId,'_crm_verified'),'false');assert.equal(s.rows.length,3);assert.equal(s.mail.length,0);
 });
