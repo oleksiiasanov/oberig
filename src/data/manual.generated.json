@@ -3,8 +3,8 @@
   "sourceUrl": "https://righteous-inch-4a5.notion.site/SDR-374874c8aa8d80d9a786f2adfeb50383",
   "pageId": "374874c8-aa8d-80d9-a786-f2adfeb50383",
   "title": "Посібник користувача D·Vision SDR",
-  "syncedAt": "2026-11-23T10:42:28.993Z",
-  "lastEditedAt": "2026-11-05T21:45:07.632Z",
+  "syncedAt": "2026-11-23T13:32:42.433Z",
+  "lastEditedAt": "2026-11-23T13:28:00.151Z",
   "blocks": [
     {
       "id": "3a3874c8-aa8d-80ee-a91f-c9838b24eabe",
@@ -836,105 +836,10 @@
           "bold": true
         },
         {
-          "text": " — додаткові функції пристрою:"
+          "text": " — додаткові функції пристрою."
         }
       ],
-      "children": [
-        {
-          "id": "a283b163-381c-4ae3-a12f-1b7165336fc3",
-          "richText": [
-            {
-              "text": "Водоспад",
-              "bold": true
-            },
-            {
-              "text": " "
-            },
-            {
-              "text": "(Waterfall)",
-              "bold": true
-            },
-            {
-              "text": " — візуальне відображення активності радіочастотного спектра."
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "64d16dd6-cf5a-4e71-8bfd-ad9c4b82073d",
-          "richText": [
-            {
-              "text": "РЕБ Тест",
-              "bold": true
-            },
-            {
-              "text": " — робочий режим для перевірки активності власного пристрою РЕБ. \nПісля ввімкнення режиму приймальні підсилювачі D·Vision SDR вимикаються, тому перевірка є безпечною для детектора. "
-            }
-          ],
-          "children": [
-            {
-              "id": "40f874c8-aa8d-80a2-bf33-e4894c95ad1c",
-              "richText": [],
-              "children": [
-                {
-                  "id": "40f874c8-aa8d-801c-8bee-ec2730da0091",
-                  "richText": [
-                    {
-                      "text": "Поза режимом "
-                    },
-                    {
-                      "text": "РЕБ Тест",
-                      "bold": true
-                    },
-                    {
-                      "text": " близьке розміщення біля потужної передавальної антени може перевантажити або пошкодити приймальний тракт."
-                    }
-                  ],
-                  "children": [],
-                  "type": "paragraph"
-                }
-              ],
-              "icon": "❗",
-              "type": "callout"
-            }
-          ],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "40f874c8-aa8d-807c-8f69-c23bc284d04d",
-          "richText": [
-            {
-              "text": "RC-керування",
-              "bold": true
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "40f874c8-aa8d-803e-adb2-db36ada16888",
-          "richText": [
-            {
-              "text": "Аналізатор спектру",
-              "bold": true
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        },
-        {
-          "id": "40f874c8-aa8d-8064-b94b-d595581b3268",
-          "richText": [
-            {
-              "text": "Пошук дрона",
-              "bold": true
-            }
-          ],
-          "children": [],
-          "type": "bulleted_list_item"
-        }
-      ],
+      "children": [],
       "type": "bulleted_list_item"
     },
     {
@@ -980,10 +885,294 @@
       "type": "bulleted_list_item"
     },
     {
+      "id": "421874c8-aa8d-80df-b0f6-e6be3355e48f",
+      "richText": [
+        {
+          "text": "4.1 Інструменти"
+        }
+      ],
+      "children": [],
+      "type": "heading_3"
+    },
+    {
+      "id": "421874c8-aa8d-803c-8cf2-eded9b676d25",
+      "richText": [
+        {
+          "text": "Водоспад",
+          "bold": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "(Waterfall)",
+          "bold": true
+        },
+        {
+          "text": " "
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80b6-9d87-c57927abb960",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A68286db4-3456-42af-a79c-83f00bfe7920%3Advision-ui-spectrum-analyzer.png?table=block&id=421874c8-aa8d-80b6-9d87-c57927abb960&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "421874c8-aa8d-80f2-8c3c-dda289d99fce",
+      "richText": [
+        {
+          "text": "Інструмент для візуального відображення активності радіочастотного спектра."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80a8-8f21-db05feeaf0ba",
+      "richText": [
+        {
+          "text": "РЕБ Тест",
+          "bold": true
+        },
+        {
+          "text": " "
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80f3-9c9c-ecf8370e43df",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3Ac8fec40b-269c-4b20-9d06-76f22464c5ca%3Advision-ui-band-grid.png?table=block&id=421874c8-aa8d-80f3-9c9c-ecf8370e43df&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "421874c8-aa8d-8009-92bc-fb54d632523c",
+      "richText": [
+        {
+          "text": "Інструмент для перевірки активності власного пристрою РЕБ. Після ввімкнення режиму приймальні підсилювачі D·Vision SDR вимикаються, тому перевірка є безпечною для детектора. "
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8074-b4ca-f41dbf90284f",
+      "richText": [],
+      "children": [
+        {
+          "id": "421874c8-aa8d-8032-9c6a-f2cc9a14322a",
+          "richText": [
+            {
+              "text": "Поза режимом "
+            },
+            {
+              "text": "РЕБ Тест",
+              "bold": true
+            },
+            {
+              "text": " близьке розміщення біля потужної передавальної антени може перевантажити або пошкодити приймальний тракт."
+            }
+          ],
+          "children": [],
+          "type": "paragraph"
+        }
+      ],
+      "icon": "❗",
+      "type": "callout"
+    },
+    {
+      "id": "421874c8-aa8d-8040-a48a-c6cfb6532c07",
+      "richText": [
+        {
+          "text": "RC-керування",
+          "bold": true
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8023-b1ce-c23d636bea53",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A8bb7b280-ab09-4678-851e-0192f6993c50%3Advision-ui-rc-scan.png?table=block&id=421874c8-aa8d-8023-b1ce-c23d636bea53&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "421874c8-aa8d-8068-b5e5-d65f1c1fad78",
+      "richText": [
+        {
+          "text": "RC-керування (Radio Control) - інструмент для виявлення радіосигналів, які використовуються для дистанційного керування безпілотниками."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80e6-a018-ef8bb9a3d5c4",
+      "richText": [
+        {
+          "text": "У багатьох FPV-дронах відеозв’язок та керування реалізовані окремими радіосистемами. Вони можуть працювати на різних частотах, використовувати різні протоколи й мати незалежні характеристики поширення сигналу."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-800b-9663-f319df56fd35",
+      "richText": [
+        {
+          "text": "Відсутність виявленого відеосигналу не завжди означає відсутність активної системи керування БпЛА поблизу. Інструмент RC-керування доповнює загальну картину радіочастотного моніторингу D·Vision SDR."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8080-9d38-de29faa45854",
+      "richText": [
+        {
+          "text": "📖 Що означає позначка LoRa?\nLoRa — це технологія фізичної передачі радіосигналу. Її не варто плутати з LoRaWAN — мережевим протоколом, який використовує LoRa переважно для пристроїв «Інтернету речей» (IoT).\nLoRa також може застосовуватися в інших системах, зокрема в радіокеруванні. Проте виявлений сигнал із характеристиками LoRa не обов’язково належить саме дрону."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8042-9eca-cb790479dd93",
+      "richText": [
+        {
+          "text": "📖 Що означає ELRS?\nУ більшості випадків керування FPV-дронами відбувається за допомогою ELRS (ExpressLRS). Залежно від радіообладнання, версії прошивки та вибраного режиму, ExpressLRS може використовувати кілька типів модуляції:"
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80da-b5e7-e2f01cfa9e1b",
+      "richText": [
+        {
+          "text": "LoRa"
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "421874c8-aa8d-807b-b9bd-fa0d470fe412",
+      "richText": [
+        {
+          "text": "FLRC (Fast Long Range Communication)"
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "421874c8-aa8d-80c3-91b7-c1fa57710953",
+      "richText": [
+        {
+          "text": "FSK"
+        }
+      ],
+      "children": [],
+      "type": "bulleted_list_item"
+    },
+    {
+      "id": "421874c8-aa8d-806f-80fb-ed5d74d106ce",
+      "richText": [
+        {
+          "text": "Не всі сигнали ELRS мають характеристики LoRa. Це має критичне значення для радіочастотного виявлення: система, здатна розпізнавати лише LoRa-модуляцію, не завжди виявлятиме всі режими ExpressLRS."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80b3-944d-e6a2c5ff9120",
+      "richText": [
+        {
+          "text": "📖 Як зчитувати дані в інструменті RC-керування?\nЯк і в інших додаткових інструментах D·Vision SDR (зокрема Тест РЕБ), тут використовується колірна індикація потужності: чим насиченіший і темніший колір, тим сильніший сигнал у визначеному діапазоні."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8086-87a6-e89f08a8b8bc",
+      "richText": [
+        {
+          "text": "Шкала потужності сигналу (від найслабшого до найсильнішого): жовтий ➔ помаранчевий ➔ зелений ➔ синій ➔ темно-синій."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80e0-93d5-ce3ba42b7f75",
+      "richText": [
+        {
+          "text": "Поява темно-синього забарвлення на певному діапазоні свідчить про наявність активного та потужного радіосигналу.\nОкрім цього, виявлений ELRS-сигнал відображається у вигляді окремого графічного блоку з вказанням конкретної частоти та рівня потужності (dBm)."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8054-ad1c-ce4f39aa4539",
+      "richText": [
+        {
+          "text": "Інструмент Пошук",
+          "bold": true
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-808d-b81c-c098e3f5e1de",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A1880771e-eda7-44ee-a7eb-963e77548681%3Advision-ui-signal-level.png?table=block&id=421874c8-aa8d-808d-b81c-c098e3f5e1de&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "421874c8-aa8d-800e-9d76-ea03dcacb7b1",
+      "richText": [
+        {
+          "text": "Пошук дрона призначений для пошуку джерела радіосигналу БпЛА через спостереження за рівнем прийнятого радіовипромінювання. Якщо ви втратили свій дрон, або знаєте, що поруч впав ворожий БпЛА і він все ще активний, ви можете знайти їх за силою сигналу за допомогою цього інструменту."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-8049-8a68-e4a07aadeb95",
+      "richText": [
+        {
+          "text": "Важливо: інструмент не є радаром і не забезпечує автоматичного визначення координат, висоти, швидкості або точної відстані до дрона."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
       "id": "3d6874c8-aa8d-80d0-9462-ecdb77565c0e",
       "richText": [
         {
-          "text": "Налаштування"
+          "text": "4.2 Налаштування"
         }
       ],
       "children": [],
@@ -1014,7 +1203,7 @@
         }
       ],
       "children": [],
-      "type": "heading_3"
+      "type": "paragraph"
     },
     {
       "id": "3d6874c8-aa8d-8054-9368-feece872c52c",
@@ -1155,7 +1344,7 @@
         }
       ],
       "children": [],
-      "type": "heading_3"
+      "type": "paragraph"
     },
     {
       "id": "3d6874c8-aa8d-8011-979c-eeb004acb6d9",
@@ -1267,20 +1456,6 @@
       "type": "bulleted_list_item"
     },
     {
-      "id": "3d6874c8-aa8d-8075-a18a-f3f066541575",
-      "richText": [
-        {
-          "text": "Дрони DJI",
-          "bold": true
-        },
-        {
-          "text": " — пошук сигналів дронів серії DJI Mavic."
-        }
-      ],
-      "children": [],
-      "type": "bulleted_list_item"
-    },
-    {
       "id": "3d6874c8-aa8d-8016-8ec3-f176fb17cf5f",
       "richText": [
         {
@@ -1307,6 +1482,47 @@
       ],
       "children": [],
       "type": "bulleted_list_item"
+    },
+    {
+      "id": "421874c8-aa8d-8005-bece-d6d716a5123d",
+      "richText": [
+        {
+          "text": "Дрони DJI",
+          "bold": true
+        },
+        {
+          "text": " — пошук сигналів дронів серії DJI Mavic."
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-80d5-a075-c9cf7cae24e8",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A369975c1-0b0f-4d9a-b549-5173ee53bfba%3Advision-ui-drone-detect.png?table=block&id=421874c8-aa8d-80d5-a075-c9cf7cae24e8&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
+    },
+    {
+      "id": "421874c8-aa8d-80f9-b8bc-d8c5f6a8467f",
+      "richText": [
+        {
+          "text": "MESH-радіостанції",
+          "bold": true
+        }
+      ],
+      "children": [],
+      "type": "paragraph"
+    },
+    {
+      "id": "421874c8-aa8d-800e-b38d-f1bd24d95511",
+      "type": "image",
+      "src": "https://righteous-inch-4a5.notion.site/image/attachment%3A26f0ba75-bb80-4506-9b15-bb1384cbfb0c%3Advision-ui-spectrum.png?table=block&id=421874c8-aa8d-800e-b38d-f1bd24d95511&spaceId=3db874c8-aa8d-81f7-9925-0003cfdc2c16&width=2000&userId=&cache=v2",
+      "caption": [],
+      "richText": [],
+      "children": []
     },
     {
       "id": "3d6874c8-aa8d-8037-b579-ffc4a55879b2",
@@ -1393,7 +1609,7 @@
         }
       ],
       "children": [],
-      "type": "heading_3"
+      "type": "paragraph"
     },
     {
       "id": "3d6874c8-aa8d-8073-968d-e60838955034",
@@ -1561,7 +1777,7 @@
         }
       ],
       "children": [],
-      "type": "heading_3"
+      "type": "paragraph"
     },
     {
       "id": "3d6874c8-aa8d-80b8-be97-ff7f31fe5248",
@@ -1784,7 +2000,7 @@
         }
       ],
       "children": [],
-      "type": "heading_3"
+      "type": "paragraph"
     },
     {
       "id": "3d6874c8-aa8d-8041-8e85-d655dae1a2af",
