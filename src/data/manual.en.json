@@ -948,5 +948,211 @@
       "bold": true
     }
   ],
-  "130 × 80 × 25 мм / ~340 г без антен": "130 × 80 × 25 mm / ~340 g without antennas"
+  "130 × 80 × 25 мм / ~340 г без антен": "130 × 80 × 25 mm / ~340 g without antennas",
+  "D·Vision SDR - пристрій пасивного моніторингу та виявлення відеосигналів, призначений для пошуку, виявлення та індикації наявності сумісних аналогових і цифрових відеосигналів у встановленому діапазоні частот.": "D·Vision SDR is a passive monitoring and video-signal detection device designed to find, detect and indicate the presence of compatible analog and digital video signals within its frequency range.",
+  "Пристрій працює виключно на прийом і нічого не випромінює в ефір.": "The device is receive-only and does not transmit anything over the air.",
+  "• Аналогове відео PAL / NTSC (FM-модуляція); \n  • Виявлення DJI Mavic; \n  • Тестове виявлення Wi-Fi камер і Walksnail FPV. \n\n⚠️ Цифрове відео не декодується.": "• Analog video PAL / NTSC (FM modulation); \n  • DJI Mavic detection; \n  • Test detection of Wi-Fi cameras and Walksnail FPV. \n\n⚠️ Digital video is not decoded.",
+  "Аналогове відео: приймання та перегляд зображення у діапазоні 540–6000 МГц — близько 10 км; вище 6000 МГц — 3,5–5 км. \n\nЦифровий сигнал (DJI Mavic) — до 2,5 км. \n\n⚠️ Значення наведені для штатних антен і сприятливих умов на відкритій місцевості та не є гарантованими для будь-якого сценарію. На фактичну дальність впливають потужність і висота передавача, частота, рельєф, забудова, рослинність, радіозавади та положення пристрою.": "Analog video: receiving and viewing the picture in the 540–6000 MHz range — about 10 km; above 6000 MHz — 3.5–5 km. \n\nDigital signal (DJI Mavic) — up to 2.5 km. \n\n⚠️ These values apply to the stock antennas in favorable open-terrain conditions and are not guaranteed for every scenario. Actual range depends on transmitter power and height, frequency, terrain, buildings, vegetation, radio interference and the position of the device.",
+  "Час повного циклу сканування": "Full scan cycle time",
+  "від 7 секунд": "from 7 seconds",
+  "Антенни": "Antennas",
+  "2 всеспрямовані антени (SMA-вихід)": "2 omnidirectional antennas (SMA connector)",
+  "MicroSD до 512 ГБ (FAT32)": "MicroSD up to 512 GB (FAT32)",
+  "• Перша версія з одним акумулятором — орієнтовно до 3 год; \n  • Друга версія з двома акумуляторами загальною ємністю 10 000 мА·год — до 6 год. \n\n⚠️ Час роботи залежить від інтенсивності використання.": "• First version with one battery — up to about 3 h; \n  • Second version with two batteries, 10,000 mAh in total — up to 6 h. \n\n⚠️ Runtime depends on how intensively the device is used.",
+  "130 × 80 × 25 мм / ~343 г без антен": "130 × 80 × 25 mm / ~343 g without antennas",
+  "2. Комплектація": "2. Package contents",
+  "Детектор D·Vision SDR — 1 шт.": "D·Vision SDR detector — 1 pc.",
+  "⚠️ Кабель USB-C та носій MicroSD в комплект не входять.": "⚠️ A USB-C cable and a MicroSD card are not included.",
+  "Окремо можна замовити додаткове обладнання - виносну антену, кріплення на бронежилет та тримач в авто.": "Additional equipment can be ordered separately: an external antenna, a body-armor mount and a car holder.",
+  "3. Підготовка до роботи": "3. Getting started",
+  "Для ефективної роботи детектора D·Vision SDR достатньо встановити антени та повністю зарядити пристрій. Додаткові налаштування не потрібні — прилад готовий до роботи одразу з коробки.": "To get the D·Vision SDR detector working, just attach the antennas and fully charge the device. No extra setup is needed — it is ready to use straight out of the box.",
+  "Встановлення антен": "Attaching the antennas",
+  "Вхід 1 — антена 540–3000 МГц — більша антена, встановлюється зліва, якщо дивитися на екран.": [
+    {
+      "text": "Input 1",
+      "bold": true
+    },
+    {
+      "text": " — 540–3000 MHz antenna — the larger antenna, attached on the left when facing the screen."
+    }
+  ],
+  "Вхід 2 — антена 2800–12000 МГц — менша антена, встановлюється справа.": [
+    {
+      "text": "Input 2",
+      "bold": true
+    },
+    {
+      "text": " — 2800–12000 MHz antenna — the smaller antenna, attached on the right."
+    }
+  ],
+  "Деталі по частотам": "Frequency details",
+  "Підключення зовнішніх антен": "Connecting external antennas",
+  "Напрямлену або іншу зовнішню антену підключайте до входу, що відповідає її робочому діапазону: вхід 1 — 540–3000 МГц, вхід 2 — 2800–12000 МГц.": "Connect a directional or other external antenna to the input that matches its operating range: input 1 — 540–3000 MHz, input 2 — 2800–12000 MHz.",
+  "Для роботи у вузькій смузі відповідно обмежте діапазон сканування. У зоні перекриття 2800–3000 МГц вибір входу визначається налаштуванням Перемикач антени 2.": [
+    {
+      "text": "For narrow-band work, limit the scan range accordingly. In the 2800–3000 MHz overlap, the input is chosen by the "
+    },
+    {
+      "text": "Antenna 2 switch",
+      "bold": true
+    },
+    {
+      "text": " setting."
+    }
+  ],
+  "Вставте microSD-карту до клацання. Карта потрібна для збереження фото і відео — без карти зйомка не працює.": [
+    {
+      "text": "Insert the microSD card until it clicks. The card is needed to save photos and video — "
+    },
+    {
+      "text": "capture does not work without a card",
+      "bold": true
+    },
+    {
+      "text": ". "
+    }
+  ],
+  "⚠️ Якщо карта нова або з іншої техніки, відформатуйте її: Налаштування → Утиліти → Форматувати SD-карту.": [
+    {
+      "text": "⚠️ If the card is new or comes from another device, format it: "
+    },
+    {
+      "text": "Settings → Utilities → Format SD card",
+      "bold": true
+    },
+    {
+      "text": "."
+    }
+  ],
+  "Заряджання та перше ввімкнення": "Charging and first power-on",
+  "Зарядіть пристрій через порт USB-C.": "Charge the device through the USB-C port.",
+  "Використовуйте зарядний адаптер із підтримкою струму від 2А.": "Use a charger that supplies at least 2 A.",
+  "Під час заряджання поруч із роз'ємом світиться світлодіод, а у верхньому правому куті екрана з'являється іконка блискавки та іконка батареї з поточним рівнем заряду.": "While charging, an LED next to the connector lights up, and a lightning icon and a battery icon with the current charge level appear in the top right corner of the screen.",
+  "Заряджання на повну займає в середньому 4–6 годин залежно від початкового рівня заряду та навантаження. Пристроєм можна користуватися під час заряджання.": "A full charge takes 4–6 hours on average, depending on the starting charge level and the load. The device can be used while charging.",
+  "3. Керування пристроєм": "3. Device controls",
+  "Елемент": "Control",
+  "Дія": "Action",
+  "Коротке натискання\n  • Фото або старт/стоп запису відео — залежно від налаштування «Запис відео»;\n  • В меню — повернення назад.\n\nДовге натискання (2 с)\n  • Вимкнення пристрою \n  • Повернення до екрана зарядки, якщо підключене живлення.": [
+    {
+      "text": "Short press",
+      "bold": true
+    },
+    {
+      "text": "\n  • Photo "
+    },
+    {
+      "text": "or",
+      "bold": true
+    },
+    {
+      "text": " start/stop video recording — depending on the \"Video recording\" setting;\n  • In a menu — go back.\n\n"
+    },
+    {
+      "text": "Long press (2 s)\n  • ",
+      "bold": true
+    },
+    {
+      "text": "Power off the device \n  • Return to the charging screen if power is connected."
+    }
+  ],
+  "Перезапуск (Reset)": "Restart (Reset)",
+  "Перезавантаження детектора.": "Restarts the detector.",
+  "Меню": "Menu",
+  "Відкриття Швидкого меню з будь-якого екрана.": "Opens the Quick menu from any screen.",
+  "Ввід": "Enter",
+  "• Підтвердження вибору; \n  • Вибір каналу в режимі Сканер.": "• Confirm a selection; \n  • Select a channel in Scanner mode.",
+  "Навігаційний джойстик": "Navigation joystick",
+  "Вгору / вниз\n  • Навігація списками; \n  • Зум у режимі Водоспад.\n\nВліво / вправо\n  • Налаштування частоти; \n  • Зміна параметрів.": [
+    {
+      "text": "Up / down\n  • ",
+      "bold": true
+    },
+    {
+      "text": "List navigation; \n  • Zoom in Waterfall mode.\n\n"
+    },
+    {
+      "text": "Left / right\n  • ",
+      "bold": true
+    },
+    {
+      "text": "Frequency tuning; \n  • Changing parameters."
+    }
+  ],
+  "Інструменти — додаткові функції пристрою.": [
+    {
+      "text": "Tools",
+      "bold": true
+    },
+    {
+      "text": " — additional device functions."
+    }
+  ],
+  "Браузер — робота зі збереженими даними (фото або відео).": [
+    {
+      "text": "Browser",
+      "bold": true
+    },
+    {
+      "text": " — working with saved data (photos or video)."
+    }
+  ],
+  "Довідка — інструкція по використанню та налаштуванню приладу.": [
+    {
+      "text": "Help",
+      "bold": true
+    },
+    {
+      "text": " — instructions for using and configuring the device."
+    }
+  ],
+  "4.1 Інструменти": "4.1 Tools",
+  "Водоспад (Waterfall)": [
+    {
+      "text": "Waterfall",
+      "bold": true
+    },
+    {
+      "text": " "
+    }
+  ],
+  "Інструмент для візуального відображення активності радіочастотного спектра.": "A tool that visually displays activity across the radio-frequency spectrum.",
+  "РЕБ Тест": [
+    {
+      "text": "EW Test",
+      "bold": true
+    },
+    {
+      "text": " "
+    }
+  ],
+  "Інструмент для перевірки активності власного пристрою РЕБ. Після ввімкнення режиму приймальні підсилювачі D·Vision SDR вимикаються, тому перевірка є безпечною для детектора.": "A tool for checking the activity of your own EW device. Once the mode is enabled, the D·Vision SDR receive amplifiers are switched off, so the check is safe for the detector.",
+  "Поза режимом РЕБ Тест близьке розміщення біля потужної передавальної антени може перевантажити або пошкодити приймальний тракт.": [
+    {
+      "text": "Outside "
+    },
+    {
+      "text": "EW Test",
+      "bold": true
+    },
+    {
+      "text": " mode, placing the device close to a powerful transmitting antenna can overload or damage the receive path."
+    }
+  ],
+  "RC-керування": "RC control",
+  "RC-керування (Radio Control) - інструмент для виявлення радіосигналів, які використовуються для дистанційного керування безпілотниками.": "RC control (Radio Control) is a tool for detecting the radio signals used to remotely control drones.",
+  "У багатьох FPV-дронах відеозв’язок та керування реалізовані окремими радіосистемами. Вони можуть працювати на різних частотах, використовувати різні протоколи й мати незалежні характеристики поширення сигналу.": "In many FPV drones, the video link and the control link are separate radio systems. They can work on different frequencies, use different protocols and have independent signal propagation characteristics.",
+  "Відсутність виявленого відеосигналу не завжди означає відсутність активної системи керування БпЛА поблизу. Інструмент RC-керування доповнює загальну картину радіочастотного моніторингу D·Vision SDR.": "Not detecting a video signal does not always mean there is no active drone control system nearby. The RC control tool completes the overall radio-frequency monitoring picture of the D·Vision SDR.",
+  "📖 Що означає позначка LoRa?\nLoRa — це технологія фізичної передачі радіосигналу. Її не варто плутати з LoRaWAN — мережевим протоколом, який використовує LoRa переважно для пристроїв «Інтернету речей» (IoT).\nLoRa також може застосовуватися в інших системах, зокрема в радіокеруванні. Проте виявлений сигнал із характеристиками LoRa не обов’язково належить саме дрону.": "📖 What does the LoRa label mean?\nLoRa is a physical-layer radio transmission technology. It should not be confused with LoRaWAN — a network protocol that uses LoRa mainly for Internet of Things (IoT) devices.\nLoRa can also be used in other systems, including radio control. However, a detected signal with LoRa characteristics does not necessarily belong to a drone.",
+  "📖 Що означає ELRS?\nУ більшості випадків керування FPV-дронами відбувається за допомогою ELRS (ExpressLRS). Залежно від радіообладнання, версії прошивки та вибраного режиму, ExpressLRS може використовувати кілька типів модуляції:": "📖 What does ELRS mean?\nMost FPV drones are controlled with ELRS (ExpressLRS). Depending on the radio hardware, firmware version and selected mode, ExpressLRS can use several types of modulation:",
+  "Не всі сигнали ELRS мають характеристики LoRa. Це має критичне значення для радіочастотного виявлення: система, здатна розпізнавати лише LoRa-модуляцію, не завжди виявлятиме всі режими ExpressLRS.": "Not all ELRS signals have LoRa characteristics. This is critical for radio-frequency detection: a system that can only recognize LoRa modulation will not always detect every ExpressLRS mode.",
+  "📖 Як зчитувати дані в інструменті RC-керування?\nЯк і в інших додаткових інструментах D·Vision SDR (зокрема Тест РЕБ), тут використовується колірна індикація потужності: чим насиченіший і темніший колір, тим сильніший сигнал у визначеному діапазоні.": "📖 How to read the RC control tool?\nAs in the other D·Vision SDR tools (such as EW Test), signal strength is shown by color: the more saturated and darker the color, the stronger the signal in that range.",
+  "Шкала потужності сигналу (від найслабшого до найсильнішого): жовтий ➔ помаранчевий ➔ зелений ➔ синій ➔ темно-синій.": "Signal strength scale (from weakest to strongest): yellow ➔ orange ➔ green ➔ blue ➔ dark blue.",
+  "Поява темно-синього забарвлення на певному діапазоні свідчить про наявність активного та потужного радіосигналу.\nОкрім цього, виявлений ELRS-сигнал відображається у вигляді окремого графічного блоку з вказанням конкретної частоти та рівня потужності (dBm).": "Dark blue in a range indicates an active, strong radio signal.\nIn addition, a detected ELRS signal is shown as a separate graphic block with its exact frequency and power level (dBm).",
+  "Інструмент Пошук": "Search tool",
+  "Пошук дрона призначений для пошуку джерела радіосигналу БпЛА через спостереження за рівнем прийнятого радіовипромінювання. Якщо ви втратили свій дрон, або знаєте, що поруч впав ворожий БпЛА і він все ще активний, ви можете знайти їх за силою сигналу за допомогою цього інструменту.": "Drone search helps locate the source of a drone's radio signal by watching the received signal level. If you have lost your drone, or know that an enemy drone has come down nearby and is still active, you can find it by signal strength with this tool.",
+  "Важливо: інструмент не є радаром і не забезпечує автоматичного визначення координат, висоти, швидкості або точної відстані до дрона.": "Important: the tool is not a radar and does not automatically determine the drone's coordinates, altitude, speed or exact distance.",
+  "4.2 Налаштування": "4.2 Settings",
+  "MESH-радіостанції": "MESH radios",
+  "Додаткова інформація по виносним антенам": "More about external antennas",
+  "D·Vision SDR + Raspberry Pi: встановлення з Windows": "D·Vision SDR + Raspberry Pi: installing from Windows"
 }
