@@ -3,8 +3,21 @@
   "channelId": "UC61jQoJOY_oYMvudg1mR42w",
   "channelTitle": "D·Vision SDR",
   "handle": "@D·VisionSDR",
-  "syncedAt": "2026-11-26T11:25:35.806Z",
+  "syncedAt": "2026-11-27T11:19:36.892Z",
   "items": [
+    {
+      "id": "-YnShCvqfG0",
+      "title": "Функція оцінки дистанції до загрози",
+      "publishedAt": "2026-11-27T10:34:19Z",
+      "url": "https://www.youtube.com/shorts/-YnShCvqfG0",
+      "thumbnail": "https://i.ytimg.com/vi/-YnShCvqfG0/hqdefault.jpg",
+      "thumbnails": [
+        "https://i.ytimg.com/vi/-YnShCvqfG0/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/-YnShCvqfG0/hq720.jpg",
+        "https://i.ytimg.com/vi/-YnShCvqfG0/hqdefault.jpg"
+      ],
+      "embedUrl": "https://www.youtube-nocookie.com/embed/-YnShCvqfG0"
+    },
     {
       "id": "QmB-p83NlnE",
       "title": "Новий інструмент RC-керування",
@@ -147,19 +160,6 @@
         "https://i.ytimg.com/vi/MTV1BMS2tQc/hqdefault.jpg"
       ],
       "embedUrl": "https://www.youtube-nocookie.com/embed/MTV1BMS2tQc"
-    },
-    {
-      "id": "iGVczUFPWBQ",
-      "title": "Оновлений процес підключення детектора D·Vision SDR до ПК.",
-      "publishedAt": "2026-09-09T12:33:33Z",
-      "url": "https://www.youtube.com/shorts/iGVczUFPWBQ",
-      "thumbnail": "https://i.ytimg.com/vi/iGVczUFPWBQ/hqdefault.jpg",
-      "thumbnails": [
-        "https://i.ytimg.com/vi/iGVczUFPWBQ/maxresdefault.jpg",
-        "https://i.ytimg.com/vi/iGVczUFPWBQ/hq720.jpg",
-        "https://i.ytimg.com/vi/iGVczUFPWBQ/hqdefault.jpg"
-      ],
-      "embedUrl": "https://www.youtube-nocookie.com/embed/iGVczUFPWBQ"
     }
   ]
 }
